@@ -1,2 +1,6 @@
-# GitLuv
-Connecting Programmers and Visionaries since 2016
+
+## To start the server
+> npm start
+
+## To lint the client folder
+> npm run lint
