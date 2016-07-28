@@ -25,11 +25,9 @@ export default class Landing extends React.Component {
 
   render() {
 	  return (
-	    <div>
-	     	<form onSubmit={this.login}>
-	     		<span>Use your github login!</span>
-	     		<input type="submit" value="Login" />
-	     	</form>
+	    <div className="landingPage">
+	    	<h1>GitLuv</h1>
+	    	<button type="button" className="pure-button" onClick={this.login}>Login with Github</button>
 	    </div>
 	  )
 	}
