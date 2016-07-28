@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A boiler plate with basic examples of react-router and react-redux",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "nodemon server/index.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./client",
     "test": "./test/run.sh"
   },
