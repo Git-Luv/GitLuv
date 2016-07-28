@@ -7,38 +7,23 @@ export default class Swipe extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			userInfo: {
-				username: null,
-				location: null,
-				bio: null,
-				avatar: null,
+			projectInfo: {
+				title: null,
+				description: null,
+				lookingFor: null,
+				skills: null,
 			}
 		}
 	}
  
-	componentWillMount() {
-		model.getUserData(document.cookie.split('=')[1])
-		.then(res => {
-			this.setState({userInfo: {
-				username: res.login,
-				location: res.location,
-				bio: res.bio,
-				avatar: res.avatar_url
-			}})
-		})
-	}
-
   render() {
 	  return (
-	    <div>
-	     	Welcome to GITLUV!
-	     	<div>
-	     		<img src={this.state.userInfo.avatar} />
-	     		<h1>{this.state.userInfo.username}</h1>
-	     		<div>{this.state.userInfo.location}</div>
-	     		<p>{this.state.userInfo.bio}</p>
-	     	</div>
-	    </div>
+     	<div>
+     		<h1>{this.state.projectInfo.title}</h1>
+     		<div>{this.state.projectInfo.description}</div>
+     		<p>{this.state.projectInfo.lookingFor}</p>
+     		<p>{this.state.projectInfo.skills}</p>
+     	</div>
 	  )
 	}
 }

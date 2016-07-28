@@ -1,14 +1,12 @@
 import fetch from 'isomorphic-fetch';
 
-export function getUserData(authToken) {
-	return fetch('https://api.github.com/user', {
+export function getProjectData() {
+	return fetch('/api/projects', {
 		method: 'GET',
 		headers: {
-			Authorization: "token " + authToken,
-			Accept: 'application/json'
+			'Content-Type' : 'application/json'
 		}
 	})
-	.then(response => {
-		return response.json();
-	})
+	.then(projects => return response.json());
+	.catch(error => console.error(error));
 }

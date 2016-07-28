@@ -48,6 +48,13 @@ app.get('/auth/login', (req, res) => {
   })
 });
 
+app.get('api/projects', (req,res) => {
+  db.collection.find({})
+    .then(projects => {
+      res.send(projects)
+    })
+})
+
 // Wild card route for client side routing.
 app.get('/*', function(req, res){
   res.sendFile( assetFolder + '/index.html' );
