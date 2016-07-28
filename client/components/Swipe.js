@@ -15,7 +15,7 @@ export default class Swipe extends React.Component {
 			}
 		}
 	}
-
+ 
 	componentWillMount() {
 		model.getUserData(document.cookie.split('=')[1])
 		.then(res => {
