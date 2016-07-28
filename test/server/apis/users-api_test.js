@@ -41,4 +41,17 @@ describe("Users API", function() {
         expect( users[0].username ).to.equal( newUser.username )
       })
   })
+
+  it_("gets a User by username", function * () {
+  	
+  	yield('/users/:username')
+  		.get('/users/mccarthyist')
+  		.expect(200)
+      	.expect(function (response) {
+        	var user = response.body
+	        expect( user ).to.equal({ username: 'mccarthyist', avatar_url: '', 
+	        	url: '', location: '', bio: '', repos: [], followers: 0,
+	        	skills: [], visionary: false, updated_at: ''})
+      	})
+  })
 })

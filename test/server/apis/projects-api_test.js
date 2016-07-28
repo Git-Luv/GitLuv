@@ -37,4 +37,17 @@ describe("Projects API", function() {
         expect( projects[0].title ).to.equal( newProject.title )
       })
   })
+
+  it_("gets a Project by title", function * () {
+  	
+  	yield('/projects/:title')
+  		.get('/projects/gitluv')
+  		.expect(200)
+      	.expect(function (response) {
+        	var project = response.body
+	        expect( project ).to.equal({ title: 'gitluv', 
+	        repo_url: 'http://www.github.com/git-luv/gitluv', description: '',
+	        req_skills: [], users_liked: [], users_disliked: []})
+      	})
+  })
 })
