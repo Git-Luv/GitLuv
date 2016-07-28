@@ -18,7 +18,7 @@ export default class Landing extends React.Component {
   		mode: 'no-cors'
   	})
   	.then(res => {
-  		console.log(res);
+  		// Redirect to github auth page
   		document.location.href = res.url;
   	})
   }
@@ -28,10 +28,6 @@ export default class Landing extends React.Component {
 	    <div>
 	     	<form onSubmit={this.login}>
 	     		<span>Use your github login!</span>
-	     		<label htmlFor="username">Username:</label>
-	     		<input id="username" type="text" />
-	     		<label htmlFor="password">Username:</label>
-	     		<input id="password" type="password" />
 	     		<input type="submit" value="Login" />
 	     	</form>
 	    </div>

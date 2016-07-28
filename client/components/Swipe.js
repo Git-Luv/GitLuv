@@ -17,10 +17,8 @@ export default class Swipe extends React.Component {
 	}
 
 	componentWillMount() {
-		console.log(document.cookie)
 		model.getUserData(document.cookie.split('=')[1])
 		.then(res => {
-			console.log("Hello!", res, this)
 			this.setState({userInfo: {
 				username: res.login,
 				location: res.location,

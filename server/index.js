@@ -32,8 +32,6 @@ app.get('/app-bundle.js',
 //
 
 app.get('/auth/login', (req, res) => {
-  // console.log(req);
-  // console.log(req.param('code'))
   console.log("Running");
 
   fetch('https://github.com/login/oauth/access_token?client_id=444a46dcbe1340ce4a49&client_secret=df1f3fc9a5da7f88c06a4432302c42d04ac8f151&code=' + req.param('code'), {
@@ -43,14 +41,9 @@ app.get('/auth/login', (req, res) => {
     }
   })
   .then(response => {
-    // console.log("response from github auth:", response)
     return response.json()
-    //fetch()
-
-    //res.redirect('/swipe');
   })
   .then(result => {
-    console.log("result:", result);
     res.cookie("AuthToken", result.access_token).redirect('/swipe');
   })
 });
