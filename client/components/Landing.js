@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 
-export default class Home extends React.Component {
+export default class Landing extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -12,19 +12,15 @@ export default class Home extends React.Component {
 
   login(e) {
   	e.preventDefault()
-  	console.log("It's working!", e)
-  	var user = {
-  		username: document.getElementById("username").value,
-  		password: document.getElementById("password").value
-  	}
-  	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49', {
+  	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://localhost:4000/auth/login', {
   		method: "GET",
-  		redirect: "manual"
+  		redirect: "manual",
+  		mode: 'no-cors'
   	})
   	.then(res => {
   		console.log(res);
+  		document.location.href = res.url;
   	})
-  	console.log("User:", user);
   }
 
   render() {
