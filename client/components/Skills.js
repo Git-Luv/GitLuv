@@ -18,13 +18,16 @@ export default class SkillsList extends React.Component {
 		this.setState({liked: !this.setState.liked});
 	}
 
+	viewMore(i,j){
+        console.log('You clicked: ', i  );
+    }
 
 	render() {
 		const text=this.state.liked ? 'liked' : 'haven\'t liked';
 
 		return (
 
-	     	<div className="skills">
+	     	<div className="skills" onClick={this.viewMore.bind(this)}>
 	     	<span>Skills:</span>
 	     		{this.state.userSkills.map((skill, i) => {
 	     			return(<div className="skill" key={i}>
@@ -38,14 +41,16 @@ export default class SkillsList extends React.Component {
 };
 
 
-// export default class SkillListRender extends React.Component{
-// 		render() {
-// 		return (
-// 			<ul>
-// 			{this.props.list.map(function(listValue){
-// 				return <li>{listValue}</li>
-// 			})}
-// 			</ul> ) } }
+	// render() {
+	// 	const text=this.state.liked ? 'liked' : 'haven\'t liked';
 
-// React.render(<SkillListRender list={[JavaScript, C++, Python, Java, Mithril]} />, document.getElementById('skill-list-render1'));
-// React.render(<SkillListRender list = {[React, Redux, Angular, Node.js, Express, Shennanigans]} />, document.getElementById('skill-list-render2'));
+	// 	return (
+
+	// 		<div onClick = {this.handleClick}>
+	// 			You {text} this.
+	// 			</div>
+
+
+	// 	);
+	// }
+
