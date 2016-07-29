@@ -24,11 +24,12 @@ var projectSchema = new Schema({
 var ProjectCollection = mongoose.model('ProjectCollection', projectSchema)
 
 
-Project.create = function(attrs){
+Project.createIfNotExists = function(attrs){
 
-	let proj = new ProjectCollection(attrs)
+	let title = attrs.title
+	delete attrs.title
 
-	return proj.save(function (err) {
+	return ProjectCollection.findOneAndUpdate({title: title}, attrs, {upsert: true}, function (err, doc) {
 		if(err){
 			console.log("!!!-----------------!!!", err)
 		} else {

@@ -29,13 +29,9 @@ var UserCollection = mongoose.model('UserCollection', userSchema)
 
 User.createIfNotExists = function(attrs){
 
-	let usr = new UserCollection(attrs)
- 
 	let usrnm = attrs.username
-
 	delete attrs.username
 
-	console.log("in user: ", attrs)
 	return UserCollection.findOneAndUpdate({username: usrnm}, attrs, {upsert: true}, function (err, doc) {
 		console.log("saving!!!")
 		if(err){
@@ -50,5 +46,13 @@ User.all = function(){
 
 	return UserCollection.find(function (err, users) {
 		if(err) console.log("!!!-----------------!!!", err)	 
+	})
+}
+
+User.getUser = function(username){
+
+	return UserCollection.findOne({username: username}, function (err, projects) {
+		console.log("saving!!!")
+		if(err) console.log("!!!-----------------!!!", err)		 
 	})
 }

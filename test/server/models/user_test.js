@@ -14,13 +14,12 @@ describe("User Model", function() {
     User.createIfNotExists(userAttrs)
       
     var allUsers = yield User.all()
-    console.log("allUsers", allUsers)
     expect( allUsers.length ).to.equal(1)
     expect( allUsers[0].username ).to.equal( 'mccarthyist' )
 
-  
-    // expect( user.username ).to.be.a('string')
-    // expect( user.username ).to.equal('mccarthyist')
-    // expect( user.bio ).to.equal('')
+    var getUser = yield User.getUser('mccarthyist')
+    expect( getUser.username ).to.be.a('string')
+    expect( getUser.username ).to.equal('mccarthyist')
+    expect( getUser.bio ).to.equal('')
   })
 })

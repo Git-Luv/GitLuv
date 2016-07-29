@@ -3,3 +3,33 @@ var User = require('../models/user')
 
 
 var UsersAPI = module.exports = express.Router()
+
+UsersAPI.get('/users', function (req, res) {
+  User.all()
+    .then(function (users) {
+      res.status(200).send(users)
+    })
+    .catch(function (err) {
+      console.log("Users.all error:", err)
+      res.status(500).send(err)
+    })
+})
+
+UsersAPI.get('/users/:username', function (req, res) {
+
+  User.getUser(req.params.username)
+  .then(function(user){
+  	res.status(200).send(user)
+  })
+  .catch(function (err){
+  	console.log("get error: ", err)
+  	res.status(500).send(err)
+  })
+})
+
+
+UsersAPI.post('/users', function (req, res) {
+
+  User.createIfNotExists( req.body )
+  res.sendStatus(201)
+})
