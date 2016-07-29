@@ -10,13 +10,15 @@ describe("Project Model", function() {
     var projectAttrs = { title: 'reactjs', repo_url: 'http://www.github.com/reactjs/reactjs', 
       	description: '', req_skills: [], users_liked: [], users_disliked: []}
 
-    var newProject = yield Project.create(projectAttrs)
-    expect( newProject.title ).to.be.a('string')
-    expect( newProject.title ).to.equal('Scooby')
-    expect( newProject.description ).to.equal('')
+    Project.createIfNotExists(projectAttrs)
 
-    var allProjects = yield Projects.all()
+    var allProjects = yield Project.all()
     expect( allProjects.length ).to.equal(1)
-    expect( allProjects[0].title ).to.equal( newProject.title )
+    expect( allProjects[0].title ).to.equal( 'reactjs' )
+
+    var getProject = yield Project.getProject('reactjs')    
+    expect( getProject.title ).to.be.a('string')
+    expect( getProject.title ).to.equal('reactjs')
+    expect( getProject.description ).to.equal('')
   })
 })

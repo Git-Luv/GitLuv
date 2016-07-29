@@ -50,6 +50,7 @@ app.get('/auth/login', (req, res) => {
   })
 });
 
+
 app.get('api/projects', (req,res) => {
   Project.find({}, function(err, projects) {
     res.send(projects)
