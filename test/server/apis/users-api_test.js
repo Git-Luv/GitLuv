@@ -17,20 +17,6 @@ describe("Users API", function() {
       .send({ username: 'mccarthyist', avatar_url: '', url: '', location: '', bio: '',
        repos: [], followers: 0, skills: [], visionary: false, updated_at: ''})
       .expect(201)
-      .expect(function(response) {
-        newUser = response.body
-
-        expect( newUser.name ).to.equal('mccarthyist')
-        expect( newUser.avatar_url ).to.equal('')
-        expect( newUser.url ).to.equal('')
-        expect( newUser.location ).to.equal('')
-        expect( newUser.bio ).to.equal('')
-        expect( newUser.repos ).to.equal([])
-        expect( newUser.followers ).to.equal(0)
-        expect( newUser.skills ).to.equal([])
-        expect( newUser.visionary ).to.equal(false)
-        expect( newUser.updated_at ).to.equal('')
-      })
 
     yield request(app)
       .get('/users')
@@ -38,20 +24,32 @@ describe("Users API", function() {
       .expect(function (response) {
         var users = response.body
         expect( users.length ).to.equal(1)
-        expect( users[0].username ).to.equal( newUser.username )
+        expect( users[0].username ).to.equal('mccarthyist' )
+        expect( users[0].avatar_url ).to.equal('')
+        expect( users[0].url ).to.equal('')
+        expect( users[0].location ).to.equal('')
+        expect( users[0].bio ).to.equal('')
+        expect( users[0].followers ).to.equal(0)
+        expect( users[0].visionary ).to.equal(false)
+        expect( users[0].updated_at ).to.equal('')
       })
   })
 
   it_("gets a User by username", function * () {
   	
-  	yield('/users/:username')
+  	yield request(app)
   		.get('/users/mccarthyist')
   		.expect(200)
       	.expect(function (response) {
         	var user = response.body
-	        expect( user ).to.equal({ username: 'mccarthyist', avatar_url: '', 
-	        	url: '', location: '', bio: '', repos: [], followers: 0,
-	        	skills: [], visionary: false, updated_at: ''})
+          expect( user.username ).to.equal('mccarthyist' )
+          expect( user.avatar_url ).to.equal('')
+          expect( user.url ).to.equal('')
+          expect( user.location ).to.equal('')
+          expect( user.bio ).to.equal('')
+          expect( user.followers ).to.equal(0)
+          expect( user.visionary ).to.equal(false)
+          expect( user.updated_at ).to.equal('')
       	})
   })
 })
