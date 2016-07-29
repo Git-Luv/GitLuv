@@ -36,6 +36,14 @@ html {
 	margin-left: 75px;
 }
 
+.landingPage img {
+	margin-top: 20px;
+	border-radius: 10px;
+  margin-left: auto;
+  margin-right:auto;
+  display:block;
+}
+
 /* ========== Profile ========== */
 
 .description {
@@ -78,10 +86,3 @@ html {
 
 /* ========== Sidebar ========== */
 
-img {
-	margin-top: 20px;
-	border-radius: 10px;
-    margin-left: auto;
-    margin-right:auto;
-    display:block;
-}
