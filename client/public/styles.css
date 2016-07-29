@@ -86,7 +86,18 @@ html {
 
 /* ========== Sidebar ========== */
 
+.sidebarOpen {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background-color: white;
+	top: 0;
+	left: 0;
+}
 
+.sidebarClose {
+
+}
 
 /*SWIPE PAGE*/
 
