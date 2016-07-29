@@ -9,21 +9,21 @@ html {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-top: -150px;
-	margin-left: -150px;
+	margin-top: -175px;
+	margin-left: -175px;
 	width: 350px;
 	height: 225px;
 }
 
 .welcomeh1 {
-	color: #E2CFEA;
+	color: white;
 	font-size: 50px;
 	text-align: center;
 	margin-bottom:10px;
 }
 
 .gitluvh1 {
-	color: #E2CFEA;
+	color: white;
 	font-size: 80px;
 	text-align: center;
 	margin-top:0;
