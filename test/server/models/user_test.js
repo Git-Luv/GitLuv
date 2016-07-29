@@ -11,13 +11,15 @@ describe("User Model", function() {
     	location: '', bio: '', repos: [], followers: 0, skills: [], 
     	visionary: false, updated_at: ''}
 
-    var newUser = yield User.create(userAttrs)
-    expect( newUse.title ).to.be.a('string')
-    expect( newUser.title ).to.equal('Scooby')
-    expect( newPet.description ).to.equal('')
-
+    User.createIfNotExists(userAttrs)
+      
     var allUsers = yield User.all()
     expect( allUsers.length ).to.equal(1)
-    expect( allUsers[0].title ).to.equal( newUser.title )
+    expect( allUsers[0].username ).to.equal( 'mccarthyist' )
+
+    var getUser = yield User.getUser('mccarthyist')
+    expect( getUser.username ).to.be.a('string')
+    expect( getUser.username ).to.equal('mccarthyist')
+    expect( getUser.bio ).to.equal('')
   })
 })
