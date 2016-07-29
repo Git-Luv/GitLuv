@@ -36,8 +36,9 @@ export default class Swipe extends React.Component {
  		console.log(event)
  		console.log('state', this.state.projects)
  		var updatedProjects = this.state.projects.slice().shift()
+ 		console.log('updatedProjects var', updatedProjects)
 		this.setState({ projects: updatedProjects })
-		console.log(this.state.projects)
+		console.log('updated projects', this.state.projects)
  	}
 
 
@@ -48,7 +49,7 @@ export default class Swipe extends React.Component {
 		     	{ this.state.projects
 		     		.map((project) => {
 		     		return (
-		     			<div key='project.id' className='currentProject'>
+		     			<div key = {project.id} className='currentProject'>
 				     		<h1>{project.title}</h1>
 				     		<div>{project.description}</div>
 				     		<p>{project.lookingFor}</p>
