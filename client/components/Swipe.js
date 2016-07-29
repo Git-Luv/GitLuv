@@ -16,7 +16,6 @@ export default class Swipe extends React.Component {
 			]
 		}
 	}
- 
  // componentWillMount() {
  // 	fetchProjects()
  // 		.then((projectData) => {
@@ -39,6 +38,7 @@ export default class Swipe extends React.Component {
 			     		</div>
 		     		)})
 		      }
+	     		<button type="button"><Link to={`profile`}>Profile</Link></button>
 	     	</div>
      	</div>
 	  )
