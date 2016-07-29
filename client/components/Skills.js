@@ -4,10 +4,11 @@ import fetch from 'isomorphic-fetch';
 
 
 export default class SkillsList extends React.Component {
-	constructor () {
-		super ();
+	constructor (props) {
+		super (props);
 		this.state = {
-			liked: false
+			liked: false,
+			userSkills: ["React", "Node", "Express", "Git", "authom", "Socket.io", "Mongo", "Redux", "React-Router"]
 		};
 		this.handleClick = this.handleClick.bind(this);
 	}
@@ -22,9 +23,16 @@ export default class SkillsList extends React.Component {
 		const text=this.state.liked ? 'liked' : 'haven\'t liked';
 
 		return (
-			<div onClick = {this.handleClick}>
-				You {text} this.
-			</div>
+
+	     	<div className="skills">
+	     	<span>Skills:</span>
+	     		{this.state.userSkills.map((skill, i) => {
+	     			return(<div className="skill" key={i}>
+							{skill}
+						</div>)
+	     		})}
+	     	</div>
+
 		);
 	}
 };
