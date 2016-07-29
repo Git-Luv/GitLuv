@@ -15,7 +15,7 @@ export default class Landing extends React.Component {
   	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://localhost:4000/auth/login', {
   		method: "GET",
   		redirect: "manual",
-  		mode: 'no-cors'
+  		mode: 'no-cors',
   	})
   	.then(res => {
   		// Redirect to github auth page

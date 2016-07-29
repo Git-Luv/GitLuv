@@ -1,27 +1,29 @@
 html {
 	height: 100%;
-  background-image: linear-gradient(#6441A4, #4A4063)
+  background-image: linear-gradient(#6441A4, #79609C)
 }	
+
+/* ========== Landing Page ========== */
 
 .landingPage {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-top: -150px;
-	margin-left: -150px;
+	margin-top: -175px;
+	margin-left: -175px;
 	width: 350px;
 	height: 225px;
 }
 
 .welcomeh1 {
-	color: #E2CFEA;
+	color: white;
 	font-size: 50px;
 	text-align: center;
 	margin-bottom:10px;
 }
 
 .gitluvh1 {
-	color: #E2CFEA;
+	color: white;
 	font-size: 80px;
 	text-align: center;
 	margin-top:0;
@@ -34,6 +36,16 @@ html {
 	margin-left: 75px;
 }
 
+.landingPage img {
+	margin-top: 20px;
+	border-radius: 10px;
+  margin-left: auto;
+  margin-right:auto;
+  display:block;
+}
+
+/* ========== Profile ========== */
+
 .description {
 	text-align: center;
 	color: #E2CFEA;
@@ -44,6 +56,7 @@ html {
 	width: 50%;
 	margin: 20px auto;
 	text-align: center;
+	color: white;
 }
 
 .profile img {
@@ -51,6 +64,15 @@ html {
 	width: 150px;
 	border-radius: 50%;
 }
+
+.profile button {
+	position: fixed;
+	left: 1em;
+	top: 1em;
+
+}
+
+/* ========== Skills ========== */
 
 .skills span {
 	display: block;
@@ -61,17 +83,36 @@ html {
 
 .skill {
 	display: inline-block;
-	background-color: white;
+	background-color: #6cc644;
+	border-radius: 10%;
+	color: white;
 	margin: 0.4em 0.6em;
-	padding: 0.2em 0.3em;
+	padding: 0.5em 0.7em;
+	text-align: center;
 }
 
-img {
-	margin-top: 20px;
-	border-radius: 10px;
-    margin-left: auto;
-    margin-right:auto;
-    display:block;
+/* ========== Sidebar ========== */
+
+.sidebarOpen {
+	z-index: 2;
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background-color: white;
+	top: 0;
+	left: 0;
+	transition: left 0.5s;
+}
+
+.sidebarClose {
+	z-index: 2;
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background-color: white;
+	top: 0;
+	left: -200px;
+	transition: left 0.5s;
 }
 
 /*SWIPE PAGE*/
@@ -95,28 +136,27 @@ img {
 	margin-top:0;
 	margin-bottom:0;
 }
-        .button-like,
-        .button-dislike,
-        .button-profile {
-            color: white;
-            border-radius: 4px;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-        }
 
-        .button-like {
-            background: rgb(28, 184, 65); /* this is a green */
-        }
+.button-like,
+.button-dislike,
+.button-profile {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
 
-        .button-dislike {
-            background: rgb(202, 60, 60); /* this is a maroon */
-        }
+.button-like {
+    background: rgb(28, 184, 65); /* this is a green */
+}
 
-        .button-warning {
-            background: rgb(223, 117, 20); /* this is an orange */
-        }
+.button-dislike {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
 
-        .button-profile {
-            background: rgb(66, 184, 221); /* this is a light blue */
-        }
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
 
-
+.button-profile {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
