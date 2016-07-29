@@ -3,6 +3,8 @@ var browserify = require('browserify-middleware');
 var path = require('path');
 var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose')
+
 
 var app = express();
 
@@ -47,6 +49,12 @@ app.get('/auth/login', (req, res) => {
     res.cookie("AuthToken", result.access_token).redirect('/swipe');
   })
 });
+
+app.get('api/projects', (req,res) => {
+  Project.find({}, function(err, projects) {
+    res.send(projects)
+  })
+})
 
 // Wild card route for client side routing.
 app.get('/*', function(req, res){
