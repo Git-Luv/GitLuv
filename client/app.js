@@ -9,6 +9,7 @@ export default function App() {
   return (
     <Router history={browserHistory}>
       <Route path='/' component={Landing} />
+      <Router path='/skills' component={Skills} />
       <Route path='/swipe' component={Swipe} />
       <Route path='/profile' component={Profile} />
     </Router>
