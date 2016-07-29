@@ -1,7 +1,6 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
-import TransitionGroup from 'react-addons-transition-group';
 import Sidebar from './sidebar'
 
 import * as model from '../models/profile';
