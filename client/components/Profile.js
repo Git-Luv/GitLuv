@@ -1,7 +1,6 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
-import Sidebar from './components/sidebar';
 import TransitionGroup from 'react-addons-transition-group';
 
 import * as model from '../models/profile';
@@ -31,9 +30,7 @@ export default class Profile extends React.Component {
   render() {
 	  return (
 	    <div className="profile">
-	    	<TransitionGroup>
-	    		{ this.state.isSidebar && <div className="sidebar"></div> }
-	    	</TransitionGroup>
+	    	
 	     	<div>
 	     		<img src={this.state.userInfo.avatar_url} />
 	     		<h1>{this.state.userInfo.login}</h1>

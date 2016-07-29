@@ -48,6 +48,7 @@ html {
 	width: 50%;
 	margin: 20px auto;
 	text-align: center;
+	color: white;
 }
 
 .profile img {
@@ -67,9 +68,12 @@ html {
 
 .skill {
 	display: inline-block;
-	background-color: white;
+	background-color: #6cc644;
+	border-radius: 10%;
+	color: white;
 	margin: 0.4em 0.6em;
-	padding: 0.2em 0.3em;
+	padding: 0.5em 0.7em;
+	text-align: center;
 }
 
 /* ========== Sidebar ========== */
