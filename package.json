@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "gitluv",
   "version": "1.0.0",
-  "description": "A boiler plate with basic examples of react-router and react-redux",
+  "description": "Imagine being a lonely developer who is really freakin good at ReactNative but no one knows how awesome it is yet, and so you can't find any work for it. Imagine having the next Big Idea, but it would require this crazy new language ReactNative that you just heard about but no one knows how to code in. Imagine GitLuv making all these problems go away. Simply by logging into GitLuv with your Github credentials, any member of the GIthub comminuty can connect with one another in search of just what they need.",
   "scripts": {
     "start": "nodemon server/index.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./client",
@@ -30,9 +30,10 @@
     "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
     "middleware": "^1.0.0",
-    "nodemon": "^1.10.0",
     "mocha": "^2.5.3",
+    "nodemon": "^1.10.0",
     "react": "^15.1.0",
+    "react-addons-transition-group": "^15.2.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.1",
