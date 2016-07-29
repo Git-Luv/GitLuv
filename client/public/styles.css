@@ -86,6 +86,13 @@ img {
 	height: 225px;
 }*/
 
+.buttons {
+	text-align: center;
+	left:50%;
+	margin-left: auto;
+	margin-right:auto;
+}
+
 .project {
 	color: #E2CFEA;
 	font-size: 30px;
@@ -93,3 +100,28 @@ img {
 	margin-top:0;
 	margin-bottom:0;
 }
+        .button-like,
+        .button-dislike,
+        .button-profile {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-like {
+            background: rgb(28, 184, 65); /* this is a green */
+        }
+
+        .button-dislike {
+            background: rgb(202, 60, 60); /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20); /* this is an orange */
+        }
+
+        .button-profile {
+            background: rgb(66, 184, 221); /* this is a light blue */
+        }
+
+
