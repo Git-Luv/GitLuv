@@ -1,3 +1,75 @@
-html, body {
-  /* Your css here */
+html {
+	height: 100%;
+  background-image: linear-gradient(#6441A4, #4A4063)
+}	
+
+.landingPage {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -150px;
+	width: 350px;
+	height: 225px;
+}
+
+.welcomeh1 {
+	color: #E2CFEA;
+	font-size: 50px;
+	text-align: center;
+	margin-bottom:10px;
+}
+
+.gitluvh1 {
+	color: #E2CFEA;
+	font-size: 80px;
+	text-align: center;
+	margin-top:0;
+	margin-bottom:0;
+}
+
+
+.landingPage button {
+	width: 150px;
+	margin-left: 75px;
+}
+
+.description {
+	text-align: center;
+	color: #E2CFEA;
+	margin-top:20px;
+}
+
+.profile {
+	width: 50%;
+	margin: 20px auto;
+	text-align: center;
+}
+
+.profile img {
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+}
+
+.skills span {
+	display: block;
+	text-align: center;
+	margin: 0em;
+	font-size: 25px;
+}
+
+.skill {
+	display: inline-block;
+	background-color: white;
+	margin: 0.4em 0.6em;
+	padding: 0.2em 0.3em;
+}
+
+img {
+	margin-top: 20px;
+	border-radius: 10px;
+    margin-left: auto;
+    margin-right:auto;
+    display:block;
 }
