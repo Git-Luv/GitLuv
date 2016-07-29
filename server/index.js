@@ -34,6 +34,8 @@ var assetFolder = Path.resolve(__dirname, '../client/public')
 routes.use(express.static(assetFolder))
 
 
+
+
 if (process.env.NODE_ENV !== 'test') {
   //
   // The Catch-all Route
