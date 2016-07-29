@@ -76,19 +76,14 @@ img {
 
 /*SWIPE PAGE*/
 
-/*.swipe {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -150px;
-	margin-left: -150px;
-	width: 350px;
-	height: 225px;
-}*/
+.swipe {
+	margin-top: 150px;
+}
 
 .buttons {
 	text-align: center;
 	left:50%;
+	margin-top: 50px;
 	margin-left: auto;
 	margin-right:auto;
 }
