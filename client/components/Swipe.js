@@ -19,6 +19,12 @@ export default class Swipe extends React.Component {
 					description: 'creating a javascript spaceship to go populate mars',
 					lookingFor: 'rocketman with backend savvy to store our digital supplies',
 					skills: 'not prone to motion sickness'
+				},
+				{ id: 3,
+					title: 'the lost world',
+					description: 'building a digital terrarium to bring dinosaurs out of extinction',
+					lookingFor: 'time traveler to collect dna samples, with javascript',
+					skills: 'minimum 5 years working in the jurassic period'
 				}
 			]
 		}
