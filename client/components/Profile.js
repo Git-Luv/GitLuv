@@ -39,23 +39,25 @@ export default class Profile extends React.Component {
   render() {
 
 	  return (
-	    <div className="profile" onClick={this.changeSidebarState.bind(this, false)}>
+	    <div className="profile" >
 	    	<Sidebar state={this.state.isSidebar}/>
-	    	<button onClick={this.changeSidebarState.bind(this, true)}>|||</button>
-	     	<div>
-	     		<img src={this.state.userInfo.avatar_url} />
-	     		<h1>{this.state.userInfo.login}</h1>
-	     		<div>{this.state.userInfo.location}</div>
-	     		<div>Followers: {this.state.userInfo.followers}</div>
-	     		<p>{this.state.userInfo.bio}</p>
-	     	</div>
-	     	<div className="skills">
-	     	<span>Skills:</span>
-	     		{this.state.userSkills.map((skill, i) => {
-	     			return(<div className="skill" key={i}>
-							{skill}
-						</div>)
-	     		})}
+	    	<div onClick={this.changeSidebarState.bind(this, false)}>
+		    	<button onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+		     	<div>
+		     		<img src={this.state.userInfo.avatar_url} />
+		     		<h1>{this.state.userInfo.login}</h1>
+		     		<div>{this.state.userInfo.location}</div>
+		     		<div>Followers: {this.state.userInfo.followers}</div>
+		     		<p>{this.state.userInfo.bio}</p>
+		     	</div>
+		     	<div className="skills">
+		     	<span>Skills:</span>
+		     		{this.state.userSkills.map((skill, i) => {
+		     			return(<div className="skill" key={i}>
+								{skill}
+							</div>)
+		     		})}
+		     	</div>
 	     	</div>
 	    </div>
 	  )
