@@ -9,18 +9,27 @@ html {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-
 	margin-top: -150px;
 	margin-left: -150px;
-	width: 300px;
+	width: 350px;
 	height: 225px;
 }
 
-.landingPage h1 {
+.welcomeh1 {
 	color: #E2CFEA;
-	font-size: 78px;
+	font-size: 50px;
 	text-align: center;
+	margin-bottom:10px;
 }
+
+.gitluvh1 {
+	color: #E2CFEA;
+	font-size: 80px;
+	text-align: center;
+	margin-top:0;
+	margin-bottom:0;
+}
+
 
 .landingPage button {
 	width: 150px;
@@ -29,10 +38,15 @@ html {
 
 /* ========== Profile ========== */
 
+.description {
+	text-align: center;
+	color: #E2CFEA;
+	margin-top:20px;
+}
+
 .profile {
 	width: 50%;
 	margin: 20px auto;
-
 	text-align: center;
 }
 
@@ -60,3 +74,10 @@ html {
 
 /* ========== Sidebar ========== */
 
+img {
+	margin-top: 20px;
+	border-radius: 10px;
+    margin-left: auto;
+    margin-right:auto;
+    display:block;
+}
