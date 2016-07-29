@@ -6,7 +6,10 @@ import Sidebar from './sidebar'
 
 import * as model from '../models/profile';
 
+
+
 export default class Profile extends React.Component {
+
 	constructor(props){
 		super(props);
 		this.state = {
@@ -28,11 +31,18 @@ export default class Profile extends React.Component {
 		})
 	}
 
+	changeSidebarState(state) {
+		if(state !== this.state.isSidebar){
+			this.setState({ isSidebar: state })
+		}
+	}
+
   render() {
 
 	  return (
-	    <div className="profile">
-	    	<Sidebar />
+	    <div className="profile" onClick={this.changeSidebarState.bind(this, false)}>
+	    	<Sidebar state={this.state.isSidebar}/>
+	    	<button onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 	     	<div>
 	     		<img src={this.state.userInfo.avatar_url} />
 	     		<h1>{this.state.userInfo.login}</h1>

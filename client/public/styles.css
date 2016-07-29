@@ -65,6 +65,13 @@ html {
 	border-radius: 50%;
 }
 
+.profile button {
+	position: fixed;
+	left: 1em;
+	top: 1em;
+
+}
+
 /* ========== Skills ========== */
 
 .skills span {
@@ -87,16 +94,25 @@ html {
 /* ========== Sidebar ========== */
 
 .sidebarOpen {
+	z-index: 2;
 	position: fixed;
 	width: 200px;
 	height: 100%;
 	background-color: white;
 	top: 0;
 	left: 0;
+	transition: left 0.5s;
 }
 
 .sidebarClose {
-left: -200px;
+	z-index: 2;
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background-color: white;
+	top: 0;
+	left: -200px;
+	transition: left 0.5s;
 }
 
 /*SWIPE PAGE*/
