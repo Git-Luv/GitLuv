@@ -27,7 +27,7 @@ export default class Landing extends React.Component {
 	  return (
 	    <div className="landingPage">
 	    	<h1>Welcome to GitLuv!</h1>
-	    	<div className="description">We connect visionaries and developers to produce quality products</div>
+	    	<div className="description">We connect visionaries and developers to bring dreams into reality</div>
 	    	<img type="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRce09JcurXChhgGjKhLTTvOcQ8glqfIdFQclOWdQdY92eJ2uYg7w" alt="btn-github" onClick={this.login} />
 	    </div>
 	  )

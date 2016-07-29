@@ -62,7 +62,7 @@ html {
 }
 
 img {
-    margin: 0px auto;
-    width:75%;
-    left:50%;
+    margin-left: auto;
+    margin-right:auto;
+    display:block;
 }
