@@ -37,3 +37,17 @@ html {
 	width: 150px;
 	border-radius: 50%;
 }
+
+.skills span {
+	display: block;
+	text-align: center;
+	margin: 0em;
+	font-size: 25px;
+}
+
+.skill {
+	display: inline-block;
+	background-color: white;
+	margin: 0.4em 0.6em;
+	padding: 0.2em 0.3em;
+}

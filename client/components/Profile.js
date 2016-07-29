@@ -14,7 +14,7 @@ export default class Profile extends React.Component {
 				bio: null,
 				avatar: null,
 			},
-			userSkills: ["React", "Node", "Express"],
+			userSkills: ["React", "Node", "Express", "Git", "authom", "Socket.io", "Mongo", "Redux", "React-Router"],
 		}
 	}
 
@@ -36,10 +36,11 @@ export default class Profile extends React.Component {
 	     		<p>{this.state.userInfo.bio}</p>
 	     	</div>
 	     	<div className="skills">
-	     		{this.state.userSkills.map(skill => {
-	     			<div className="skill">
+	     	<span>Skills:</span>
+	     		{this.state.userSkills.map((skill, i) => {
+	     			return(<div className="skill" key={i}>
 							{skill}
-						</div>
+						</div>)
 	     		})}
 	     	</div>
 	    </div>
