@@ -7,22 +7,31 @@ html {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-
+	min-width:350px;
 	margin-top: -150px;
 	margin-left: -150px;
-	width: 300px;
+	width: 350px;
 	height: 225px;
 }
 
 .landingPage h1 {
 	color: #E2CFEA;
-	font-size: 78px;
+	font-size: 60px;
 	text-align: center;
+	margin-bottom: 0px;
 }
+
+
 
 .landingPage button {
 	width: 150px;
 	margin-left: 75px;
+}
+
+.description {
+	text-align: center;
+	color: #E2CFEA;
+	padding-bottom:12px;
 }
 
 .profile {
@@ -50,4 +59,10 @@ html {
 	background-color: white;
 	margin: 0.4em 0.6em;
 	padding: 0.2em 0.3em;
+}
+
+img {
+    margin: 0px auto;
+    width:75%;
+    left:50%;
 }
