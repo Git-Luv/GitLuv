@@ -14,20 +14,17 @@ export default class SkillsList extends React.Component {
 	}
 
 
-	handleClick() {
+	handleClick(i) {
 		this.setState({liked: !this.setState.liked});
+		console.log("state", this.state)
+		console.log('You clicked: ', i)
 	}
-
-	viewMore(i,j){
-        console.log('You clicked: ', i  );
-    }
 
 	render() {
 		const text=this.state.liked ? 'liked' : 'haven\'t liked';
 
 		return (
-
-	     	<div className="skills" onClick={this.viewMore.bind(this)}>
+	     	<div className="skills" onClick={this.handleClick}>
 	     	<span>Skills:</span>
 	     		{this.state.userSkills.map((skill, i) => {
 	     			return(<div className="skill" key={i}>
@@ -35,7 +32,6 @@ export default class SkillsList extends React.Component {
 						</div>)
 	     		})}
 	     	</div>
-
 		);
 	}
 };
