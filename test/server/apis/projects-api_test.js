@@ -14,19 +14,9 @@ describe("Projects API", function() {
 
     yield request(app)
       .post('/projects')
-      .send({ title: 'gitluv', repo_url: 'http://www.github.com/git-luv/gitluv', 
+      .send({title: 'reactjs', repo_url: 'http://www.github.com/reactjs/reactjs',  
       	description: '', req_skills: [], users_liked: [], users_disliked: []})
       .expect(201)
-      .expect(function(response) {
-        newProject = response.body
-
-        expect( newUser.title ).to.equal('mccarthyist')
-        expect( newUser.repo_url ).to.equal('http://www.github.com/git-luv/gitluv')
-        expect( newUser.description ).to.equal('')
-        expect( newUser.req_skills ).to.equal([])
-        expect( newUser.users_liked ).to.equal([])
-        expect( newUser.users_disliked ).to.equal([])
-      })
 
     yield request(app)
       .get('/projects')
@@ -34,20 +24,22 @@ describe("Projects API", function() {
       .expect(function (response) {
         var projects = response.body
         expect( projects.length ).to.equal(1)
-        expect( projects[0].title ).to.equal( newProject.title )
+        expect( projects[0].title ).to.equal('reactjs')
+        expect( projects[0].repo_url ).to.equal('http://www.github.com/reactjs/reactjs')
+        expect( projects[0].description ).to.equal('')
       })
   })
 
   it_("gets a Project by title", function * () {
   	
-  	yield('/projects/:title')
-  		.get('/projects/gitluv')
+  	yield request(app)
+  		.get('/projects/reactjs')
   		.expect(200)
-      	.expect(function (response) {
-        	var project = response.body
-	        expect( project ).to.equal({ title: 'gitluv', 
-	        repo_url: 'http://www.github.com/git-luv/gitluv', description: '',
-	        req_skills: [], users_liked: [], users_disliked: []})
-      	})
+      .expect(function (response) {
+        var projects = response.body
+        expect( projects.title ).to.equal('reactjs')
+        expect( projects.repo_url ).to.equal('http://www.github.com/reactjs/reactjs')
+        expect( projects.description ).to.equal('')
+      })
   })
 })
