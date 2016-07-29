@@ -26,8 +26,10 @@ export default class Swipe extends React.Component {
 					lookingFor: 'time traveler to collect dna samples, with javascript',
 					skills: 'minimum 5 years working in the jurassic period'
 				}
-			]
+			],
+			likedProjects: []
 		}
+		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
 	}
  // componentWillMount() {
@@ -36,13 +38,24 @@ export default class Swipe extends React.Component {
  // 			this.setState({projects: projectData})
  // 		});
  //  }
+ 	handleLike(event) {
+ 		event.preventDefault();
+		console.log("this.state", this.state)
+		var likedProjects = this.state.likedProjects;
+ 		var likedProject = this.state.projects[0];
+ 		var updatedProjects = this.state.projects.slice(1)
+ 		likedProjects.push(likedProject)
+ 		this.setState({ 
+			projects: updatedProjects,
+			likedProjects: likedProjects
+		 })
+ 	}
 
  	handleDislike(event) {
  		event.preventDefault();
  		var updatedProjects = this.state.projects.slice(1)
 		this.setState({ projects: updatedProjects })
  	}
-
 
   render() {
 	  return (
@@ -60,7 +73,7 @@ export default class Swipe extends React.Component {
 	     		</div>
 	     		<div className="buttons">
 			     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislike}>Dislike</button>
-			     	<button type="button" className="button-like pure-button" onSubmit={this.onSubmit}>Like</button>
+			     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
 						<Link className="button-profile pure-button" to={`profile`}>Profile</Link>
 	   			</div>
      	</div>
