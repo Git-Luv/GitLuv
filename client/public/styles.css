@@ -73,3 +73,23 @@ img {
     margin-right:auto;
     display:block;
 }
+
+/*SWIPE PAGE*/
+
+/*.swipe {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -150px;
+	width: 350px;
+	height: 225px;
+}*/
+
+.project {
+	color: #E2CFEA;
+	font-size: 30px;
+	text-align: center;
+	margin-top:0;
+	margin-bottom:0;
+}
