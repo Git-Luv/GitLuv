@@ -1,28 +1,45 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 
-import * as model from '../models/swipe'
+import { fetchProjects } from '../models/swipe'
 
 export default class Swipe extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			projectInfo: {
-				title: null,
-				description: null,
-				lookingFor: null,
-				skills: null,
-			}
+			projects: [
+				{ title: 'atlantis',
+					description: 'building an underwater digital civilization',
+					lookingFor: 'programmer who can hold their breath very long',
+					skills: 'h20 tolerant'
+				}
+			]
 		}
 	}
  
+ // componentWillMount() {
+ // 	fetchProjects()
+ // 		.then((projectData) => {
+ // 			this.setState({projects: projectData})
+ // 		});
+ //  }
+
   render() {
 	  return (
-     	<div>
-     		<h1>{this.state.projectInfo.title}</h1>
-     		<div>{this.state.projectInfo.description}</div>
-     		<p>{this.state.projectInfo.lookingFor}</p>
-     		<p>{this.state.projectInfo.skills}</p>
+	  	<div className='swipe'>
+	     	<div>
+		     	{ this.state.projects
+		     		.map((project) => {
+		     		return (
+		     			<div className='currentProject'>
+				     		<h1>{project.title}</h1>
+				     		<div>{project.description}</div>
+				     		<p>{project.lookingFor}</p>
+				     		<p>{project.skills}</p>
+			     		</div>
+		     		)})
+		      }
+	     	</div>
      	</div>
 	  )
 	}

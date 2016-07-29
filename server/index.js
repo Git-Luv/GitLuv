@@ -3,6 +3,8 @@ var browserify = require('browserify-middleware');
 var path = require('path');
 var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose')
+
 
 var app = express();
 
@@ -49,10 +51,9 @@ app.get('/auth/login', (req, res) => {
 });
 
 app.get('api/projects', (req,res) => {
-  db.collection.find({})
-    .then(projects => {
-      res.send(projects)
-    })
+  Project.find({}, function(err, projects) {
+    res.send(projects)
+  })
 })
 
 // Wild card route for client side routing.
