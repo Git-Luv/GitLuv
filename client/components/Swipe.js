@@ -39,19 +39,14 @@ export default class Swipe extends React.Component {
 
  	handleDislike(event) {
  		event.preventDefault();
- 		console.log(event)
- 		console.log('state', this.state.projects)
  		var updatedProjects = this.state.projects.slice(1)
- 		console.log('updatedProjects var', updatedProjects)
 		this.setState({ projects: updatedProjects })
-		console.log('updated projects', this.state)
  	}
 
 
   render() {
 	  return (
 	  	<div className='swipe'>
-	     	<div>
      			<div key={this.state.projects[0].id} className='currentProject'>
 		     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 		     		<div className="description">
@@ -68,7 +63,6 @@ export default class Swipe extends React.Component {
 			     	<button type="button" className="button-like pure-button" onSubmit={this.onSubmit}>Like</button>
 						<Link className="button-profile pure-button" to={`profile`}>Profile</Link>
 	   			</div>
-	     	</div>
      	</div>
 	  )
 	}
