@@ -13,6 +13,7 @@ conn.once('open', function() {
 
 var projectSchema = new Schema({
 	title:          String,
+	username:       String,
 	repo_url:       String,
 	description:    String,
 	location:       String,
