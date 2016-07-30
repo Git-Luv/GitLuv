@@ -15,7 +15,8 @@ export default class SideBar extends React.Component {
 	}
 
 	logoutUser() {
-		
+		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+		browserHistory.pushState(null, '/')
 	}
 
 	render() {
