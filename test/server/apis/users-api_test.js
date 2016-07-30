@@ -9,13 +9,13 @@ describe("Users API", function() {
   app.use('/', routes)
   app.testReady()
 
-  it_("creates and gets all Users", function * () {
+  xit_("creates and gets all Users", function * () {
     var newUser;
 
     yield request(app)
       .post('/users')
       .send({ username: 'mccarthyist', avatar_url: '', url: '', location: '', bio: '',
-       repos: [], followers: 0, skills: [], visionary: false, updated_at: ''})
+       repos: [], followers: 0, skills: ["react.js", "node.js", "dancing"], visionary: false, updated_at: ''})
       .expect(201)
 
     yield request(app)
@@ -35,7 +35,7 @@ describe("Users API", function() {
       })
   })
 
-  it_("gets a User by username", function * () {
+  xit_("gets a User by username", function * () {
   	
   	yield request(app)
   		.get('/users/mccarthyist')
@@ -52,4 +52,18 @@ describe("Users API", function() {
           expect( user.updated_at ).to.equal('')
       	})
   })
+
+  it_("edits an existing user/pushes new skills", function * () {
+    yield request(app)
+      .patch('/users')
+      .send(['mccarthyist', {skills: ['lol', 'werk'], visionary: true}])
+      .expect(201)
+  })
+
+  // it_("changes visionary status", function * () {
+  //   yield request(app)
+  //     .patch('/users/skills')
+  //     .send({visionary: true})
+  //     .expect(201)
+  // })
 })

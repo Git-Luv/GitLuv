@@ -9,7 +9,7 @@ describe("Projects API", function() {
   app.use('/', routes)
   app.testReady()
 
-  it_("creates and gets all Projects", function * () {
+  xit_("creates and gets all Projects", function * () {
     var newProject;
 
     yield request(app)
@@ -30,7 +30,7 @@ describe("Projects API", function() {
       })
   })
 
-  it_("gets a Project by title", function * () {
+  xit_("gets a Project by title", function * () {
   	
   	yield request(app)
   		.get('/projects/reactjs')
@@ -41,5 +41,13 @@ describe("Projects API", function() {
         expect( projects.repo_url ).to.equal('http://www.github.com/reactjs/reactjs')
         expect( projects.description ).to.equal('')
       })
+  })
+
+  xit_("edits a project", function * () {
+
+    yield request(app)
+      .patch('./projects')
+      .send()
+      .expect(201)
   })
 })

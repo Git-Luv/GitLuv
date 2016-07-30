@@ -21,6 +21,7 @@ var userSchema = new Schema({
 	followers:    Number,
 	skills:       Array,
 	visionary:    Boolean,
+	projects:     Array,
 	updated_at:   String
 })
 
@@ -33,7 +34,6 @@ User.createIfNotExists = function(attrs){
 	delete attrs.username
 
 	return UserCollection.findOneAndUpdate({username: usrnm}, attrs, {upsert: true}, function (err, doc) {
-		console.log("saving!!!")
 		if(err){
 			console.log("!!!-----------------!!!", err)
 		} else {
@@ -55,4 +55,44 @@ User.getUser = function(username){
 		console.log("saving!!!")
 		if(err) console.log("!!!-----------------!!!", err)		 
 	})
+}
+
+User.editUser = function(username, changedAttrs){
+	console.log("username: " + username + " and changedAttrs: " + changedAttrs)
+
+	// let changedAttrs = JSON.parse(changedAttrsJSON)
+	console.log("!!!" + changedAttrs)
+	return User.getUser(username)
+	.then(function (userInfo){
+
+		console.log("running?")
+
+		if(changedAttrs.skills !== userInfo.skills){
+			changedAttrs.skills = userInfo.skills.concat(changedAttrs.skills)
+			console.log("New Skills: ", changedAttrs.skills)
+		} else {
+			delete changedAttrs.skills
+		}
+
+		if(changedAttrs.projects !== userInfo.projects){
+			changedAttrs.projects = userInfo.projects.concat(changedAttrs.projects)
+			console.log("New Projects: ", changedAttrs.projects)
+		} else {
+			delete changedAttrs.projects
+		}
+
+		// changedAttrs.skills   = newSkills
+		// changedAttrs.projects = newProjects
+
+		return UserCollection.findOneAndUpdate({username: username}, changedAttrs, function (err, doc) {
+			if(err){
+				console.log("!!!-----------------!!!", err)
+			} else {
+				console.log("created!")
+			}
+		})
+
+
+	})
+	.catch(err => console.log("what? ", err))
 }

@@ -33,3 +33,10 @@ UsersAPI.post('/users', function (req, res) {
   User.createIfNotExists( req.body )
   res.sendStatus(201)
 })
+
+UsersAPI.patch('/users', function (req, res) {
+
+
+	User.editUser(req.body[0], req.body[1]).then(x => res.sendStatus(201))
+	// 
+})
