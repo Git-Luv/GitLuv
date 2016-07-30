@@ -59,25 +59,12 @@ export default class Swipe extends React.Component {
 		this.setState({ projects: updatedProjects })
  	}
 
-<<<<<<< HEAD
-  render() {
-	  return (
-	  	<div className='swipe'>
-     			<div key={this.state.projects[0].id} className='currentProject'>
-=======
- 	changeSidebarState(state) {
-		if(state !== this.state.isSidebar){
-			this.setState({ isSidebar: state })
-		}
-	}
-
   render() {
 	  return (
 	  	<div className='swipe'>
 	  			<Sidebar state={this.state.isSidebar}/>
      			<div key={this.state.projects[0].id} className='currentProject' onClick={this.changeSidebarState.bind(this, false)}>
      				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
->>>>>>> origin
 		     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 		     		<div className="description">
 		     			<h2>Project Description:</h2>
@@ -91,10 +78,7 @@ export default class Swipe extends React.Component {
 	     		<div className="buttons">
 			     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislike}>Dislike</button>
 			     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
-<<<<<<< HEAD
 						<Link className="button-profile pure-button" to={`profile`}>Profile</Link>
-=======
->>>>>>> origin
 	   			</div>
      	</div>
 	  )
