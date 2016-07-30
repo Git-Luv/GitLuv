@@ -65,13 +65,6 @@ html {
 	border-radius: 50%;
 }
 
-.profile button {
-	position: fixed;
-	left: 1em;
-	top: 1em;
-
-}
-
 /* ========== Skills ========== */
 
 .skills span {
@@ -113,6 +106,28 @@ html {
 	top: 0;
 	left: -200px;
 	transition: left 0.5s;
+}
+
+.sidebarButton {
+	position: fixed;
+	left: 1em;
+	top: 1em;
+}
+ 
+.sidebar-button {
+	margin: 5px auto;
+	display: block;
+	width: 115px;
+	background-color: #6cc644;
+	color: white;
+}
+
+.sidebar-button-logout {
+	margin: 5px auto;
+	display: block;
+	width: 115px;
+	background-color: #CA3C3C;
+	color: white;
 }
 
 /*SWIPE PAGE*/
