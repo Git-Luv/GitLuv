@@ -91,6 +91,17 @@ html {
 	text-align: center;
 }
 
+.button-skillsSelected {
+	bottom: 0;
+	text-align: center;
+	left:50%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right:auto;
+}
+	}
+}
+
 /* ========== Sidebar ========== */
 
 .sidebarOpen {
