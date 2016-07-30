@@ -4,6 +4,8 @@ import Sidebar from './sidebar';
 
 import { fetchProjects } from '../models/swipe'
 
+var dc = require('delightful-cookies');
+
 export default class Swipe extends React.Component {
 	constructor(props){
 		super(props);
@@ -34,12 +36,19 @@ export default class Swipe extends React.Component {
 		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
 	}
- // componentWillMount() {
- // 	fetchProjects()
- // 		.then((projectData) => {
- // 			this.setState({projects: projectData})
- // 		});
- //  }
+
+	componentWillMount() {
+
+		if(!dc.get('AuthToken')){
+			browserHistory.pushState(null, '/')
+		}
+
+ 		// fetchProjects()
+ 		// .then((projectData) => {
+ 		// 	this.setState({projects: projectData})
+ 		// });
+ 	}
+
  	handleLike(event) {
  		event.preventDefault();
 		console.log("this.state", this.state)
