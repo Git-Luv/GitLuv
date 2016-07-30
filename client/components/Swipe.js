@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
+import * as Projects from '../models/projects';
 
 import { fetchProjects } from '../models/swipe'
 
@@ -34,12 +35,13 @@ export default class Swipe extends React.Component {
 		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
 	}
- // componentWillMount() {
- // 	fetchProjects()
- // 		.then((projectData) => {
- // 			this.setState({projects: projectData})
- // 		});
- //  }
+ componentWillMount() {
+ 	// fetchProjects()
+ 	// 	.then((projectData) => {
+ 	// 		this.setState({projects: projectData})
+ 	// 	});
+ 		Projects.getAllProjects().then(x => console.log(x))
+  }
  	handleLike(event) {
  		event.preventDefault();
 		console.log("this.state", this.state)

@@ -13,13 +13,13 @@ describe("Users API", function() {
     var newUser;
 
     yield request(app)
-      .post('/users')
+      .post('/api/users')
       .send({ username: 'mccarthyist', avatar_url: '', url: '', location: '', bio: '',
        repos: [], followers: 0, skills: ["react.js", "node.js", "dancing"], visionary: false, updated_at: ''})
       .expect(201)
 
     yield request(app)
-      .get('/users')
+      .get('/api/users')
       .expect(200)
       .expect(function (response) {
         var users = response.body
@@ -38,7 +38,7 @@ describe("Users API", function() {
   it_("gets a User by username", function * () {
   	
   	yield request(app)
-  		.get('/users/mccarthyist')
+  		.get('/api/users/mccarthyist')
   		.expect(200)
       	.expect(function (response) {
         	var user = response.body
@@ -55,7 +55,7 @@ describe("Users API", function() {
 
   it_("edits an existing user/pushes new skills", function * () {
     yield request(app)
-      .patch('/users')
+      .patch('/api/users')
       .send(['mccarthyist', {skills: ['lol', 'werk', 'react.js'], visionary: true, projects: ['wut', 'duh', 'hek']}])
       .expect(201)
   })
