@@ -15,7 +15,7 @@ describe("Users API", function() {
     yield request(app)
       .post('/users')
       .send({ username: 'mccarthyist', avatar_url: '', url: '', location: '', bio: '',
-       repos: [], followers: 0, skills: [], visionary: false, updated_at: ''})
+       repos: [], followers: 0, skills: ["react.js", "node.js", "dancing"], visionary: false, updated_at: ''})
       .expect(201)
 
     yield request(app)
@@ -52,4 +52,12 @@ describe("Users API", function() {
           expect( user.updated_at ).to.equal('')
       	})
   })
+
+  it_("edits an existing user/pushes new skills", function * () {
+    yield request(app)
+      .patch('/users')
+      .send(['mccarthyist', {skills: ['lol', 'werk', 'react.js'], visionary: true, projects: ['wut', 'duh', 'hek']}])
+      .expect(201)
+  })
+
 })
