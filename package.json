@@ -26,6 +26,7 @@
     "babelify": "^7.3.0",
     "babel-preset-es2015": "^6.0.15",
     "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
     "body-parser": "^1.15.2",
     "browserify-middleware": "^7.0.0",
     "chai": "^3.5.0",
