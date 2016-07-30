@@ -24,10 +24,33 @@ export default class Profile extends React.Component {
 	}
 
 	componentWillMount() {
-		model.getUserData(document.cookie.split('=')[1])
+		// Take all browser's cookies and find the one we need
+		let cookie = this.getCookie();
+		model.getUserData(cookie.value)
 		.then(res => {
 			this.setState({userInfo: res});
 		})
+	}
+
+	getCookie() {
+		// Splits cookie string into individual cookie strings in an array
+		let cookies = document.cookie.split(';');
+		// Takes the cookies array and creates an object for each cookie.
+		cookies.forEach((cookie, i) => {
+			let cookieArray = cookie.split('=')
+			cookies[i] = {
+				name: cookieArray[0],
+				value: cookieArray[1],
+			}
+		})
+		// Finds the "AuthToken" cookie and returns it
+		let result;
+		cookies.forEach(cookie => {
+			if(cookie.name === 'AuthToken'){
+				result = cookie;
+			}
+		})
+		return result;
 	}
 
 	changeSidebarState(state) {
@@ -39,23 +62,25 @@ export default class Profile extends React.Component {
   render() {
 
 	  return (
-	    <div className="profile" onClick={this.changeSidebarState.bind(this, false)}>
+	    <div className="profile" >
 	    	<Sidebar state={this.state.isSidebar}/>
-	    	<button onClick={this.changeSidebarState.bind(this, true)}>|||</button>
-	     	<div>
-	     		<img src={this.state.userInfo.avatar_url} />
-	     		<h1>{this.state.userInfo.login}</h1>
-	     		<div>{this.state.userInfo.location}</div>
-	     		<div>Followers: {this.state.userInfo.followers}</div>
-	     		<p>{this.state.userInfo.bio}</p>
-	     	</div>
-	     	<div className="skills">
-	     	<span>Skills:</span>
-	     		{this.state.userSkills.map((skill, i) => {
-	     			return(<div className="skill" key={i}>
-							{skill}
-						</div>)
-	     		})}
+	    	<div onClick={this.changeSidebarState.bind(this, false)}>
+		    	<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+		     	<div>
+		     		<img src={this.state.userInfo.avatar_url} />
+		     		<h1>{this.state.userInfo.login}</h1>
+		     		<div>{this.state.userInfo.location}</div>
+		     		<div>Followers: {this.state.userInfo.followers}</div>
+		     		<p>{this.state.userInfo.bio}</p>
+		     	</div>
+		     	<div className="skills">
+		     	<span>Skills:</span>
+		     		{this.state.userSkills.map((skill, i) => {
+		     			return(<div className="skill" key={i}>
+								{skill}
+							</div>)
+		     		})}
+		     	</div>
 	     	</div>
 	    </div>
 	  )
