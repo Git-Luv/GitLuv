@@ -24,10 +24,29 @@ export default class Profile extends React.Component {
 	}
 
 	componentWillMount() {
-		model.getUserData(document.cookie.split('=')[1])
+		let cookie = this.getCookie();
+		model.getUserData(cookie.value)
 		.then(res => {
 			this.setState({userInfo: res});
 		})
+	}
+
+	getCookie() {
+		let cookies = document.cookie.split(';');
+		cookies.forEach((cookie, i) => {
+			let cookieArray = cookie.split('=')
+			cookies[i] = {
+				name: cookieArray[0],
+				value: cookieArray[1],
+			}
+		})
+		let result;
+		cookies.forEach(cookie => {
+			if(cookie.name === 'AuthToken'){
+				result = cookie;
+			}
+		})
+		return result;
 	}
 
 	changeSidebarState(state) {
