@@ -9,7 +9,7 @@ describe("Projects API", function() {
   app.use('/', routes)
   app.testReady()
 
-  xit_("creates and gets all Projects", function * () {
+  it_("creates and gets all Projects", function * () {
     var newProject;
 
     yield request(app)
@@ -30,7 +30,7 @@ describe("Projects API", function() {
       })
   })
 
-  xit_("gets a Project by title", function * () {
+  it_("gets a Project by title", function * () {
   	
   	yield request(app)
   		.get('/projects/reactjs')
@@ -43,11 +43,11 @@ describe("Projects API", function() {
       })
   })
 
-  xit_("edits a project", function * () {
+  it_("edits a project", function * () {
 
     yield request(app)
-      .patch('./projects')
-      .send()
+      .patch('/projects')
+      .send(['reactjs', {description: 'sick!!!', users_liked: ['mccarthyist']}])
       .expect(201)
   })
 })

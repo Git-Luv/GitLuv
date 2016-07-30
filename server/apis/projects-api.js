@@ -33,3 +33,17 @@ ProjectsAPI.post('/projects', function (req, res) {
   Project.createIfNotExists( req.body )
   res.sendStatus(201)
 })
+
+ProjectsAPI.patch('/projects', function (req, res) {
+
+	//This function takes a 2 piece array, first index is the title and
+	//the second is an object of all information being changed.
+
+	console.log('lolwut ' + JSON.stringify(req.body))
+
+	Project.editProject(req.body[0], req.body[1]).then(x => res.sendStatus(201))
+	.catch(function(err){
+		console.log(err) 
+		res.sendStatus(500)
+	})
+})

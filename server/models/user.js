@@ -60,29 +60,32 @@ User.getUser = function(username){
 User.editUser = function(username, changedAttrs){
 	console.log("username: " + username + " and changedAttrs: " + changedAttrs)
 
-	// let changedAttrs = JSON.parse(changedAttrsJSON)
-	console.log("!!!" + changedAttrs)
 	return User.getUser(username)
 	.then(function (userInfo){
 
 		console.log("running?")
 
-		if(changedAttrs.skills !== userInfo.skills){
-			changedAttrs.skills = userInfo.skills.concat(changedAttrs.skills)
-			console.log("New Skills: ", changedAttrs.skills)
-		} else {
-			delete changedAttrs.skills
+		if(changedAttrs.skills){
+			let newArr = []
+			for(let i = 0; i < changedAttrs.skills.length; i++){
+
+				if(!(userInfo.skills.indexOf(changedAttrs.skills[i]) >= 0)){
+					newArr.push(changedAttrs.skills[i])
+				}
+			}
+			changedAttrs.skills = userInfo.skills.concat(newArr)
 		}
 
-		if(changedAttrs.projects !== userInfo.projects){
-			changedAttrs.projects = userInfo.projects.concat(changedAttrs.projects)
-			console.log("New Projects: ", changedAttrs.projects)
-		} else {
-			delete changedAttrs.projects
-		}
+		if(changedAttrs.projects){
+			let newArr2 = []
+			for(let i = 0; i < changedAttrs.projects.length; i++){
 
-		// changedAttrs.skills   = newSkills
-		// changedAttrs.projects = newProjects
+				if(!(userInfo.projects.indexOf(changedAttrs.projects[i]) >= 0)){
+					newArr2.push(changedAttrs.projects[i])
+				}
+			}
+			changedAttrs.projects = userInfo.projects.concat(newArr2)
+		}
 
 		return UserCollection.findOneAndUpdate({username: username}, changedAttrs, function (err, doc) {
 			if(err){

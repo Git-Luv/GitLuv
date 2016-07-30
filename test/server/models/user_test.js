@@ -3,7 +3,7 @@ require(TEST_HELPER)
 var request = require('supertest-as-promised')
 var User = require(__server + '/models/user.js')
 
-xdescribe("User Model", function() {
+describe("User Model", function() {
 
   // Promise coroutines
   it_("creates and persists data", function * () {

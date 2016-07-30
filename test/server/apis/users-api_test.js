@@ -9,7 +9,7 @@ describe("Users API", function() {
   app.use('/', routes)
   app.testReady()
 
-  xit_("creates and gets all Users", function * () {
+  it_("creates and gets all Users", function * () {
     var newUser;
 
     yield request(app)
@@ -35,7 +35,7 @@ describe("Users API", function() {
       })
   })
 
-  xit_("gets a User by username", function * () {
+  it_("gets a User by username", function * () {
   	
   	yield request(app)
   		.get('/users/mccarthyist')
@@ -56,14 +56,8 @@ describe("Users API", function() {
   it_("edits an existing user/pushes new skills", function * () {
     yield request(app)
       .patch('/users')
-      .send(['mccarthyist', {skills: ['lol', 'werk'], visionary: true}])
+      .send(['mccarthyist', {skills: ['lol', 'werk', 'react.js'], visionary: true, projects: ['wut', 'duh', 'hek']}])
       .expect(201)
   })
 
-  // it_("changes visionary status", function * () {
-  //   yield request(app)
-  //     .patch('/users/skills')
-  //     .send({visionary: true})
-  //     .expect(201)
-  // })
 })
