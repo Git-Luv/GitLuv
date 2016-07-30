@@ -17,7 +17,8 @@ export default class SideBar extends React.Component {
 	render() {
 		return(
 			<div className={ this.state.isSidebar ? 'sidebarOpen' : 'sidebarClose' }>
-				<Link to={`swipe`}>MAIN</Link>
+				<Link className="button-profile pure-button sidebar-button" to={`swipe`}>Swipe</Link>
+				<Link className="button-profile pure-button sidebar-button" to={`profile`}>Profile</Link>
 			</div>
 			)
 	}
