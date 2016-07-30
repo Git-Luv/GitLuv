@@ -14,11 +14,16 @@ export default class SideBar extends React.Component {
 			this.setState({isSidebar: nextProps.state })
 	}
 
+	logoutUser() {
+		
+	}
+
 	render() {
 		return(
 			<div className={ this.state.isSidebar ? 'sidebarOpen' : 'sidebarClose' }>
-				<Link className="button-profile pure-button sidebar-button" to={`swipe`}>Swipe</Link>
-				<Link className="button-profile pure-button sidebar-button" to={`profile`}>Profile</Link>
+				<Link className="pure-button sidebar-button" to={`profile`}>Profile</Link>
+				<Link className="pure-button sidebar-button" to={`swipe`}>Swipe</Link>
+				<button className="pure-button sidebar-button-logout" onClick={this.logoutUser}>Logout</button>
 			</div>
 			)
 	}

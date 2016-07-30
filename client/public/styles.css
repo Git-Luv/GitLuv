@@ -118,6 +118,16 @@ html {
 	margin: 5px auto;
 	display: block;
 	width: 115px;
+	background-color: #6cc644;
+	color: white;
+}
+
+.sidebar-button-logout {
+	margin: 5px auto;
+	display: block;
+	width: 115px;
+	background-color: #CA3C3C;
+	color: white;
 }
 
 /*SWIPE PAGE*/
