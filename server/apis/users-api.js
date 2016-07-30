@@ -27,7 +27,7 @@ UsersAPI.get('/users/:username', function (req, res) {
   fetch("https://api.github.com/users/:username", {
     method: 'GET',
     headers: {
-      Authorization: token access_token,
+      Authorization: "token " + document.cookie.split('=')[1],
       Accept: 'application/json'
     }
   })
