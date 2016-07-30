@@ -42,7 +42,11 @@ export default class Profile extends React.Component {
 	    <div className="profile" >
 	    	<Sidebar state={this.state.isSidebar}/>
 	    	<div onClick={this.changeSidebarState.bind(this, false)}>
+<<<<<<< HEAD
 		    	<button onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+=======
+		    	<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+>>>>>>> origin
 		     	<div>
 		     		<img src={this.state.userInfo.avatar_url} />
 		     		<h1>{this.state.userInfo.login}</h1>
