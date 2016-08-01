@@ -11,26 +11,26 @@ export default class SkillsList extends React.Component {
 			userSkills: []
 		};
 		this.handleClick = this.handleClick.bind(this);
-		console.log("stateALL", this.state)
 	}
 
-		
-
 	handleClick(skill) {
-		// this.setState({liked: !this.setState.liked});
 			let userSkills = this.state.userSkills;
-			let allSkills = this.state.allSkills 
-			console.log("allSkills", allSkills)
-
-					userSkills.push(skill);
-
+			console.log("skill", skill)
+			if(userSkills.indexOf(skill) == -1) {
+				console.log("hi from inside this loop", userSkills.indexOf(skill))
+				userSkills.push(skill)
+			};
 			console.log("userSkills", userSkills)
-			console.log("I WAS CLICKED ON", skill + "   I am typeOf ", typeof skill)
+			console.log("I WAS CLICKED ON", skill)
 	}	
 
-	sendToDatabase(skillz) {
+	sendToDatabase(user, skillz) {
 		let userSkills = this.state.userSkills;
 		console.log("USERSKILLS OK BYE", userSkills)
+		//call method to update user in DB with new selection of selected skills
+		updateUser(user, skillz)
+		//add redirect to projects page
+
 	}
 
 	render() {
@@ -45,37 +45,10 @@ export default class SkillsList extends React.Component {
 						</div>)
 	     		})}
 	     	</div>
-	     		<div >
-   				 		<button className="button-skillsSelected" onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
+	     		<div className="button-skillsSelected">
+   				 		<button onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
    					</div>
 	    </div>
 		);
 	}
 };
-
-
-	// render() {
-	// 	const text=this.state.liked ? 'liked' : 'haven\'t liked';
-
-	// 	return (
-
-	// 		<div onClick = {this.handleClick}>
-	// 			You {text} this.
-	// 			</div>
-
-	// render() {
-	// 	const text=this.state.liked ? 'liked' : 'haven\'t liked';
-
-	// 	return (
-
-	// 		<div onClick = {this.handleClick}>
-	// 			You {text} this.
-	// 			</div>
-
-
-	// 	);
-	// }
-
-	// 	);
-	// }
-
