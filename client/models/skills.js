@@ -1,16 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export function storeUserSkills (user, selectedSkills) {
+export function storeUserSkills (user, userSkills) {
 	return fetch('/api/users', {
 		method: 'PATCH', 
 		headers: {
 			'Content-Type': 'application/json'
-		}
+		},
 		body:
 		{
-			'user': 'selectedSkills'
+			'user': 'userSkills'
 		}
 	})
-	.then(users => return response.json());
+	.then(response => console.log("wtfwtftf", response))
 	.catch(error => console.error(error));
 }

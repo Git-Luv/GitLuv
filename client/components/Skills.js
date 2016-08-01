@@ -2,15 +2,19 @@ import React from 'react'
 import { Router, Route, browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 
+import * as model from '../models/skills';
+
 
 export default class SkillsList extends React.Component {
 	constructor (props) {
 		super (props);
 		this.state = {
 			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router"],
-			userSkills: []
+			userSkills: [],
+			user: "" 
 		};
 		this.handleClick = this.handleClick.bind(this);
+		console.log("props", props)
 	}
 
 	handleClick(skill) {
@@ -26,9 +30,10 @@ export default class SkillsList extends React.Component {
 
 	sendToDatabase(user, skillz) {
 		let userSkills = this.state.userSkills;
+		let userName = this.state.user
 		console.log("USERSKILLS OK BYE", userSkills)
 		//call method to update user in DB with new selection of selected skills
-		// updateUser(user, skillz)
+		model.storeUserSkills(userSkills)
 		//add redirect to projects page
 		browserHistory.pushState(null, '/swipe')
 	}
