@@ -1,8 +1,11 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
+import * as Projects from '../models/projects'
 
 import { fetchProjects } from '../models/swipe'
+
+// var dc = require('delightful-cookies');
 
 export default class Swipe extends React.Component {
 	constructor(props){
@@ -34,6 +37,12 @@ export default class Swipe extends React.Component {
 		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
 	}
+
+	componentWillMount() {
+
+ 		Projects.getAllProjects().then(x => console.log(x))
+
+ 	}
 
  	handleLike(event) {
  		event.preventDefault();

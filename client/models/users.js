@@ -32,7 +32,7 @@ export function addUser(userObj){
 	.catch(err => console.error(err))
 }
 
-export function addUser(username, updatedAttrs){
+export function updateUser(username, updatedAttrs){
 	return fetch('/api/users', {
 		method: 'PATCH',
 		headers: {
@@ -43,7 +43,6 @@ export function addUser(username, updatedAttrs){
 	.then(x => console.log("Patched!"))
 	.catch(err => console.error(err))
 }
-
 
 // export function playerMove(move, userId, increment){
 // 	return fetch('/api/userMove',{
