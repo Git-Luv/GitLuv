@@ -4,7 +4,8 @@ var Project = require('../models/project')
 
 var ProjectsAPI = module.exports = express.Router()
 
-ProjectsAPI.get('/projects', function (req, res) {
+ProjectsAPI.get('/api/projects', function (req, res) {
+  console.log("getting!!")
   Project.all()
     .then(function (projects) {
       res.status(200).send(projects)
@@ -15,7 +16,7 @@ ProjectsAPI.get('/projects', function (req, res) {
     })
 })
 
-ProjectsAPI.get('/projects/:title', function (req, res) {
+ProjectsAPI.get('/api/projects/:title', function (req, res) {
 
   Project.getProject(req.params.title)
   .then(function(project){
@@ -28,13 +29,13 @@ ProjectsAPI.get('/projects/:title', function (req, res) {
 })
 
 
-ProjectsAPI.post('/projects', function (req, res) {
+ProjectsAPI.post('/api/projects', function (req, res) {
 
   Project.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-ProjectsAPI.patch('/projects', function (req, res) {
+ProjectsAPI.patch('/api/projects', function (req, res) {
 
 	//This function takes a 2 piece array, first index is the title and
 	//the second is an object of all information being changed.

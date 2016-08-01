@@ -13,13 +13,13 @@ describe("Projects API", function() {
     var newProject;
 
     yield request(app)
-      .post('/projects')
+      .post('/api/projects')
       .send({title: 'reactjs', repo_url: 'http://www.github.com/reactjs/reactjs',  
       	description: '', req_skills: [], users_liked: [], users_disliked: []})
       .expect(201)
 
     yield request(app)
-      .get('/projects')
+      .get('/api/projects')
       .expect(200)
       .expect(function (response) {
         var projects = response.body
@@ -33,7 +33,7 @@ describe("Projects API", function() {
   it_("gets a Project by title", function * () {
   	
   	yield request(app)
-  		.get('/projects/reactjs')
+  		.get('/api/projects/reactjs')
   		.expect(200)
       .expect(function (response) {
         var projects = response.body
@@ -46,7 +46,7 @@ describe("Projects API", function() {
   it_("edits a project", function * () {
 
     yield request(app)
-      .patch('/projects')
+      .patch('/api/projects')
       .send(['reactjs', {description: 'sick!!!', users_liked: ['mccarthyist']}])
       .expect(201)
   })

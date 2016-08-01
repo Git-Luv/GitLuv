@@ -1,10 +1,11 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
+import * as Projects from '../models/projects'
 
 import { fetchProjects } from '../models/swipe'
 
-var dc = require('delightful-cookies');
+// var dc = require('delightful-cookies');
 
 export default class Swipe extends React.Component {
 	constructor(props){
@@ -39,14 +40,8 @@ export default class Swipe extends React.Component {
 
 	componentWillMount() {
 
-		if(!dc.get('AuthToken')){
-			browserHistory.pushState(null, '/')
-		}
+ 		Projects.getAllProjects().then(x => console.log(x))
 
- 		// fetchProjects()
- 		// .then((projectData) => {
- 		// 	this.setState({projects: projectData})
- 		// });
  	}
 
  	handleLike(event) {
