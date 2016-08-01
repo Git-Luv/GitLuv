@@ -23,10 +23,14 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
     "babelify": "^7.3.0",
     "body-parser": "^1.15.2",
     "browserify-middleware": "^7.0.0",
     "chai": "^3.5.0",
+    "delightful-cookies": "^1.0.1",
     "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
     "middleware": "^1.0.0",

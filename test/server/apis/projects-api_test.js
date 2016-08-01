@@ -42,4 +42,12 @@ describe("Projects API", function() {
         expect( projects.description ).to.equal('')
       })
   })
+
+  it_("edits a project", function * () {
+
+    yield request(app)
+      .patch('/projects')
+      .send(['reactjs', {description: 'sick!!!', users_liked: ['mccarthyist']}])
+      .expect(201)
+  })
 })

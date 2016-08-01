@@ -5,7 +5,7 @@ import Sidebar from './sidebar'
 
 import * as model from '../models/profile';
 
-
+var dc = require('delightful-cookies');
 
 export default class Profile extends React.Component {
 
@@ -24,10 +24,15 @@ export default class Profile extends React.Component {
 	}
 
 	componentWillMount() {
-		model.getUserData(document.cookie.split('=')[1])
-		.then(res => {
-			this.setState({userInfo: res});
-		})
+		if(dc.get('AuthToken')){
+			// Take all browser's cookies and find the one we need
+			model.getUserData(dc.get('AuthToken').value)
+			.then(res => {
+				this.setState({userInfo: res});
+			})
+		} else {
+			browserHistory.pushState(null, '/');
+		}
 	}
 
 	changeSidebarState(state) {
@@ -42,7 +47,7 @@ export default class Profile extends React.Component {
 	    <div className="profile" >
 	    	<Sidebar state={this.state.isSidebar}/>
 	    	<div onClick={this.changeSidebarState.bind(this, false)}>
-		    	<button onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+		    	<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 		     	<div>
 		     		<img src={this.state.userInfo.avatar_url} />
 		     		<h1>{this.state.userInfo.login}</h1>
