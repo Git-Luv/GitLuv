@@ -7,7 +7,8 @@ export default class SkillsList extends React.Component {
 	constructor (props) {
 		super (props);
 		this.state = {
-			userSkills: [{name:"React"}, {name:"Angular.js"}, {name:"Redux"}, {name:"Mithril"}, {name:"Backbone"}, {name:"Node.js"}, {name:"Express"}, {name: "Git"}, {name: "Passport"}, {name: "Socket.io"}, {name: "Mongo"}]
+			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo"],
+			userSkills: []
 		};
 		this.handleClick = this.handleClick.bind(this);
 		// console.log("stateALL", this.state)
@@ -20,31 +21,39 @@ export default class SkillsList extends React.Component {
 //then 
 		
 
-	handleClick(i) {
-				//redo on click set state to not be targeting key of state object that no longer exists but now the liekd property of the i key on userSkills aray
+	handleClick(skill) {
 		this.setState({liked: !this.setState.liked});
-		console.log("state", this.state)
-		console.log("name", this.state.name)
-		// console.log('You clicked: ', i)
+			let userSkills = this.state.userSkills;
+			let allSkills = this.state.allSkills 
+			console.log("allSkills", allSkills)
+			userSkills.push(skill)
+			console.log("userSkills", userSkills)
+			console.log("I WAS CLICKED ON", skill + "   I am typeOf ", typeof skill)
 	}
+		// console.log('You clicked: ', i)
+	
 
+	sendToDatabase(i) {
+
+		console.log("HIIIIII", i.key)
+	}
 
 	render() {
 		const text=this.state.liked ? 'liked' : 'haven\'t liked';
 
 		return (
 			<div>
-	     	<div className="skills" onClick={this.handleClick}>
+	     	<div className="skills">
 	     	<span>Skills:</span>
-	     		{this.state.userSkills.map((skill, i) => {
+	     		{this.state.allSkills.map((skill, i) => {
 	     			// console.log("skills", skill.name)
-	     			return(<div className="skill" key={i}>
-							{skill.name}
+	     			return(<div className="skill" key={i} onClick={this.handleClick.bind(this, skill)}>
+							{skill}
 						</div>)
 	     		})}
 	     	</div>
 	     		<div >
-   				 		<button className="button-skillsSelected" >Show Me Some Projects!</button>
+   				 		<button className="button-skillsSelected" onClick={this.sendToDatabase}>Show Me Some Projects!</button>
    					</div>
 	    </div>
 		);
@@ -61,6 +70,18 @@ export default class SkillsList extends React.Component {
 	// 			You {text} this.
 	// 			</div>
 
+	// render() {
+	// 	const text=this.state.liked ? 'liked' : 'haven\'t liked';
+
+	// 	return (
+
+	// 		<div onClick = {this.handleClick}>
+	// 			You {text} this.
+	// 			</div>
+
+
+	// 	);
+	// }
 
 	// 	);
 	// }
