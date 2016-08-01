@@ -10,6 +10,10 @@ export default class Landing extends React.Component {
 		}
 	}
 
+	componentWillMount() {
+		
+	}
+
   login(e) {
   	e.preventDefault()
   	

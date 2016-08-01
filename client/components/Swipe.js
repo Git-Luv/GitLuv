@@ -36,11 +36,7 @@ export default class Swipe extends React.Component {
 		this.handleDislike = this.handleDislike.bind(this);
 	}
  componentWillMount() {
- 	// fetchProjects()
- 	// 	.then((projectData) => {
- 	// 		this.setState({projects: projectData})
- 	// 	});
- 		Projects.getAllProjects().then(x => console.log(x))
+
   }
  	handleLike(event) {
  		event.preventDefault();
