@@ -189,8 +189,15 @@ html {
 }
 
 .modalContent {
-	background-color: #fff;
+	background-color: #eee;
 	margin: 5%;
   width: 90%;
   height: 90%;
+}
+
+.stageContent {
+	color: black;
+	position: relative;
+	top: 45%;
+	transform: translateY(-50%);
 }
