@@ -48,7 +48,6 @@ export default class Swipe extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
-				console.log('GETUSERDATA RES', res)
 				this.setState({username: res.login});
 				// grab all projects from db
 		 		Projects.getAllProjects()
@@ -73,19 +72,17 @@ export default class Swipe extends React.Component {
  	handleLike(event) {
  		event.preventDefault();
  		Projects.updateProject(this.state.projects[0].title, {users_liked: [this.state.username]})
- 		console.log("LIKED BY: ", this.state.username)
  		this.setState({ direction: 'right' })
  		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
  	}
  	handleDislike(event) {
  		event.preventDefault();
+ 		Projects.updateProject(this.state.projects[0].title, {users_disliked: [this.state.username]})
 		this.setState({ direction: 'left'})
 		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
 	}
 		
   updateArray() { 
-			console.log("INUPDATEARRAY", this.state.direction)
-			console.log("State?", this.state)
  			var updatedProjects = this.state.projects.slice(1)
 			this.setState({
 				projects: updatedProjects,
