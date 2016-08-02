@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, Route, browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 
-import * as modelSkills from '../models/skills';
+import * as modelSkills from '../models/users';
 import * as modelProfile from '../models/profile';
 
 var dc = require('delightful-cookies')
@@ -30,23 +30,23 @@ export default class SkillsList extends React.Component {
 			console.log("I WAS CLICKED ON", skill)
 	}	
 
-	componentWillMount() {
-		let cookie = this.getCookie()
-		modelProfile.getUserData(cookie.value)
-		.then(res => {
-			this.setState({userInfo: res});
-			console.log("NSDKFNSKDFNKSDF", res)
-		})
-	}
+	// componentWillMount() {
+	// 	let cookie = this.getCookie()
+	// 	modelProfile.getUserData(cookie.value)
+	// 	.then(res => {
+	// 		this.setState({user: res.login});
+	// 		console.log("NSDKFNSKDFNKSDF", res)
+	// 	})
+	// }
 
 	sendToDatabase(user, skillz) {
-		let userSkills = this.state.userSkills;
-		let userName = this.state.user
-		console.log("USERSKILLS OK BYE", userSkills)
+		let userSkillz = this.state.userSkills;
+		let userName = this.state.user;
+		console.log("USERSKILLS OK BYE", userSkillz);
 		//call method to update user in DB with new selection of selected skills
-		modelSkills.storeUserSkills(userSkills)
+		modelSkills.updateUser(userName, userSkillz);
 		//add redirect to projects page
-		browserHistory.pushState(null, '/swipe')
+		browserHistory.pushState(null, '/swipe');
 	}
 
 	render() {
