@@ -76,7 +76,7 @@ html {
 
 .skill {
 	display: inline-block;
-	background-color: #6cc644;
+	background-color: #57BC9A;
 	border-radius: 10%;
 	color: white;
 	margin: 0.4em 0.6em;
@@ -91,10 +91,10 @@ html {
 	position: fixed;
 	width: 200px;
 	height: 100%;
-	background-color: white;
+	background-image: linear-gradient(#FF5F6D, #FFC371);
 	top: 0;
 	left: 0;
-	transition: left 0.5s;
+	transition: left 0.25s;
 }
 
 .sidebarClose {
@@ -102,10 +102,10 @@ html {
 	position: fixed;
 	width: 200px;
 	height: 100%;
-	background-color: white;
+	background-image: linear-gradient(#FF5F6D, #FFC371);
 	top: 0;
 	left: -200px;
-	transition: left 0.5s;
+	transition: left 0.25s;
 }
 
 .sidebarButton {
@@ -118,7 +118,7 @@ html {
 	margin: 5px auto;
 	display: block;
 	width: 115px;
-	background-color: #6cc644;
+	background-color: #57BC9A;
 	color: white;
 }
 
@@ -126,7 +126,7 @@ html {
 	margin: 5px auto;
 	display: block;
 	width: 115px;
-	background-color: #CA3C3C;
+	background-color: #900C3F;
 	color: white;
 }
 
@@ -161,11 +161,11 @@ html {
 }
 
 .button-like {
-    background: rgb(28, 184, 65); /* this is a green */
+    background-color: #57BC9A; /* this is a green */
 }
 
 .button-dislike {
-    background: rgb(202, 60, 60); /* this is a maroon */
+    background-color: #900C3F; /* this is a maroon */
 }
 
 .button-warning {
