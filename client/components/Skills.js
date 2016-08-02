@@ -24,7 +24,8 @@ export default class SkillsList extends React.Component {
 		modelProfile.getUserData(cookie.value)
 		.then(res => {
 			this.setState({user: res.login});
-			console.log("NSDKFNSKDFNKSDF", res)
+			let user = this.state.user;
+			console.log(user);
 		})
 	}
 
@@ -40,13 +41,14 @@ export default class SkillsList extends React.Component {
 	}	
 
 	sendToDatabase(user, skillz) {
-		let userSkillz = this.state.userSkills;
+		let userSkillz = {skills: this.state.userSkills};
 		let userName = this.state.user;
-		console.log("USERSKILLS OK BYE", userSkillz);
+		console.log("USERSKILLS OK BYE", userName, "hehehehehe", userSkillz);
 		//call method to update user in DB with new selection of selected skills
 		modelSkills.updateUser(userName, userSkillz);
 		//add redirect to projects page
 		browserHistory.pushState(null, '/swipe');
+		console.log('YEA FURR IM UPDATED CHECK THE DB FOO')
 	}
 
 	render() {

@@ -48,9 +48,9 @@ export default class Swipe extends React.Component {
  		Projects.getProject("wtf").then(y => console.log(y))
 
  		Users.getAllUsers().then(z => console.log(z))
- 		Users.addUser({username: "Mr. Junior", location: "hell", followers: 6, skills: []})
- 		Users.updateUser("Mr. Junior", {bio: "lol"})
- 		Users.getUser("Mr. Junior").then(a => console.log(a))
+ 		Users.addUser({username: "theTSLC", location: "PARADISE", followers: 1735460, skills: []})
+ 		Users.updateUser("theTSLC", {bio: "tbone"})
+ 		Users.getUser("theTSLC").then(a => console.log(a))
 
  	}
 
