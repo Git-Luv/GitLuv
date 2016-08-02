@@ -3,9 +3,12 @@ var browserify = require('browserify-middleware');
 var path = require('path');
 var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var User = require('./models/user');
+
 
 var app = express();
+
 
 var port = process.env.PORT || 4000;
 
@@ -37,6 +40,11 @@ app.get('/app-bundle.js',
 //
 // Github Authorization
 //
+//set up middleware to check 'isAuthenticate' on protected endpoints
+
+var Profile = require('./apis/github-api');
+var cookie = null;
+
 app.get('/auth/login', (req, res) => {
   console.log("Running");
 
@@ -50,8 +58,47 @@ app.get('/auth/login', (req, res) => {
     return response.json()
   })
   .then(result => {
-    res.cookie("AuthToken", result.access_token).redirect('/skills');
+      cookie = result.access_token;
+
+    return Profile.getUserData(result.access_token)
   })
+  .then(data => {
+      console.log('data getuserdata', data)
+      //'/api/users/:username'
+      //User.getUser(req.params.username)
+      //if exists send to '/swipe' endpoint
+      //'/api/usersPOST'
+      //if not exist send to '/skills' endpoint
+      User.getUser(data.login)
+      .then(userData => {
+        console.log('!!!!userData', userData);
+        if(!userData){
+        //store user in DB?
+          var userStuff = {
+            username: data.login,
+            avatar_url: data.avatar_url,
+            url: data.html_url,
+            location: data.location,
+            bio: data.bio,
+            followers: data.followers,
+            updated_at: data.updated_at
+          }
+          User.createIfNotExists( userStuff )
+          .then(x => {
+            res.cookie("AuthToken", cookie)
+            res.redirect('/skills');
+          })
+          
+        }
+        else {
+          res.cookie("AuthToken", cookie)
+          res.redirect('/swipe');
+
+        }
+      })
+
+  })
+
 });
 
 //
@@ -110,7 +157,6 @@ app.use('/api/projectsPATCH', function (req, res) {
 // Users API
 //
 
-var User = require('./models/user')
 
 app.use('/api/usersGET', function (req, res) {
   User.all()
