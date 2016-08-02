@@ -196,3 +196,11 @@ html {
 .button-profile {
     background: rgb(66, 184, 221); /* this is a light blue */
 }
+
+.loading {
+	color: #E2CFEA;
+	font-size: 30px;
+	text-align: center;
+	margin-bottom:0;
+	margin-top:300px;
+}
