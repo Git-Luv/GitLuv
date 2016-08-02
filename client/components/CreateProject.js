@@ -14,9 +14,7 @@ export default class CreateProject extends React.Component {
 			stage: 0,
 			input0: "",
 			project: {
-				name: null,
-				description: null,
-				skillsNeeded: [],
+				
 			}
 		}
 	}
@@ -34,7 +32,7 @@ export default class CreateProject extends React.Component {
 					model.getRepoData(this.state.input0)
 					.then(repo => {
 						this.setState({ project: {
-							name: repo.name,
+							title: repo.name,
 							description: repo.description,
 							username:       repo.owner.login,
 							repo_url:       repo.html_url,
