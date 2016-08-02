@@ -25,7 +25,6 @@ export default class Project extends React.Component {
 	}
 
 	createProject() {
-		console.log("CREATE PROJECT")
 		this.setState({ isCreatingProject: true })
 	}
 
@@ -40,7 +39,7 @@ export default class Project extends React.Component {
 		return (
 			<div className="profile" >
 				<Sidebar state={this.state.isSidebar} />
-				{ this.state.isCreatingProject ? <CreateProject /> : null }
+				{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }
 				<div onClick={this.changeSidebarState.bind(this, false)}>
 					<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 					{ this.state.project ? 

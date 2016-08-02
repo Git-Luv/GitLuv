@@ -102,7 +102,7 @@ html {
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
 	text-align: center;
-	left:50%;
+	left: 50%;
 }
 
 .skill-deselected {
@@ -113,7 +113,7 @@ html {
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
 	text-align: center;
-	left:50%;
+	left: 50%;
 }
 
 /*.button-skillsSelected {
@@ -227,6 +227,14 @@ html {
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.4);
 	z-index: 1;
+}
+
+.createProjectSubmit {
+	margin: 5px auto;
+	display: block;
+	width: 115px;
+	background-color: #6cc644;
+	color: white;
 }
 
 .modalContent {

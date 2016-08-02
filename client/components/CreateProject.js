@@ -12,7 +12,7 @@ export default class CreateProject extends React.Component {
 		super(props);
 		this.state = {
 			stage: 0,
-			input0: "delightful-cookies",
+			input0: "",
 			project: {
 				name: null,
 				description: null,
@@ -62,7 +62,10 @@ export default class CreateProject extends React.Component {
 	}
 
 	submitProject() {
-		
+		Projects.addProject(this.state.project)
+		.then(res => {
+			this.props.project.setState({ isCreatingProject: false });
+		})
 	}
 
 	returnStage(stage) {
@@ -70,9 +73,8 @@ export default class CreateProject extends React.Component {
 			case 0:
 				return (
 					<div>
-					Repo name: <input value={this.state.input0} onChange={this.handleChange.bind(this)} />
+					Repo name: <input onChange={this.handleChange.bind(this)} />
 					<div>
-						<button type="button" className="button-like pure-button" onClick={this.handleNextStage.bind(this, 'skip')}>Skip</button>
 						<button type="button" className="button-like pure-button" onClick={this.handleNextStage.bind(this, 'next')}>Next</button>
 					</div>
 					</div>
@@ -91,12 +93,12 @@ export default class CreateProject extends React.Component {
 								else
 									skillClassName = "skill-deselected"
 								return (
-									<div key={i} className={skillClassName + " animated flipInX"} onClick={this.handleSkillSelect.bind(this, skill)}>
+									<button key={i} className={skillClassName + " animated flipInX"} onClick={this.handleSkillSelect.bind(this, skill)}>
 										{skill}
-									</div> )
+									</button> )
 							})}
 						</div>
-						<button className="pure-button createProjectSubmit" onClick={this.submitProject.bind(this)}>Logout</button>
+						<button className="pure-button createProjectSubmit" onClick={this.submitProject.bind(this)}>Submit</button>
 					</div>
 				)
 			case 2:
