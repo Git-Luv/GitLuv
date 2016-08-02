@@ -19,6 +19,7 @@
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
+
 .animated.hinge {
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
