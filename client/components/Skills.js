@@ -1,23 +1,21 @@
 import React from 'react'
 import { Router, Route, browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
-
 import * as modelSkills from '../models/users';
 import * as modelProfile from '../models/profile';
-
-var dc = require('delightful-cookies')
+let dc = require('delightful-cookies')
 
 export default class SkillsList extends React.Component {
 	constructor (props) {
 		super (props);
+		// add languages as desired
 		this.state = {
-			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router"],
+			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router", "C++", "Java", "Ruby", "Python", "Go", "Haskell"],
 			userSkills: [],
 			user: "" 
 		};
 		this.handleClick = this.handleClick.bind(this);
-		console.log("props", props)
-	}
+	};
 
 	componentWillMount() {
 		let cookie = dc.get("AuthToken")
@@ -25,31 +23,22 @@ export default class SkillsList extends React.Component {
 		.then(res => {
 			this.setState({user: res.login});
 			let user = this.state.user;
-			console.log(user);
 		})
-	}
+	};
 
 	handleClick(skill) {
 			let userSkills = this.state.userSkills;
-			console.log("skill", skill)
 			if(userSkills.indexOf(skill) == -1) {
-				console.log("hi from inside this loop", userSkills.indexOf(skill))
 				userSkills.push(skill)
 			};
-			console.log("userSkills", userSkills)
-			console.log("I WAS CLICKED ON", skill)
-	}	
+	};
 
 	sendToDatabase(user, skillz) {
 		let userSkillz = {skills: this.state.userSkills};
 		let userName = this.state.user;
-		console.log("USERSKILLS OK BYE", userName, "hehehehehe", userSkillz);
-		//call method to update user in DB with new selection of selected skills
 		modelSkills.updateUser(userName, userSkillz);
-		//add redirect to projects page
 		browserHistory.pushState(null, '/swipe');
-		console.log('YEA FURR IM UPDATED CHECK THE DB FOO')
-	}
+	};
 
 	render() {
 		let skillz = this.state.userSkills;
@@ -69,5 +58,5 @@ export default class SkillsList extends React.Component {
    					</div>
 	    </div>
 		);
-	}
+	};
 };
