@@ -94,6 +94,28 @@ html {
 	left:50%;
 }
 
+.skill-selected {
+	display: inline-block;
+	background-color: #6cc644;
+	border-radius: 10%;
+	color: white;
+	margin: 0.4em 0.6em;
+	padding: 0.5em 0.7em;
+	text-align: center;
+	left:50%;
+}
+
+.skill-deselected {
+	display: inline-block;
+	background-color: #CA3C3C;
+	border-radius: 10%;
+	color: white;
+	margin: 0.4em 0.6em;
+	padding: 0.5em 0.7em;
+	text-align: center;
+	left:50%;
+}
+
 /*.button-skillsSelected {
 	bottom: 0;
 	text-align: center;
@@ -102,8 +124,6 @@ html {
 	margin-left: auto;
 	margin-right:auto;
 }*/
-	
-}
 
 /* ========== Sidebar ========== */
 

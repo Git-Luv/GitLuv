@@ -49,6 +49,22 @@ export default class CreateProject extends React.Component {
 		}
 	}
 
+	handleSkillSelect(skill) {
+		var temp = this.state.project;
+		var index = temp.req_skills.indexOf(skill);
+		if(index > -1){
+			temp.req_skills.splice(index, 1)
+		} else {
+			temp.req_skills.push(skill);	
+		}
+
+		this.setState({ project: temp })
+	}
+
+	submitProject() {
+		
+	}
+
 	returnStage(stage) {
 		switch(stage){
 			case 0:
@@ -66,14 +82,21 @@ export default class CreateProject extends React.Component {
 					<div>
 						<div>Project Name: <h1>{this.state.project.name}</h1></div>
 						<div>Description: <span>{this.state.project.description}</span></div>
-						<div className="selectedSkills">
-
-						</div>
+						<div>Please select the skills you require for this project</div>
 						<div className="skillSelector">
 							{skills.map((skill, i) => {
-								return ( <div key={i} className="skill animated flipInX">{skill}</div> )
+								var skillClassName = '';
+								if(this.state.project.req_skills.indexOf(skill) > -1) 
+									skillClassName = "skill-selected" 
+								else
+									skillClassName = "skill-deselected"
+								return (
+									<div key={i} className={skillClassName + " animated flipInX"} onClick={this.handleSkillSelect.bind(this, skill)}>
+										{skill}
+									</div> )
 							})}
 						</div>
+						<button className="pure-button createProjectSubmit" onClick={this.submitProject.bind(this)}>Logout</button>
 					</div>
 				)
 			case 2:
