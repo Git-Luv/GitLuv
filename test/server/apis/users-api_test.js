@@ -9,7 +9,7 @@ describe("Users API", function() {
   app.use('/', routes)
   app.testReady()
 
-  it_("creates and gets all Users", function * () {
+  xit_("creates and gets all Users", function * () {
     var newUser;
 
     yield request(app)
@@ -35,7 +35,7 @@ describe("Users API", function() {
       })
   })
 
-  it_("gets a User by username", function * () {
+  xit_("gets a User by username", function * () {
   	
   	yield request(app)
   		.get('/users/mccarthyist')
