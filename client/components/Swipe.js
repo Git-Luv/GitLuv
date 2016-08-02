@@ -82,7 +82,7 @@ export default class Swipe extends React.Component {
 		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
 	}
 		
-  updateArray() { 
+    updateArray() { 
  			var updatedProjects = this.state.projects.slice(1)
 			this.setState({
 				projects: updatedProjects,
@@ -96,33 +96,29 @@ export default class Swipe extends React.Component {
 		}
 	}
 
-	handleDislikeClick(event){
-		this.handleDislike(event)
-	}
-
-  render() {
-  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
-  	// console.log('DIRECTION BEFORE RENDER', direction)
-	  return (
-	  	<div className='swipe'>
-	  			<Sidebar state={this.state.isSidebar}/>
-     				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
-     			<div key={this.state.key} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
-		     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
-		     		<div className="description">
-		     			<h2>Project Description:</h2>
-		     			<p>{this.state.projects[0].description}</p>
-		     			<h2>Looking For:</h2>
-			     		<p>{this.state.projects[0].lookingFor}</p>
-			     		<h2>Required Skills:</h2>
-			     		<p>{this.state.projects[0].skills}</p>
+    render() {
+	  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
+	  	// console.log('DIRECTION BEFORE RENDER', direction)
+		  return (
+		  	<div className='swipe'>
+		  			<Sidebar state={this.state.isSidebar}/>
+	     				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+	     			<div key={this.state.key} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
+			     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
+			     		<div className="description">
+			     			<h2>Project Description:</h2>
+			     			<p>{this.state.projects[0].description}</p>
+			     			<h2>Looking For:</h2>
+				     		<p>{this.state.projects[0].lookingFor}</p>
+				     		<h2>Required Skills:</h2>
+				     		<p>{this.state.projects[0].skills}</p>
+			     		</div>
 		     		</div>
-	     		</div>
-	     		<div className="buttons">
-			     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislikeClick.bind(this)}>Dislike</button>
-			     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
-	   			</div>
-     	</div>
-	  )
+		     		<div className="buttons">
+				     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislike.bind(this)}>Dislike</button>
+				     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
+		   			</div>
+	     	</div>
+		  )
+		}
 	}
-}
