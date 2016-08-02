@@ -50,7 +50,7 @@ app.get('/auth/login', (req, res) => {
     return response.json()
   })
   .then(result => {
-    res.cookie("AuthToken", result.access_token).redirect('/swipe');
+    res.cookie("AuthToken", result.access_token).redirect('/skills');
   })
 });
 
