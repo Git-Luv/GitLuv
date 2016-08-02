@@ -1,7 +1,14 @@
 html {
 	height: 100%;
-  background-image: linear-gradient(#6441A4, #79609C)
+  background-image: url(http://i.imgur.com/s1ZXO34.gif;);
+  background-repeat: no-repeat;
+  center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
 }	
+
 
 /* ========== Landing Page ========== */
 
