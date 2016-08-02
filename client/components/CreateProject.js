@@ -3,13 +3,16 @@ import { browserHistory, Link } from 'react-router';
 import * as model from '../models/project';
 import * as Projects from '../models/projects'
 
+var skills = [
+"React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router"]
+
 export default class CreateProject extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			stage: 0,
-			input0: "",
+			input0: "delightful-cookies",
 			project: {
 				name: null,
 				description: null,
@@ -30,8 +33,9 @@ export default class CreateProject extends React.Component {
 				} else {
 					model.getRepoData(this.state.input0)
 					.then(repo => {
-						Projects.addProject({
-							title:          repo.name,
+						this.setState({ project: {
+							name: repo.name,
+							description: repo.description,
 							username:       repo.owner.login,
 							repo_url:       repo.html_url,
 							description:    repo.description,
@@ -39,10 +43,6 @@ export default class CreateProject extends React.Component {
 							req_skills:     [],
 							users_liked:    [],
 							users_disliked: [],
-						})
-						this.setState({ project: {
-							name: repo.name,
-							description: repo.description,
 						}, stage: 1 })
 					})
 				}
@@ -54,7 +54,7 @@ export default class CreateProject extends React.Component {
 			case 0:
 				return (
 					<div>
-					Repo name: <input onChange={this.handleChange.bind(this)} />
+					Repo name: <input value={this.state.input0} onChange={this.handleChange.bind(this)} />
 					<div>
 						<button type="button" className="button-like pure-button" onClick={this.handleNextStage.bind(this, 'skip')}>Skip</button>
 						<button type="button" className="button-like pure-button" onClick={this.handleNextStage.bind(this, 'next')}>Next</button>
@@ -64,8 +64,16 @@ export default class CreateProject extends React.Component {
 			case 1:
 				return (
 					<div>
-						<div>Project Name: <input value={this.state.project.name} /></div>
-						<div>Description: <textarea value={this.state.project.description} /></div>
+						<div>Project Name: <h1>{this.state.project.name}</h1></div>
+						<div>Description: <span>{this.state.project.description}</span></div>
+						<div className="selectedSkills">
+
+						</div>
+						<div className="skillSelector">
+							{skills.map((skill, i) => {
+								return ( <div key={i} className="skill animated flipInX">{skill}</div> )
+							})}
+						</div>
 					</div>
 				)
 			case 2:

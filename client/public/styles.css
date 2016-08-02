@@ -198,6 +198,16 @@ html {
 .stageContent {
 	color: black;
 	position: relative;
-	top: 45%;
-	transform: translateY(-50%);
+	/*top: 45%;
+	transform: translateY(-50%);*/
+}
+
+.skillsSelector div {
+	display: inline-block;
+	background-color: #6cc644;
+	border-radius: 10%;
+	color: white;
+	margin: 0.4em 0.6em;
+	padding: 0.5em 0.7em;
+	text-align: center;
 }
