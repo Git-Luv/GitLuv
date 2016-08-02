@@ -82,6 +82,8 @@ export default class Swipe extends React.Component {
 	  	// console.log('DIRECTION BEFORE RENDER', direction)
 	  	if(this.state.projects === null) {
 	  		return (<h3 className="loading">Loading...</h3>)
+	  	} else if (this.state.projects.length === 0) {
+	  		return (<h3 className="loading">No more projects, check back later!</h3>)
 	  	} else {
 			  return (
 		  	<div className='swipe'>
