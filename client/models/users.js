@@ -41,6 +41,6 @@ export function updateUser(username, updatedAttrs){
 		},
 		body: JSON.stringify([username, updatedAttrs])
 	})
-	.then(x => console.log("Patched!"))
+	.then(x => console.log("Patched in DB!", x))
 	.catch(err => console.error(err))
 }

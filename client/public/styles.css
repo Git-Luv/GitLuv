@@ -67,6 +67,15 @@ html {
 
 /* ========== Skills ========== */
 
+
+.button-skillsSelected {
+	text-align: center;
+	left:50%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right:auto;
+}
+
 .skills span {
 	display: block;
 	text-align: center;
@@ -82,6 +91,18 @@ html {
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
 	text-align: center;
+	left:50%;
+}
+
+/*.button-skillsSelected {
+	bottom: 0;
+	text-align: center;
+	left:50%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right:auto;
+}*/
+	
 }
 
 /* ========== Sidebar ========== */

@@ -64,10 +64,12 @@ export default class Swipe extends React.Component {
  		// Projects.updateProject("wtf", {description: "uhh"})
  		// Projects.getProject("wtf").then(y => console.log(y))
 
+
  		// Users.getAllUsers().then(z => console.log(z))
  		// Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
  		// Users.updateUser("Mr. Junior", {bio: "lol"})
  		// Users.getUser("Mr. Junior").then(a => console.log(a))
+
  	}
 
  	handleLike(event) {
