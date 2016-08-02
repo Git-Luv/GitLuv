@@ -2,6 +2,8 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
+import * as Users from '../models/users'
+
 
 import { fetchProjects } from '../models/swipe'
 
@@ -38,9 +40,17 @@ export default class Swipe extends React.Component {
 		this.handleDislike = this.handleDislike.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 
  		Projects.getAllProjects().then(x => console.log(x))
+ 		Projects.addProject({title: "wtf", users_liked: ['mccarthyist']})
+ 		Projects.updateProject("wtf", {description: "uhh"})
+ 		Projects.getProject("wtf").then(y => console.log(y))
+
+ 		Users.getAllUsers().then(z => console.log(z))
+ 		Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
+ 		Users.updateUser("Mr. Junior", {bio: "lol"})
+ 		Users.getUser("Mr. Junior").then(a => console.log(a))
 
  	}
 
