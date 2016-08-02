@@ -36,7 +36,7 @@ export default class CreateProject extends React.Component {
 							repo_url:       repo.html_url,
 							description:    repo.description,
 							location:       null,
-							req_skills:     ,
+							req_skills:     [],
 							users_liked:    [],
 							users_disliked: [],
 						})
