@@ -84,11 +84,8 @@ app.get('/auth/login', (req, res) => {
             updated_at: data.updated_at
           }
           User.createIfNotExists( userStuff )
-          .then(x => {
             res.cookie("AuthToken", cookie)
             res.redirect('/skills');
-          })
-          
         }
         else {
           res.cookie("AuthToken", cookie)
