@@ -3,6 +3,8 @@ import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar'
 import CreateProject from './createproject'
 
+import * as Projects from '../models/projects'
+
 var dc = require('delightful-cookies');
 
 export default class Project extends React.Component {

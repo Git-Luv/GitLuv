@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import * as model from '../models/project';
+import * as Projects from '../models/projects'
 
 export default class CreateProject extends React.Component {
 
@@ -29,7 +30,16 @@ export default class CreateProject extends React.Component {
 				} else {
 					model.getRepoData(this.state.input0)
 					.then(repo => {
-						console.log(repo)
+						Projects.addProject({
+							title:          repo.name,
+							username:       repo.owner.login,
+							repo_url:       repo.html_url,
+							description:    repo.description,
+							location:       null,
+							req_skills:     ,
+							users_liked:    [],
+							users_disliked: [],
+						})
 						this.setState({ project: {
 							name: repo.name,
 							description: repo.description,
