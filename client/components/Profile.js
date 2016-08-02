@@ -28,17 +28,7 @@ export default class Profile extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
-				console.log('getuserdata res', res)
-				//'/api/users/:username'
-				//User.getUser(req.params.username)
-				//if exists send to '/swipe' endpoint
-				//'/api/usersPOST'
-				//if not exist send to '/skills' endpoint
-
-
-					this.setState({userInfo: res});
-				
-
+				this.setState({userInfo: res});
 			})
 		} else {
 			browserHistory.pushState(null, '/');
