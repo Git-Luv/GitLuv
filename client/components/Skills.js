@@ -19,6 +19,16 @@ export default class SkillsList extends React.Component {
 		console.log("props", props)
 	}
 
+	componentWillMount() {
+		let cookie = document.cookie;
+		console.log("COOKIES", cookie)
+
+		// .then(res => {
+		// 	// this.setState({user: res.login});
+		// 	console.log("NSDKFNSKDFNKSDF", res)
+		// })
+	}
+
 	handleClick(skill) {
 			let userSkills = this.state.userSkills;
 			console.log("skill", skill)
@@ -29,15 +39,6 @@ export default class SkillsList extends React.Component {
 			console.log("userSkills", userSkills)
 			console.log("I WAS CLICKED ON", skill)
 	}	
-
-	// componentWillMount() {
-	// 	let cookie = this.getCookie()
-	// 	modelProfile.getUserData(cookie.value)
-	// 	.then(res => {
-	// 		this.setState({user: res.login});
-	// 		console.log("NSDKFNSKDFNKSDF", res)
-	// 	})
-	// }
 
 	sendToDatabase(user, skillz) {
 		let userSkillz = this.state.userSkills;
