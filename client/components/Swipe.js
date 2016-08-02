@@ -2,11 +2,8 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
-
 import * as model from '../models/profile';
-
 import * as Users from '../models/users'
-
 
 import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
@@ -51,31 +48,32 @@ export default class Swipe extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
-				this.setState({username: res.username});
+				console.log('GETUSERDATA RES', res)
+				this.setState({username: res.login});
 				// grab all projects from db
-		 		// Projects.getAllProjects()
-		 		// .then(x => {
-		 		// 	this.setState({projects: x})
-		 		// })
+		 		Projects.getAllProjects()
+		 		.then(x => {
+		 			this.setState({projects: x})
+		 		})
 			})
 		} else {
 			browserHistory.pushState(null, '/');
 		}
- 		Projects.getAllProjects().then(x => console.log(x))
- 		Projects.addProject({title: "wtf", users_liked: ['mccarthyist']})
- 		Projects.updateProject("wtf", {description: "uhh"})
- 		Projects.getProject("wtf").then(y => console.log(y))
+ 		// Projects.getAllProjects().then(x => console.log(x))
+ 		// Projects.addProject({title: "wtf", users_liked: ['mccarthyist']})
+ 		// Projects.updateProject("wtf", {description: "uhh"})
+ 		// Projects.getProject("wtf").then(y => console.log(y))
 
- 		Users.getAllUsers().then(z => console.log(z))
- 		Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
- 		Users.updateUser("Mr. Junior", {bio: "lol"})
- 		Users.getUser("Mr. Junior").then(a => console.log(a))
-
+ 		// Users.getAllUsers().then(z => console.log(z))
+ 		// Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
+ 		// Users.updateUser("Mr. Junior", {bio: "lol"})
+ 		// Users.getUser("Mr. Junior").then(a => console.log(a))
  	}
 
  	handleLike(event) {
  		event.preventDefault();
- 		Projects.updateProject(this.state.projects[0].title, this.state.username)
+ 		Projects.updateProject(this.state.projects[0].title, {users_liked: [this.state.username]})
+ 		console.log("LIKED BY: ", this.state.username)
  		this.setState({ direction: 'right' })
  		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
  	}
@@ -87,6 +85,7 @@ export default class Swipe extends React.Component {
 		
   updateArray() { 
 			console.log("INUPDATEARRAY", this.state.direction)
+			console.log("State?", this.state)
  			var updatedProjects = this.state.projects.slice(1)
 			this.setState({
 				projects: updatedProjects,
