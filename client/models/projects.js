@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 require('es6-promise').polyfill();
 
 export function getAllProjects(){
-	return fetch('/api/projects', {
+	return fetch('/api/projectsGET', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -15,16 +15,6 @@ export function getAllProjects(){
 	})
 }
 
-// export function getAllProjects(){
-// 	return new Promise(function(resolve, reject){
-// 		request.get('/api/projects')
-// 		.on(response, function(resp){
-// 			console.log(resp)
-// 			resolve(resp)
-// 		})
-// 	})
-// }
-
 export function getProject(title){
 	return fetch('/api/projects/' + title, {
 		method: 'GET',
@@ -36,7 +26,7 @@ export function getProject(title){
 }
 
 export function addProject(projectObj){
-	return fetch('/api/projects', {
+	return fetch('/api/projectsPOST', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -48,7 +38,7 @@ export function addProject(projectObj){
 }
 
 export function updateProject(title, updatedAttrs){
-	return fetch('/api/projects', {
+	return fetch('/api/projectsPATCH', {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json'

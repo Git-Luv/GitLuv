@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
+require('es6-promise').polyfill();
 
 export function getAllUsers(){
-	return fetch('/api/users', {
+	return fetch('/api/usersGET', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -21,11 +22,11 @@ export function getUser(username){
 }
 
 export function addUser(userObj){
-	return fetch('/api/users', {
+	return fetch('/api/usersPOST', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
-		}
+		},
 		body: JSON.stringify(userObj)
 	})
 	.then(x => console.log("Added!"))
@@ -33,29 +34,13 @@ export function addUser(userObj){
 }
 
 export function updateUser(username, updatedAttrs){
-	return fetch('/api/users', {
+	return fetch('/api/usersPATCH', {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json'
-		}
+		},
 		body: JSON.stringify([username, updatedAttrs])
 	})
 	.then(x => console.log("Patched!"))
 	.catch(err => console.error(err))
 }
-
-// export function playerMove(move, userId, increment){
-// 	return fetch('/api/userMove',{
-// 		method: 'PATCH',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify({
-// 			move: move,
-//       userId: userId,
-//       increment: increment
-// 		})
-// 	})
-//   .then(data => data.json())
-//   .catch(error => console.error(error));
-// }

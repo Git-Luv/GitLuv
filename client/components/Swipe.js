@@ -2,7 +2,12 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
+<<<<<<< HEAD
 import * as model from '../models/profile';
+=======
+import * as Users from '../models/users'
+
+>>>>>>> master
 
 
 import { fetchProjects } from '../models/swipe'
@@ -43,8 +48,9 @@ export default class Swipe extends React.Component {
 		this.updateArray = this.updateArray.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 
+<<<<<<< HEAD
 		if(dc.get('AuthToken')){
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
@@ -59,6 +65,18 @@ export default class Swipe extends React.Component {
 		} else {
 			browserHistory.pushState(null, '/');
 		}
+=======
+ 		Projects.getAllProjects().then(x => console.log(x))
+ 		Projects.addProject({title: "wtf", users_liked: ['mccarthyist']})
+ 		Projects.updateProject("wtf", {description: "uhh"})
+ 		Projects.getProject("wtf").then(y => console.log(y))
+
+ 		Users.getAllUsers().then(z => console.log(z))
+ 		Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
+ 		Users.updateUser("Mr. Junior", {bio: "lol"})
+ 		Users.getUser("Mr. Junior").then(a => console.log(a))
+
+>>>>>>> master
  	}
 
  	handleLike(event) {
