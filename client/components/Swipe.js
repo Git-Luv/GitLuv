@@ -13,26 +13,7 @@ export default class Swipe extends React.Component {
 		super(props);
 		this.state = {
 			isSidebar: false,
-			projects: [
-				{ id: 1,
-					title: 'atlantis',
-					description: 'building an underwater digital civilization',
-					lookingFor: 'programmer who can hold their breath very long',
-					skills: 'h20 tolerant'
-				},
-				{ id: 2,
-					title: 'rocketman',
-					description: 'creating a javascript spaceship to go populate mars',
-					lookingFor: 'rocketman with backend savvy to store our digital supplies',
-					skills: 'not prone to motion sickness'
-				},
-				{ id: 3,
-					title: 'the lost world',
-					description: 'building a digital terrarium to bring dinosaurs out of extinction',
-					lookingFor: 'time traveler to collect dna samples, with javascript',
-					skills: 'minimum 5 years working in the jurassic period'
-				}
-			],
+			projects: null,
 			key: 0,
 			username: 'kyhan',
 			direction: 'null',
@@ -99,7 +80,10 @@ export default class Swipe extends React.Component {
     render() {
 	  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
 	  	// console.log('DIRECTION BEFORE RENDER', direction)
-		  return (
+	  	if(this.state.projects === null) {
+	  		return (<h3 className="loading">Loading...</h3>)
+	  	} else {
+			  return (
 		  	<div className='swipe'>
 		  			<Sidebar state={this.state.isSidebar}/>
 	     				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
@@ -119,6 +103,6 @@ export default class Swipe extends React.Component {
 				     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
 		   			</div>
 	     	</div>
-		  )
+		  )}
 		}
 	}
