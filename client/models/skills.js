@@ -6,11 +6,10 @@ export function storeUserSkills (user, userSkills) {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body:
-		{
-			'user': 'userSkills'
-		}
+		body: ""
+			// JSON.stringify(	[user, {skills: userSkills}])
+		
 	})
 	.then(response => console.log("wtfwtftf", response))
-	.catch(error => console.error(error));
+	.catch(error => console.error(error))
 }

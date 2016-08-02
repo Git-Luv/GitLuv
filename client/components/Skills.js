@@ -2,8 +2,10 @@ import React from 'react'
 import { Router, Route, browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 
-import * as model from '../models/skills';
+import * as modelSkills from '../models/skills';
+import * as modelProfile from '../models/profile';
 
+var dc = require('delightful-cookies')
 
 export default class SkillsList extends React.Component {
 	constructor (props) {
@@ -28,12 +30,21 @@ export default class SkillsList extends React.Component {
 			console.log("I WAS CLICKED ON", skill)
 	}	
 
+	componentWillMount() {
+		let cookie = this.getCookie()
+		modelProfile.getUserData(cookie.value)
+		.then(res => {
+			this.setState({userInfo: res});
+			console.log("NSDKFNSKDFNKSDF", res)
+		})
+	}
+
 	sendToDatabase(user, skillz) {
 		let userSkills = this.state.userSkills;
 		let userName = this.state.user
 		console.log("USERSKILLS OK BYE", userSkills)
 		//call method to update user in DB with new selection of selected skills
-		model.storeUserSkills(userSkills)
+		modelSkills.storeUserSkills(userSkills)
 		//add redirect to projects page
 		browserHistory.pushState(null, '/swipe')
 	}
