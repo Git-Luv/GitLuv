@@ -2,12 +2,14 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
+
+import * as model from '../models/profile';
+
 import * as Users from '../models/users'
 
 
 import { fetchProjects } from '../models/swipe'
-
-// var dc = require('delightful-cookies');
+var dc = require('delightful-cookies');
 
 export default class Swipe extends React.Component {
 	constructor(props){
@@ -34,14 +36,31 @@ export default class Swipe extends React.Component {
 					skills: 'minimum 5 years working in the jurassic period'
 				}
 			],
+			key: 0,
+			username: 'kyhan',
+			direction: 'null',
 			likedProjects: []
 		}
 		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
+		this.updateArray = this.updateArray.bind(this);
 	}
 
 	componentDidMount() {
-
+		if(dc.get('AuthToken')){
+			// Take all browser's cookies and find the one we need
+			model.getUserData(dc.get('AuthToken').value)
+			.then(res => {
+				this.setState({username: res.username});
+				// grab all projects from db
+		 		// Projects.getAllProjects()
+		 		// .then(x => {
+		 		// 	this.setState({projects: x})
+		 		// })
+			})
+		} else {
+			browserHistory.pushState(null, '/');
+		}
  		Projects.getAllProjects().then(x => console.log(x))
  		Projects.addProject({title: "wtf", users_liked: ['mccarthyist']})
  		Projects.updateProject("wtf", {description: "uhh"})
@@ -56,22 +75,24 @@ export default class Swipe extends React.Component {
 
  	handleLike(event) {
  		event.preventDefault();
-		console.log("this.state", this.state)
-		var likedProjects = this.state.likedProjects;
- 		var likedProject = this.state.projects[0];
- 		var updatedProjects = this.state.projects.slice(1)
- 		likedProjects.push(likedProject)
- 		this.setState({ 
-			projects: updatedProjects,
-			likedProjects: likedProjects
-		 })
+ 		Projects.updateProject(this.state.projects[0].title, this.state.username)
+ 		this.setState({ direction: 'right' })
+ 		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
  	}
-
  	handleDislike(event) {
  		event.preventDefault();
- 		var updatedProjects = this.state.projects.slice(1)
-		this.setState({ projects: updatedProjects })
- 	}
+		this.setState({ direction: 'left'})
+		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
+	}
+		
+  updateArray() { 
+			console.log("INUPDATEARRAY", this.state.direction)
+ 			var updatedProjects = this.state.projects.slice(1)
+			this.setState({
+				projects: updatedProjects,
+				direction: 'null' 
+			})
+		}
 
  	changeSidebarState(state) {
 		if(state !== this.state.isSidebar){
@@ -79,12 +100,18 @@ export default class Swipe extends React.Component {
 		}
 	}
 
+	handleDislikeClick(event){
+		this.handleDislike(event)
+	}
+
   render() {
+  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
+  	// console.log('DIRECTION BEFORE RENDER', direction)
 	  return (
 	  	<div className='swipe'>
 	  			<Sidebar state={this.state.isSidebar}/>
-     			<div key={this.state.projects[0].id} className='currentProject' onClick={this.changeSidebarState.bind(this, false)}>
      				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+     			<div key={this.state.key} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
 		     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 		     		<div className="description">
 		     			<h2>Project Description:</h2>
@@ -96,7 +123,7 @@ export default class Swipe extends React.Component {
 		     		</div>
 	     		</div>
 	     		<div className="buttons">
-			     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislike}>Dislike</button>
+			     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislikeClick.bind(this)}>Dislike</button>
 			     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
 	   			</div>
      	</div>
