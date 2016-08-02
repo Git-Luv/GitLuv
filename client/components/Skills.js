@@ -20,13 +20,12 @@ export default class SkillsList extends React.Component {
 	}
 
 	componentWillMount() {
-		let cookie = document.cookie;
-		console.log("COOKIES", cookie)
-
-		// .then(res => {
-		// 	// this.setState({user: res.login});
-		// 	console.log("NSDKFNSKDFNKSDF", res)
-		// })
+		let cookie = dc.get("AuthToken")
+		modelProfile.getUserData(cookie.value)
+		.then(res => {
+			this.setState({user: res.login});
+			console.log("NSDKFNSKDFNKSDF", res)
+		})
 	}
 
 	handleClick(skill) {
