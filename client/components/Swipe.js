@@ -85,7 +85,13 @@ export default class Swipe extends React.Component {
 	  	if(this.state.projects === null) {
 	  		return (<h3 className="loading">Loading...</h3>)
 	  	} else if (this.state.projects.length === 0) {
-	  		return (<h3 className="loading">No more projects, check back later!</h3>)
+	  		return (
+	  			<div>
+		  			<Sidebar state={this.state.isSidebar}/>
+		  			<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+		  			<h3 className="loading">No more projects, check back later!</h3>
+	  			</div>
+	  			)
 	  	} else {
 			  return (
 		  	<div className='swipe'>
