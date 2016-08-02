@@ -4,17 +4,22 @@ import * as profile from './profile'
 var dc = require('delightful-cookies')
 
 export function getRepoData(repoName) {
-	profile.getUserData(dc.get('AuthToken'))
+	return profile.getUserData(dc.get('AuthToken').value)
 	.then(response => {
-		fetch('https://api.github.com/repos/' + response.login + '/' + repoName,
+		console.log(repoName);
+		return fetch('https://api.github.com/repos/' + response.login + '/' + repoName,
 		{
 			headers: {
-			Authorization: "token " + authToken,
+			Authorization: "token " + dc.get('AuthToken').value,
 			Accept: 'application/json'
 			}
 		})
 		.then(response => {
+			console.log(response)
 			return response.json();
+		})
+		.catch(err => {
+			console.log("ERROR:", err)
 		})
 	})
 }

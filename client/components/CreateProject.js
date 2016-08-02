@@ -27,12 +27,14 @@ export default class CreateProject extends React.Component {
 				if(command === 'skip'){
 					this.setState({ stage: 1 });
 				} else {
-					var repo = model.getRepoData(this.state.input0)
-					console.log(repo)
-					this.setState({ project: {
-						name: repo.name,
-						description: repo.description,
-					} })
+					model.getRepoData(this.state.input0)
+					.then(repo => {
+						console.log(repo)
+						this.setState({ project: {
+							name: repo.name,
+							description: repo.description,
+						}, stage: 1 })
+					})
 				}
 		}
 	}
@@ -53,7 +55,7 @@ export default class CreateProject extends React.Component {
 				return (
 					<div>
 						<div>Project Name: <input value={this.state.project.name} /></div>
-						<div>Project Name: <textarea value={this.state.project.description} /></div>
+						<div>Description: <textarea value={this.state.project.description} /></div>
 					</div>
 				)
 			case 2:
