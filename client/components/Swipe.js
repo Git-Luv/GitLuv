@@ -105,7 +105,7 @@ export default class Swipe extends React.Component {
 			     			<h2>Looking For:</h2>
 				     		<p>{this.state.projects[0].lookingFor}</p>
 				     		<h2>Required Skills:</h2>
-				     		<p>{this.state.projects[0].skills}</p>
+				     		<p>{this.state.projects[0].req_skills.map(skill => <div className="skill">{skill}</div>)}</p>
 			     		</div>
 		     		</div>
 		     		<div className="buttons">
