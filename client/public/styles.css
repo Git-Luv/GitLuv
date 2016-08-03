@@ -135,8 +135,7 @@ html {
 	top: 0;
 	left: 0;
 	transition: left 0.25s;
-	border: 20px;
-	border-image: linear-gradient(#F15F79, #B24592);
+	z-index: 0.75;
 }
 
 .sidebarClose {
@@ -148,8 +147,7 @@ html {
 	top: 0;
 	left: -200px;
 	transition: left 0.25s;
-	border: 20px;
-	border-image: linear-gradient(#F15F79, #B24592);
+	z-index: 0.75;
 }
 
 .sidebarButton {
