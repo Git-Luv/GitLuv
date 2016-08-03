@@ -45,6 +45,7 @@
     "react": "^15.1.0",
     "react-addons-transition-group": "^15.2.1",
     "react-dom": "^15.0.1",
+    "react-popout": "^0.5.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.1",
     "react-sidebar": "^2.2.1",
