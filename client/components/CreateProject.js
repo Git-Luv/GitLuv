@@ -65,7 +65,7 @@ export default class CreateProject extends React.Component {
 		Projects.addProject(this.state.project)
 		.then(res => {
 			this.props.project.setState({ isCreatingProject: false });
-			document.alert("Project created!")
+			window.alert("Project created!")
 		})
 	}
 
