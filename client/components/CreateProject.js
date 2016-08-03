@@ -13,6 +13,7 @@ export default class CreateProject extends React.Component {
 		this.state = {
 			stage: 0,
 			input0: "",
+			inputArea: "",
 			project: {
 				
 			}
@@ -23,27 +24,28 @@ export default class CreateProject extends React.Component {
 		this.setState({ input0: event.target.value })
 	}
 
+	handleAreaChange(event) {
+		this.setState({ inputArea: event.target.value })
+	}
+
 	handleNextStage(command) {
 		switch(this.state.stage){
 			case 0:
-				if(command === 'skip'){
-					this.setState({ stage: 1 });
-				} else {
-					model.getRepoData(this.state.input0)
-					.then(repo => {
-						this.setState({ project: {
-							title: repo.name,
-							description: repo.description,
-							username:       repo.owner.login,
-							repo_url:       repo.html_url,
-							description:    repo.description,
-							location:       null,
-							req_skills:     [],
-							users_liked:    [],
-							users_disliked: [],
-						}, stage: 1 })
-					})
-				}
+				model.getRepoData(this.state.input0)
+				.then(repo => {
+					this.setState({ project: {
+						title: 					repo.name,
+						description: 		repo.description,
+						username:       repo.owner.login,
+						looking_for:  	this.state.inputArea,
+						repo_url:       repo.html_url,
+						description:    repo.description,
+						location:       null,
+						req_skills:     [],
+						users_liked:    [],
+						users_disliked: [],
+					}, stage: 1 })
+				})
 		}
 	}
 
@@ -63,6 +65,7 @@ export default class CreateProject extends React.Component {
 		Projects.addProject(this.state.project)
 		.then(res => {
 			this.props.project.setState({ isCreatingProject: false });
+			document.alert("Project created!")
 		})
 	}
 
@@ -70,11 +73,11 @@ export default class CreateProject extends React.Component {
 		switch(stage){
 			case 0:
 				return (
-					<div>
-					Repo name: <input onChange={this.handleChange.bind(this)} />
-					<div>
+					<div className="stage">
+						GitHub Repo name: <input onChange={this.handleChange.bind(this)} />
+						<span>What kind of work are you looking for?</span>
+						<textarea rows="4" cols="50" onChange={this.handleAreaChange.bind(this)} />
 						<button type="button" className="button-like pure-button" onClick={this.handleNextStage.bind(this, 'next')}>Next</button>
-					</div>
 					</div>
 					)
 			case 1:
