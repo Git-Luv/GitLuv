@@ -48,20 +48,22 @@ export default class Profile extends React.Component {
 	    	<Sidebar state={this.state.isSidebar}/>
 	    	<div onClick={this.changeSidebarState.bind(this, false)}>
 		    	<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
-		     	<div>
+		     	<div className="profile-left">
 		     		<img src={this.state.userInfo.avatar_url} />
+	     		</div>
+	     		<div className="profile-right">
 		     		<h1>{this.state.userInfo.login}</h1>
 		     		<div>{this.state.userInfo.location}</div>
 		     		<div>Followers: {this.state.userInfo.followers}</div>
 		     		<p>{this.state.userInfo.bio}</p>
-		     	</div>
-		     	<div className="skills">
-		     	<span>Skills:</span>
-		     		{this.state.userSkills.map((skill, i) => {
-		     			return(<div className="skill animated fadeInUp" key={i}>
-								{skill}
-							</div>)
-		     		})}
+			     	<div className="skills">
+			     	<span>Skills:</span>
+			     		{this.state.userSkills.map((skill, i) => {
+			     			return(<div className="skill animated fadeInUp" key={i}>
+									{skill}
+								</div>)
+			     		})}
+			     	</div>
 		     	</div>
 	     	</div>
 	    </div>
