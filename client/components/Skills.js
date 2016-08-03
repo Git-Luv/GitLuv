@@ -28,9 +28,12 @@ export default class SkillsList extends React.Component {
 
 	handleClick(skill) {
 			let userSkills = this.state.userSkills;
-			if(userSkills.indexOf(skill) == -1) {
+			let index = userSkills.indexOf(skill)
+			if(index > -1) {
+				userSkills.splice(index, 1) 
+			} else {
 				userSkills.push(skill)
-			};
+			}
 			this.setState({userSkills: userSkills})
 			console.log(userSkills)
 	};
