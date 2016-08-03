@@ -38,10 +38,13 @@ export default class SkillsList extends React.Component {
 	sendToDatabase(user, skillz) {
 		let userSkillz = {skills: this.state.userSkills};
 		let userName = this.state.user;
+		if (userSkillz.skills.length < 1 || !userSkillz) {
+			alert("Please choose at least one skill")
+			console.log("LESS THAN 1")
+		} else {
 		modelSkills.updateUser(userName, userSkillz);
 		browserHistory.pushState(null, '/swipe');
-		console.log("ThIS IS DB STUFF", userName, userSkillz)
-
+		console.log("ThIS IS DB STUFF", userName, userSkillz) }
 	};
 
 	render() {
