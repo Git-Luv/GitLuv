@@ -26,6 +26,9 @@ export default class Swipe extends React.Component {
 	}
 
 	componentDidMount() {
+
+		hasEvent = false;
+
 		if(dc.get('AuthToken')){
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
