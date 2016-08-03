@@ -61,8 +61,12 @@ html {
 	width: 50%;
 	margin: 20px auto;
 	text-align: center;
-	color: white;
-	margin-top: 10%;
+	color: black;
+	background-color: white;
+	box-shadow: 0px 0px 20px black;
+	margin-top: 5%;
+	padding: 5px;
+	border-radius: 2%;
 }
 
 .profile img {
@@ -180,7 +184,7 @@ html {
 /*SWIPE PAGE*/
 
 .swipe {
-	margin-top: 10%;
+	margin-top: 5%;
 }
 
 .buttons {
@@ -243,6 +247,16 @@ html {
 	color: white;
 }
 
+.projectPage {
+	width: 50%;
+	margin: 20px auto;
+	text-align: center;
+	color: black;
+	margin-top: 5%;
+	padding: 5px;
+	border-radius: 2%;
+}
+
 .modalContent {
 	background-color: #eee;
 	margin: 5%;
@@ -264,6 +278,24 @@ html {
 .stage > * {
 	display: block;
 	margin: 10px auto;
+}
+
+.projectCancelButton {
+	display: inline-block;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	margin: 0px;
+	padding: 5px;
+}
+
+.projectWarning {
+	display: block;
+	color: red;
+}
+
+.projectWarning-hidden {
+	display: none;
 }
 
 .skillsSelector div {

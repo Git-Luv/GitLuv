@@ -50,18 +50,20 @@ export default class Profile extends React.Component {
 		    	<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 		     	<div>
 		     		<img src={this.state.userInfo.avatar_url} />
+	     		</div>
+	     		<div className="profile-right">
 		     		<h1>{this.state.userInfo.login}</h1>
 		     		<div>{this.state.userInfo.location}</div>
 		     		<div>Followers: {this.state.userInfo.followers}</div>
 		     		<p>{this.state.userInfo.bio}</p>
-		     	</div>
-		     	<div className="skills">
-		     	<span>Skills:</span>
-		     		{this.state.userSkills.map((skill, i) => {
-		     			return(<div className="skill animated fadeInUp" key={i}>
-								{skill}
-							</div>)
-		     		})}
+			     	<div className="skills">
+			     	<span>Skills:</span>
+			     		{this.state.userSkills.map((skill, i) => {
+			     			return(<div className="skill animated fadeInUp" key={i}>
+									{skill}
+								</div>)
+			     		})}
+			     	</div>
 		     	</div>
 	     	</div>
 	    </div>
