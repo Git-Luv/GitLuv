@@ -7,6 +7,7 @@ import * as Users from '../models/users'
 
 import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
+var hasEvent = false;
 
 export default class Swipe extends React.Component {
 	constructor(props){
@@ -56,14 +57,22 @@ export default class Swipe extends React.Component {
  		event.preventDefault();
  		Projects.updateProject(this.state.projects[0].title, {users_liked: [this.state.username]})
  		this.setState({ direction: 'right' })
- 		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
+ 		if(!hasEvent) {
+ 			document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
+ 			hasEvent = true;
+ 		}
  	}
  	handleDislike(event) {
  		event.preventDefault();
  		Projects.updateProject(this.state.projects[0].title, {users_disliked: [this.state.username]})
 		this.setState({ direction: 'left'})
-		document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
+		if(!hasEvent) {
+			document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
+			hasEvent = true;
+		}
 	}
+
+
 		
     updateArray() { 
  			var updatedProjects = this.state.projects.slice(1)
@@ -95,8 +104,8 @@ export default class Swipe extends React.Component {
 	  	} else {
 			  return (
 		  	<div className='swipe'>
-		  			<Sidebar state={this.state.isSidebar}/>
-	     				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+		  			<Sidebar state={this.state.isSidebar} />
+	     				<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 	     			<div key={this.state.key} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
 			     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 			     		<div className="description">
@@ -105,7 +114,7 @@ export default class Swipe extends React.Component {
 			     			<h2>Looking For:</h2>
 				     		<p>{this.state.projects[0].lookingFor}</p>
 				     		<h2>Required Skills:</h2>
-				     		<p>{this.state.projects[0].skills}</p>
+				     		<p>{this.state.projects[0].req_skills.map(skill => <div className="skill">{skill}</div>)}</p>
 			     		</div>
 		     		</div>
 		     		<div className="buttons">

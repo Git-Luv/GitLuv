@@ -37,7 +37,7 @@ export default class Project extends React.Component {
 	render() {
 		console.log(this.state.isCreatingProject)
 		return (
-			<div className="profile" >
+			<div className="projectPage" >
 				<Sidebar state={this.state.isSidebar} />
 				{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }
 				<div onClick={this.changeSidebarState.bind(this, false)}>

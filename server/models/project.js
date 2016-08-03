@@ -17,6 +17,7 @@ var projectSchema = new Schema({
 	repo_url:       String,
 	description:    String,
 	location:       String,
+	looking_for:    String,
 	req_skills:     Array,
 	users_liked:    Array,
 	users_disliked: Array,

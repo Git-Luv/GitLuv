@@ -1,18 +1,23 @@
 html {
-	height: 100%;
-  background-image: linear-gradient(#6441A4, #79609C)
+  height: 100%;
+  background-image: linear-gradient(#002551, #00326c);
 }	
+
 
 /* ========== Landing Page ========== */
 
 .landingPage {
 	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -175px;
-	margin-left: -175px;
-	width: 350px;
-	height: 225px;
+	width: 100%;
+	height: 100%;
+  /*url(http://i.imgur.com/s1ZXO34.gif;);*/
+	background-image: url(http://res.cloudinary.com/pashadelic/image/upload/cs_srgb,c_limit,h_1550,w_1550/qinekafjcgtqd8l7u1qq.jpg);
+	background-repeat: no-repeat;
+    center center fixed; 
+/*        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;*/
 }
 
 .welcomeh1 {
@@ -48,7 +53,7 @@ html {
 
 .description {
 	text-align: center;
-	color: #E2CFEA;
+	color: slate;
 	margin-top:20px;
 }
 
@@ -56,8 +61,12 @@ html {
 	width: 50%;
 	margin: 20px auto;
 	text-align: center;
-	color: white;
-	margin-top: 15%;
+	color: black;
+	background-color: white;
+	box-shadow: 0px 0px 20px black;
+	margin-top: 5%;
+	padding: 5px;
+	border-radius: 2%;
 }
 
 .profile img {
@@ -151,7 +160,9 @@ html {
 .sidebarButton {
 	position: fixed;
 	left: 1em;
-	top: 1em;
+	top: 1em;    
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
  
 .sidebar-button {
@@ -173,7 +184,7 @@ html {
 /*SWIPE PAGE*/
 
 .swipe {
-	margin-top: 15%;
+	margin-top: 5%;
 }
 
 .buttons {
@@ -185,7 +196,7 @@ html {
 }
 
 .project {
-	color: #E2CFEA;
+	color: dark slate;
 	font-size: 30px;
 	text-align: center;
 	margin-top:0;
@@ -236,6 +247,16 @@ html {
 	color: white;
 }
 
+.projectPage {
+	width: 50%;
+	margin: 20px auto;
+	text-align: center;
+	color: black;
+	margin-top: 5%;
+	padding: 5px;
+	border-radius: 2%;
+}
+
 .modalContent {
 	background-color: #eee;
 	margin: 5%;
@@ -250,6 +271,33 @@ html {
 	transform: translateY(-50%);*/
 }
 
+.stage {
+	padding-top: 40px;
+}
+
+.stage > * {
+	display: block;
+	margin: 10px auto;
+}
+
+.projectCancelButton {
+	display: inline-block;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	margin: 0px;
+	padding: 5px;
+}
+
+.projectWarning {
+	display: block;
+	color: red;
+}
+
+.projectWarning-hidden {
+	display: none;
+}
+
 .skillsSelector div {
 	display: inline-block;
 	background-color: #6cc644;
@@ -261,9 +309,32 @@ html {
 }
 
 .loading {
-	color: #E2CFEA;
+	color: white;
+	opacity: 0.9;
 	font-size: 30px;
 	text-align: center;
 	margin-bottom:0;
 	margin-top:300px;
+}
+.landing-text {
+	color: #E2CFEA;
+	font-size: 30px;
+	text-align: center;
+	margin-bottom:0;
+	margin-top:200px;
+}
+
+.currentProject {
+	color: black;
+	text-align: center;
+	width: 40%;
+	margin: 10px auto;
+	text-align: center;
+	color: black;
+	background-color: white;
+	box-shadow: 0px 0px 20px black;
+	margin-top: 5%;
+	padding: 5px;
+	padding-bottom: 40px;
+	border-radius: 2%;
 }
