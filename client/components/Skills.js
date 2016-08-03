@@ -12,7 +12,7 @@ export default class SkillsList extends React.Component {
 		this.state = {
 			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router", "C++", "Java", "Ruby", "Python", "Go", "Haskell"],
 			userSkills: [],
-			user: "" 
+			user: ""
 		};
 		this.handleClick = this.handleClick.bind(this);
 	};
@@ -38,6 +38,7 @@ export default class SkillsList extends React.Component {
 		let userName = this.state.user;
 		modelSkills.updateUser(userName, userSkillz);
 		browserHistory.pushState(null, '/swipe');
+
 	};
 
 	render() {
@@ -45,6 +46,7 @@ export default class SkillsList extends React.Component {
 		//add a whole bunch of styling to make all this furr awesome
 		return (
 			<div>
+				<h2 className="animated zoomOutUp" >This is a Test</h2>
 	     	<div className="skills">
 	     	<span>Skills:</span>
 	     		{this.state.allSkills.map((skill, i) => {
