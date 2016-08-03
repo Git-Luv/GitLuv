@@ -100,7 +100,7 @@ export default class Swipe extends React.Component {
 	  		return (
 	  			<div>
 		  			<Sidebar state={this.state.isSidebar}/>
-		  			<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+		  			<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 		  			<h3 className="loading">No more projects, check back later!</h3>
 	  			</div>
 	  			)
@@ -115,7 +115,7 @@ export default class Swipe extends React.Component {
 			     			<h2>Project Description:</h2>
 			     			<p>{this.state.projects[0].description}</p>
 			     			<h2>Looking For:</h2>
-				     		<p>{this.state.projects[0].lookingFor}</p>
+				     		<p>{this.state.projects[0].looking_for}</p>
 				     		<h2>Required Skills:</h2>
 				     		<p>{this.state.projects[0].req_skills.map(skill => <div className="skill">{skill}</div>)}</p>
 			     		</div>
