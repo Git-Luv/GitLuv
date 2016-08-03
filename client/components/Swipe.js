@@ -96,7 +96,7 @@ export default class Swipe extends React.Component {
 			  return (
 		  	<div className='swipe'>
 		  			<Sidebar state={this.state.isSidebar} />
-	     				<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+	     				<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 	     			<div key={this.state.key} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
 			     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 			     		<div className="description">
