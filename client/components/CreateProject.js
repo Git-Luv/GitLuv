@@ -78,11 +78,28 @@ export default class CreateProject extends React.Component {
 	}
 
 	submitProject() {
-		Projects.addProject(this.state.project)
-		.then(res => {
-			this.props.project.setState({ isCreatingProject: false, error: false });
-			window.alert("Project created!")
-		})
+
+		if(this.state.project.req_skills.length > 0){
+			Projects.addProject(this.state.project)
+			.then(res => {
+				this.props.project.setState({ isCreatingProject: false, error: false });
+				window.alert("Project created!")
+			})
+		} else {
+			if(errorTimeoutId){
+				window.clearTimeout(errorTimeoutId);
+			}
+			if(!document.getElementsByClassName('projectWarning')[0])
+				document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
+			else {
+				document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
+				window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
+			}
+
+			errorTimeoutId = window.setTimeout(x => {
+				document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut";
+			}, 4000)
+		}
 	}
 
 	cancelProject() {
@@ -122,6 +139,7 @@ export default class CreateProject extends React.Component {
 							})}
 						</div>
 						<button className="pure-button createProjectSubmit" onClick={this.submitProject.bind(this)}>Submit</button>
+						<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
 					</div>
 				)
 			case 2:
