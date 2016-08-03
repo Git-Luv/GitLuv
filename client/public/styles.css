@@ -250,6 +250,15 @@ html {
 	transform: translateY(-50%);*/
 }
 
+.stage {
+	padding-top: 40px;
+}
+
+.stage > * {
+	display: block;
+	margin: 10px auto;
+}
+
 .skillsSelector div {
 	display: inline-block;
 	background-color: #6cc644;
