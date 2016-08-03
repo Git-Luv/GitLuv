@@ -41,7 +41,7 @@ export default class Project extends React.Component {
 				<Sidebar state={this.state.isSidebar} />
 				{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }
 				<div onClick={this.changeSidebarState.bind(this, false)}>
-					<button className="sidebarButton" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
+					<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 					{ this.state.project ? 
 						<div>HELLO WORLD!</div> 
 						:
