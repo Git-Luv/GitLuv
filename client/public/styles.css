@@ -73,6 +73,12 @@ html {
 
 /* ========== Skills ========== */
 
+.skillPageTitle {
+	color: white;
+	font-size: 50px;
+	text-align: center;
+	margin-bottom:10px;
+}
 
 .button-skillsSelected {
 	text-align: center;
@@ -122,14 +128,6 @@ html {
 	left: 50%;
 }
 
-/*.button-skillsSelected {
-	bottom: 0;
-	text-align: center;
-	left:50%;
-	margin-top: 50px;
-	margin-left: auto;
-	margin-right:auto;
-}*/
 
 /* ========== Sidebar ========== */
 
@@ -257,6 +255,15 @@ html {
 	position: relative;
 	/*top: 45%;
 	transform: translateY(-50%);*/
+}
+
+.stage {
+	padding-top: 40px;
+}
+
+.stage > * {
+	display: block;
+	margin: 10px auto;
 }
 
 .skillsSelector div {

@@ -10,9 +10,9 @@ export default class SkillsList extends React.Component {
 		super (props);
 		// add languages as desired
 		this.state = {
-			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router", "C++", "Java", "Ruby", "Python", "Go", "Haskell"],
+			allSkills: ["React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router", "C++", "Java", "Ruby", "Python", "Go", "Haskell", "Android", "iOS", "C#", "Machine Language(s)", "Ruby on Rails", "MEAN stack", "PERRN stack", "Heroku"],
 			userSkills: [],
-			user: "" 
+			user: ""
 		};
 		this.handleClick = this.handleClick.bind(this);
 	};
@@ -31,6 +31,8 @@ export default class SkillsList extends React.Component {
 			if(userSkills.indexOf(skill) == -1) {
 				userSkills.push(skill)
 			};
+			this.setState({userSkills: userSkills})
+			console.log(userSkills)
 	};
 
 	sendToDatabase(user, skillz) {
@@ -38,19 +40,25 @@ export default class SkillsList extends React.Component {
 		let userName = this.state.user;
 		modelSkills.updateUser(userName, userSkillz);
 		browserHistory.pushState(null, '/swipe');
+		console.log("ThIS IS DB STUFF", userName, userSkillz)
+
 	};
 
 	render() {
 		let skillz = this.state.userSkills;
-		//add a whole bunch of styling to make all this furr awesome
 		return (
 			<div>
-	     	<div className="skills">
-	     	<span>Skills:</span>
-	     		{this.state.allSkills.map((skill, i) => {
-	     			return(<div className="skill" key={i} onClick={this.handleClick.bind(this, skill)}>
-							{skill}
-						</div>)
+				<h2 className = "skillPageTitle"> Choose Your Top Skills </h2>
+	     	<div className="skillSelector">
+	     		{this.state.allSkills.map((skill, i) => {var skillClassName = '';
+								if(this.state.userSkills.indexOf(skill) > -1) 
+									skillClassName = "skill-selected" 
+								else
+									skillClassName = "skill-deselected"
+	     			return(
+	     				<button key={i} className={skillClassName + " animated flipInX"} onClick={this.handleClick.bind(this, skill)}>
+	     					{skill}
+	     				</button> )
 	     		})}
 	     	</div>
 	     		<div className="button-skillsSelected">
