@@ -131,10 +131,12 @@ html {
 	position: fixed;
 	width: 200px;
 	height: 100%;
-	background-image: linear-gradient(#FF5F6D, #FFC371);
+	background-image: linear-gradient(#B24592, #F15F79);
 	top: 0;
 	left: 0;
 	transition: left 0.25s;
+	border: 20px;
+	border-image: linear-gradient(#F15F79, #B24592);
 }
 
 .sidebarClose {
@@ -142,10 +144,12 @@ html {
 	position: fixed;
 	width: 200px;
 	height: 100%;
-	background-image: linear-gradient(#FF5F6D, #FFC371);
+	background-image: linear-gradient(#B24592, #F15F79);
 	top: 0;
 	left: -200px;
 	transition: left 0.25s;
+	border: 20px;
+	border-image: linear-gradient(#F15F79, #B24592);
 }
 
 .sidebarButton {
