@@ -340,3 +340,10 @@ html {
 	padding-bottom: 40px;
 	border-radius: 2%;
 }
+
+.toGithub img{
+	width: 20%;
+	height: 20%;
+	border-radius: 0;
+	/*position: relative;*/
+}
