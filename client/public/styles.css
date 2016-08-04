@@ -432,6 +432,11 @@ html {
 }
 
 .l-box {
-    padding-right: 2.6cm;
+	color:white;
+    padding-right: 2.5cm;
+}
+
+.menu-links a:hover { 
+    background-color: grey;
 }
 
