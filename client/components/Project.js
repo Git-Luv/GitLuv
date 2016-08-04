@@ -36,15 +36,21 @@ componentWillMount() {
 		this.setState({user: res.login});
 		let user = this.state.user;
 		console.log("user", user)
-	})
-
-	Projects.getAllProjects()
-	.then(projects => {
-		console.log("PROJECTS imported as", projects)
-		projects.forEach((project) => {
-			if (project.username == user) {
-				console.log("wtf this happened")
-			}
+		let creator = this.state.user
+		Projects.getAllProjects()
+		.then(projects => {
+			console.log("PROJECTS imported as", projects)
+			var temp = [];
+			projects.forEach((project) => {
+				console.log("trying")
+				console.log("creator", this.state.user)
+				console.log("projects.username", project.username )
+				if (project.username == creator) {
+					console.log("wtf this happened")
+					temp.push(project);
+				}
+			})
+			this.setState({myProjects: temp})
 		})
 
 	})
@@ -83,15 +89,16 @@ componentWillMount() {
 //////////////////////////////////////////////////
 	render() {
 		console.log(this.state.isCreatingProject)
-
+		console.log("MY PROJECTS", this.state.myProjects)
 		return (
 			<div>
 				<div>
-					<h2 className="usersWhoLikedTitle">These Users Like Your Project!</h2>
+					<h2 className="projectsPageTitle">Welcome Visionary</h2>
+					<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
 					<Accordion>
 					                {[1, 2, 3, 4, 5].map((item) => {
 					                    return (
-					                        <AccordionItem title={`Item ${ item }`} slug={item} key={item}>
+					                        <AccordionItem title={`Your Project: ${ item }`} slug={item} key={item}>
 					                            <div>
 					                                {`Item ${ item } content`}
 					                                {item === 3 ? <p><img src="https://cloud.githubusercontent.com/assets/38787/8015584/2883817e-0bda-11e5-9662-b7daf40e8c27.gif" /></p> : null}
