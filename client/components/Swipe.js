@@ -4,6 +4,7 @@ import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
 import * as model from '../models/profile';
 import * as Users from '../models/users'
+import * as Utils from '../utils'
 
 import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
@@ -16,9 +17,10 @@ export default class Swipe extends React.Component {
 		this.state = {
 			isSidebar: false,
 			projects: null,
-			username: 'kyhan',
+			username: null,
 			direction: 'null',
-			likedProjects: []
+			likedProjects: [],
+			userSkills: []
 		}
 		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
@@ -33,17 +35,38 @@ export default class Swipe extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
+				// console.log('res', res)
 				this.setState({username: res.login});
+
 				// grab all projects from db
 		 		Projects.getAllProjects()
 		 		.then(x => {
 		 			var allProjects = [];
-		 			x.map((project) => {
+		 			x.forEach((project) => {
 		 				if (project.users_liked.indexOf(res.login) === -1 && project.users_disliked.indexOf(res.login) === -1) {
 		 					allProjects.push(project)
 		 				}
 		 			})
-		 			this.setState({projects: allProjects})
+		 			// grab user info including user skills
+		 			Users.getUser(res.login)
+		 			.then(res => {
+		 				//add user skills to this.state.userSkills
+		 				this.setState({userSkills: res.skills})
+						allProjects.forEach(project => {
+			 				project.commonSkills = Utils.getCommonSkillCount(res, project);
+		 				})
+		 				// Sort based on the amount of commonSkills
+		 				allProjects = allProjects.sort((a, b) => {
+		 					if(a.commonSkills < b.commonSkills){
+		 						return 1;
+		 					} else if(a.commonSkills > b.commonSkills){
+		 						return -1;
+		 					} else {
+		 						return 0;
+		 					}
+		 				})
+		 				this.setState({projects: allProjects})
+		 			})
 		 		})
 			})
 		} else {
@@ -59,7 +82,7 @@ export default class Swipe extends React.Component {
  		// Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
  		// Users.updateUser("Mr. Junior", {bio: "lol"})
  		// Users.getUser("Mr. Junior").then(a => console.log(a))
-
+ 		
  	}
 
  	handleLike(event) {
@@ -80,6 +103,16 @@ export default class Swipe extends React.Component {
 			hasEvent = true;
 		}
 	}
+
+	handleProjects(skill){
+		if(this.state.userSkills.indexOf(skill) >= 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 		
   updateArray() { 
 			var updatedProjects = this.state.projects.slice(1)
@@ -94,6 +127,7 @@ export default class Swipe extends React.Component {
 			this.setState({ isSidebar: state })
 		}
 	}
+
 
   render() {
   	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'

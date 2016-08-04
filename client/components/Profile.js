@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 import Sidebar from './sidebar'
 
 import * as model from '../models/profile';
+import * as Users from '../models/users';
 
 var dc = require('delightful-cookies');
 
@@ -18,7 +19,7 @@ export default class Profile extends React.Component {
 				bio: null,
 				avatar: null,
 			},
-			userSkills: ["React", "Node", "Express", "Git", "authom", "Socket.io", "Mongo", "Redux", "React-Router"],
+			userSkills: [],
 			isSidebar: false,
 		}
 	}
@@ -28,7 +29,10 @@ export default class Profile extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
-				this.setState({userInfo: res});
+				Users.getUser(res.login)
+				.then(user => {
+					this.setState({userInfo: res, userSkills: user.skills})
+				})
 			})
 		} else {
 			browserHistory.pushState(null, '/');
@@ -43,33 +47,34 @@ export default class Profile extends React.Component {
 
   render() {
 	  return (
-	    <div className="profile" >
-	    	<Sidebar state={this.state.isSidebar}/>
-	    	<div onClick={this.changeSidebarState.bind(this, false)}>
-		    	<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
-		     	<div>
-		     		<img src={this.state.userInfo.avatar_url} />
-	     		</div>
-	     		<div className="profile-right">
-		     		<h1>{this.state.userInfo.login}</h1>
-		     		<div>{this.state.userInfo.location}</div>
-		     		<div>Followers: {this.state.userInfo.followers}</div>
-		     		<p>{this.state.userInfo.bio}</p>
-		     		<p>
-			     		<a href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
-			     			<img src="/images/github.jpeg"/>
-			     		</a>
-		     		</p>
-			     	<div className="skills">
-			     	<span>Skills:</span>
-			     		{this.state.userSkills.map((skill, i) => {
-			     			return(<div className="skill animated fadeInUp" key={i}>
-									{skill}
+	  	<div>
+	    	<Sidebar />
+		    <div className="profile" >
+		    	<div onClick={this.changeSidebarState.bind(this, false)}>
+			     	<div>
+			     		<img src={this.state.userInfo.avatar_url} />
+		     		</div>
+		     		<div className="profile-right">
+			     		<h1>{this.state.userInfo.login}</h1>
+			     		<div>{this.state.userInfo.location}</div>
+			     		<div>Followers: {this.state.userInfo.followers}</div>
+			     		<p>{this.state.userInfo.bio}</p>
+			     		<p>
+				     		<a href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
+				     			<img src="/images/github.jpeg"/>
+				     		</a>
+			     		</p>
+				     	<div className="skills">
+				     	<span>Skills:</span>
+				     		{this.state.userSkills.map((skill, i) => {
+				     			return(<div className="skill animated fadeInUp" key={i}>
+										{skill}
 								</div>)
-			     		})}
+				     		})}
+				     	</div>
 			     	</div>
 		     	</div>
-	     	</div>
+		    </div>
 	    </div>
 	  )
 	}
