@@ -42,7 +42,6 @@ export default class Profile extends React.Component {
 	}
 
   render() {
-  		console.log(this.state.userInfo.username)
 	  return (
 	    <div className="profile" >
 	    	<Sidebar state={this.state.isSidebar}/>
