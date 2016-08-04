@@ -1,10 +1,8 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import * as model from '../models/project';
-import * as Projects from '../models/projects'
-
-var skills = [
-"JavaScript", "React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router", "C++", "Java", "Ruby", "Python", "Go", "Haskell", "Android", "iOS", "C#", "Machine Language(s)", "Ruby on Rails", "MEAN stack", "PERRN stack", "Heroku"]
+import * as Projects from '../models/projects';
+import * as Utils from '../utils'
 
 var errorTimeoutId;
 
@@ -122,11 +120,12 @@ export default class CreateProject extends React.Component {
 			case 1:
 				return (
 					<div>
+						<button type="button" className="projectCancelButton" onClick={this.cancelProject.bind(this)}>X</button>
 						<h1 style={{paddingTop: '10px'}}>{this.state.project.title}</h1>
 						<div>Description: <span>{this.state.project.description}</span></div>
 						<div>Please select the skills you require for this project</div>
 						<div className="skillSelector">
-							{skills.map((skill, i) => {
+							{Utils.getSkills().map((skill, i) => {
 								var skillClassName = '';
 								if(this.state.project.req_skills.indexOf(skill) > -1) 
 									skillClassName = "skill-selected" 
