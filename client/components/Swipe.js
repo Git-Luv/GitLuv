@@ -49,6 +49,8 @@ export default class Swipe extends React.Component {
 		 			// grab user info including user skills
 		 			Users.getUser(res.login)
 		 			.then(res => {
+		 				//add user skills to this.state.userSkills
+		 				this.setState({userSkills: res.skills})
 						allProjects.forEach(project => {
 			 				project.commonSkills = Utils.getCommonSkillCount(res, project);
 		 				})
@@ -64,12 +66,6 @@ export default class Swipe extends React.Component {
 		 				})
 		 				this.setState({projects: allProjects})
 		 			})
-		 		})
-
-		 		Users.getUser(res.login)
-		 		.then(y => {
-		 			console.log('y', y)
-		 			this.setState({userSkills: y.skills})
 		 		})
 			})
 		} else {
