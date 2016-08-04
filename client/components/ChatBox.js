@@ -1,25 +1,85 @@
-import React from 'react'
+import React from 'react';
 import Sidebar from './sidebar';
+import * as Chat from '../models/Chat'
 
-export default class extends React.Component {
+export default class ChatBox extends React.Component {
 	  
-	constructor(props) {
+	constructor (props) {
    	super(props);
     this.state = {
+      username : "",
     	developer: null,
     	visionary: null,
+    	room     : null,
       text     : "",
-      messages : []
+      messages : [],
     }
   }
 
-  componentDidMount(){
+  componentDidMount () {
+  	let self = this
+  	Chat.getChatroom(this.state.room)
+  	.then(messages => this.setState(messages: messages))
+  }
+
+  _handleSubmit (e) {
+  	e.preventDefault();
+
+  	// this.chatRoom = 
+    socket.emit("send", {
+      room   : this.chatRoom,
+      sentBy : self.state.username ? self.state.username : self.props.player.name,
+      message: this.state.chatText,
+    })
+
+    // clear input after each message
+    this.setState({
+      text: ""
+    })
 
   }
 
   render () {
-  	return (<div></div>)
+  	return (
+      <div className="chatBox">
+        <div className="messages">
+          <form onSubmit={this._handleSubmit.bind(this)}>
+            <input
+              type="text"
+              value={this.state.text}
+              className="u-full-width"
+              placeholder="send a message!"
+              id="chatInput"
+              onChange={event => this.setState({chatText: event.target.value})}
+							/>
+
+            <input type="submit" style={{visibility: "hidden"}}></input>
+          </form>
+          <table className="table table-hover">
+            <tbody>
+              {
+                this.state.messages.map(function (msg,index) {
+                  return (
+                    <Message key={index} name={msg.sentBy} message={msg.message}/>
+                  )
+                })
+              }
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    )
   }
+}
 
-
+class Message extends React.Component {
+  render() {
+    return (
+      <tr className="message">
+        <td className="text-left">{this.props.name}</td>
+        <td className="text-right">{this.props.message}</td>
+      </tr>
+    )
+  }
 }
