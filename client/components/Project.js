@@ -94,6 +94,7 @@ componentWillMount() {
 			<div>
 				<div>
 					<h2 className="projectsPageTitle">Welcome Visionary</h2>
+					<img src="/images/badge.jpeg"/>
 					<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
 					<Accordion>
 					                {[1, 2, 3, 4, 5].map((item) => {
