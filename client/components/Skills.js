@@ -91,7 +91,7 @@ export default class SkillsList extends React.Component {
 	     		})}
 	     	</div>
 	     		<div className="button-skillsSelected">
-   				 		<button onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
+   				 		<button className="pure-button" onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
    					</div>
 	    </div>
 		);
