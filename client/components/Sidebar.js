@@ -4,14 +4,6 @@ import { browserHistory, Link } from 'react-router';
 export default class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			isSidebar: false,
-		}
-	}
-
-	componentWillReceiveProps(nextProps) {
-			this.setState({isSidebar: nextProps.state })
 	}
 
 	logoutUser() {
