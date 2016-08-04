@@ -4,6 +4,7 @@ import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
 import * as model from '../models/profile';
 import * as Users from '../models/users'
+import * as Utils from '../utils'
 
 import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
@@ -37,12 +38,29 @@ export default class Swipe extends React.Component {
 		 		Projects.getAllProjects()
 		 		.then(x => {
 		 			var allProjects = [];
-		 			x.map((project) => {
+		 			x.forEach((project) => {
 		 				if (project.users_liked.indexOf(res.login) === -1 && project.users_disliked.indexOf(res.login) === -1) {
 		 					allProjects.push(project)
 		 				}
 		 			})
-		 			this.setState({projects: allProjects})
+		 			// grab user info including user skills
+		 			Users.getUser(res.login)
+		 			.then(res => {
+						allProjects.forEach(project => {
+			 				project.commonSkills = Utils.getCommonSkillCount(res, project);
+		 				})
+		 				// Sort based on the amount of commonSkills
+		 				allProjects = allProjects.sort((a, b) => {
+		 					if(a.commonSkills < b.commonSkills){
+		 						return 1;
+		 					} else if(a.commonSkills > b.commonSkills){
+		 						return -1;
+		 					} else {
+		 						return 0;
+		 					}
+		 				})
+		 				this.setState({projects: allProjects})
+		 			})
 		 		})
 			})
 		} else {
@@ -119,7 +137,7 @@ export default class Swipe extends React.Component {
 				     			<h2>Looking For:</h2>
 					     		<p>{this.state.projects[0].looking_for}</p>
 					     		<h2>Required Skills:</h2>
-					     		<p>{this.state.projects[0].req_skills.map(skill => <div className="skill">{skill}</div>)}</p>
+					     		<p>{this.state.projects[0].req_skills.map((skill, i) => <span className="skill" key={i}>{skill}</span>)}</p>
 				     		</div>
 		     			</div>
 		     		<div className="buttons">
