@@ -5,6 +5,9 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var http = require('http').Server(express);
+var io = require('socket.io')(http);
+
 
 
 var app = express();
@@ -236,7 +239,27 @@ app.use('/api/chatPATCH', function (req, res) {
 // Chat Sockets
 //
 
+io.on('connection', function(socket){
 
+  socket.on('subscribe', function(room) {
+    console.log('joining room', room);
+    socket.join(room);
+  })
+
+  socket.on('unsubscribe', function(room) {
+    console.log('leaving room', room);
+    socket.leave(room);
+  })
+
+  socket.on('send', function(data) {
+    console.log('sending message: ', data);
+    Chat.updateChatroom(data)
+      .then(function(x){
+        io.sockets.in(data.room).emit('chat message', data);
+      })
+  });
+
+})
 
 
 // Wild card route for client side routing.
