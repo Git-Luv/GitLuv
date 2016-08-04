@@ -51,27 +51,36 @@ export default class Profile extends React.Component {
 	    	<Sidebar state={this.state.isSidebar}/>
 	    	<div onClick={this.changeSidebarState.bind(this, false)}>
 		    	<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
-		     	<div>
-		     		<img src={this.state.userInfo.avatar_url} />
+		    	<table>
+			    	<tr>
+				    	<th className="profile-leftPanel">
+					     	<div>
+					     		<img src={this.state.userInfo.avatar_url} />
+				     		</div>
+			     		</th>
+				     	<th className="profile-rightPanel">
+				     		<h1>{this.state.userInfo.login}</h1>
+				     		<div className="profile-location">{this.state.userInfo.location}</div>
+				     		<div className="profile-followers">Followers: {this.state.userInfo.followers}</div>
+				     		<p className="profile-bio">{this.state.userInfo.bio}</p>
+				     		<p>
+					     		<a href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
+					     			<img src="/images/github.jpeg"/>
+					     		</a>
+				     		</p>
+			     		</th>
+		     		</tr>
+	     		</table>
+	     		<div className="badges">
+	     			BADGES
 	     		</div>
-	     		<div className="profile-right">
-		     		<h1>{this.state.userInfo.login}</h1>
-		     		<div>{this.state.userInfo.location}</div>
-		     		<div>Followers: {this.state.userInfo.followers}</div>
-		     		<p>{this.state.userInfo.bio}</p>
-		     		<p>
-			     		<a href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
-			     			<img src="/images/github.jpeg"/>
-			     		</a>
-		     		</p>
-			     	<div className="skills">
-			     	<span>Skills:</span>
-			     		{this.state.userSkills.map((skill, i) => {
-			     			return(<div className="skill animated fadeInUp" key={i}>
-									{skill}
-								</div>)
-			     		})}
-			     	</div>
+		     	<div className="skills">
+		     	<span>Skills:</span>
+		     		{this.state.userSkills.map((skill, i) => {
+		     			return(<div className="skill animated fadeInUp" key={i}>
+								{skill}
+							</div>)
+		     		})}
 		     	</div>
 	     	</div>
 	    </div>
