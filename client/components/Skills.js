@@ -3,6 +3,7 @@ import { Router, Route, browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import * as modelSkills from '../models/users';
 import * as modelProfile from '../models/profile';
+import * as Utils from '../utils';
 let dc = require('delightful-cookies')
 let Popout = require('react-popout')
 
@@ -11,7 +12,7 @@ export default class SkillsList extends React.Component {
 		super (props);
 		// add languages as desired
 		this.state = {
-			allSkills: ["JavaScript", "React", "Angular.js", "Redux", "Mithril", "Backbone", "Node.js", "Express", "Git", "Passport", "Socket.io", "Mongo", "Mongoose", "Test Driven Development", "Continuous Deployment", "Agile Methodology", "Waterfall Methodology", "OAuth", "PHP", "Postgress", "KNEX", "Browserify", "Webpack", "Grunt", "Gulp", "CSS", "HTML", "ES2015", "React Native", "React-Router", "C++", "Java", "Ruby", "Python", "Go", "Haskell", "Android", "iOS", "C#", "Machine Language(s)", "Ruby on Rails", "MEAN stack", "PERRN stack", "Heroku"],
+			allSkills: Utils.getSkills(),
 			userSkills: [],
 			user: "",
 			// isPoppedOut: false

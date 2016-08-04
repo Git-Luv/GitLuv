@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 import Sidebar from './sidebar'
 
 import * as model from '../models/profile';
+import * as Users from '../models/users';
 
 var dc = require('delightful-cookies');
 
@@ -18,7 +19,7 @@ export default class Profile extends React.Component {
 				bio: null,
 				avatar: null,
 			},
-			userSkills: ["React", "Node", "Express", "Git", "authom", "Socket.io", "Mongo", "Redux", "React-Router"],
+			userSkills: [],
 			isSidebar: false,
 		}
 	}
@@ -28,7 +29,10 @@ export default class Profile extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
-				this.setState({userInfo: res});
+				Users.getUser(res.login)
+				.then(user => {
+					this.setState({userInfo: res, userSkills: user.skills})
+				})
 			})
 		} else {
 			browserHistory.pushState(null, '/');
@@ -42,7 +46,10 @@ export default class Profile extends React.Component {
 	}
 
   render() {
+<<<<<<< HEAD
   	console.log(this.state.userInfo.username)
+=======
+>>>>>>> master
 	  return (
 	  	<div>
 	    	<Sidebar />
