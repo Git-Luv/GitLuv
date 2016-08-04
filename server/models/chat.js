@@ -41,7 +41,7 @@ Chat.getChatroom = function(chatRoom){
 	})
 }
 
-Chat.editChatroom = function(chatRoom, changedAttrs){
+Chat.updateChatroom = function(chatRoom, changedAttrs){
 	console.log("chat room: " + chatRoom + " and changedAttrs: " + changedAttrs)
 
 	return Chat.getChatroom(chatRoom)

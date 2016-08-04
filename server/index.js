@@ -223,14 +223,18 @@ app.use('/api/chatPOST', function (req, res) {
   res.sendStatus(201)
 })
 
-app.use('api/chatPATCH', function (req, res) {
+app.use('/api/chatPATCH', function (req, res) {
 
   console.log("patching chatroom: ", req.body)
-  Chat.editChatroom(req.body[0], req.body[1]).then(x => res.sendStatus(201))
+  Chat.updateChatroom(req.body[0], req.body[1]).then(x => res.sendStatus(201))
   .catch(function(err){
     console.log("chat patch error: ", err)
   })
-}
+})
+
+//
+// Chat Sockets
+//
 
 
 

@@ -23,7 +23,7 @@ export function addChatroom(chatRoomObj){
 	.catch(err => console.error(err))
 }
 
-export function updateProject(chatRoom, updatedAttrs){
+export function updateChatroom(chatRoom, updatedAttrs){
 	return fetch('/api/chatPATCH', {
 		method: 'PATCH',
 		headers: {
