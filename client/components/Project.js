@@ -3,6 +3,8 @@ import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar'
 import CreateProject from './createproject'
 import * as Projects from '../models/projects'
+import * as modelProfile from '../models/profile';
+
 import { Accordion, AccordionItem } from 'react-sanfona';
 
 var dc = require('delightful-cookies');
@@ -16,7 +18,8 @@ export default class Project extends React.Component {
 			isCreatingProject: null,
 			// added to state to show users who liked your projects
 			myProjects: [],
-			allprojects: []
+			allprojects: [],
+			user: ""
 		}
 	}
 
@@ -25,7 +28,35 @@ export default class Project extends React.Component {
 /////////////////////////////////////////////////////
 
 
+componentWillMount() {
+	// identifies username
+	let cookie = dc.get("AuthToken")
+	modelProfile.getUserData(cookie.value)
+	.then(res => {
+		this.setState({user: res.login});
+		let user = this.state.user;
+		console.log("user", user)
+	})
 
+	Projects.getAllProjects()
+	.then(projects => {
+		console.log("PROJECTS imported as", projects)
+		projects.forEach((project) => {
+			if (project.username == user) {
+				console.log("wtf this happened")
+			}
+		})
+
+	})
+
+
+
+
+// preexisting to addition of users who like functionality
+	if(!dc.get('AuthToken')){
+		browserHistory.pushState(null, '/')
+	}
+}
 
 
 
@@ -45,11 +76,6 @@ export default class Project extends React.Component {
 		this.setState({ isCreatingProject: true })
 	}
 
-	componentWillMount() {
-		if(!dc.get('AuthToken')){
-			browserHistory.pushState(null, '/')
-		}
-	}
 
 
 
@@ -75,7 +101,7 @@ export default class Project extends React.Component {
 					                })}
 					            </Accordion>
 
-					
+
 				</div>
 	
 
