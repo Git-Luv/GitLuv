@@ -12,11 +12,10 @@ conn.once('open', function() {
 })
 
 var chatSchema = new Schema({
-	chatRoom:              String,
-	visionary:             String,
-	developer:             String,
-	messagesFromVisionary: Array,
-	messagesFromDeveloper: Array,
+	chatRoom:  String,
+	visionary: String,
+	developer: String,
+	messages:  Array,
 })
 
 var ChatCollection = mongoose.model('Chatcollection', chatSchema)
@@ -48,27 +47,27 @@ Chat.editChatroom = function(chatRoom, changedAttrs){
 	return Chat.getChatroom(chatRoom)
 		.then( function (chatRoomInfo){
 		
-			if(changedAttrs.messagesFromVisionary){
+			if(changedAttrs.messages){
 				let newArr = []
-				for(let i = 0; i < changedAttrs.messagesFromVisionary.length; i++){
+				for(let i = 0; i < changedAttrs.messages.length; i++){
 
-					if(!(chatRoomInfo.messagesFromVisionary.indexOf(changedAttrs.messagesFromVisionary[i]) >= 0)){
-						newArr.push(changedAttrs.messagesFromVisionary[i])
+					if(!(chatRoomInfo.messages.indexOf(changedAttrs.messages[i]) >= 0)){
+						newArr.push(changedAttrs.messages[i])
 					}
 				}
-				changedAttrs.messagesFromVisionary = chatRoomInfo.messagesFromVisionary.concat(newArr)
+				changedAttrs.messages = chatRoomInfo.messages.concat(newArr)
 			}
 
-			if(changedAttrs.messagesFromDeveloper){
-				let newArr1 = []
-				for(let i = 0; i < changedAttrs.messagesFromDeveloper.length; i++){
+			// if(changedAttrs.messagesFromDeveloper){
+			// 	let newArr1 = []
+			// 	for(let i = 0; i < changedAttrs.messagesFromDeveloper.length; i++){
 
-					if(!(chatRoomInfo.messagesFromDeveloper.indexOf(changedAttrs.messagesFromDeveloper[i]) >= 0)){
-						newArr1.push(changedAttrs.messagesFromDeveloper[i])
-					}
-				}
-				changedAttrs.messagesFromDeveloper = chatRoomInfo.messagesFromDeveloper.concat(newArr1)
-			}
+			// 		if(!(chatRoomInfo.messagesFromDeveloper.indexOf(changedAttrs.messagesFromDeveloper[i]) >= 0)){
+			// 			newArr1.push(changedAttrs.messagesFromDeveloper[i])
+			// 		}
+			// 	}
+			// 	changedAttrs.messagesFromDeveloper = chatRoomInfo.messagesFromDeveloper.concat(newArr1)
+			// }
 
 			return ChatCollection.findOneAndUpdate({chatRoom: chatRoom}, changedAttrs, function (err, doc) {
 				if(err){
