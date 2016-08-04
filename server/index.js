@@ -169,13 +169,13 @@ app.use('/api/usersGET', function (req, res) {
 app.use('/api/users/:username', function (req, res) {
 
   User.getUser(req.params.username)
-  .then(function(user){
-    res.status(200).send(user)
-  })
-  .catch(function (err){
-    console.log("get error: ", err)
-    res.status(500).send(err)
-  })
+    .then(function(user){
+      res.status(200).send(user)
+    })
+    .catch(function (err){
+      console.log("get error: ", err)
+      res.status(500).send(err)
+    })
 })
 
 
@@ -196,6 +196,48 @@ app.use('/api/usersPATCH', function (req, res) {
     res.sendStatus(500)
   })
 })
+
+//
+// Chat API
+//
+
+var Chat = require('./models/chat')
+
+app.use('/api/chat/:chatRoom', function (req, res) {
+  
+  console.log("chat API params: ", req.params.chatRoom)
+  Chat.getChatroom(req.params.chatRoom)
+    .then(function(room){
+      res.status(200).send(room)
+    })
+    .catch(function(err){
+      console.log("chat get error: ", err)
+      res.sendStatus(500)
+    })
+})
+
+app.use('/api/chatPOST', function (req, res) {
+  
+  console.log("creating chatroom: ", req.body)
+  Chat.createIfNotExists( req.body )
+  res.sendStatus(201)
+})
+
+app.use('/api/chatPATCH', function (req, res) {
+
+  console.log("patching chatroom: ", req.body)
+  Chat.updateChatroom(req.body[0], req.body[1]).then(x => res.sendStatus(201))
+  .catch(function(err){
+    console.log("chat patch error: ", err)
+  })
+})
+
+//
+// Chat Sockets
+//
+
+
+
 
 // Wild card route for client side routing.
 app.get('/*', function(req, res){

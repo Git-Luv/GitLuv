@@ -1,6 +1,7 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
+import * as Chat from '../models/chat'
 
 export default class Landing extends React.Component {
 	constructor(props){
@@ -11,7 +12,9 @@ export default class Landing extends React.Component {
 	}
 
 	componentWillMount() {
-		
+		// Chat.addChatroom({chatRoom: "mccarthyistthetslc", visionary: "thetslc", developer: "mccarthyist"})
+		// Chat.getChatroom("mccarthyistthetslc").then(x => console.log(x))
+		// Chat.updateChatroom("mccarthyistthetslc", {messages:[{sentBy: 'mccarthyist', message: 'eyo' }, {sentBy: 'thetslc', message: 'watup' }]})
 	}
 
   login(e) {

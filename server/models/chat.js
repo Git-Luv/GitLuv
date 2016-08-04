@@ -43,15 +43,12 @@ Chat.getChatroom = function(chatRoom){
 
 Chat.updateChatroom = function(chatRoom, changedAttrs){
 	console.log("chat room: " + chatRoom + " and changedAttrs: " + changedAttrs)
-
-			return ChatCollection.findOneAndUpdate({chatRoom: chatRoom}, changedAttrs, function (err, doc) {
-				if(err){
-					console.log("!!!-----------------!!!", err)
-				} else {
-					console.log("update chat room:", chatRoom, "!")
-				}
-			})
-		}
+		return ChatCollection.findOneAndUpdate({chatRoom: chatRoom}, changedAttrs, function (err, doc) {
+			if(err){
+				console.log("!!!-----------------!!!", err)
+			} else {
+				console.log("update chat room:", chatRoom, "!")
+			}
+		})
 		.catch(err => console.log("error in chat model: ", err))
-
 }
