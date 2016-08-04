@@ -46,10 +46,6 @@ export default class Profile extends React.Component {
 	}
 
   render() {
-<<<<<<< HEAD
-  	console.log(this.state.userInfo.username)
-=======
->>>>>>> master
 	  return (
 	  	<div>
 	    	<Sidebar />
