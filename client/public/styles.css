@@ -183,8 +183,7 @@ html {
 	color: white;
 }
 
-/*SWIPE PAGE*/
-
+/* ========== Swipe Page ========== */
 .swipe {
 	margin-top: 5%;
 }
@@ -230,6 +229,13 @@ html {
 }
 
 /* ========== Project ========== */
+
+.usersWhoLikedTitle {
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	margin-bottom:10px;
+}
 
 .createProjectModal {
 	width: 100%;

@@ -2,22 +2,38 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar'
 import CreateProject from './createproject'
-
 import * as Projects from '../models/projects'
 
 var dc = require('delightful-cookies');
 
 export default class Project extends React.Component {
-
 	constructor(props) {
 		super(props)
 		this.state = {
 			isSidebar: false,
 			project: null,
 			isCreatingProject: null,
+			// added to state to show users who liked your projects
+			myProjects: [],
+			allprojects: []
 		}
 	}
 
+
+//// users who liked your projects functionality ////
+/////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+//// sidebar and create project functionality ////
+//////////////////////////////////////////////////
 	changeSidebarState(state) {
 		if(state !== this.state.isSidebar){
 			this.setState({ isSidebar: state })
@@ -34,12 +50,29 @@ export default class Project extends React.Component {
 		}
 	}
 
+
+
+//// render render render render render render ////
+//////////////////////////////////////////////////
 	render() {
 		console.log(this.state.isCreatingProject)
+
 		return (
 			<div>
-				<div className="usersWhoLiked">
-					<h2>These Users Like Your Project!</h2>	
+				<div>
+					<h2 className="usersWhoLikedTitle">These Users Like Your Project!</h2>
+
+
+					
+				</div>
+	
+
+
+
+
+
+
+
 					<div className="projectPage">
 						<Sidebar state={this.state.isSidebar} />
 						{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }
@@ -52,7 +85,6 @@ export default class Project extends React.Component {
 							}
 					</div>
 				</div>
-			</div>
 			</div>
 			)
 	}
