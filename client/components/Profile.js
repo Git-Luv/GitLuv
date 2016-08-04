@@ -42,7 +42,7 @@ export default class Profile extends React.Component {
 	}
 
   render() {
-
+  		console.log(this.state.userInfo.username)
 	  return (
 	    <div className="profile" >
 	    	<Sidebar state={this.state.isSidebar}/>
@@ -56,6 +56,11 @@ export default class Profile extends React.Component {
 		     		<div>{this.state.userInfo.location}</div>
 		     		<div>Followers: {this.state.userInfo.followers}</div>
 		     		<p>{this.state.userInfo.bio}</p>
+		     		<p>
+			     		<a href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
+			     			<img src="/images/github.jpeg"/>
+			     		</a>
+		     		</p>
 			     	<div className="skills">
 			     	<span>Skills:</span>
 			     		{this.state.userSkills.map((skill, i) => {
