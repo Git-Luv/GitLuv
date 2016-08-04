@@ -16,9 +16,10 @@ export default class Swipe extends React.Component {
 			isSidebar: false,
 			projects: null,
 			key: 0,
-			username: 'kyhan',
+			username: null,
 			direction: 'null',
-			likedProjects: []
+			likedProjects: [],
+			userSkills: []
 		}
 		this.handleLike = this.handleLike.bind(this);
 		this.handleDislike = this.handleDislike.bind(this);
@@ -33,11 +34,19 @@ export default class Swipe extends React.Component {
 			// Take all browser's cookies and find the one we need
 			model.getUserData(dc.get('AuthToken').value)
 			.then(res => {
+				// console.log('res', res)
 				this.setState({username: res.login});
+
 				// grab all projects from db
 		 		Projects.getAllProjects()
 		 		.then(x => {
 		 			this.setState({projects: x})
+		 		})
+
+		 		Users.getUser(res.login)
+		 		.then(y => {
+		 			console.log('y', y)
+		 			this.setState({userSkills: y.skills})
 		 		})
 			})
 		} else {
@@ -53,7 +62,7 @@ export default class Swipe extends React.Component {
  		// Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
  		// Users.updateUser("Mr. Junior", {bio: "lol"})
  		// Users.getUser("Mr. Junior").then(a => console.log(a))
-
+ 		
  	}
 
  	handleLike(event) {
@@ -75,7 +84,14 @@ export default class Swipe extends React.Component {
 		}
 	}
 
-
+	handleProjects(skill){
+		if(this.state.userSkills.indexOf(skill) >= 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 		
     updateArray() { 
  			var updatedProjects = this.state.projects.slice(1)
@@ -93,7 +109,7 @@ export default class Swipe extends React.Component {
 
     render() {
 	  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
-	  	// console.log('DIRECTION BEFORE RENDER', direction)
+	  	console.log('state', this.state)
 	  	if(this.state.projects === null) {
 	  		return (<h3 className="loading">Loading...</h3>)
 	  	} else if (this.state.projects.length === 0) {
@@ -117,7 +133,7 @@ export default class Swipe extends React.Component {
 			     			<h2>Looking For:</h2>
 				     		<p>{this.state.projects[0].looking_for}</p>
 				     		<h2>Required Skills:</h2>
-				     		<p>{this.state.projects[0].req_skills.map(skill => <div className="skill">{skill}</div>)}</p>
+				     		<p>{this.state.projects[0].req_skills.map(skill => <div className={this.handleProjects(skill) ? 'skill-selected':'skill-deselected'}>{skill}</div>)}</p>
 			     		</div>
 		     		</div>
 		     		<div className="buttons">
