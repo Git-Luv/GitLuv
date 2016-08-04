@@ -47,10 +47,10 @@ export default class Profile extends React.Component {
 
   render() {
 	  return (
+	  	<div>
+    	<Sidebar state={this.state.isSidebar}/>
 	    <div className="profile" >
-	    	<Sidebar state={this.state.isSidebar}/>
 	    	<div onClick={this.changeSidebarState.bind(this, false)}>
-		    	<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 		    	<table>
 			    	<tr>
 				    	<th className="profile-leftPanel">
@@ -83,6 +83,7 @@ export default class Profile extends React.Component {
 		     		})}
 		     	</div>
 		    </div>
+	    </div>
 	    </div>
 	  )
 	}
