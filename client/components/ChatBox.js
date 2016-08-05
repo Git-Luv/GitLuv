@@ -12,14 +12,14 @@ export default class ChatBox extends React.Component {
     	visionary: null,
     	room     : null,
       text     : "",
-      messages : [],
+      messages : []
     }
   }
 
   componentDidMount () {
   	let self = this
   	Chat.getChatroom(this.state.room)
-  	.then(messages => this.setState(messages: messages))
+  	.then(messages => this.setState({messages: messages}))
   }
 
   _handleSubmit (e) {

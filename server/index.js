@@ -210,7 +210,7 @@ app.use('/api/chatGET', function (req, res) {
 
   Chat.all()
     .then(function (chats) {
-        console.log("getting!!: ", chats)
+        // console.log("getting!!: ", chats)
       res.status(200).send(chats)
     })
     .catch(function (err) {

@@ -128,8 +128,6 @@ export default class Swipe extends React.Component {
 		}
 	}
 
-
-
   render() {
   	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
   	if(this.state.projects === null) {
@@ -146,7 +144,6 @@ export default class Swipe extends React.Component {
 		  return (
 	  		<div className='swipe'>
 	  			<Sidebar state={this.state.isSidebar} />
-     				<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
      				<div key={this.state.projects[0].id} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
 			     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 			     		<div className="description">

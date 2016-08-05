@@ -65,6 +65,7 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">Profile</Link></li>
 			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">Swipe</Link></li>
 			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">Projects</Link></li>
+			                <li className="pure-menu-item"><Link to={`messages`} className="pure-menu-link l-box">Messages</Link></li>
 			            </ul>
 			        </div>
 			    </div>
