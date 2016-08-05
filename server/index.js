@@ -5,9 +5,10 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
-
+var Badge = require('./models/badges');
 
 var app = express();
+//var io = require('socket.io')(app)
 
 
 var port = process.env.PORT || 4000;
@@ -246,6 +247,14 @@ app.use('/api/chatPATCH', function (req, res) {
 //
 
 
+
+//
+// Badge Sockets
+//
+
+// io.on('connection', socket => {
+
+// })
 
 
 // Wild card route for client side routing.

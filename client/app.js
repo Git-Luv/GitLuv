@@ -6,6 +6,7 @@ import Swipe from './components/swipe';
 import Profile from './components/profile';
 import Project from './components/project';
 import SkillsList from './components/skills'
+import BadgeNotifier from './components/badgenotifier';
 
 export default function App() {
   return (
@@ -14,7 +15,7 @@ export default function App() {
       <Route path='/swipe' component={Swipe} />
       <Route path='/profile' component={Profile} />
       <Route path='/project' component={Project} />
-      <Router path='/skills' component={SkillsList} />
+      <Route path='/skills' component={SkillsList} />
     </Router>
   );
 }
