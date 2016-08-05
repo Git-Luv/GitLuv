@@ -25,11 +25,12 @@ export default class ChatBox extends React.Component {
   _handleSubmit (e) {
   	e.preventDefault();
 
-  	// this.chatRoom = 
+  	var self = this;
+
     socket.emit("send", {
       room   : this.chatRoom,
-      sentBy : self.state.username ? self.state.username : self.props.player.name,
-      message: this.state.chatText,
+      sentBy : this.state.username ? this.state.username : this.props.player.name,
+      message: this.state.chatText
     })
 
     // clear input after each message
