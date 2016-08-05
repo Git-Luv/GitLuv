@@ -34,6 +34,13 @@ Chat.createIfNotExists = function(attrs){
 	})
 }
 
+Chat.all = function(){
+
+	return ChatCollection.find(function (err, chats) {
+		if(err) console.log("!!!------------!!!", err)
+	})
+}
+
 Chat.getChatroom = function(chatRoom){
 
 	return ChatCollection.findOne({chatRoom: chatRoom}, function (err, doc) {

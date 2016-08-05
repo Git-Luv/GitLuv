@@ -1,6 +1,20 @@
 import fetch from 'isomorphic-fetch';
 require('es6-promise').polyfill();
 
+export function getAllChatrooms(){
+	return fetch('/api/chatsGET', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}})
+	.then(function(data){
+		return data.json()
+	})
+	.catch(function(err){
+	  return console.error(err)
+	})
+}
+
 export function getChatroom(chatRoom){
 	return fetch('/api/chat/' + chatRoom, {
 		method: 'GET',

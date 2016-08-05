@@ -42,15 +42,9 @@ Project.createIfNotExists = function(attrs){
 
 Project.all = function(){
 
-
-
-	var testReturn = ProjectCollection.find(function (err, projects) {
+	return ProjectCollection.find(function (err, projects) {
 		if(err) console.log("!!!-----------------!!!", err)		 
 	})
-
-	// console.log("testReturn: ", testReturn)
-
-	return testReturn
 }
 
 Project.getProject = function(projectTitle){

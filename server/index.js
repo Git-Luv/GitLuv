@@ -206,6 +206,19 @@ app.use('/api/usersPATCH', function (req, res) {
 
 var Chat = require('./models/chat')
 
+app.use('/api/chatGET', function (req, res) {
+
+  Chat.all()
+    .then(function (chats) {
+        console.log("getting!!: ", chats)
+      res.status(200).send(chats)
+    })
+    .catch(function (err) {
+      console.log("Chat.all error:", err)
+      res.status(500).send(err)
+    })
+})
+
 app.use('/api/chat/:chatRoom', function (req, res) {
   
   console.log("chat API params: ", req.params.chatRoom)

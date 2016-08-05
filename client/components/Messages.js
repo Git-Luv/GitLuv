@@ -1,3 +1,5 @@
+import React from 'react';
+import { browserHistory, Link } from 'react-router';
 import ChatBox from './ChatBox'
 
 export default class Messages extends React.Component {
@@ -10,7 +12,7 @@ export default class Messages extends React.Component {
 	}
 
 	componentDidMount () {
-
+		
 	}
 
 	render () {
