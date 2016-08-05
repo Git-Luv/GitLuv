@@ -1,8 +1,8 @@
 var Chat = module.exports;
-var mongoose = require('mongoose');
+var mongoose = require('../db');
 mongoose.Promise = global.Promise;
 var Schema = mongoose.Schema;
-mongoose.connect('mongodb://gitluv:lolboi5@ds031965.mlab.com:31965/gitluv');
+// mongoose.connect('mongodb://gitluv:lolboi5@ds031965.mlab.com:31965/gitluv');
 
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'connection error in chat:'));
