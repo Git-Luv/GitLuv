@@ -98,7 +98,7 @@ componentWillMount() {
 					<img className="visionaryBadge" src="/images/badge.jpeg" />
 					<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
 					<Accordion>
-					                {[1, 2, 3, 4, 5].map((item) => {
+					                {this.state.myProjects.map((item) => {
 					                    return (
 					                        <AccordionItem title={`Your Project: ${ item }`} slug={item} key={item}>
 					                            <div>
