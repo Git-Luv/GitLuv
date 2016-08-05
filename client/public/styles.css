@@ -184,6 +184,13 @@ html {
 }
 
 /* ========== Swipe Page ========== */
+
+.visionaryBadge {
+	display: block;
+	margin-left: auto;
+	margin-right: auto
+}
+
 .swipe {
 	margin-top: 5%;
 }
@@ -233,7 +240,7 @@ html {
 
 
 .react-sanfona{ 
- 	text-align: center
+ 	text-align: center;
  }
 
 /* projects that are NOT clicked on color

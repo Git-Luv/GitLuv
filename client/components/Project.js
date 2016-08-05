@@ -92,9 +92,10 @@ componentWillMount() {
 		console.log("MY PROJECTS", this.state.myProjects)
 		return (
 			<div>
+				<Sidebar />
 				<div>
 					<h2 className="projectsPageTitle">Welcome Visionary</h2>
-					<img src="/images/badge.jpeg"/>
+					<img className="visionaryBadge" src="/images/badge.jpeg" />
 					<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
 					<Accordion>
 					                {[1, 2, 3, 4, 5].map((item) => {
@@ -120,18 +121,14 @@ componentWillMount() {
 
 
 
-				<Sidebar />
 				<div className="projectPage" >
 					{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }
-					<div onClick={this.changeSidebarState.bind(this, false)}>
-						{ this.state.project ? 
-							<div>HELLO WORLD!</div> 
-							:
+							
+							
 						  <button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
 						}
 					</div>
 				</div>
-			</div>
 			)
 	}
 
