@@ -8,7 +8,6 @@ var User = require('./models/user');
 var Badge = require('./models/badges');
 
 var app = express();
-//var io = require('socket.io')(app)
 
 
 var port = process.env.PORT || 4000;
@@ -248,13 +247,6 @@ app.use('/api/chatPATCH', function (req, res) {
 
 
 
-//
-// Badge Sockets
-//
-
-// io.on('connection', socket => {
-
-// })
 
 
 // Wild card route for client side routing.
@@ -269,5 +261,16 @@ var assetFolder = path.resolve(__dirname, '../client/public')
 var apiFolder   = path.resolve(__dirname, './apis') 
 
 var port = process.env.PORT || 4000
-app.listen(port)
-console.log("Listening on port", port)
+var server = app.listen(port, () => {
+  console.log("Listening on port", port)
+})
+
+//
+// Badge Sockets
+//
+
+var io = require('socket.io')(server)
+
+io.on('connection', socket => {
+  console.log("Badges are alive!", socket);
+})
