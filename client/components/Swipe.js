@@ -129,6 +129,7 @@ export default class Swipe extends React.Component {
 	}
 
 
+
   render() {
   	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
   	if(this.state.projects === null) {
