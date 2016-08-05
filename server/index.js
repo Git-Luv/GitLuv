@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
 var Badge = require('./models/badges');
+var Session = require('./models/sessions');
 
 var app = express();
 
@@ -86,6 +87,9 @@ app.get('/auth/login', (req, res) => {
           User.createIfNotExists( userStuff )
             res.cookie("AuthToken", cookie)
             res.redirect('/skills');
+
+          // Create Session
+          Session.create()
         }
         else {
           res.cookie("AuthToken", cookie)
