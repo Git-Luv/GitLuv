@@ -1,7 +1,8 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
-import Sidebar from './sidebar'
+import Sidebar from './sidebar';
+import Badge from './badge';
 
 import * as model from '../models/profile';
 import * as Users from '../models/users';
@@ -57,6 +58,11 @@ export default class Profile extends React.Component {
 					     	<div>
 					     		<img src={this.state.userInfo.avatar_url} />
 				     		</div>
+			     		</th>
+			     		<th className="profile-middlePanel">
+			     			<div>
+			     				
+			     			</div>
 			     		</th>
 				     	<th className="profile-rightPanel">
 				     		<h1>{this.state.userInfo.login}</h1>
