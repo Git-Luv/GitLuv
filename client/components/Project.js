@@ -100,10 +100,9 @@ componentWillMount() {
 					<Accordion>
 					                {this.state.myProjects.map((item) => {
 					                    return (
-					                        <AccordionItem title={`Your Project: ${ item }`} slug={item} key={item}>
+					                        <AccordionItem title={`Your Project: ${ item.username}`} slug={item} key={item}>
 					                            <div>
-					                                {`Item ${ item } content`}
-					                                {item === 3 ? <p><img src="https://cloud.githubusercontent.com/assets/38787/8015584/2883817e-0bda-11e5-9662-b7daf40e8c27.gif" /></p> : null}
+					                                {`Liked by: ${ item.users_liked.map(user =>  user ) }`}
 					                            </div>
 					                        </AccordionItem>
 					                    );
