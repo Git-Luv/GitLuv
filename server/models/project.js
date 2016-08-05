@@ -60,6 +60,14 @@ Project.getProject = function(projectTitle){
 	})
 }
 
+Project.getUserProject = function(username) {
+	return ProjectCollection.find({ username: username }, (err, projects) => {
+		if(err) {
+			console.log("ERROR Line66:", err)
+		}
+	})
+}
+
 Project.editProject = function(title, changedAttrs){
 	console.log("title: " + title + " and changedAttrs: " + changedAttrs)
 

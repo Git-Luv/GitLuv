@@ -6,6 +6,7 @@ import Badge from './badge';
 
 import * as model from '../models/profile';
 import * as Users from '../models/users';
+import * as Projects from '../models/projects';
 
 var dc = require('delightful-cookies');
 
@@ -57,10 +58,14 @@ export default class Profile extends React.Component {
 		// Badges will be stored in database
 		// Store amount (5), object ('project') and operator (>)
 		// Every action we need to check if the user has completed any badges and award/notify the user
-
+		Projects.getAllUserProjects(this.state.userInfo.login)
+		.then(projects => {
+			console.log('projects', projects)
+		})
 	}
 
   render() {
+  	this.getBadges();
 	  return (
 	  	<div>
     	<Sidebar state={this.state.isSidebar}/>

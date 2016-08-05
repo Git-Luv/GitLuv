@@ -117,6 +117,15 @@ app.use('/api/projectsGET', function (req, res) {
     })
 })
 
+app.use('/api/userProjects/:username', function(req, res) {
+
+  Project.getUserProject(req.params.username)
+  .then(projects => {
+    res.send(projects);
+  })
+
+})
+
 app.use('/api/projects/:title', function (req, res) {
 
   Project.getProject(req.params.title)

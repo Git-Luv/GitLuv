@@ -15,6 +15,16 @@ export function getAllProjects(){
 	})
 }
 
+export function getAllUserProjects(username){
+	return fetch('/api/userProjects/' + username, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}})
+	.then(data => data.json())
+	.catch(err => console.error(err))
+}
+
 export function getProject(title){
 	return fetch('/api/projects/' + title, {
 		method: 'GET',
