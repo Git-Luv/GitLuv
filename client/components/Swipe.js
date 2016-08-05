@@ -128,38 +128,42 @@ export default class Swipe extends React.Component {
 		}
 	}
 
-  render() {
-  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
-  	if(this.state.projects === null) {
-  		return (<h3 className="loading">Loading...</h3>)
-  	} else if (this.state.projects.length === 0) {
-  		return (
-  			<div>
-	  			<Sidebar state={this.state.isSidebar}/>
-	  			<h3 className="loading">No more projects, check back later!</h3>
-  			</div>
-  			)
-  	} else {
-		  return (
-	  		<div className='swipe'>
-	  			<Sidebar state={this.state.isSidebar} />
-     				<div key={this.state.projects[0].id} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
-			     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
-			     		<div className="description">
-			     			<h2>Project Description:</h2>
-			     			<p>{this.state.projects[0].description}</p>
-			     			<h2>Looking For:</h2>
-				     		<p>{this.state.projects[0].looking_for}</p>
-				     		<h2>Required Skills:</h2>
-				     		<p>{this.state.projects[0].req_skills.map(skill => <div className="skill">{skill}</div>)}</p>
-			     		</div>
-	     			</div>
-	     		<div className="buttons">
-			     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislike.bind(this)}>Dislike</button>
-			     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
-	   			</div>
-     		</div>
-	    )
-  	}			
+    render() {
+	  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
+	  	// console.log('state', this.state)
+
+	  	if(this.state.projects === null) {
+	  		return (<h3 className="loading">Loading...</h3>)
+	  	} else if (this.state.projects.length === 0) {
+	  		return (
+	  			<div>
+		  			<Sidebar />
+		  			<h3 className="loading">No more projects, check back later!</h3>
+	  			</div>
+	  			)
+	  	} else {
+			  return (
+			  	<div>
+		  			<Sidebar />
+			  		<div className='swipe'>
+		     				<div key={this.state.projects[0].id} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
+					     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
+					     		<div className="description">
+					     			<h2>Project Description:</h2>
+					     			<p>{this.state.projects[0].description}</p>
+					     			<h2>Looking For:</h2>
+						     		<p>{this.state.projects[0].looking_for}</p>
+						     		<h2>Required Skills:</h2>
+						     		<p>{this.state.projects[0].req_skills.map(skill => <div className={this.handleProjects(skill)? 'skill-selected': 'skill-deselected'}>{skill}</div>)}</p>
+					     		</div>
+			     			</div>
+			     		<div className="buttons">
+					     	<button type="button" className="button-dislike pure-button" onClick={this.handleDislike.bind(this)}>Dislike</button>
+					     	<button type="button" className="button-like pure-button" onClick={this.handleLike}>Like</button>
+			   			</div>
+		     		</div>
+	  			</div>
+		    )
+    	}			
 	}
 }
