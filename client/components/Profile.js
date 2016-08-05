@@ -46,6 +46,20 @@ export default class Profile extends React.Component {
 		}
 	}
 
+	getBadges() {
+		// get all badges, check to see what badge's the user has and return an array of badges to be rendered
+		// Props for badges:
+		// badgeID
+		// Title,
+		// Description,
+		// Rules { amount: 5, object: 'project', operator: '>' }
+
+		// Badges will be stored in database
+		// Store amount (5), object ('project') and operator (>)
+		// Every action we need to check if the user has completed any badges and award/notify the user
+
+	}
+
   render() {
 	  return (
 	  	<div>
@@ -61,7 +75,7 @@ export default class Profile extends React.Component {
 			     		</th>
 			     		<th className="profile-middlePanel">
 			     			<div>
-			     				
+			     				<Badge />
 			     			</div>
 			     		</th>
 				     	<th className="profile-rightPanel">
