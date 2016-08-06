@@ -148,13 +148,13 @@ export default class Swipe extends React.Component {
 			  		<div className='swipe'>
 		     				<div key={this.state.projects[0].id} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
 					     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
-					     		<div className="description">
+					     		<div className="projectDescription">
 					     			<h2>Project Description:</h2>
 					     			<p>{this.state.projects[0].description}</p>
 					     			<h2>Looking For:</h2>
 						     		<p>{this.state.projects[0].looking_for}</p>
 						     		<h2>Required Skills:</h2>
-						     		<p>{this.state.projects[0].req_skills.map(skill => <div className={this.handleProjects(skill)? 'skill-selected': 'skill-deselected'}>{skill}</div>)}</p>
+						     		<p>{this.state.projects[0].req_skills.map(skill => <button className={this.handleProjects(skill)? 'skill-selected pure-button': 'skill-deselected pure-button'}>{skill}</button>)}</p>
 					     		</div>
 			     			</div>
 			     		<div className="buttons">
