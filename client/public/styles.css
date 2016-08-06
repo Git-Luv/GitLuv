@@ -245,7 +245,7 @@ html {
 
 /* projects that are NOT clicked on color
 */.react-sanfona-item{
-	color: red
+	color: white
 }
 
 .react-sanfona-item-body{
@@ -254,11 +254,12 @@ html {
 
 /*project that IS clicked on color*/
 .react-sanfona-item-expanded{
-	color: white
+	color: magenta
 }
 
-.react-sanfona-item-body-wrapper{
-	color: yellow
+/*users who liked project that is clicked on
+*/.react-sanfona-item-body-wrapper{
+	color: magenta
 }
 
 .usersWhoLikedTitle {

@@ -16,9 +16,7 @@ export default class Project extends React.Component {
 			isSidebar: false,
 			project: null,
 			isCreatingProject: null,
-			// added to state to show users who liked your projects
 			myProjects: [],
-			// allprojects: [],
 			user: ""
 		}
 	}
@@ -107,8 +105,6 @@ componentWillMount() {
 					                    );
 					                })}
 					            </Accordion>
-
-
 				</div>
 	
 
