@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from './sidebar';
-import * as Chat from '../models/Chat'
+import * as Chat from '../models/chat'
 
 export default class ChatBox extends React.Component {
 		
@@ -20,14 +20,16 @@ export default class ChatBox extends React.Component {
 		this.setState({username: this.props.username,
 											 room: this.props.room})
 
+		console.log(this.props.username + " + " + this.props.room)
+
 		console.log(this.state.username + " + " + this.state.room)
 
 		let self = this
 
-		Chat.getChatroom(this.state.room)
-		.then(messages => {
-			console.log(messages)
-			this.setState({messages: messages})
+		Chat.getChatroom(this.props.room)
+		.then(room => {
+			console.log(room)
+			this.setState({messages: room.messages})
 		})
 	}
 

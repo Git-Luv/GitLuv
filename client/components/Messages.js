@@ -48,7 +48,7 @@ export default class Messages extends React.Component {
 				console.log(self.state.username + " + " + chatBox.chatRoom)
 
 				// console.log(chatbox)
-				return(<ChatBox username={self.state.username} messages={chatBox.chatRoom}/>)
+				return(<ChatBox username={self.state.username} room={chatBox.chatRoom}/>)
 			})}
 		</div>)
 	}

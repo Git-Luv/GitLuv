@@ -16,6 +16,7 @@ var chatSchema = new Schema({
 	visionary: String,
 	developer: String,
 	messages:  Array,
+	initiated: Boolean
 })
 
 var ChatCollection = mongoose.model('Chatcollection', chatSchema)
@@ -42,7 +43,7 @@ Chat.all = function(){
 }
 
 Chat.getChatroom = function(chatRoom){
-
+	console.log("chatroom in server", chatRoom)
 	return ChatCollection.findOne({chatRoom: chatRoom}, function (err, doc) {
 		if(err) console.log("!!!-----------------!!!", err)
 	})

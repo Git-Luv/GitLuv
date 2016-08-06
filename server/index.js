@@ -219,10 +219,10 @@ app.use('/api/chatGET', function (req, res) {
     })
 })
 
-app.use('/api/chat/:chatRoom', function (req, res) {
+app.use('/api/chat/:chatroom', function (req, res) {
   
-  console.log("chat API params: ", req.params.chatRoom)
-  Chat.getChatroom(req.params.chatRoom)
+  console.log("chat API params: ", req.params.chatroom)
+  Chat.getChatroom(req.params.chatroom)
     .then(function(room){
       res.status(200).send(room)
     })
