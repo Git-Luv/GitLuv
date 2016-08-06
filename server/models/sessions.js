@@ -4,15 +4,25 @@ mongoose.promise = global.Promise;
 
 var sessionSchema = new mongoose.Schema({
 	username: String,
-	authToken: Number
+	authToken: String
 })
 
-var SessionCollection = mongoose.model('SessionCollection', badgeSchema);
+var SessionCollection = mongoose.model('SessionCollection', sessionSchema);
 
 Session.create = function(username, token) {
-	return SessionCollection.findOneAndUpdate({authToken: token}, {authToken: token, username: username}, {upset: true}, function (err, doc) {
-		if(err){
-			console.log("!!!-----------------!!!", err)
-		}
+	let session = new SessionCollection({
+		username: username,
+		authToken: token
+	})
+
+	session.save(function (err, data) {
+		if(err)	console.log("!!!-----------------!!!", err);
+		else console.log('session saved', data)
+	})
+}
+
+Session.remove = function(authToken) {
+	SessionCollection.find({authToken: authToken}).remove((err, data) => {
+		if(err) console.log('ERROR:', err);
 	})
 }

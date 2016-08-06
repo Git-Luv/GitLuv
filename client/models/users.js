@@ -44,3 +44,10 @@ export function updateUser(username, updatedAttrs){
 	.then(x => console.log("Patched in DB!", x))
 	.catch(err => console.error(err))
 }
+
+export function logout(authToken){
+	return fetch('/api/logout/' + authToken, {
+		method: 'GET'
+	})
+	.then(x => console.log("Session removed"))
+}

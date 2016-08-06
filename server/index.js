@@ -64,7 +64,7 @@ app.get('/auth/login', (req, res) => {
     return Profile.getUserData(result.access_token)
   })
   .then(data => {
-      console.log('data getuserdata', data)
+      //console.log('data getuserdata', data)
       //'/api/users/:username'
       //User.getUser(req.params.username)
       //if exists send to '/swipe' endpoint
@@ -72,7 +72,7 @@ app.get('/auth/login', (req, res) => {
       //if not exist send to '/skills' endpoint
       User.getUser(data.login)
       .then(userData => {
-        console.log('!!!!userData', userData);
+        //console.log('!!!!userData', userData);
         if(!userData){
         //store user in DB?
           var userStuff = {
@@ -85,13 +85,15 @@ app.get('/auth/login', (req, res) => {
             updated_at: data.updated_at
           }
           User.createIfNotExists( userStuff )
-            res.cookie("AuthToken", cookie)
-            res.redirect('/skills');
 
           // Create Session
-          Session.create()
+          Session.create(data.login, cookie)
+          
+          res.cookie("AuthToken", cookie)
+          res.redirect('/skills');
         }
         else {
+          Session.create(data.login, cookie)
           res.cookie("AuthToken", cookie)
           res.redirect('/swipe');
 
@@ -101,6 +103,10 @@ app.get('/auth/login', (req, res) => {
   })
 
 });
+
+app.get('/api/logout/:token', (req, res) => {
+  Session.remove(req.params.token);
+})
 
 //
 // Project API
@@ -112,11 +118,11 @@ app.use('/api/projectsGET', function (req, res) {
 
   Project.all()
     .then(function (projects) {
-        console.log("getting!!: ", projects)
+        //console.log("getting!!: ", projects)
       res.status(200).send(projects)
     })
     .catch(function (err) {
-      console.log("Project.all error:", err)
+      //console.log("Project.all error:", err)
       res.status(500).send(err)
     })
 })
@@ -137,7 +143,7 @@ app.use('/api/projects/:title', function (req, res) {
     res.status(200).send(project)
   })
   .catch(function (err){
-    console.log("get error: ", err)
+    //console.log("get error: ", err)
     res.status(500).send(err)
   })
 })
@@ -154,7 +160,7 @@ app.use('/api/projectsPATCH', function (req, res) {
   //This function takes a 2 piece array, first index is the title and
   //the second is an object of all information being changed.
 
-  console.log('lolwut ' + JSON.stringify(req.body))
+  //console.log('lolwut ' + JSON.stringify(req.body))
 
   Project.editProject(req.body[0], req.body[1]).then(x => res.sendStatus(201))
   .catch(function(err){
@@ -193,7 +199,7 @@ app.use('/api/users/:username', function (req, res) {
 
 
 app.use('/api/usersPOST', function (req, res) {
-  console.log("running usersPost")
+  //console.log("running usersPost")
   User.createIfNotExists( req.body )
   res.sendStatus(201)
 })
@@ -202,7 +208,7 @@ app.use('/api/usersPATCH', function (req, res) {
 
   //This function takes a 2 piece array, first index is the username and
   //the second is an object of all information being changed.
-  console.log("running usersPatch")
+  //console.log("running usersPatch")
   User.editUser(req.body[0], req.body[1]).then(x => res.sendStatus(201))
   .catch(function(err){
     console.log(err) 
@@ -218,7 +224,7 @@ var Chat = require('./models/chat')
 
 app.use('/api/chat/:chatRoom', function (req, res) {
   
-  console.log("chat API params: ", req.params.chatRoom)
+  //console.log("chat API params: ", req.params.chatRoom)
   Chat.getChatroom(req.params.chatRoom)
     .then(function(room){
       res.status(200).send(room)
@@ -231,14 +237,14 @@ app.use('/api/chat/:chatRoom', function (req, res) {
 
 app.use('/api/chatPOST', function (req, res) {
   
-  console.log("creating chatroom: ", req.body)
+  //console.log("creating chatroom: ", req.body)
   Chat.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
 app.use('/api/chatPATCH', function (req, res) {
 
-  console.log("patching chatroom: ", req.body)
+  //console.log("patching chatroom: ", req.body)
   Chat.updateChatroom(req.body[0], req.body[1]).then(x => res.sendStatus(201))
   .catch(function(err){
     console.log("chat patch error: ", err)

@@ -1,5 +1,8 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
+import * as User from '../models/users';
+
+var dc = require('delightful-cookies');
 
 export default class SideBar extends React.Component {
 	constructor(props) {
@@ -9,7 +12,7 @@ export default class SideBar extends React.Component {
 	}
 
 	logoutUser() {
-		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+		User.logout(dc.get('AuthToken').value)
 		browserHistory.pushState(null, '/')
 	}
 	
