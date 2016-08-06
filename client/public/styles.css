@@ -83,10 +83,14 @@ html {
 	border-radius: 50%;
 }
 
-.profile th {
-	width: 50%;
+.profile-rightPanel, .profile-leftPanel {
+	width: 33%;
 	padding: 10px 0px;
 	margin: 0px;
+}
+
+.profile-middlePanel {
+	width: 20%;
 }
 
 .profile table,tr {

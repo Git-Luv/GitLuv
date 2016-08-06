@@ -21,7 +21,8 @@ var userSchema = new Schema({
 	skills:       Array,
 	visionary:    Boolean,
 	projects:     Array,
-	updated_at:   String
+	updated_at:   String,
+	badges: 			Array
 })
 
 var UserCollection = mongoose.model('UserCollection', userSchema)
@@ -31,6 +32,7 @@ User.createIfNotExists = function(attrs){
 
 	let usrnm = attrs.username
 	delete attrs.username
+	attrs.badges = [];
 
 	return UserCollection.findOneAndUpdate({username: usrnm}, attrs, {upsert: true}, function (err, doc) {
 		if(err){
