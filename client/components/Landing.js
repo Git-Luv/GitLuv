@@ -4,6 +4,8 @@ import fetch from 'isomorphic-fetch';
 import * as Chat from '../models/chat'
 import Sidebar from './sidebar'
 
+var dc = require('delightful-cookies');
+
 export default class Landing extends React.Component {
 	constructor(props){
 		super(props);
@@ -34,7 +36,26 @@ export default class Landing extends React.Component {
   render() {
 	  return (
 	  	<div>
-	  	  <Sidebar />
+	  		<div className="custom-wrapper pure-g " ref="menuClass" id="menu">
+			    <div className="pure-u-1 pure-u-md-1-4">
+			        <div className="pure-menu">
+			            <a href="#" className="pure-menu-heading custom-brand menu-item l-box">GitLuv</a>
+			            <a href="#" className="custom-toggle" ref="toggleClass" id="toggle" onClick={this.toggleMenu}><s className="bar"></s><s className="bar"></s></a>
+			        </div>
+			    </div>
+			    // <div className="pure-u-1 pure-u-md-1-6">
+			    //     <div className="menu-links pure-menu pure-menu-horizontal custom-can-transform">
+			    //         <ul className="pure-menu-list">
+			    //             <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
+			    //             <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
+			    //             <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
+			    //             <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
+			    //         </ul>
+			    //     </div>
+			    // </div>
+			    // <div className="pure-u-1 pure-u-md-1-3">
+			    // </div>
+			</div>
 	    <div className="landingPage">
 	    	<div className="landing-text">
 	    	<h1 className="gitluvh1">GitLuv</h1>

@@ -116,7 +116,7 @@ font-family: 'Roboto', sans-serif;
 .skill {
 	display: inline-block;
 	background-color: #57BC9A;
-	border-radius: 10%;
+	/*border-radius: 10%;*/
 	color: white;
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
