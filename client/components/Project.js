@@ -18,7 +18,7 @@ export default class Project extends React.Component {
 			isCreatingProject: null,
 			// added to state to show users who liked your projects
 			myProjects: [],
-			allprojects: [],
+			// allprojects: [],
 			user: ""
 		}
 	}
@@ -42,7 +42,6 @@ componentWillMount() {
 			console.log("PROJECTS imported as", projects)
 			var temp = [];
 			projects.forEach((project) => {
-				console.log("trying")
 				console.log("creator", this.state.user)
 				console.log("projects.username", project.username )
 				if (project.username == creator) {
@@ -98,11 +97,11 @@ componentWillMount() {
 					<img className="visionaryBadge" src="/images/badge.jpeg" />
 					<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
 					<Accordion>
-					                {this.state.myProjects.map((item) => {
+					                {this.state.myProjects.map((item, i) => {
 					                    return (
-					                        <AccordionItem title={`Your Project: ${ item.username}`} slug={item} key={item}>
+					                        <AccordionItem title={`Your Project: ${ item.title}`}  key={i} >
 					                            <div>
-					                                {`Liked by: ${ item.users_liked.map(user =>  user ) }`}
+					                                {`Liked by: ${ item.users_liked.map(user =>  user ).join(', ') }`}
 					                            </div>
 					                        </AccordionItem>
 					                    );
