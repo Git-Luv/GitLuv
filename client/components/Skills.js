@@ -32,7 +32,7 @@ export default class SkillsList extends React.Component {
 
 	componentWillMount() {
 		let cookie = dc.get("AuthToken")
-		modelProfile.getUserData(cookie.value)
+		modelProfile.getUserData(cookie)
 		.then(res => {
 			this.setState({user: res.login});
 			let user = this.state.user;

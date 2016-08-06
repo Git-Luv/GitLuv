@@ -31,7 +31,7 @@
     "body-parser": "^1.15.2",
     "browserify-middleware": "^7.0.0",
     "chai": "^3.5.0",
-    "delightful-cookies": "^1.2.0",
+    "delightful-cookies": "^2.0.1",
     "es6-promise": "^3.2.1",
     "eslint": "^3.2.2",
     "express": "^4.14.0",

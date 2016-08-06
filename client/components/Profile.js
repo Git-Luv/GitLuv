@@ -29,7 +29,7 @@ export default class Profile extends React.Component {
 	componentWillMount() {
 		if(dc.get('AuthToken')){
 			// Take all browser's cookies and find the one we need
-			model.getUserData(dc.get('AuthToken').value)
+			model.getUserData(dc.get('AuthToken'))
 			.then(res => {
 				Users.getUser(res.login)
 				.then(user => {

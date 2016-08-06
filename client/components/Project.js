@@ -29,7 +29,7 @@ export default class Project extends React.Component {
 componentWillMount() {
 	// identifies username
 	let cookie = dc.get("AuthToken")
-	modelProfile.getUserData(cookie.value)
+	modelProfile.getUserData(cookie)
 	.then(res => {
 		this.setState({user: res.login});
 		let user = this.state.user;
