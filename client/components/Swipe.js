@@ -137,7 +137,6 @@ export default class Swipe extends React.Component {
 	  		return (
 	  			<div>
 		  			<Sidebar />
-		  			<button className="sidebarButton pure-button" onClick={this.changeSidebarState.bind(this, true)}>|||</button>
 		  			<h3 className="loading">No more projects, check back later!</h3>
 	  			</div>
 	  			)

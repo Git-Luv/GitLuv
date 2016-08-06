@@ -43,18 +43,7 @@ export default class Landing extends React.Component {
 			            <a href="#" className="custom-toggle" ref="toggleClass" id="toggle" onClick={this.toggleMenu}><s className="bar"></s><s className="bar"></s></a>
 			        </div>
 			    </div>
-			    // <div className="pure-u-1 pure-u-md-1-6">
-			    //     <div className="menu-links pure-menu pure-menu-horizontal custom-can-transform">
-			    //         <ul className="pure-menu-list">
-			    //             <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
-			    //             <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
-			    //             <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
-			    //             <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
-			    //         </ul>
-			    //     </div>
-			    // </div>
-			    // <div className="pure-u-1 pure-u-md-1-3">
-			    // </div>
+			    
 			</div>
 	    <div className="landingPage">
 	    	<div className="landing-text">

@@ -11,50 +11,6 @@ export default class SideBar extends React.Component {
 		this.toggleHorizontal = this.toggleHorizontal.bind(this)
 	}
 
-	componentDidMount() {
-
-		if(dc.get('AuthToken')){
-			// Take all browser's cookies and find the one we need
-			model.getUserData(dc.get('AuthToken').value)
-			.then(res => {
-				// console.log('res', res)
-				this.setState({username: res.login});
-
-				// grab all projects from db
-		 		Projects.getAllProjects()
-		 		.then(x => {
-		 			var allProjects = [];
-		 			x.forEach((project) => {
-		 				if (project.users_liked.indexOf(res.login) === -1 && project.users_disliked.indexOf(res.login) === -1) {
-		 					allProjects.push(project)
-		 				}
-		 			})
-		 			// grab user info including user skills
-		 			Users.getUser(res.login)
-		 			.then(res => {
-		 				//add user skills to this.state.userSkills
-		 				this.setState({userSkills: res.skills})
-						allProjects.forEach(project => {
-			 				project.commonSkills = Utils.getCommonSkillCount(res, project);
-		 				})
-		 				// Sort based on the amount of commonSkills
-		 				allProjects = allProjects.sort((a, b) => {
-		 					if(a.commonSkills < b.commonSkills){
-		 						return 1;
-		 					} else if(a.commonSkills > b.commonSkills){
-		 						return -1;
-		 					} else {
-		 						return 0;
-		 					}
-		 				})
-		 				this.setState({projects: allProjects})
-		 			})
-		 		})
-			})
-		} else {
-			browserHistory.pushState(null, '/');
-		}
-	}
 
 	logoutUser() {
 		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
