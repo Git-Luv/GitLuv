@@ -2,9 +2,10 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import Sidebar from './sidebar';
 import * as Projects from '../models/projects'
-import * as model from '../models/profile';
-import * as Users from '../models/users'
-import * as Utils from '../utils'
+import * as model    from '../models/profile';
+import * as Users    from '../models/users'
+import * as Chat     from '../models/chat'
+import * as Utils    from '../utils'
 
 import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
@@ -87,12 +88,19 @@ export default class Swipe extends React.Component {
 
  	handleLike(event) {
  		event.preventDefault();
- 		Projects.updateProject(this.state.projects[0].title, {users_liked: [this.state.username]})
- 		this.setState({ direction: 'right' })
+ 		var self = this
+
+		let developer = this.state.username
+		let visionary = this.state.projects[0].username
+			Chat.addChatroom({chatRoom: visionary + "" + developer, developer: developer, visionary: visionary})
+		.then(function(x) {	
+ 		Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
+ 		self.setState({ direction: 'right' })
  		if(!hasEvent) {
- 			document.getElementsByClassName('currentProject')[0].addEventListener('animationend', this.updateArray.bind(this))
+ 			document.getElementsByClassName('currentProject')[0].addEventListener('animationend', self.updateArray.bind(self))
  			hasEvent = true;
  		}
+ 		})
  	}
  	handleDislike(event) {
  		event.preventDefault();
@@ -115,7 +123,7 @@ export default class Swipe extends React.Component {
 
 		
   updateArray() { 
-			var updatedProjects = this.state.projects.slice(1)
+		var updatedProjects = this.state.projects.slice(1)
 		this.setState({
 			projects: updatedProjects,
 			direction: 'null' 

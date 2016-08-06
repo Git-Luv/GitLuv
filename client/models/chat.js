@@ -12,6 +12,7 @@ export function getAllChatrooms(){
 }
 
 export function getChatroom(chatRoom){
+	console.log(chatRoom)
 	return fetch('/api/chat/' + chatRoom, {
 		method: 'GET',
 		headers: {

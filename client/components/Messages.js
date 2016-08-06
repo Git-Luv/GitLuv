@@ -2,7 +2,6 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import ChatBox from './ChatBox'
 import * as model from '../models/profile';
-
 import * as Chat from '../models/chat'
 
 var dc = require('delightful-cookies');
@@ -27,6 +26,7 @@ export default class Messages extends React.Component {
 
 			Chat.getAllChatrooms()
 			.then(function(chats){
+				console.log(chats)
 				let chatArr = [];
 				chats.map(function(chat){
 					if( self.state.username === chat.developer ||
@@ -43,12 +43,13 @@ export default class Messages extends React.Component {
 	render () {
 		var self = this
 		return (<div>
-			{this.state.chats.map(function(chatbox){
+			{this.state.chats.map(function(chatBox){
+
+				console.log(self.state.username + " + " + chatBox.chatRoom)
+
 				// console.log(chatbox)
-				<ChatBox username={self.state.username} />
+				return(<ChatBox username={self.state.username} messages={chatBox.chatRoom}/>)
 			})}
 		</div>)
 	}
-
-
 }

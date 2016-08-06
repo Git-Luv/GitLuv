@@ -102,5 +102,3 @@ export default class SideBar extends React.Component {
 			// 	<Link className="pure-button sidebar-button" to={`project`}>Projects</Link>
 			// 	<button className="pure-button sidebar-button-logout" onClick={this.logoutUser}>Logout</button>
 			// </div>
-
-
