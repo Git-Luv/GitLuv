@@ -85,15 +85,11 @@ app.get('/auth/login', (req, res) => {
             updated_at: data.updated_at
           }
           User.createIfNotExists( userStuff )
-
-          // Create Session
-          Session.create(data.login, cookie)
           
           res.cookie("AuthToken", cookie)
           res.redirect('/skills');
         }
         else {
-          Session.create(data.login, cookie)
           res.cookie("AuthToken", cookie)
           res.redirect('/swipe');
 

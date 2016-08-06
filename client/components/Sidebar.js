@@ -12,7 +12,7 @@ export default class SideBar extends React.Component {
 	}
 
 	logoutUser() {
-		User.logout(dc.get('AuthToken').value)
+		dc.remove('AuthToken')
 		browserHistory.pushState(null, '/')
 	}
 	
