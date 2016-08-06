@@ -2,6 +2,7 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import * as model from '../models/project';
 import * as Projects from '../models/projects';
+import * as BadgeChecker from '../models/badgeChecker'
 import * as Utils from '../utils'
 
 var errorTimeoutId;
@@ -81,6 +82,7 @@ export default class CreateProject extends React.Component {
 			Projects.addProject(this.state.project)
 			.then(res => {
 				this.props.project.setState({ isCreatingProject: false, error: false });
+				BadgeChecker.checkProjects(this.state.project.username)
 				window.alert("Project created!")
 			})
 		} else {
