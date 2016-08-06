@@ -67,9 +67,9 @@ export default class Profile extends React.Component {
 				     	<div className="skills">
 				     	<span>Skills:</span>
 				     		{this.state.userSkills.map((skill, i) => {
-				     			return(<div className="skill animated fadeInUp" key={i}>
+				     			return(<button className="pure-button skill animated fadeInUp" key={i}>
 										{skill}
-								</div>)
+								</button>)
 				     		})}
 				     	</div>
 			     	</div>

@@ -1,12 +1,16 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 
+var dc = require('delightful-cookies');
+
+
 export default class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.toggleMenu = this.toggleMenu.bind(this)
 		this.toggleHorizontal = this.toggleHorizontal.bind(this)
 	}
+
 
 	logoutUser() {
 		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
@@ -67,28 +71,24 @@ export default class SideBar extends React.Component {
 	render() {
 		return(
 			<div className="custom-wrapper pure-g " ref="menuClass" id="menu">
-			    <div className="pure-u-1 pure-u-md-1-3">
+			    <div className="pure-u-1 pure-u-md-1-4">
 			        <div className="pure-menu">
-			            <a href="#" className="pure-menu-heading custom-brand menu-item">GitLuv</a>
+			            <a href="#" className="pure-menu-heading custom-brand menu-item l-box">GitLuv</a>
 			            <a href="#" className="custom-toggle" ref="toggleClass" id="toggle" onClick={this.toggleMenu}><s className="bar"></s><s className="bar"></s></a>
 			        </div>
 			    </div>
-			    <div className="pure-u-1 pure-u-md-1-3">
+			    <div className="pure-u-1 pure-u-md-1-6">
 			        <div className="menu-links pure-menu pure-menu-horizontal custom-can-transform">
 			            <ul className="pure-menu-list">
-			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">Profile</Link></li>
-			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">Swipe</Link></li>
-			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">Projects</Link></li>
-			                <li className="pure-menu-item"><Link to={`messages`} className="pure-menu-link l-box">Messages</Link></li>
+			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
+			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
+			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
+			                <li className="pure-menu-item"><Link to={`messages`} className="pure-menu-link l-box">MESSAGES</Link></li>
+			                <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
 			        </div>
 			    </div>
 			    <div className="pure-u-1 pure-u-md-1-3">
-			        <div className="menu-links pure-menu pure-menu-horizontal custom-menu-3 custom-can-transform">
-			            <ul className="pure-menu-list">
-			                <li className="pure-menu-item"><a onClick={this.logoutUser} className="pure-menu-link menu-item">Logout</a></li>
-			            </ul>
-			        </div>
 			    </div>
 			</div>
 			)

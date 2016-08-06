@@ -1,6 +1,6 @@
 html {
   height: 115%;
-  background-image: linear-gradient(#002551, #00326c);
+  background-color: #5f66f8;
 }	
 
 
@@ -10,8 +10,9 @@ html {
 	position: fixed;
 	width: 100%;
 	height: 100%;
+	  background-color: #5f66f8;
   /*url(http://i.imgur.com/s1ZXO34.gif;);*/
-	background-image: url(http://res.cloudinary.com/pashadelic/image/upload/cs_srgb,c_limit,h_1550,w_1550/qinekafjcgtqd8l7u1qq.jpg);
+	/*background-image: url(http://res.cloudinary.com/pashadelic/image/upload/cs_srgb,c_limit,h_1550,w_1550/qinekafjcgtqd8l7u1qq.jpg);*/
 	background-repeat: no-repeat;
 	background-size: cover;
     center fixed; 
@@ -22,18 +23,19 @@ html {
 }
 
 .welcomeh1 {
-	color: white;
-	font-size: 50px;
-	text-align: center;
-	margin-bottom:10px;
+
+color: white;
+font-family: 'Rock Salt', cursive;
+margin-bottom:10px;
+font-size: 40px;
+
 }
 
 .gitluvh1 {
 	color: white;
-	font-size: 80px;
-	text-align: center;
-	margin-top:0;
+	font-family: 'Pattaya', sans-serif;
 	margin-bottom:0;
+	font-size:130px;
 }
 
 
@@ -54,8 +56,20 @@ html {
 
 .description {
 	text-align: center;
-	color: slate;
+	color: white;
+	margin-bottom:10px;
+	font-size: 25px;
+font-family: 'Raleway', sans-serif;
+}
+
+.profile-right {
+	font-family: 'Roboto', sans-serif;
+}
+.projectDescription {
+	text-align: center;
+	color: black;
 	margin-top:20px;
+	font-family: 'Roboto', sans-serif;
 }
 
 .profile {
@@ -82,13 +96,16 @@ html {
 	color: white;
 	font-size: 50px;
 	text-align: center;
-	margin-bottom:10px;
+	/*margin-bottom: -1px;*/
+	/*margin-bottom:10px;*/
+font-family: 'Roboto', sans-serif;
+
 }
 
 .button-skillsSelected {
 	text-align: center;
 	left:50%;
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	margin-left: auto;
 	margin-right:auto;
 }
@@ -103,7 +120,7 @@ html {
 .skill {
 	display: inline-block;
 	background-color: #57BC9A;
-	border-radius: 10%;
+	/*border-radius: 10%;*/
 	color: white;
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
@@ -114,7 +131,7 @@ html {
 .skill-selected {
 	display: inline-block;
 	background-color: #6cc644;
-	border-radius: 10%;
+	/*border-radius: 10%;*/
 	color: white;
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
@@ -125,7 +142,7 @@ html {
 .skill-deselected {
 	display: inline-block;
 	background-color: #CA3C3C;
-	border-radius: 10%;
+	/*border-radius: 10%;*/
 	color: white;
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
@@ -184,7 +201,13 @@ html {
 	color: white;
 }
 
-/*SWIPE PAGE*/
+/* ========== Swipe Page ========== */
+
+.visionaryBadge {
+	display: block;
+	margin-left: auto;
+	margin-right: auto
+}
 
 .swipe {
 	margin-top: 5%;
@@ -204,6 +227,8 @@ html {
 	text-align: center;
 	margin-top:0;
 	margin-bottom:0;
+   font-family: 'Roboto', sans-serif;
+
 }
 
 .button-like,
@@ -231,6 +256,46 @@ html {
 }
 
 /* ========== Project ========== */
+
+
+
+.react-sanfona{ 
+ 	text-align: center;
+ }
+
+/* projects that are NOT clicked on color
+*/.react-sanfona-item{
+	color: white
+}
+
+.react-sanfona-item-body{
+	color: red
+}
+
+/*project that IS clicked on color*/
+.react-sanfona-item-expanded{
+	color: magenta
+}
+
+/*users who liked project that is clicked on
+*/.react-sanfona-item-body-wrapper{
+	color: magenta
+}
+
+.usersWhoLikedTitle {
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	margin-bottom:10px;
+}
+
+.projectsPageTitle{
+	color: white;
+	font-size: 40px;
+	text-align: center;
+	margin-top:0;
+	margin-bottom:0;
+}
 
 .createProjectModal {
 	width: 100%;
@@ -309,6 +374,7 @@ html {
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
 	text-align: center;
+	max-width: ;
 }
 
 .loading {
@@ -318,9 +384,11 @@ html {
 	text-align: center;
 	margin-bottom:0;
 	margin-top:300px;
+	font-family: 'Roboto', sans-serif;
+
 }
 .landing-text {
-	color: #E2CFEA;
+	color: #2f38f6;
 	font-size: 30px;
 	text-align: center;
 	margin-bottom:0;
@@ -333,12 +401,26 @@ html {
 	width: 40%;
 	margin: 10px auto;
 	text-align: center;
-	color: black;
 	background-color: white;
 	box-shadow: 0px 0px 20px black;
 	margin-top: 5%;
 	padding: 5px;
 	padding-bottom: 40px;
+	border-radius: 2%;
+}
+
+.skillSelector {
+	color: black;
+	text-align: center;
+	width: 70%;
+	margin: 10px auto;
+	text-align: center;
+	/*background-color: white;*/
+	/*box-shadow: 0px 0px 20px black;*/
+/*	margin-top: 5%;
+	margin-bottom: 5%;*/
+	padding: 5px;
+	/*padding-bottom: 40px;*/
 	border-radius: 2%;
 }
 
@@ -351,10 +433,10 @@ html {
 
 /*MENU*/
 .custom-wrapper {
-    background-color: black;
+    background-color:#464ef7;
     margin-bottom: 1em;
     -webkit-font-smoothing: antialiased;
-    height: 2.1em;
+    height: 2.5em;
     overflow: hidden;
     -webkit-transition: height 0.5s;
     -moz-transition: height 0.5s;
@@ -362,8 +444,17 @@ html {
     transition: height 0.5s;
 }
 
+.showProjects {
+	background-color: #464ef7;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	margin-top: 25px;
+
+}
+
 .custom-wrapper.open {
-    height: 14em;
+    height: 19em;
 }
 
 .custom-menu-3 {
@@ -381,7 +472,7 @@ html {
 }
 
 .custom-toggle .bar {
-    background-color: #777;
+    background-color: white;
     display: block;
     width: 20px;
     height: 2px;
@@ -430,14 +521,19 @@ html {
 
 .menu-item {
 	color:white;
+	font-family: 'Roboto', sans-serif;
 }
 
 .l-box {
 	color:white;
     padding-right: 2.5cm;
+    height: 2.5em;
+    font-size: 18px;
+	font-family: 'Roboto', sans-serif;
 }
 
 .menu-links a:hover { 
-    background-color: grey;
+    background-color: #5f66f8;
+    /*text-decoration: underline;*/
 }
 
