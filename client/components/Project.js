@@ -89,40 +89,32 @@ componentWillMount() {
 		console.log("MY PROJECTS", this.state.myProjects)
 		return (
 			<div>
-				<Sidebar />
 				<div>
-					<h2 className="projectsPageTitle">Welcome Visionary</h2>
-					<img className="visionaryBadge" src="/images/badge.jpeg" />
-					<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
-					<Accordion>
-					                {this.state.myProjects.map((item, i) => {
-					                    return (
-					                        <AccordionItem title={`Your Project: ${ item.title}`}  key={i} >
-					                            <div>
-					                                {`Liked by: ${ item.users_liked.map(user =>  user ).join(', ') }`}
-					                            </div>
-					                        </AccordionItem>
-					                    );
-					                })}
-					            </Accordion>
+					<Sidebar />
+					<h2 className="projectsPageTitle">My Projects</h2>
+					<div className="projectsLiked">
+						<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
+						<Accordion className="likedUsers">
+			                {this.state.myProjects.map((item, i) => {
+			                    return (
+			                    	<div className="demo-container">
+				                        <AccordionItem title={`${ item.title}`}  key={i} >
+				                            <div>
+				                                {`Liked by: ${ item.users_liked.map(user =>  user ).join(', ') }`}
+				                            </div>
+				                        </AccordionItem>
+			                        </div>
+			                    );
+			                })}
+			            </Accordion>
+		            </div>
 				</div>
-	
+						<div className="projectPage">
+							{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
+							<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
+						</div>
+			</div>
 
-
-
-
-
-
-
-
-				<div className="projectPage" >
-					{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }
-							
-							
-						  <button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
-						}
-					</div>
-				</div>
 			)
 	}
 

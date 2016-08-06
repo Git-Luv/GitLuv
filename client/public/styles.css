@@ -265,7 +265,7 @@ font-family: 'Roboto', sans-serif;
 
 /* projects that are NOT clicked on color
 */.react-sanfona-item{
-	color: white
+	color: black
 }
 
 .react-sanfona-item-body{
@@ -274,19 +274,21 @@ font-family: 'Roboto', sans-serif;
 
 /*project that IS clicked on color*/
 .react-sanfona-item-expanded{
-	color: magenta
+	color: #464ef7
 }
 
 /*users who liked project that is clicked on
 */.react-sanfona-item-body-wrapper{
-	color: magenta
+	color: #464ef7
 }
 
 .usersWhoLikedTitle {
-	color: white;
+	color: black;
 	font-size: 20px;
 	text-align: center;
 	margin-bottom:10px;
+	font-family: 'Roboto', sans-serif;
+
 }
 
 .projectsPageTitle{
@@ -295,6 +297,8 @@ font-family: 'Roboto', sans-serif;
 	text-align: center;
 	margin-top:0;
 	margin-bottom:0;
+	font-family: 'Roboto', sans-serif;
+
 }
 
 .createProjectModal {
@@ -424,6 +428,33 @@ font-family: 'Roboto', sans-serif;
 	border-radius: 2%;
 }
 
+.projectsLiked {
+	color: black;
+	text-align: center;
+	width: 40%;
+	margin: 10px auto;
+	text-align: center;
+	background-color: white;
+	box-shadow: 0px 0px 20px black;
+	margin-top: 5%;
+	padding: 15px;
+	padding-bottom: 40px;
+	border-radius: 2%;
+	font-family: 'Roboto', sans-serif;
+}
+.horizontal-rule {
+   display: block;
+   height: 1px;
+   border: 0;
+   border-top: 1px solid #ccc;
+   margin: 1em 0;
+   padding: 0;
+}
+
+.likedUsers {
+	text-align: left;
+}
+
 .toGithub img{
 	width: 20%;
 	height: 20%;
@@ -535,5 +566,100 @@ font-family: 'Roboto', sans-serif;
 .menu-links a:hover { 
     background-color: #5f66f8;
     /*text-decoration: underline;*/
+}
+
+$primary-color: #03a9f4;
+$gray: #ccc;
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nobile', sans-serif;
+}
+
+.demo-container {
+  padding: 40px;
+  width: 100%;
+
+  h1 {
+    border-bottom: 1px solid $gray;
+    color: $primary-color;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+  }
+
+  h2 {
+    color: $gray;
+  }
+}
+
+.react-sanfona {
+  border: 1px solid $gray;
+  border-radius: 3px;
+  margin-bottom: 70px;
+}
+
+.react-sanfona-item {
+
+  &-title {
+    background-color: #fafafa;
+    border-top: 1px solid $gray;
+    color: #333;
+    padding: 20px;
+    text-transform: uppercase;
+    transition: background-color .3s;
+  }
+
+  &:first-child &-title {
+    border-top: none;
+  }
+
+  &-expanded &-title {
+    background-color: $primary-color;
+    color: #fff;
+
+    .title-done-btn {
+        display: inline-block;
+        float: right;
+        color: #000;
+    }
+  }
+
+  &-body-wrapper {
+    color: #666;
+    padding: 20px;
+    position: relative;
+
+    &:hover .tooltip {
+      opacity: 1;
+    }
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .title-done-btn {
+      display: none;
+  }
+
+}
+
+.tooltip {
+  background-color: #000;
+  bottom: -10px;
+  border-radius: 3px;
+  color: #fff;
+  left: 10px;
+  opacity: 0;
+  padding: 10px;
+  position: absolute;
+  transition: opacity .3s;
 }
 
