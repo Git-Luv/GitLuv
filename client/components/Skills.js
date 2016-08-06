@@ -82,7 +82,7 @@ export default class SkillsList extends React.Component {
 				<div>
 					<Sidebar />
 				</div>
-				<h2 className = "skillPageTitle"> Choose Your Top Skills </h2>
+				<h2 className = "skillPageTitle"> Select your top skills </h2>
 	     	<div className="skillSelector">
 	     		{this.state.allSkills.map((skill, i) => {var skillClassName = '';
 								if(this.state.userSkills.indexOf(skill) > -1) 
@@ -96,7 +96,7 @@ export default class SkillsList extends React.Component {
 	     		})}
 	     	</div>
 	     		<div className="button-skillsSelected">
-   				 		<button className="pure-button" onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
+   				 		<button className="pure-button showProjects" onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
    					</div>
 	    </div>
 		);

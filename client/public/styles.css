@@ -92,13 +92,16 @@ font-family: 'Raleway', sans-serif;
 	color: white;
 	font-size: 50px;
 	text-align: center;
-	margin-bottom:10px;
+	/*margin-bottom: -1px;*/
+	/*margin-bottom:10px;*/
+font-family: 'Roboto', sans-serif;
+
 }
 
 .button-skillsSelected {
 	text-align: center;
 	left:50%;
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	margin-left: auto;
 	margin-right:auto;
 }
@@ -319,6 +322,7 @@ font-family: 'Raleway', sans-serif;
 	margin: 0.4em 0.6em;
 	padding: 0.5em 0.7em;
 	text-align: center;
+	max-width: ;
 }
 
 .loading {
@@ -330,8 +334,7 @@ font-family: 'Raleway', sans-serif;
 	margin-top:300px;
 }
 .landing-text {
-	color: 
-#2f38f6;
+	color: #2f38f6;
 	font-size: 30px;
 	text-align: center;
 	margin-bottom:0;
@@ -349,6 +352,21 @@ font-family: 'Raleway', sans-serif;
 	margin-top: 5%;
 	padding: 5px;
 	padding-bottom: 40px;
+	border-radius: 2%;
+}
+
+.skillSelector {
+	color: black;
+	text-align: center;
+	width: 70%;
+	margin: 10px auto;
+	text-align: center;
+	/*background-color: white;*/
+	/*box-shadow: 0px 0px 20px black;*/
+/*	margin-top: 5%;
+	margin-bottom: 5%;*/
+	padding: 5px;
+	/*padding-bottom: 40px;*/
 	border-radius: 2%;
 }
 
@@ -372,8 +390,17 @@ font-family: 'Raleway', sans-serif;
     transition: height 0.5s;
 }
 
+.showProjects {
+	background-color: #464ef7;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 18px;
+	margin-top: 25px;
+
+}
+
 .custom-wrapper.open {
-    height: 14em;
+    height: 19em;
 }
 
 .custom-menu-3 {
