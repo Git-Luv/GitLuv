@@ -6,7 +6,9 @@ import * as Projects from '../models/projects'
 import * as modelProfile from '../models/profile';
 
 import { Accordion, AccordionItem } from 'react-sanfona';
+import { CardStack, Card } from 'react-cardstack';
 
+// require('normalize.css');
 var dc = require('delightful-cookies');
 
 export default class Project extends React.Component {
@@ -19,6 +21,7 @@ export default class Project extends React.Component {
 			myProjects: [],
 			user: ""
 		}
+		this.toggleAccordion = this.toggleAccordion.bind(this)
 	}
 
 
@@ -49,16 +52,34 @@ componentWillMount() {
 			})
 			this.setState({myProjects: temp})
 		})
-
 	})
 
+	var acc = document.getElementsByClassName("accordion");
+	var i;
 
-
-
+	for (i = 0; i < acc.length; i++) {
+	    acc[i].onclick = function(){
+	        this.classList.toggle("active");
+	        this.nextElementSibling.classList.toggle("show");
+		}	
+	}
 // preexisting to addition of users who like functionality
 	if(!dc.get('AuthToken')){
 		browserHistory.pushState(null, '/')
 	}
+
+	document.getElementsByClassName('accordion').onclick = function() {
+
+    var className = ' ' + accordion.className + ' ';
+
+    if ( ~className.indexOf(' active ') ) {
+        this.className = className.replace(' active ', ' ');
+        console.log('NOT ACTIVE')
+    } else {
+        this.className += ' active';
+        console.log('ACTIVE')
+    }              
+}
 }
 
 
@@ -79,14 +100,28 @@ componentWillMount() {
 		this.setState({ isCreatingProject: true })
 	}
 
+	toggleAccordion(e) {
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		    acc[i].onclick = function(){
+		        this.classList.toggle("active");
+		        this.nextElementSibling.classList.toggle("show");
+		        console.log('panel?', this.nextElementSibling.classList)
+		        console.log('CLASS', this.classList)
+    		}	
+		}
+	}
+
+
 
 
 
 //// render render render render render render ////
 //////////////////////////////////////////////////
 	render() {
-		console.log(this.state.isCreatingProject)
-		console.log("MY PROJECTS", this.state.myProjects)
+		var active
 		return (
 			<div>
 				<div>
@@ -94,25 +129,42 @@ componentWillMount() {
 					<h2 className="projectsPageTitle">My Projects</h2>
 					<div className="projectsLiked">
 						<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
-						<Accordion className="likedUsers">
+						<div className="likedUsers">
 			                {this.state.myProjects.map((item, i) => {
 			                    return (
-			                    	<div className="demo-container">
-				                        <AccordionItem title={`${ item.title}`}  key={i} >
-				                            <div>
-				                                {`Liked by: ${ item.users_liked.map(user =>  user ).join(', ') }`}
+			                    	<div className="accordionContainer" key={i}>
+				                        <button className="accordion" title={`${ item.title}`}  onClick={this.toggleAccordion} key={i} >{item.title}</button>
+				                            <div className="panel">
+				                            	<CardStack 
+				                            		width={480}
+												    height={100}
+												    background='#f8f8f8'
+												    hoverOffset={25}>
+
+												    <Card background='#464ef7'>
+												    	<div className='card'>
+												        	<h3>kyhant</h3>
+											        	</div>
+												    </Card>
+
+												    <Card background='#5f66f8'>
+												    	<div className='card'>
+												        	<h3>mccarthyist</h3>
+											        	</div>
+												    </Card>
+
+												</CardStack>
 				                            </div>
-				                        </AccordionItem>
 			                        </div>
 			                    );
 			                })}
-			            </Accordion>
+			            </div>
 		            </div>
 				</div>
-						<div className="projectPage">
-							{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
-							<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
-						</div>
+					<div className="projectPage">
+						{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
+						<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
+					</div>
 			</div>
 
 			)
