@@ -677,23 +677,29 @@ button.accordion {
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-button.accordion.active, button.accordion:hover {
+button.accordion.active, button.accordion:hover{
     background-color: #ddd;
 }
+
+div.user-liked:hover{
+    background-color: #eee;
+}
+
 
 /* Style the accordion panel. Note: hidden by default */
 div.panel {
     padding: 0 10px 0 10px;
     background-color: white;
     max-height: 0;
-    overflow: hidden;
+    overflow: scroll;
     transition: 0.6s ease-in-out;
     opacity: 0;
+
 }
 
 div.panel.show {
     opacity: 1;
-    max-height: 500px;
+    max-height: 300px;
 }
 
 button.accordion:after {
@@ -717,4 +723,19 @@ button.accordion.active:after {
 	padding-left: 20px;
 }
 
+.user-liked {
+	padding-top: .4px;
+	padding-bottom: .4px;
+	margin-bottom: -8px;
+	padding-left: 20px;
+	vertical-align: middle;
+	position:relative;
+
+}
+
+img.userPhoto {
+	border-radius: 100px;
+	width: 50px;
+	height: 50px;
+}
 

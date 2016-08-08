@@ -4,6 +4,7 @@ import Sidebar from './sidebar'
 import CreateProject from './createproject'
 import * as Projects from '../models/projects'
 import * as modelProfile from '../models/profile';
+import * as modelUser from '../models/users';
 
 import { Accordion, AccordionItem } from 'react-sanfona';
 import { CardStack, Card } from 'react-cardstack';
@@ -19,9 +20,11 @@ export default class Project extends React.Component {
 			project: null,
 			isCreatingProject: null,
 			myProjects: [],
+			allUsers:[],
 			user: ""
 		}
 		this.toggleAccordion = this.toggleAccordion.bind(this)
+		this.getUserData = this.getUserData.bind(this)
 	}
 
 
@@ -70,16 +73,23 @@ componentWillMount() {
 
 	document.getElementsByClassName('accordion').onclick = function() {
 
-    var className = ' ' + accordion.className + ' ';
+	    var className = ' ' + accordion.className + ' ';
 
-    if ( ~className.indexOf(' active ') ) {
-        this.className = className.replace(' active ', ' ');
-        console.log('NOT ACTIVE')
-    } else {
-        this.className += ' active';
-        console.log('ACTIVE')
-    }              
-}
+	    if ( ~className.indexOf(' active ') ) {
+	        this.className = className.replace(' active ', ' ');
+	        console.log('NOT ACTIVE')
+	    } else {
+	        this.className += ' active';
+	        console.log('ACTIVE')
+	    }              
+	}
+
+	modelUser.getAllUsers()
+	.then(res => {
+		console.log("MODELUSERSRESPONSE", res)
+		this.setState({allUsers: res})
+		console.log('MODELUSERTHIS.STATE', this.state)
+	})
 }
 
 
@@ -113,8 +123,22 @@ componentWillMount() {
     		}	
 		}
 	}
+	
+	getUserData(user) {
+		return modelUser.getUser(user)
+		.then(res => {
+			console.log('RESPONSE FROM GETUSER', res)
+			return res.avatar_url
+		})
+	}
 
-
+	getAvatar(user) {
+		var userObject = this.state.allUsers.filter(function(profile) {
+			return profile.username === user;
+		})
+		console.log('USEROBJECT=========', userObject)
+		return userObject[0].avatar_url
+	}
 
 
 
@@ -128,32 +152,20 @@ componentWillMount() {
 					<Sidebar />
 					<h2 className="projectsPageTitle">My Projects</h2>
 					<div className="projectsLiked">
-						<h4 className="usersWhoLikedTitle">These Developers Like Your Project(s)!</h4>
 						<div className="likedUsers">
 			                {this.state.myProjects.map((item, i) => {
 			                    return (
 			                    	<div className="accordionContainer" key={i}>
 				                        <button className="accordion" title={`${ item.title}`}  onClick={this.toggleAccordion} key={i} >{item.title}</button>
 				                            <div className="panel">
-				                            	<CardStack 
-				                            		width={480}
-												    height={100}
-												    background='#f8f8f8'
-												    hoverOffset={25}>
-
-												    <Card background='#464ef7'>
-												    	<div className='card'>
-												        	<h3>kyhant</h3>
-											        	</div>
-												    </Card>
-
-												    <Card background='#5f66f8'>
-												    	<div className='card'>
-												        	<h3>mccarthyist</h3>
-											        	</div>
-												    </Card>
-
-												</CardStack>
+											    {item.users_liked.map(user => {
+											    	return (
+											    		<div className="user-liked">
+			     											<img className="userPhoto" src={this.getAvatar(user)} />
+					                            			<span><h4>{user}</h4></span>
+				                            			</div>
+			                        				)
+		                        				})}
 				                            </div>
 			                        </div>
 			                    );
