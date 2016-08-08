@@ -162,6 +162,7 @@ componentWillMount() {
 											    	return (
 											    		<div className="user-liked">
 			     											<img className="userPhoto" src={this.getAvatar(user)} />
+			     											
 					                            			<span><h4>{user}</h4></span>
 				                            			</div>
 			                        				)
