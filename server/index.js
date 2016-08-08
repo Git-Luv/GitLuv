@@ -99,9 +99,9 @@ app.get('/auth/login', (req, res) => {
 });
 
 
-app.use('/api/projectsGET', Auth.isAuthenticated, function(req, res) {
-    res.send('look at me!');
-});
+// app.use('/api/projectsGET', Auth.isAuthenticated, function(req, res) {
+//     res.send('look at me!');
+// });
 
 
 //
@@ -111,18 +111,18 @@ app.use('/api/projectsGET', Auth.isAuthenticated, function(req, res) {
 
 var Project = require('./models/project')
 
-// app.use('/api/projectsGET', function (req, res) {
+app.use('/api/projectsGET', Auth.isAuthenticated, function (req, res) {
 
-//   Project.all()
-//     .then(function (projects) {
-//         console.log("getting!!: ", projects)
-//       res.status(200).send(projects)
-//     })
-//     .catch(function (err) {
-//       console.log("Project.all error:", err)
-//       res.status(500).send(err)
-//     })
-// })
+  Project.all()
+    .then(function (projects) {
+        console.log("getting!!: ", projects)
+      res.status(200).send(projects)
+    })
+    .catch(function (err) {
+      console.log("Project.all error:", err)
+      res.status(500).send(err)
+    })
+})
 
 app.use('/api/projects/:title', function (req, res) {
 
