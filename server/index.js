@@ -97,13 +97,6 @@ app.get('/auth/login', (req, res) => {
   })
 
 });
-
-
-// app.use('/api/projectsGET', Auth.isAuthenticated, function(req, res) {
-//     res.send('look at me!');
-// });
-
-
 //
 //
 // Project API
@@ -124,7 +117,7 @@ app.use('/api/projectsGET', Auth.isAuthenticated, function (req, res) {
     })
 })
 
-app.use('/api/projects/:title', function (req, res) {
+app.use('/api/projects/:title', Auth.isAuthenticated, function (req, res) {
 
   Project.getProject(req.params.title)
   .then(function(project){
@@ -137,13 +130,13 @@ app.use('/api/projects/:title', function (req, res) {
 })
 
 
-app.use('/api/projectsPOST', function (req, res) {
+app.use('/api/projectsPOST', Auth.isAuthenticated, function (req, res) {
 
   Project.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-app.use('/api/projectsPATCH', function (req, res) {
+app.use('/api/projectsPATCH', Auth.isAuthenticated, function (req, res) {
 
   //This function takes a 2 piece array, first index is the title and
   //the second is an object of all information being changed.
@@ -162,7 +155,7 @@ app.use('/api/projectsPATCH', function (req, res) {
 //
 
 
-app.use('/api/usersGET', function (req, res) {
+app.use('/api/usersGET', Auth.isAuthenticated, function (req, res) {
   User.all()
     .then(function (users) {
       res.status(200).send(users)
@@ -173,7 +166,7 @@ app.use('/api/usersGET', function (req, res) {
     })
 })
 
-app.use('/api/users/:username', function (req, res) {
+app.use('/api/users/:username', Auth.isAuthenticated, function (req, res) {
 
   User.getUser(req.params.username)
     .then(function(user){
