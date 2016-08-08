@@ -682,6 +682,7 @@ button.accordion.active, button.accordion:hover{
 
 div.user-liked:hover{
     background-color: #eee;
+    transform: scale(1.1);
 }
 
 
@@ -729,6 +730,7 @@ button.accordion.active:after {
 	padding-left: 20px;
 	vertical-align: middle;
 	position:relative;
+	transition: all .2s ease-in-out;
 	
 }
 
@@ -743,6 +745,7 @@ img.userPhoto {
 	display:inline-block;
 	float:left;
 	margin-right:10px;
+	margin-top: 5px;
 }
 
 .chat-button {
@@ -750,8 +753,11 @@ img.userPhoto {
 	display:inline-block;
 	margin-top:12px;
 	margin-bottom:1px;
-	margin-right: 10px;
+	margin-right: 18px;
+	background-color: #464ef7;
+	color:white;
 }
+
 
 
 
