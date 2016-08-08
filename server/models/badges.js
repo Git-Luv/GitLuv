@@ -11,3 +11,8 @@ var badgeSchema = new mongoose.Schema({
 
 var BadgeCollection = mongoose.model('BadgeCollection', badgeSchema);
 
+Badge.getAll = function() {
+	return BadgeCollection.find((err, data) => {
+		console.log("DATA inside:", data);
+	})
+}

@@ -213,6 +213,18 @@ app.use('/api/usersPATCH', function (req, res) {
 })
 
 //
+// Badge API
+//
+
+app.get('/api/badges', (req, res) => {
+  Badge.getAll()
+    .then(data => {
+      console.log('DATA:', data);
+      res.send(data);
+    })
+})
+
+//
 // Chat API
 //
 
@@ -269,14 +281,4 @@ var apiFolder   = path.resolve(__dirname, './apis')
 var port = process.env.PORT || 4000
 var server = app.listen(port, () => {
   console.log("Listening on port", port)
-})
-
-//
-// Badge Sockets
-//
-
-var io = require('socket.io')(server)
-
-io.on('connection', socket => {
-  console.log("Badges are alive!", socket);
 })
