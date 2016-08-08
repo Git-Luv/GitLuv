@@ -5,7 +5,7 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
-
+var Auth = require('./models/util')
 
 var app = express();
 
@@ -98,24 +98,31 @@ app.get('/auth/login', (req, res) => {
 
 });
 
+
+app.use('/api/projectsGET', Auth.isAuthenticated, function(req, res) {
+    res.send('look at me!');
+});
+
+
+//
 //
 // Project API
 //
 
 var Project = require('./models/project')
 
-app.use('/api/projectsGET', function (req, res) {
+// app.use('/api/projectsGET', function (req, res) {
 
-  Project.all()
-    .then(function (projects) {
-        console.log("getting!!: ", projects)
-      res.status(200).send(projects)
-    })
-    .catch(function (err) {
-      console.log("Project.all error:", err)
-      res.status(500).send(err)
-    })
-})
+//   Project.all()
+//     .then(function (projects) {
+//         console.log("getting!!: ", projects)
+//       res.status(200).send(projects)
+//     })
+//     .catch(function (err) {
+//       console.log("Project.all error:", err)
+//       res.status(500).send(err)
+//     })
+// })
 
 app.use('/api/projects/:title', function (req, res) {
 
