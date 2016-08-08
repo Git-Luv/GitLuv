@@ -179,13 +179,13 @@ app.use('/api/users/:username', Auth.isAuthenticated, function (req, res) {
 })
 
 
-app.use('/api/usersPOST', function (req, res) {
+app.use('/api/usersPOST', Auth.isAuthenticated, function (req, res) {
   console.log("running usersPost")
   User.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-app.use('/api/usersPATCH', function (req, res) {
+app.use('/api/usersPATCH', Auth.isAuthenticated, function (req, res) {
 
   //This function takes a 2 piece array, first index is the username and
   //the second is an object of all information being changed.
@@ -203,7 +203,7 @@ app.use('/api/usersPATCH', function (req, res) {
 
 var Chat = require('./models/chat')
 
-app.use('/api/chat/:chatRoom', function (req, res) {
+app.use('/api/chat/:chatRoom', Auth.isAuthenticated, function (req, res) {
   
   console.log("chat API params: ", req.params.chatRoom)
   Chat.getChatroom(req.params.chatRoom)
@@ -216,14 +216,14 @@ app.use('/api/chat/:chatRoom', function (req, res) {
     })
 })
 
-app.use('/api/chatPOST', function (req, res) {
+app.use('/api/chatPOST', Auth.isAuthenticated, function (req, res) {
   
   console.log("creating chatroom: ", req.body)
   Chat.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-app.use('/api/chatPATCH', function (req, res) {
+app.use('/api/chatPATCH', Auth.isAuthenticated, function (req, res) {
 
   console.log("patching chatroom: ", req.body)
   Chat.updateChatroom(req.body[0], req.body[1]).then(x => res.sendStatus(201))
