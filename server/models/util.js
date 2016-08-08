@@ -61,25 +61,3 @@ Auth.isAuthenticated = function(req, res, next) {
             
         })
 }
-
-
-    // app.get('/auth/login', (req, res) => {
-    //     console.log("Running");
-
-    //     // if exists then fetch data from github
-    //     fetch('https://github.com/login/oauth/access_token?client_id=444a46dcbe1340ce4a49&client_secret=df1f3fc9a5da7f88c06a4432302c42d04ac8f151&code=' + req.param('code'), {
-    //         method: 'POST',
-    //         headers: {
-    //           Accept: 'application/json'
-    //         }
-    //     })
-    //     .then(function(response){
-    //         console.log('resssssss', response)
-    //         return response.json()
-    //     })
-    //     .then(function(result){
-    //         console.log('result`````````!!!~~~', result)
-    //         cookie = result.access_token;
-
-    //         return Profile.getUserData(result.access_token)
-    //     })
