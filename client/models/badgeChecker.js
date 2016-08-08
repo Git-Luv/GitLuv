@@ -15,7 +15,18 @@ export function checkProjects(username) {
 
 		fetch('/api/badges')
 		.then(res => {
-			console.log(res);
+			console.log("RES", res);
+			return res.json()
+		})
+		.then(badges => {
+			badges = badges
+			.filter(badge => { badge.rules.object === 'project' && user.badges.indexOf(badge.badgeid) === -1 ? true : false })
+			.forEach(badge => {
+				if(eval(`${projects.length} ${badge.rules.operator} ${badge.rules.amount}`)){
+					
+				}
+			})
+			console.log("DATA", badges)
 		})
 	})
 }

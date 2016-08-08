@@ -224,6 +224,16 @@ app.get('/api/badges', (req, res) => {
     })
 })
 
+app.post('/api/badges', (req, res) => {
+  console.log("BODY!",req.body)
+  Badge.create(req.body)
+  res.end();
+})
+
+app.post('/api/badge/:username', (req, res) => {
+  
+})
+
 //
 // Chat API
 //
