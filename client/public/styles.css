@@ -729,7 +729,11 @@ button.accordion.active:after {
 	padding-left: 20px;
 	vertical-align: middle;
 	position:relative;
+	
+}
 
+.user-liked-username {
+	display:inline-block;
 }
 
 img.userPhoto {
@@ -740,4 +744,14 @@ img.userPhoto {
 	float:left;
 	margin-right:10px;
 }
+
+.chat-button {
+	float:right;
+	display:inline-block;
+	margin-top:12px;
+	margin-bottom:1px;
+	margin-right: 10px;
+}
+
+
 
