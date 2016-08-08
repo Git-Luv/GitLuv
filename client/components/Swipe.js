@@ -44,7 +44,7 @@ export default class Swipe extends React.Component {
 		 		.then(x => {
 		 			var allProjects = [];
 		 			x.forEach((project) => {
-		 				if (project.users_liked.indexOf(res.login) === -1 && project.users_disliked.indexOf(res.login) === -1) {
+		 				if (project.users_liked.indexOf(res.login) === -1 && project.users_disliked.indexOf(res.login) === -1 && project.username !== res.login) {
 		 					allProjects.push(project)
 		 				}
 		 			})
