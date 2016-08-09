@@ -5,6 +5,7 @@ export function getChatroom(chatRoom){
 	return fetch('/api/chat/' + chatRoom, {
 		method: 'GET',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		}})
 	.then(data => data.json())
@@ -15,6 +16,7 @@ export function addChatroom(chatRoomObj){
 	return fetch('/api/chatPOST', {
 		method: 'POST',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(chatRoomObj)
@@ -27,6 +29,7 @@ export function updateChatroom(chatRoom, updatedAttrs){
 	return fetch('/api/chatPATCH', {
 		method: 'PATCH',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify([chatRoom, updatedAttrs])

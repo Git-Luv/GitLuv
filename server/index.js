@@ -5,7 +5,7 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
-
+var Auth = require('./models/util')
 
 var app = express();
 
@@ -40,7 +40,6 @@ app.get('/app-bundle.js',
 //
 // Github Authorization
 //
-//set up middleware to check 'isAuthenticate' on protected endpoints
 
 var Profile = require('./apis/github-api');
 var cookie = null;
@@ -97,14 +96,14 @@ app.get('/auth/login', (req, res) => {
   })
 
 });
-
+//
 //
 // Project API
 //
 
 var Project = require('./models/project')
 
-app.use('/api/projectsGET', function (req, res) {
+app.use('/api/projectsGET', Auth.isAuthenticated, function (req, res) {
 
   Project.all()
     .then(function (projects) {
@@ -117,7 +116,7 @@ app.use('/api/projectsGET', function (req, res) {
     })
 })
 
-app.use('/api/projects/:title', function (req, res) {
+app.use('/api/projects/:title', Auth.isAuthenticated, function (req, res) {
 
   Project.getProject(req.params.title)
   .then(function(project){
@@ -130,13 +129,13 @@ app.use('/api/projects/:title', function (req, res) {
 })
 
 
-app.use('/api/projectsPOST', function (req, res) {
+app.use('/api/projectsPOST', Auth.isAuthenticated, function (req, res) {
 
   Project.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-app.use('/api/projectsPATCH', function (req, res) {
+app.use('/api/projectsPATCH', Auth.isAuthenticated, function (req, res) {
 
   //This function takes a 2 piece array, first index is the title and
   //the second is an object of all information being changed.
@@ -155,7 +154,7 @@ app.use('/api/projectsPATCH', function (req, res) {
 //
 
 
-app.use('/api/usersGET', function (req, res) {
+app.use('/api/usersGET', Auth.isAuthenticated, function (req, res) {
   User.all()
     .then(function (users) {
       res.status(200).send(users)
@@ -166,7 +165,7 @@ app.use('/api/usersGET', function (req, res) {
     })
 })
 
-app.use('/api/users/:username', function (req, res) {
+app.use('/api/users/:username', Auth.isAuthenticated, function (req, res) {
 
   User.getUser(req.params.username)
     .then(function(user){
@@ -179,13 +178,13 @@ app.use('/api/users/:username', function (req, res) {
 })
 
 
-app.use('/api/usersPOST', function (req, res) {
+app.use('/api/usersPOST', Auth.isAuthenticated, function (req, res) {
   console.log("running usersPost")
   User.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-app.use('/api/usersPATCH', function (req, res) {
+app.use('/api/usersPATCH', Auth.isAuthenticated, function (req, res) {
 
   //This function takes a 2 piece array, first index is the username and
   //the second is an object of all information being changed.
@@ -203,7 +202,7 @@ app.use('/api/usersPATCH', function (req, res) {
 
 var Chat = require('./models/chat')
 
-app.use('/api/chat/:chatRoom', function (req, res) {
+app.use('/api/chat/:chatRoom', Auth.isAuthenticated, function (req, res) {
   
   console.log("chat API params: ", req.params.chatRoom)
   Chat.getChatroom(req.params.chatRoom)
@@ -216,14 +215,14 @@ app.use('/api/chat/:chatRoom', function (req, res) {
     })
 })
 
-app.use('/api/chatPOST', function (req, res) {
+app.use('/api/chatPOST', Auth.isAuthenticated, function (req, res) {
   
   console.log("creating chatroom: ", req.body)
   Chat.createIfNotExists( req.body )
   res.sendStatus(201)
 })
 
-app.use('/api/chatPATCH', function (req, res) {
+app.use('/api/chatPATCH', Auth.isAuthenticated, function (req, res) {
 
   console.log("patching chatroom: ", req.body)
   Chat.updateChatroom(req.body[0], req.body[1]).then(x => res.sendStatus(201))
