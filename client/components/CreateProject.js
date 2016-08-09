@@ -109,18 +109,21 @@ export default class CreateProject extends React.Component {
 			case 0:
 				return (
 					<div className="stage">
-						<button type="button" className="projectCancelButton" onClick={this.cancelProject.bind(this)}>X</button>
-						GitHub Repo name: <input onChange={this.handleChange.bind(this)} />
-						<span>What kind of work are you looking for?</span>
-						<textarea rows="4" cols="50" onChange={this.handleAreaChange.bind(this)} />
-						<button type="button" className="button-like pure-button" onClick={this.handleNextStage.bind(this, 'next')}>Next</button>
-						<div className="projectWarning-hidden animated tada">You don't have a repo on your GitHub account with that name</div>
+						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
+							<form className="pure-form create-project">
+							    <fieldset className="pure-group">
+							        <input type="text" className="pure-input-1-2" onChange={this.handleChange.bind(this)} placeholder="Enter GitHub Repo Title" />
+							        <textarea className="pure-input-1-2" onChange={this.handleAreaChange.bind(this)} placeholder="Description of work to be completed"></textarea>
+							    </fieldset>
+							    <button type="submit" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
+						    </form>
+						<div className="projectWarning-hidden animated tada">`You don't have a repo on your GitHub account with that name`</div>
 					</div>
 					)
 			case 1:
 				return (
 					<div>
-						<button type="button" className="projectCancelButton" onClick={this.cancelProject.bind(this)}>X</button>
+						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
 						<h1 style={{paddingTop: '10px'}}>{this.state.project.title}</h1>
 						<div>Description: <span>{this.state.project.description}</span></div>
 						<div>Please select the skills you require for this project</div>
@@ -137,7 +140,7 @@ export default class CreateProject extends React.Component {
 									</button> )
 							})}
 						</div>
-						<button className="pure-button createProjectSubmit" onClick={this.submitProject.bind(this)}>Submit</button>
+						<button className="pure-button createProjectSubmit pure-button" onClick={this.submitProject.bind(this)}>Submit</button>
 						<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
 					</div>
 				)
@@ -152,7 +155,7 @@ export default class CreateProject extends React.Component {
 		return (
 			<div className="createProjectModal">
 				<div className="modalContent animated fadeInUp">
-					<div className="stageContent animated fadeInRight" >
+					<div className="stageContent animated fadeIn" >
 						{ this.returnStage(this.state.stage) }
 					</div>
 				</div>
