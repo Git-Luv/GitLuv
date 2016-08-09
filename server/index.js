@@ -5,6 +5,7 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Notify = require('./models/notifications');
 
 
 var app = express();
@@ -194,6 +195,34 @@ app.use('/api/usersPATCH', function (req, res) {
   .catch(function(err){
     console.log(err) 
     res.sendStatus(500)
+  })
+})
+
+//
+// Notifications API
+//
+
+app.delete('/api/notifications', (req, res) => {
+  Notify.remove(req.body.id)
+  res.end()
+})
+
+app.post('/api/notifications', (req, res) => {
+  Notify.add(req.body)
+  res.end()
+})
+
+app.get('/api/notifications/:username', (req, res) => {
+  Notify.get(req.params.username)
+  .then(data => {
+    res.send(data);
+  })
+})
+
+app.get('/api/unreadNotifications/:username', (req, res) => {
+  Notify.getUnread(req.params.username)
+  .then(data => {
+    res.send(data);
   })
 })
 

@@ -758,6 +758,13 @@ img.userPhoto {
 	color:white;
 }
 
-
-
+/* ============ Notification System ============ */
+.NotifySystemMenu {
+	position: fixed;
+	right: 10%;
+	top: 2.5em;
+	width: 40%;
+	background-color: white;
+  box-shadow: 5px 7px 15px -6px;
+}
 

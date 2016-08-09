@@ -1,5 +1,8 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
+import * as Profile from '../models/profile';
+import * as notifyModel from '../models/notifications';
+import NotifySystem from './NotifySystem';
 
 var dc = require('delightful-cookies');
 
@@ -9,8 +12,28 @@ export default class SideBar extends React.Component {
 		super(props);
 		this.toggleMenu = this.toggleMenu.bind(this)
 		this.toggleHorizontal = this.toggleHorizontal.bind(this)
+		this.state = {
+			notifications: [],
+			username: null,
+			isNotifySystemOpen: false,
+		}
 	}
 
+	componentWillMount() {
+		if(!this.state.username){
+			Profile.getUserData(dc.get('AuthToken').value)
+			.then(res => {
+				notifyModel.getUnread(res.login)
+				.then(data => {
+					this.setState({ username: res.login, notifications: data })
+				})
+			})
+		}
+	}
+
+	toggleNotificationMenu() {
+		this.setState({ isNotifySystemOpen: !this.state.isNotifySystemOpen })
+	}
 
 	logoutUser() {
 		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
@@ -83,12 +106,16 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
 			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
 			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
+			                <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">Notifications<span>{this.state.notifications.length}</span></a></li>
 			                <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
 			        </div>
 			    </div>
 			    <div className="pure-u-1 pure-u-md-1-3">
 			    </div>
+			    { this.state.isNotifySystemOpen ? 
+				    <NotifySystem />
+			    : null }
 			</div>
 			)
 	}
