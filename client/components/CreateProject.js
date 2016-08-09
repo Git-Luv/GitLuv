@@ -155,7 +155,7 @@ export default class CreateProject extends React.Component {
 		return (
 			<div className="createProjectModal">
 				<div className="modalContent animated fadeInUp">
-					<div className="stageContent animated fadeInRight" >
+					<div className="stageContent animated fadeIn" >
 						{ this.returnStage(this.state.stage) }
 					</div>
 				</div>
