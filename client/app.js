@@ -15,8 +15,8 @@ export default function App() {
       <Route path='/swipe' component={Swipe} />
       <Route path='/profile' component={Profile} />
       <Route path='/project' component={Project} />
-      <Router path='/skills' component={SkillsList} />
-      <Router path='/userprofile/*' component={UserProfile} />
+      <Route path='/skills' component={SkillsList} />
+      <Route path='/userprofile/:user' component={UserProfile} />
     </Router>
   );
 }

@@ -776,6 +776,9 @@ img.userPhoto {
 	color:white;
 }
 
+li.logout:hover {
+	cursor:pointer;
+}
 
 
 
