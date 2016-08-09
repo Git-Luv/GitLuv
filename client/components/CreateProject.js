@@ -112,7 +112,7 @@ export default class CreateProject extends React.Component {
 						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
 							<form className="pure-form create-project">
 							    <fieldset className="pure-group">
-							        <input type="text" className="pure-input-1-2" onChange={this.handleChange.bind(this)} placeholder="Repo Title" />
+							        <input type="text" className="pure-input-1-2" onChange={this.handleChange.bind(this)} placeholder="Enter GitHub Repo Title" />
 							        <textarea className="pure-input-1-2" onChange={this.handleAreaChange.bind(this)} placeholder="Description of work to be completed"></textarea>
 							    </fieldset>
 							    <button type="submit" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
