@@ -1,7 +1,8 @@
 var User = module.exports
-var mongoose = require('../db');
+var mongoose = require('mongoose');
 mongoose.Promise = global.Promise
 var Schema = mongoose.Schema;
+mongoose.connect('mongodb://gitluv:lolboi5@ds031965.mlab.com:31965/gitluv');
 
 var conn = mongoose.connection;             
 conn.on('error', console.error.bind(console, 'connection error:'));  
