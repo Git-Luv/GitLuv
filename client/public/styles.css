@@ -768,3 +768,20 @@ img.userPhoto {
   box-shadow: 5px 7px 15px -6px;
 }
 
+.notification-read,
+.notification-unread span {
+	letter-spacing: 0em;
+}
+
+.notification-read,
+.notification-unread {
+	padding: 5px;
+}
+
+.notification-read {
+	background-color: #fff;
+}
+
+.notification-unread {
+	background-color: #aaa;
+}
