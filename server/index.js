@@ -40,7 +40,6 @@ app.get('/app-bundle.js',
 //
 // Github Authorization
 //
-//set up middleware to check 'isAuthenticate' on protected endpoints
 
 var Profile = require('./apis/github-api');
 var cookie = null;
