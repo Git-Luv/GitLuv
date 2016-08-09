@@ -73,7 +73,7 @@ export default class SideBar extends React.Component {
 			<div className="custom-wrapper pure-g " ref="menuClass" id="menu">
 			    <div className="pure-u-1 pure-u-md-1-4">
 			        <div className="pure-menu">
-			            <a href="#" className="pure-menu-heading custom-brand menu-item l-box">GitLuv</a>
+			            <a href="#" className="pure-menu-heading custom-brand menu-item l-box logo">GitLuv</a>
 			            <a href="#" className="custom-toggle" ref="toggleClass" id="toggle" onClick={this.toggleMenu}><s className="bar"></s><s className="bar"></s></a>
 			        </div>
 			    </div>
