@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 import * as modelSkills from '../models/users';
 import * as modelProfile from '../models/profile';
 import * as Utils from '../utils';
+import Sidebar from './sidebar';
 let dc = require('delightful-cookies')
 let Popout = require('react-popout')
 
@@ -78,7 +79,10 @@ export default class SkillsList extends React.Component {
 
 		return (
 			<div>
-				<h2 className = "skillPageTitle"> Choose Your Top Skills </h2>
+				<div>
+					<Sidebar />
+				</div>
+				<h2 className = "skillPageTitle"> Select your top skills </h2>
 	     	<div className="skillSelector">
 	     		{this.state.allSkills.map((skill, i) => {var skillClassName = '';
 								if(this.state.userSkills.indexOf(skill) > -1) 
@@ -86,13 +90,13 @@ export default class SkillsList extends React.Component {
 								else
 									skillClassName = "skill-deselected"
 	     			return(
-	     				<button key={i} className={skillClassName + " animated flipInX"} onClick={this.handleClick.bind(this, skill)}>
+	     				<button key={i} className={skillClassName + " animated flipInX pure-button"} onClick={this.handleClick.bind(this, skill)}>
 	     					{skill}
 	     				</button> )
 	     		})}
 	     	</div>
 	     		<div className="button-skillsSelected">
-   				 		<button className="pure-button" onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
+   				 		<button className="pure-button showProjects" onClick={this.sendToDatabase.bind(this, skillz)}>Show Me Some Projects!</button>
    					</div>
 	    </div>
 		);
