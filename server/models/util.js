@@ -34,7 +34,6 @@ app.get('/app-bundle.js',
 //set up middleware to check 'isAuthenticate' on protected endpoints
 
 var Profile = require('../apis/github-api');
-var cookie = null;
 
 Auth.isAuthenticated = function(req, res, next) {
 
@@ -57,7 +56,6 @@ Auth.isAuthenticated = function(req, res, next) {
 //   })
 
 // .then(function(authToken){
-
     // console.log('sldfjalfkj', req.get('Authorization'))
         // Check for Authorization header in req.get('Authorization')
     var authToken = req.get('Authorization')
@@ -71,12 +69,12 @@ Auth.isAuthenticated = function(req, res, next) {
         })
         // Like that then check to see if there is data in the .then()
         .then(function(data){
+            // console.log('cookie test???', document.cookie.split(''))
+            console.log('~~~~~~~~~~~~~~~~~~', authToken)
+            console.log('dataaaaaaa', data);
             // If there is data run next()
             if(data.status === 200 || data.statusText === 'Authorized'){
-                res.status(200)
-                console.log('~~~~~~~~~~~~~~~~~~', authToken)
-                console.log('dataaaaaaa', data);
-
+                console.log('made it in here', 'plsssss')                
                 return next();
             }
             else{
