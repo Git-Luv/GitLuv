@@ -39,17 +39,12 @@ componentWillMount() {
 	.then(res => {
 		this.setState({user: res.login});
 		let user = this.state.user;
-		console.log("user", user)
 		let creator = this.state.user
 		Projects.getAllProjects()
 		.then(projects => {
-			console.log("PROJECTS imported as", projects)
 			var temp = [];
 			projects.forEach((project) => {
-				console.log("creator", this.state.user)
-				console.log("projects.username", project.username )
 				if (project.username == creator) {
-					console.log("wtf this happened")
 					temp.push(project);
 				}
 			})
@@ -77,18 +72,14 @@ componentWillMount() {
 
 	    if ( ~className.indexOf(' active ') ) {
 	        this.className = className.replace(' active ', ' ');
-	        console.log('NOT ACTIVE')
 	    } else {
 	        this.className += ' active';
-	        console.log('ACTIVE')
 	    }              
 	}
 
 	modelUser.getAllUsers()
 	.then(res => {
-		console.log("MODELUSERSRESPONSE", res)
 		this.setState({allUsers: res})
-		console.log('MODELUSERTHIS.STATE', this.state)
 	})
 }
 
@@ -118,8 +109,6 @@ componentWillMount() {
 		    acc[i].onclick = function(){
 		        this.classList.toggle("active");
 		        this.nextElementSibling.classList.toggle("show");
-		        console.log('panel?', this.nextElementSibling.classList)
-		        console.log('CLASS', this.classList)
     		}	
 		}
 	}
@@ -127,7 +116,6 @@ componentWillMount() {
 	getUserData(user) {
 		return modelUser.getUser(user)
 		.then(res => {
-			console.log('RESPONSE FROM GETUSER', res)
 			return res.avatar_url
 		})
 	}
@@ -136,7 +124,6 @@ componentWillMount() {
 		var userObject = this.state.allUsers.filter(function(profile) {
 			return profile.username === user;
 		})
-		console.log('USEROBJECT=========', userObject)
 		return userObject[0].avatar_url
 	}
 
