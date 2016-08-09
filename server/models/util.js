@@ -37,6 +37,28 @@ var Profile = require('../apis/github-api');
 var cookie = null;
 
 Auth.isAuthenticated = function(req, res, next) {
+
+// app.get('/auth/login', (req, res) => {
+//   console.log("Running");
+
+//   fetch('https://github.com/login/oauth/access_token?client_id=444a46dcbe1340ce4a49&client_secret=df1f3fc9a5da7f88c06a4432302c42d04ac8f151&code=' + req.param('code'), {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json'
+//     }
+//   })
+//   .then(response => {
+//     return response.json()
+//   })
+//   .then(result => {
+//     var authToken = result.access_token;
+
+//     return result.access_token;
+//   })
+
+// .then(function(authToken){
+
+    // console.log('sldfjalfkj', req.get('Authorization'))
         // Check for Authorization header in req.get('Authorization')
     var authToken = req.get('Authorization')
         // if exists then fetch data from github
@@ -48,10 +70,13 @@ Auth.isAuthenticated = function(req, res, next) {
             }
         })
         // Like that then check to see if there is data in the .then()
-        .then(function(user){
+        .then(function(data){
             // If there is data run next()
-            if(user){
-                console.log('userrrrrr', user);
+            if(data.status === 200 || data.statusText === 'Authorized'){
+                res.status(200)
+                console.log('~~~~~~~~~~~~~~~~~~', authToken)
+                console.log('dataaaaaaa', data);
+
                 return next();
             }
             else{
@@ -60,4 +85,7 @@ Auth.isAuthenticated = function(req, res, next) {
             }
             
         })
+// })
+// })
+
 }
