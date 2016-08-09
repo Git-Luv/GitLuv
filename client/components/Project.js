@@ -148,8 +148,10 @@ componentWillMount() {
 											    {item.users_liked.map(user => {
 											    	return (
 											    		<div className="user-liked">
+											    		<Link to={`userprofile/${user}`}>
 			     											<img className="userPhoto" src={this.getAvatar(user)} />
 					                            			<span className="user-liked-username"><h4>{user}</h4></span>
+				                            			</Link>
 					                            			<button className="chat-button pure-button">chat</button>
 				                            			</div>
 			                        				)

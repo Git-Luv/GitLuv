@@ -5,7 +5,8 @@ import Landing from './components/landing';
 import Swipe from './components/swipe';
 import Profile from './components/profile';
 import Project from './components/project';
-import SkillsList from './components/skills'
+import SkillsList from './components/skills';
+import UserProfile from './components/userprofile';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Route path='/profile' component={Profile} />
       <Route path='/project' component={Project} />
       <Router path='/skills' component={SkillsList} />
+      <Router path='/userprofile/*' component={UserProfile} />
     </Router>
   );
 }
