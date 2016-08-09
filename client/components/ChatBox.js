@@ -1,6 +1,9 @@
 import React from 'react';
 import Sidebar from './sidebar';
-import * as Chat from '../models/chat'
+import * as Chat from '../models/chat';
+import * as model from '../models/profile';
+
+var dc = require('delightful-cookies');
 
 export default class ChatBox extends React.Component {
 		
@@ -19,11 +22,6 @@ export default class ChatBox extends React.Component {
 	componentDidMount () {
 		this.setState({username: this.props.username,
 											 room: this.props.room})
-
-		console.log(this.props.username + " + " + this.props.room)
-
-		console.log(this.state.username + " + " + this.state.room)
-
 		let self = this
 
 		Chat.getChatroom(this.props.room)
@@ -31,22 +29,31 @@ export default class ChatBox extends React.Component {
 			console.log(room)
 			this.setState({messages: room.messages})
 		})
+
+		socket.on('send', function(x){
+			let msgs = self.state.messages
+			self.setState({messages: msgs.concat(x)})
+		})
 	}
 
 	_handleSubmit (e) {
-		e.preventDefault();
+		// e.preventDefault();
 
-		var self = this;
+		// var self = this;
 
-		// socket.emit("send", {
-		//   room   : this.chatRoom,
-		//   sentBy : this.state.username ? this.state.username : this.props.player.name,
-		//   message: this.state.chatText
-		// })
+	Chat.editChatroom(this.props.username, {messages: [{sentBy: this.state.username, message: this.state.text}]})
+		.then(function(x){
 
-		// clear input after each message
-		this.setState({
-			text: ""
+			socket.emit("send", {
+			  room   : this.chatRoom,
+			  sentBy : this.state.username, 
+			  message: this.state.chatText
+			})
+
+			// clear input after each message
+			this.setState({
+				text: ""
+			})
 		})
 	}
 

@@ -1,8 +1,11 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import ChatBox from './ChatBox'
+import Sidebar from './sidebar'
 import * as model from '../models/profile';
 import * as Chat from '../models/chat'
+
+import { Accordion, AccordionItem } from 'react-sanfona';
 
 var dc = require('delightful-cookies');
 
@@ -43,13 +46,21 @@ export default class Messages extends React.Component {
 	render () {
 		var self = this
 		return (<div>
-			{this.state.chats.map(function(chatBox){
+			<Sidebar />
+				<Accordion>
+					{this.state.chats.map(function(chatBox){
 
-				console.log(self.state.username + " + " + chatBox.chatRoom)
+						console.log(self.state.username + " + " + chatBox.chatRoom)
 
-				// console.log(chatbox)
-				return(<ChatBox username={self.state.username} room={chatBox.chatRoom}/>)
-			})}
+						// console.log(chatbox)
+						return(
+							<AccordionItem title={'message'} >
+								<ChatBox username={self.state.username} room={chatBox.chatRoom}/>
+							}
+							</AccordionItem>
+						)
+					})}
+				</Accordion>
 		</div>)
 	}
 }
