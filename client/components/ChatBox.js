@@ -1,6 +1,5 @@
 import React from 'react';
 import Sidebar from './sidebar';
-// var socket =  require('socket.io');
 import * as Chat from '../models/chat';
 import * as model from '../models/profile';
 
@@ -23,7 +22,6 @@ export default class ChatBox extends React.Component {
 	componentDidMount () {
 		let self = this	
 
-
 		this.setState({username: this.props.username,
 											 room: this.props.room})
 
@@ -33,10 +31,17 @@ export default class ChatBox extends React.Component {
 			this.setState({messages: room.messages})
 		})
 
-		console.log("room? ", this.props.room)
 		socket.emit("subscribe", this.props.room);
 
-    socket.on("chat message", (msg) => self.setState({messages: self.state.messages.concat(msg)}));
+    socket.on("chat message", function(msg) {
+    	console.log("Step 4 msg in socket.on client: ", msg)
+
+    	let newMess = [{sentby: msg.sentBy, message: msg.message}]
+
+    	if(self.state.room === msg.room){
+    		self.setState({messages: self.state.messages.concat(msg)})
+    	}
+  	})
 	}
 
 	_handleSubmit (event) {
@@ -44,16 +49,18 @@ export default class ChatBox extends React.Component {
 
 		var self = this;
 
-		console.log("handle submit: " + this.state.text)
+		// console.log("handle submit: " + this.state.text)
 
 	// Chat.updateChatroom(this.state.room, {messages: [{sentBy: this.state.username, message: this.state.text}]})
 	// 	.then(function(x){
 
-			socket.emit("send", {
-			  room   : this.state.room,
-			  sentBy : this.state.username, 
-			  message: this.state.text
-			})
+		console.log("step 1 --- ChatBox.js: ", {room: this.state.room, sentBy: this.state.username, message: this.state.text})
+
+		socket.emit("send", {
+		  room   : this.state.room,
+		  sentBy : this.state.username, 
+		  message: this.state.text
+		})
 
 			// clear input after each message
 			self.setState({
@@ -78,7 +85,7 @@ export default class ChatBox extends React.Component {
 							}
 						</tbody>
 					</table>
-					<form onSubmit={this._handleSubmit.bind(this)}>
+					<form onSubmit={this._handleSubmit.bind(this)} >
 						<input
 							type="text"
 							value={this.state.text}
@@ -86,6 +93,7 @@ export default class ChatBox extends React.Component {
 							placeholder="send a message!"
 							id="chatInput"
 							onChange={event => this.setState({text: event.target.value})}
+							autoComplete="off"
 							/>
 
 						<input type="submit" style={{visibility: "hidden"}}></input>

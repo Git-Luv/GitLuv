@@ -43,26 +43,41 @@ Chat.all = function(){
 }
 
 Chat.getChatroom = function(chatRoom){
-	console.log("chatroom in server", chatRoom)
+
 	return ChatCollection.findOne({chatRoom: chatRoom}, function (err, doc) {
 		if(err) console.log("!!!-----------------!!!", err)
 	})
 }
 
 Chat.updateChatroom = function(chatRoom, changedAttrs){
+
+	console.log("Step 3a --- Chat.updateChatroom => chatroom: ", chatRoom, "and: ", changedAttrs)
 	
 	return Chat.getChatroom(chatRoom)
 		.then( function (chatRoomInfo){
 		
-			if(changedAttrs.messages){
-				let newArr = []
-				for(let i = 0; i < changedAttrs.messages.length; i++){
-						newArr.push(changedAttrs.messages[i])
-				}
-				changedAttrs.messages = chatRoomInfo.messages.concat(newArr)
+			console.log("chatRoomInfo: ", chatRoomInfo)
+			console.log("Step 3b --- changedAttrs: ", changedAttrs)
+
+			let cRoom = changedAttrs.room
+
+			if(changedAttrs.messages[0].message){
+				let newMess = changedAttrs.messages[0] 
+				console.log(newMess)
+
+				cRoom = newMess.room
+
+				delete newMess.room
+
+				console.log("is this it?: ", newMess)
+
+				changedAttrs.messages = chatRoomInfo.messages.concat([newMess])
+
+				console.log("Step 3c --- changedAttrs: ", changedAttrs)
+
 			}
 
-			return ChatCollection.findOneAndUpdate({chatRoom: chatRoom}, changedAttrs, function (err, doc) {
+			return ChatCollection.findOneAndUpdate({chatRoom: cRoom}, changedAttrs, function (err, doc) {
 				if(err){
 					console.log("!!!-----------------!!!", err)
 				} else {

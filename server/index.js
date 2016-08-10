@@ -35,11 +35,11 @@ app.use(express.static(assetFolder));
 
 // app.use('/', routes)
 
-app.get('/socket.io/socket.io.js',function(req, res){
-  console.log("what is happening")
-  var toGo = path.join(__dirname, '../node_modules/socket.io-client/socket.io.js')
-  res.sendFile(toGo)
-})
+// app.get('/socket.io/socket.io.js',function(req, res){
+//   console.log("what is happening")
+//   var toGo = path.join(__dirname, '../node_modules/socket.io-client/socket.io.js')
+//   res.sendFile(toGo)
+// })
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -113,7 +113,7 @@ app.get('/auth/login', (req, res) => {
   })
 
 });
-//
+
 //
 // Project API
 //
@@ -220,7 +220,7 @@ app.use('/api/usersPATCH', Auth.isAuthenticated, function (req, res) {
 var Chat = require('./models/chat')
 
 
-app.use('/api/chatGET', function (req, res) {
+app.use('/api/chatGET', Auth.isAuthenticated, function (req, res) {
 
   Chat.all()
     .then(function (chats) {
@@ -235,9 +235,8 @@ app.use('/api/chatGET', function (req, res) {
 
 app.use('/api/chat/:chatRoom', Auth.isAuthenticated, function (req, res) {
 
-  
-  console.log("chat API params: ", req.params.chatroom)
-  Chat.getChatroom(req.params.chatroom)
+ 
+  Chat.getChatroom(req.params.chatRoom)
     .then(function(room){
       res.status(200).send(room)
     })
@@ -280,13 +279,20 @@ io.on('connection', function(socket){
   })
 
   socket.on('send', function(data) {
-    console.log('sending message: ', data);
+    console.log('step 2 --- socket .on(send): ', data);
 
-    //delete data.room to send to updateChatroom
-    Chat.updateChatroom(data.room, data)
-      .then(function(x){
-        io.broadcast.to(data.room).emit('chat message', data);
-      })
+    let rooooooom = data.room
+    
+    if(data.message){
+      
+      Chat.updateChatroom(data.room, {messages: [data]})
+        .then(function(x){
+          console.log("in '.then()' roomName: " + rooooooom + " data: " + data)
+          data.room = rooooooom
+          io.in(data.room).emit('chat message', data);
+        })
+
+    }
   });
 
 })
