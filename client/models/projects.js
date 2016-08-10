@@ -1,10 +1,13 @@
 import fetch from 'isomorphic-fetch';
 require('es6-promise').polyfill();
+var dc = require('delightful-cookies');
+
 
 export function getAllProjects(){
 	return fetch('/api/projectsGET', {
 		method: 'GET',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		}})
 	.then(function(data){
@@ -19,6 +22,7 @@ export function getProject(title){
 	return fetch('/api/projects/' + title, {
 		method: 'GET',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		}})
 	.then(data => data.json())
@@ -29,6 +33,7 @@ export function addProject(projectObj){
 	return fetch('/api/projectsPOST', {
 		method: 'POST',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(projectObj)
@@ -41,6 +46,7 @@ export function updateProject(title, updatedAttrs){
 	return fetch('/api/projectsPATCH', {
 		method: 'PATCH',
 		headers: {
+			'Authorization': dc.get('AuthToken').value,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify([title, updatedAttrs])

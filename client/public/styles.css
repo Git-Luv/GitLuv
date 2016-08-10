@@ -330,10 +330,17 @@ font-family: 'Roboto', sans-serif;
 }
 
 .modalContent {
-	background-color: #eee;
-	margin: 5%;
-  width: 90%;
-  height: 90%;
+	background-color: white;
+	margin: auto;
+	margin-top: 150px;
+  	width: 50%;
+  	height: 50%;
+  	color: black;
+	text-align: center;
+	box-shadow: 0px 0px 20px black;
+/*	padding: 5px;
+	padding-bottom: 40px;*/
+	border-radius: 1%;
 }
 
 .stageContent {
@@ -396,7 +403,18 @@ font-family: 'Roboto', sans-serif;
 	font-size: 30px;
 	text-align: center;
 	margin-bottom:0;
-	margin-top:200px;
+	margin-top:180px;
+}
+
+.create-project {
+	position: relative;
+	text-align:center;
+	padding-left: 25%;
+	width: 100%;
+}
+
+.project-next {
+	float:left;
 }
 
 .currentProject {
@@ -692,7 +710,7 @@ div.panel {
     background-color: white;
     max-height: 0;
     overflow: scroll;
-    transition: 0.6s ease-in-out;
+    transition: 0.4s ease-in-out;
     opacity: 0;
 
 }
@@ -758,6 +776,9 @@ img.userPhoto {
 	color:white;
 }
 
+li.logout:hover {
+	cursor:pointer;
+}
 
 
 
