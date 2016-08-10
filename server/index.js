@@ -5,24 +5,41 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+// var http = require('http').Server(express);
+// var io = require('socket.io')(http);
+
+var path = require('path')
+
+
+
+
 var Auth = require('./models/util')
+
 
 var app = express();
 
+var server = app.listen(4000);
+var io = require('socket.io').listen(server)
 
-var port = process.env.PORT || 4000;
+// var port = process.env.PORT || 4000;
 
 var assetFolder = path.join(__dirname, '..', 'client','public');
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // var routes = express.Router()
 
 // routes.use( '/api', require('./apis/projects-api.js') )
 
 // app.use('/', routes)
+
+// app.get('/socket.io/socket.io.js',function(req, res){
+//   console.log("what is happening")
+//   var toGo = path.join(__dirname, '../node_modules/socket.io-client/socket.io.js')
+//   res.sendFile(toGo)
+// })
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -96,7 +113,7 @@ app.get('/auth/login', (req, res) => {
   })
 
 });
-//
+
 //
 // Project API
 //
@@ -202,9 +219,23 @@ app.use('/api/usersPATCH', Auth.isAuthenticated, function (req, res) {
 
 var Chat = require('./models/chat')
 
+
+app.use('/api/chatGET', Auth.isAuthenticated, function (req, res) {
+
+  Chat.all()
+    .then(function (chats) {
+        // console.log("getting!!: ", chats)
+      res.status(200).send(chats)
+    })
+    .catch(function (err) {
+      console.log("Chat.all error:", err)
+      res.status(500).send(err)
+    })
+})
+
 app.use('/api/chat/:chatRoom', Auth.isAuthenticated, function (req, res) {
-  
-  console.log("chat API params: ", req.params.chatRoom)
+
+ 
   Chat.getChatroom(req.params.chatRoom)
     .then(function(room){
       res.status(200).send(room)
@@ -235,7 +266,36 @@ app.use('/api/chatPATCH', Auth.isAuthenticated, function (req, res) {
 // Chat Sockets
 //
 
+io.on('connection', function(socket){
 
+  socket.on('subscribe', function(room) {
+    console.log('joining room', room);
+    socket.join(room);
+  })
+
+  socket.on('unsubscribe', function(room) {
+    console.log('leaving room', room);
+    socket.leave(room);
+  })
+
+  socket.on('send', function(data) {
+    console.log('step 2 --- socket .on(send): ', data);
+
+    let rooooooom = data.room
+    
+    if(data.message){
+      
+      Chat.updateChatroom(data.room, {messages: [data]})
+        .then(function(x){
+          console.log("in '.then()' roomName: " + rooooooom + " data: " + data)
+          data.room = rooooooom
+          io.in(data.room).emit('chat message', data);
+        })
+
+    }
+  });
+
+})
 
 
 // Wild card route for client side routing.
@@ -249,6 +309,6 @@ app.get('/*', function(req, res){
 var assetFolder = path.resolve(__dirname, '../client/public')
 var apiFolder   = path.resolve(__dirname, './apis') 
 
-var port = process.env.PORT || 4000
-app.listen(port)
-console.log("Listening on port", port)
+// var port = process.env.PORT || 4000
+// app.listen(port)
+// console.log("Listening on port", port)

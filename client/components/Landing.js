@@ -17,7 +17,7 @@ export default class Landing extends React.Component {
 	componentWillMount() {
 		// Chat.addChatroom({chatRoom: "mccarthyistthetslc", visionary: "thetslc", developer: "mccarthyist"})
 		// Chat.getChatroom("mccarthyistthetslc").then(x => console.log(x))
-		// Chat.updateChatroom("mccarthyistthetslc", {messages:[{sentBy: 'mccarthyist', message: 'eyo' }, {sentBy: 'thetslc', message: 'watup' }]})
+		// Chat.updateChatroom("mccarthyistthetslc", {messages: [{sentBy: 'mccarthyist', message: 'stahp' }]})
 	}
 
   login(e) {
