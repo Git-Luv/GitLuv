@@ -21,6 +21,7 @@ var userSchema = new Schema({
 	skills:       Array,
 	visionary:    Boolean,
 	projects:     Array,
+	endorsements: Array,
 	updated_at:   String
 })
 
