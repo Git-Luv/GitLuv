@@ -13,20 +13,27 @@ export default class UserProfile extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			activeUser: '',
 			userInfo: {
 				username: null,
 				location: null,
 				bio: null,
 				avatar: null,
+				endorsements: []
 			},
 			userSkills: [],
 			isSidebar: false,
 		}
+		this.handleEndorsement = this.handleEndorsement.bind(this);
 	}
 
 	componentWillMount() {
 		var url = window.location.href;
 		var user = url.slice(url.lastIndexOf('/')+1, url.length);
+		var cookie = dc.get("AuthToken")
+
+		model.getUserData(cookie.value)
+		.then(res => this.setState({ activeUser: res.login }))
 
 		Users.getUser(user)
 		.then(user => {
@@ -38,6 +45,21 @@ export default class UserProfile extends React.Component {
 		if(state !== this.state.isSidebar){
 			this.setState({ isSidebar: state })
 		}
+	}
+
+	handleEndorsement(e) {
+		e.preventDefault();
+		var temp = this.state.userInfo;
+		var activeUser = this.state.activeUser;
+		var user = this.state.userInfo.username;
+		var endorsements = this.state.userInfo.endorsements;
+		if(endorsements.indexOf(activeUser) === -1 && activeUser !== user) {
+			endorsements.push(this.state.activeUser);
+		}
+		temp.endorsements = endorsements;
+		this.setState({userInfo: temp})
+		Users.updateUser(this.state.userInfo.username, {endorsements: endorsements})
+		.then(x => console.log('state after update', this.state))
 	}
 
   render() {
@@ -56,10 +78,14 @@ export default class UserProfile extends React.Component {
 			     		<div>Followers: {this.state.userInfo.followers}</div>
 			     		<p>{this.state.userInfo.bio}</p>
 			     		<p>
-				     		<a target="_blank" href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
+				     		<a target="_blank" href={'http://www.github.com/' + this.state.userInfo.username} className="toGithub">
 				     			<img src="/images/github.jpeg"/>
 				     		</a>
 			     		</p>
+			     		<div className="endorsements">
+			     			<p>Endorsements: {this.state.userInfo.endorsements.length}</p>
+							<button className="pure-button" onClick={this.handleEndorsement}>Endorse</button>
+						</div>
 				     	<div className="skills">
 				     	<span>Skills:</span>
 				     		{this.state.userSkills.map((skill, i) => {
