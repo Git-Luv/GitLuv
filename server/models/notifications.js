@@ -8,13 +8,15 @@ var conn = mongoose.connection;
 var notificationSchema = new Schema({
 	description: 	String,
 	isRead: 			Boolean,
-	username:  		String, 
+	username:  		String,
+	created: 			String, 
 })
 
 var Collection = mongoose.model('Notifications', notificationSchema);
 
 Notify.add = function(obj){
 	var item = new Collection(obj)
+	item.created = new Date();
 
 	item.save(err => {
 		if(err)
