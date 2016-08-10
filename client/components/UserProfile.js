@@ -84,9 +84,8 @@ export default class UserProfile extends React.Component {
 				     		</a>
 			     		</p>
 			     		<div className="endorsements">
-			     		<p>
 							<button className="pure-button" onClick={this.handleEndorsement}>Endorse</button>
-						</p>
+
 						</div>
 				     	<div className="skills">
 				     	<span>Skills:</span>
