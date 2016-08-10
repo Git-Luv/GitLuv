@@ -56,7 +56,7 @@ export default class UserProfile extends React.Component {
 			     		<div>Followers: {this.state.userInfo.followers}</div>
 			     		<p>{this.state.userInfo.bio}</p>
 			     		<p>
-				     		<a target="_blank" href={'http://www.github.com/' + this.state.userInfo.login} className="toGithub">
+				     		<a target="_blank" href={'http://www.github.com/' + this.state.userInfo.username} className="toGithub">
 				     			<img src="/images/github.jpeg"/>
 				     		</a>
 			     		</p>
