@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './sidebar';
+// var socket =  require('socket.io');
 import * as Chat from '../models/chat';
 import * as model from '../models/profile';
 
@@ -20,41 +21,45 @@ export default class ChatBox extends React.Component {
 	}
 
 	componentDidMount () {
+		let self = this	
+
+
 		this.setState({username: this.props.username,
 											 room: this.props.room})
-		let self = this
 
 		Chat.getChatroom(this.props.room)
 		.then(room => {
-			console.log(room)
+			console.log("room in getChatroom: ", room)
 			this.setState({messages: room.messages})
 		})
 
-		socket.on('send', function(x){
-			let msgs = self.state.messages
-			self.setState({messages: msgs.concat(x)})
-		})
+		console.log("room? ", this.props.room)
+		socket.emit("subscribe", this.props.room);
+
+    socket.on("chat message", (msg) => self.setState({messages: self.state.messages.concat(msg)}));
 	}
 
-	_handleSubmit (e) {
-		// e.preventDefault();
+	_handleSubmit (event) {
+		event.preventDefault();
 
-		// var self = this;
+		var self = this;
 
-	Chat.editChatroom(this.props.username, {messages: [{sentBy: this.state.username, message: this.state.text}]})
-		.then(function(x){
+		console.log("handle submit: " + this.state.text)
+
+	// Chat.updateChatroom(this.state.room, {messages: [{sentBy: this.state.username, message: this.state.text}]})
+	// 	.then(function(x){
 
 			socket.emit("send", {
-			  room   : this.chatRoom,
+			  room   : this.state.room,
 			  sentBy : this.state.username, 
-			  message: this.state.chatText
+			  message: this.state.text
 			})
 
 			// clear input after each message
-			this.setState({
+			self.setState({
 				text: ""
 			})
-		})
+		// })
 	}
 
 	render () {
@@ -62,18 +67,6 @@ export default class ChatBox extends React.Component {
 		return (
 			<div className="chatBox">
 				<div className="messages">
-					<form onSubmit={this._handleSubmit.bind(this)}>
-						<input
-							type="text"
-							value={this.state.text}
-							className="u-full-width"
-							placeholder="send a message!"
-							id="chatInput"
-							onChange={event => this.setState({chatText: event.target.value})}
-							/>
-
-						<input type="submit" style={{visibility: "hidden"}}></input>
-					</form>
 					<table className="table table-hover">
 						<tbody>
 							{
@@ -85,6 +78,18 @@ export default class ChatBox extends React.Component {
 							}
 						</tbody>
 					</table>
+					<form onSubmit={this._handleSubmit.bind(this)}>
+						<input
+							type="text"
+							value={this.state.text}
+							className="u-full-width"
+							placeholder="send a message!"
+							id="chatInput"
+							onChange={event => this.setState({text: event.target.value})}
+							/>
+
+						<input type="submit" style={{visibility: "hidden"}}></input>
+					</form>
 				</div>
 
 			</div>

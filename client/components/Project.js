@@ -5,6 +5,8 @@ import CreateProject from './createproject'
 import * as Projects from '../models/projects'
 import * as modelProfile from '../models/profile';
 import * as modelUser from '../models/users';
+import ChatBox from './ChatBox'
+
 
 import { Accordion, AccordionItem } from 'react-sanfona';
 import { CardStack, Card } from 'react-cardstack';
@@ -171,3 +173,6 @@ componentWillMount() {
 	}
 
 }
+
+
+

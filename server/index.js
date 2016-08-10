@@ -5,27 +5,38 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
-var http = require('http').Server(express);
-var io = require('socket.io')(http);
+// var http = require('http').Server(express);
+// var io = require('socket.io')(http);
+
+var path = require('path')
+
 
 
 
 var app = express();
 
+var server = app.listen(4000);
+var io = require('socket.io').listen(server)
 
-var port = process.env.PORT || 4000;
+// var port = process.env.PORT || 4000;
 
 var assetFolder = path.join(__dirname, '..', 'client','public');
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // var routes = express.Router()
 
 // routes.use( '/api', require('./apis/projects-api.js') )
 
 // app.use('/', routes)
+
+app.get('/socket.io/socket.io.js',function(req, res){
+  console.log("what is happening")
+  var toGo = path.join(__dirname, '../node_modules/socket.io-client/socket.io.js')
+  res.sendFile(toGo)
+})
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -266,9 +277,11 @@ io.on('connection', function(socket){
 
   socket.on('send', function(data) {
     console.log('sending message: ', data);
-    Chat.updateChatroom(data)
+
+    //delete data.room to send to updateChatroom
+    Chat.updateChatroom(data.room, data)
       .then(function(x){
-        io.sockets.in(data.room).emit('chat message', data);
+        io.broadcast.to(data.room).emit('chat message', data);
       })
   });
 
@@ -286,6 +299,6 @@ app.get('/*', function(req, res){
 var assetFolder = path.resolve(__dirname, '../client/public')
 var apiFolder   = path.resolve(__dirname, './apis') 
 
-var port = process.env.PORT || 4000
-app.listen(port)
-console.log("Listening on port", port)
+// var port = process.env.PORT || 4000
+// app.listen(port)
+// console.log("Listening on port", port)

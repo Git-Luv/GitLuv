@@ -16,6 +16,7 @@ export default class Messages extends React.Component {
 		this.state = {
 			username: "",
 			chats: [],
+			chatRoom: null
 		}
 	}
 
@@ -29,7 +30,6 @@ export default class Messages extends React.Component {
 
 			Chat.getAllChatrooms()
 			.then(function(chats){
-				console.log(chats)
 				let chatArr = [];
 				chats.map(function(chat){
 					if( self.state.username === chat.developer ||
@@ -40,6 +40,43 @@ export default class Messages extends React.Component {
 				self.setState({chats: chatArr})
 			})
 		})
+
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		    acc[i].onclick = function(){
+		        this.classList.toggle("active");
+		        this.nextElementSibling.classList.toggle("show");
+			}	
+		}
+	// preexisting to addition of users who like functionality
+		if(!dc.get('AuthToken')){
+			browserHistory.pushState(null, '/')
+		}
+
+		document.getElementsByClassName('accordion').onclick = function() {
+
+		    var className = ' ' + accordion.className + ' ';
+
+		    if ( ~className.indexOf(' active ') ) {
+		        this.className = className.replace(' active ', ' ');
+		    } else {
+		        this.className += ' active';
+		    }              
+		}
+	}
+
+	toggleAccordion(e) {
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		    acc[i].onclick = function(){
+		        this.classList.toggle("active");
+		        this.nextElementSibling.classList.toggle("show");
+    		}	
+		}
 	}
 
 
@@ -47,20 +84,29 @@ export default class Messages extends React.Component {
 		var self = this
 		return (<div>
 			<Sidebar />
-				<Accordion>
-					{this.state.chats.map(function(chatBox){
+				
+					{this.state.chats.map(function(chatBox, i){
+						let chatName;
+						if(self.state.username === chatBox.developer){
+							chatName = chatBox.visionary
+						} else {
+							chatName = chatBox.developer
+						}
 
-						console.log(self.state.username + " + " + chatBox.chatRoom)
-
-						// console.log(chatbox)
 						return(
-							<AccordionItem title={'message'} >
-								<ChatBox username={self.state.username} room={chatBox.chatRoom}/>
-							}
-							</AccordionItem>
+							<div className='accordionContainer' key={i}>
+				        <button className="accordion" title={`${ chatName }`}  onClick={self.toggleAccordion} key={i} >{chatName}</button>
+				          <div className="panel">
+										<ChatBox username={self.state.username} room={chatBox.chatRoom}/>
+									</div>
+							</div>
+							
 						)
 					})}
-				</Accordion>
+
 		</div>)
 	}
 }
+
+
+
