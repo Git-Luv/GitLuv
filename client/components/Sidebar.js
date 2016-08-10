@@ -35,6 +35,16 @@ export default class SideBar extends React.Component {
 		this.setState({ isNotifySystemOpen: !this.state.isNotifySystemOpen })
 	}
 
+	getNotifyCount() {
+		var count = 0;
+		for(let i = 0; i < this.state.notifications.length; i++){
+			if(!this.state.notifications[i].isRead){
+				count++;
+			}
+		}
+		return count;
+	}
+
 	logoutUser() {
 		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
 		browserHistory.pushState(null, '/')
@@ -106,7 +116,7 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
 			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
 			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
-			                <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">Notify <span>{this.state.notifications.length}</span></a></li>
+			                <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">Notify <span>{this.getNotifyCount()}</span></a></li>
 			                <li className="pure-menu-item menu-links pure-menu custom-menu-3 custom-can-transform"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
 			        </div>

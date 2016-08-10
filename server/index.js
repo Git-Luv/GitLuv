@@ -203,13 +203,13 @@ app.use('/api/usersPATCH', function (req, res) {
 //
 
 app.delete('/api/notifications', (req, res) => {
-  Notify.remove(req.body.id)
-  res.end()
+  Notify.remove(req.body);
+  res.send({});
 })
 
 app.post('/api/notifications', (req, res) => {
-  Notify.add(req.body)
-  res.end()
+  Notify.add(req.body);
+  res.send({});
 })
 
 app.get('/api/notifications/:username', (req, res) => {
@@ -221,6 +221,14 @@ app.get('/api/notifications/:username', (req, res) => {
 
 app.get('/api/unreadNotifications/:username', (req, res) => {
   Notify.getUnread(req.params.username)
+  .then(data => {
+    res.send(data);
+  })
+})
+
+app.get('/api/getNotifications/:id', (req, res) => {
+  console.log(req.params.id)
+  Notify.getOne(req.params.id)
   .then(data => {
     res.send(data);
   })

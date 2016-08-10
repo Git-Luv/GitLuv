@@ -14,9 +14,14 @@ var notificationSchema = new Schema({
 
 var Collection = mongoose.model('Notifications', notificationSchema);
 
-Notify.add = function(obj){
+Notify.add = function(obj) {
 	var item = new Collection(obj)
 	item.created = new Date();
+	if(!obj){
+		item.isRead = false;
+	} else {
+		item.isRead = obj.isRead;
+	}
 
 	item.save(err => {
 		if(err)
@@ -24,18 +29,21 @@ Notify.add = function(obj){
 	})
 }
 
-Notify.remove = function(id){
-	Collection.remove({ _id: id }, err => {
+Notify.remove = function(obj) {
+	Collection.remove({ _id: obj.id }, err => {
 		if(err)
 			console.log("ERROR notifications.js:29", err)
 	})
-
 }
 
-Notify.get = function(username){
+Notify.getOne = function(id) {
+	return Collection.find({ _id: id })
+}
+
+Notify.get = function(username) {
 	return Collection.find({ username: username })
 }
 
-Notify.getUnread = function(username){
+Notify.getUnread = function(username) {
 	return Collection.find({ username: username }).where('isRead').equals(false)
 }

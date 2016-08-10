@@ -778,6 +778,15 @@ img.userPhoto {
 	padding: 5px;
 }
 
+.notify-timeCreated {
+	font-style: italic;
+	font-size: 1em;
+}
+
+.notify-description {
+	font-size: 1.1em;
+}
+
 .notification-read {
 	background-color: #fff;
 }
