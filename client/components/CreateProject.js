@@ -14,6 +14,7 @@ export default class CreateProject extends React.Component {
 			stage: 0,
 			input0: "",
 			inputArea: "",
+			inputDesc: "",
 			project: {},
 			error: false,
 		}
@@ -27,10 +28,14 @@ export default class CreateProject extends React.Component {
 		this.setState({ inputArea: event.target.value })
 	}
 
+	handleDescChange(event) {
+		this.setState({inputDesc: event.target.value })
+	}
+
 	handleCreateRepo(){
 		var repoObject = {
 			name: this.state.input0,
-  			description: this.state.inputArea,
+  			description: this.state.inputDesc,
   			private: false,
   			has_issues: true,
   			has_wiki: true,
@@ -46,6 +51,7 @@ export default class CreateProject extends React.Component {
 				repo_url:       repo.html_url,
 				description:    repo.description,
 				location:       null,
+				inputDesc:      '', 
 				req_skills:     [],
 				users_liked:    [],
 				users_disliked: [],
@@ -169,7 +175,7 @@ export default class CreateProject extends React.Component {
 							<form className="pure-form create-project">
 							    <fieldset className="pure-group">
 							    	<div>The repo named {this.state.project.title} does not exist, we can create it for you!</div>
-							        <textarea className="pure-input-1-2" onChange={this.handleAreaChange.bind(this)} placeholder="Please enter a short description of the repository"></textarea>
+							        <textarea className="pure-input-1-2" onChange={this.handleDescChange.bind(this)} value='' placeholder="Please enter a short description of the repository"></textarea>
 							    </fieldset>
 							    <button type="button" onClick={this.setState.bind(this, {stage: 1})} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
 						    </form>
