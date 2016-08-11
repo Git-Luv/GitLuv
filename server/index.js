@@ -27,7 +27,7 @@ var assetFolder = path.join(__dirname, '..', 'client','public');
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
-// app.use(bodyParser.json());
+  app.use(bodyParser.json());
 
 // var routes = express.Router()
 
@@ -161,7 +161,7 @@ app.use('/api/projectsPATCH', Auth.isAuthenticated, function (req, res) {
 
   Project.editProject(req.body[0], req.body[1]).then(x => res.sendStatus(201))
   .catch(function(err){
-    console.log(err) 
+    console.log("ERROR IN PATCH API", err) 
     res.sendStatus(500)
   })
 })
