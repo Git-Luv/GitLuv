@@ -46,15 +46,21 @@ export default class NotifySystem extends React.Component {
 		return(
 			<div className="NotifySystemMenu">
 				<div className="notifications">
-					{ this.state.notifications.map((item, i) => {
-						return (
-							<div className={ item.isRead ? "notification-unread" : "notification-read" } key={i} onClick={this.handleNotifyClick.bind(this, item)}>
-								<span className="notify-description">{item.description}</span>
-								<br/>
-								<span className="notify-timeCreated">{Utils.convertTimeToString(item.created)}</span>
-							</div>
-						)
-					}) }
+					{ this.state.notifications.length === 0 ? 
+							<div style={{
+								letterSpacing: "0em"
+							}}>There are currently no notifications</div>
+					:
+						this.state.notifications.map((item, i) => {
+							return (
+									<div className={ item.isRead ? "notification-unread" : "notification-read" } key={i} onClick={this.handleNotifyClick.bind(this, item)}>
+										<span className="notify-description">{item.description}</span>
+										<br/>
+										<span className="notify-timeCreated">{Utils.convertTimeToString(item.created)}</span>
+									</div>
+							)
+						})
+					}
 				</div>
 			</div>
 		)
