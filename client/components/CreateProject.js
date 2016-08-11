@@ -30,7 +30,7 @@ export default class CreateProject extends React.Component {
 	handleCreateRepo(){
 		var repoObject = {
 			name: this.state.input0,
-  			description: "This is your first repository",
+  			description: this.state.inputArea,
   			private: false,
   			has_issues: true,
   			has_wiki: true,
@@ -49,7 +49,7 @@ export default class CreateProject extends React.Component {
 				req_skills:     [],
 				users_liked:    [],
 				users_disliked: [],
-			}, stage: 1 })
+			}, stage: 2 })
 		})
 	}
 
@@ -59,8 +59,8 @@ export default class CreateProject extends React.Component {
 				model.getRepoData(this.state.input0)
 				.then(repo => {
 					this.setState({ project: {
-						title: 					repo.name,
-						description: 		repo.description,
+						title: 			repo.name,
+						description: 	repo.description,
 						username:       repo.owner.login,
 						looking_for:  	this.state.inputArea,
 						repo_url:       repo.html_url,
@@ -72,7 +72,7 @@ export default class CreateProject extends React.Component {
 					}, stage: 1 })
 				})
 				.catch(err => {
-						this.handleCreateRepo();
+					this.handleCreateRepo();
 				})
 		}
 	}
@@ -134,7 +134,6 @@ export default class CreateProject extends React.Component {
 							    </fieldset>
 							    <button type="button" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
 						    </form>
-						<div className="projectWarning-hidden animated tada">`You don't have a repo on your GitHub account with that name`</div>
 					</div>
 					)
 			case 1:
@@ -165,8 +164,17 @@ export default class CreateProject extends React.Component {
 				)
 			case 2:
 				return (
-					<div>ENDING!</div>
-				)
+					<div className="stage">
+						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
+							<form className="pure-form create-project">
+							    <fieldset className="pure-group">
+							    	<div>The repo named {this.state.project.title} does not exist, we can create it for you!</div>
+							        <textarea className="pure-input-1-2" onChange={this.handleAreaChange.bind(this)} placeholder="Please enter a short description of the repository"></textarea>
+							    </fieldset>
+							    <button type="button" onClick={this.setState.bind(this, {stage: 1})} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
+						    </form>
+					</div>
+					)
 		}
 	}
 
