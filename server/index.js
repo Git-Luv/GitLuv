@@ -27,10 +27,6 @@ var assetFolder = path.join(__dirname, '..', 'client','public');
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
-<<<<<<< HEAD
-=======
-  app.use(bodyParser.json());
->>>>>>> origin
 
 app.use(bodyParser.json());
 

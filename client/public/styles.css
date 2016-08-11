@@ -337,7 +337,7 @@ font-family: 'Roboto', sans-serif;
   	height: 60%;
   	color: black;
 	text-align: center;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 /*	padding: 5px;
 	padding-bottom: 40px;*/
 	border-radius: 1%;
@@ -426,7 +426,7 @@ font-family: 'Roboto', sans-serif;
 	margin: 10px auto;
 	text-align: center;
 	background-color: white;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 	margin-top: 5%;
 	padding: 5px;
 	padding-bottom: 40px;
@@ -455,7 +455,7 @@ font-family: 'Roboto', sans-serif;
 	margin: 10px auto;
 	text-align: center;
 	background-color: white;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 	margin-top: 5%;
 	padding: 15px;
 	border-radius: 2%;
@@ -782,55 +782,31 @@ li.logout:hover {
 	cursor:pointer;
 }
 
-.chat
-{
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* ========== Chat ========== */
+
+.messages {
 }
 
-.chat li
-{
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
+.messagesNotSend {
+	width: 100%;
 }
 
-.chat li.left .chat-body
-{
-    margin-left: 60px;
+.chat-body {
+
 }
 
-.chat li.right .chat-body
-{
-    margin-right: 60px;
+.chat-one {
+	
 }
 
-
-.chat li .chat-body p
-{
-    margin: 0;
-    color: #777777;
+.chat-name {
+	
 }
 
-.createProjectSkills {
-	margin-top: 50%;
+.chat-time {
+	color: gray;
 }
 
-.panel .slidedown .glyphicon, .chat .glyphicon
-{
-    margin-right: 5px;
-}
-
-.panel-body
-{
-    overflow-y: scroll;
-    height: 400px;;
-}
-
-#chatInput {
-  margin: auto;
-  /* position: fixed; */
-  bottom: 0px;
-  width: 100%;
+.chat-message {
+	/*text-align: right;*/
 }
