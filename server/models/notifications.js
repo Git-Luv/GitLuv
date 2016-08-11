@@ -30,7 +30,7 @@ Notify.add = function(obj) {
 }
 
 Notify.remove = function(obj) {
-	Collection.remove({ _id: obj.id }, err => {
+	Collection.remove({ id: obj.id }, err => {
 		if(err)
 			console.log("ERROR notifications.js:29", err)
 	})
