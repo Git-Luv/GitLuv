@@ -249,6 +249,11 @@ app.get('/api/getNotifications/:id', (req, res) => {
   })
 })
 
+app.patch('/api/notifications', (req, res) => {
+  Notify.read(req.body.id)
+  res.send({})
+})
+
 //
 // Chat API
 //

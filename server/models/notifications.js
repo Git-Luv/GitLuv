@@ -44,3 +44,9 @@ Notify.get = function(username) {
 Notify.getUnread = function(username) {
 	return Collection.find({ username: username }).where('isRead').equals(false)
 }
+
+Notify.read = function(id) {
+	return Collection.findOneAndUpdate({ _id: id }, { isRead: true }, { upsert: true }, function(err, docs){
+		if(err) console.log("ERROR! Server notifications.js line 50", err);
+	})
+}

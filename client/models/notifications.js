@@ -51,19 +51,14 @@ export function getUnread(username) {
 	})
 }
 
-export function read(obj, callback) {
-	this.getOne(obj.id)
-	.then(item => {
-		this.remove({ id: obj.id })
-		.then(x => {
-			this.add({
-				description: 	item[0].description,
-				isRead: true,
-				username:  		item[0].username, 
-			})
-			.then(x => {
-				callback();
-			})
-		})
+export function read(obj) {
+	return fetch('/api/notifications', {
+		method: "PATCH",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(obj)
+	}).then(res => {
+		return res.json();
 	})
 }
