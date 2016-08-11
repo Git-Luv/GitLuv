@@ -820,6 +820,6 @@ img.userPhoto {
 	background-color: #aaa;
 }
 
-li.logout:hover {
-	cursor:pointer;
+.a-button:hover {
+	cursor: pointer;
 }

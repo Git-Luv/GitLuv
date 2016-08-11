@@ -14,15 +14,15 @@ export default class NotifySystem extends React.Component {
 		}
 	}
 
-	componentWillMount() {
-		Profile.getUserData(dc.get('AuthToken').value)
-		.then(res => {
-			NotifyModel.get(res.login)
-			.then(data => {
-				this.setState({ notifications: data })
-			})
-		})
-	}
+	// componentWillMount() {
+	// 	Profile.getUserData(dc.get('AuthToken').value)
+	// 	.then(res => {
+	// 		NotifyModel.get(res.login)
+	// 		.then(data => {
+	// 			this.setState({ notifications: data })
+	// 		})
+	// 	})
+	// }
 
 	handleNotifyClick(item) {
 		if(!item.isRead){
@@ -31,17 +31,13 @@ export default class NotifySystem extends React.Component {
 			})
 
 			var temp = [];
-			for(let i = 0; i < this.state.notifications.length; i++){
-				var obj = this.state.notifications[i];
+			for(let i = 0; i < this.props.notifications.length; i++){
+				var obj = this.props.notifications[i];
 				if(item._id === obj._id){
 					obj.isRead = true;
 				}
 				temp.push(obj);
 			}
-
-			temp = temp.sort((a, b) => {
-				
-			})
 
 			this.setState({ notifications: temp })
 		}
@@ -51,12 +47,12 @@ export default class NotifySystem extends React.Component {
 		return(
 			<div className="NotifySystemMenu">
 				<div className="notifications">
-					{ this.state.notifications.length === 0 ? 
+					{ this.props.notifications.length === 0 ? 
 							<div style={{
 								letterSpacing: "0em"
 							}}>There are currently no notifications</div>
 					:
-						this.state.notifications.map((item, i) => {
+						this.props.notifications.map((item, i) => {
 							return (
 									<div className={ item.isRead ? "notification-unread" : "notification-read" } key={i} onClick={this.handleNotifyClick.bind(this, item)}>
 										<span className="notify-description">{item.description}</span>
