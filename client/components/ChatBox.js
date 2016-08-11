@@ -15,7 +15,9 @@ export default class ChatBox extends React.Component {
 			visionary: null,
 			room     : null,
 			text     : "",
-			messages : []
+			messages : [],
+			open     : null,
+
 		}
 	}
 
@@ -23,7 +25,10 @@ export default class ChatBox extends React.Component {
 		let self = this	
 
 		this.setState({username: this.props.username,
-											 room: this.props.room})
+											 room: this.props.room,
+								  visionary: this.props.visionary,
+								  developer: this.props.developer,
+											 open: this.props.open || null})
 
 		Chat.getChatroom(this.props.room)
 		.then(room => {
