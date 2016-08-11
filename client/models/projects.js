@@ -51,6 +51,6 @@ export function updateProject(title, updatedAttrs){
 		},
 		body: JSON.stringify([title, updatedAttrs])
 	})
-	.then(x => console.log("Patched!"))
+	.then(x => console.log("Patched!", x))
 	.catch(err => console.error(err))
 }

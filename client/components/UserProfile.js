@@ -76,6 +76,7 @@ export default class UserProfile extends React.Component {
 			     		<h1>{this.state.userInfo.username}</h1>
 			     		<div>{this.state.userInfo.location}</div>
 			     		<div>Followers: {this.state.userInfo.followers}</div>
+		     			<div>Endorsements: {this.state.userInfo.endorsements.length}</div>
 			     		<p>{this.state.userInfo.bio}</p>
 			     		<p>
 				     		<a target="_blank" href={'http://www.github.com/' + this.state.userInfo.username} className="toGithub">
@@ -83,8 +84,8 @@ export default class UserProfile extends React.Component {
 				     		</a>
 			     		</p>
 			     		<div className="endorsements">
-			     			<p>Endorsements: {this.state.userInfo.endorsements.length}</p>
 							<button className="pure-button" onClick={this.handleEndorsement}>Endorse</button>
+
 						</div>
 				     	<div className="skills">
 				     	<span>Skills:</span>
