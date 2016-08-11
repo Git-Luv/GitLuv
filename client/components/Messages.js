@@ -97,7 +97,7 @@ export default class Messages extends React.Component {
 							<div className='accordionContainer' key={i}>
 				        <button className="accordion" title={`${ chatName }`}  onClick={self.toggleAccordion} key={i} >{chatName}</button>
 				          <div className="panel">
-										<ChatBox username={self.state.username} room={chatBox.chatRoom}/>
+										<ChatBox username={self.state.username} room={chatBox.chatRoom} visionary={chatBox.visionary} developer={chatBox.developer}/>
 									</div>
 							</div>
 							

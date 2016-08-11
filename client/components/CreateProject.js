@@ -156,24 +156,26 @@ export default class CreateProject extends React.Component {
 				return (
 					<div>
 						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
-						<h1 style={{paddingTop: '10px'}}>{this.state.project.title}</h1>
-						<div>Description: <span>{this.state.project.description}</span></div>
-						<div>Please select the skills you require for this project</div>
 						<div className="skillSelector">
-							{Utils.getSkills().map((skill, i) => {
-								var skillClassName = '';
-								if(this.state.project.req_skills.indexOf(skill) > -1) 
-									skillClassName = "skill-selected" 
-								else
-									skillClassName = "skill-deselected"
-								return (
-									<button key={i} className={skillClassName + " animated flipInX"} onClick={this.handleSkillSelect.bind(this, skill)}>
-										{skill}
-									</button> )
-							})}
+						<div className="createProjectSkills">
+							<h1 style={{paddingTop: '10px'}}>{this.state.project.title}</h1>
+							<div>Description: <span>{this.state.project.description}</span></div>
+							<div>Please select the skills you require for this project</div>
+								{Utils.getSkills().map((skill, i) => {
+									var skillClassName = '';
+									if(this.state.project.req_skills.indexOf(skill) > -1) 
+										skillClassName = "skill-selected" 
+									else
+										skillClassName = "skill-deselected"
+									return (
+										<button key={i} className={skillClassName + " animated flipInX pure-button"} onClick={this.handleSkillSelect.bind(this, skill)}>
+											{skill}
+										</button> )
+								})}
+							</div>
+							<button className="pure-button createProjectSubmit pure-button" onClick={this.submitProject.bind(this)}>Submit</button>
+							<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
 						</div>
-						<button className="pure-button createProjectSubmit pure-button" onClick={this.submitProject.bind(this)}>Submit</button>
-						<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
 					</div>
 				)
 			case 2:
