@@ -38,7 +38,6 @@ export default class SideBar extends React.Component {
 	}
 
 	updateNotifications() {
-		console.log("Updating!")
 		notifyModel.getUnread(this.state.username)
 		.then(data => {
 			this.setState({ notifications: data })
@@ -51,6 +50,9 @@ export default class SideBar extends React.Component {
 			if(!this.state.notifications[i].isRead){
 				count++;
 			}
+		}
+		if(count === 0){
+			return null;
 		}
 		return count;
 	}
