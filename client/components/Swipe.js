@@ -141,7 +141,12 @@ export default class Swipe extends React.Component {
 	  	// console.log('state', this.state)
 
 	  	if(this.state.projects === null) {
-	  		return (<h3 className="loading">Loading...</h3>)
+	  		return (
+	  			<div>
+		  			<Sidebar />
+		  			<h3 className="loading">Loading...</h3>
+	  			</div>
+	  			)
 	  	} else if (this.state.projects.length === 0) {
 	  		return (
 	  			<div>
