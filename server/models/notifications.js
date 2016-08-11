@@ -17,7 +17,7 @@ var Collection = mongoose.model('Notifications', notificationSchema);
 Notify.add = function(obj) {
 	var item = new Collection(obj)
 	item.created = new Date();
-	if(!obj){
+	if(!obj.isRead){
 		item.isRead = false;
 	} else {
 		item.isRead = obj.isRead;

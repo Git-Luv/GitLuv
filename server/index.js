@@ -148,7 +148,6 @@ app.use('/api/projects/:title', Auth.isAuthenticated, function (req, res) {
 
 
 app.use('/api/projectsPOST', Auth.isAuthenticated, function (req, res) {
-
   Project.createIfNotExists( req.body )
   res.sendStatus(201)
 })

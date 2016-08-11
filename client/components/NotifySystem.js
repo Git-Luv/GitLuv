@@ -38,6 +38,11 @@ export default class NotifySystem extends React.Component {
 				}
 				temp.push(obj);
 			}
+
+			temp = temp.sort((a, b) => {
+				
+			})
+
 			this.setState({ notifications: temp })
 		}
 	}
