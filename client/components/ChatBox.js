@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './sidebar';
+import moment from 'moment';
 import * as Chat from '../models/chat';
 import * as model from '../models/profile';
 
@@ -54,24 +55,20 @@ export default class ChatBox extends React.Component {
 
 		var self = this;
 
-		// console.log("handle submit: " + this.state.text)
-
-	// Chat.updateChatroom(this.state.room, {messages: [{sentBy: this.state.username, message: this.state.text}]})
-	// 	.then(function(x){
-
 		console.log("step 1 --- ChatBox.js: ", {room: this.state.room, sentBy: this.state.username, message: this.state.text})
 
 		socket.emit("send", {
 		  room   : this.state.room,
 		  sentBy : this.state.username, 
-		  message: this.state.text
+		  message: this.state.text,
+		  time   : moment()
 		})
 
 			// clear input after each message
-			self.setState({
-				text: ""
-			})
-		// })
+		self.setState({
+			text: ""
+		})
+
 	}
 
 	render () {
@@ -84,7 +81,7 @@ export default class ChatBox extends React.Component {
 							{
 								this.state.messages.map(function (msg,index) {
 									return (
-										<Message key={index} name={msg.sentBy} message={msg.message}/>
+										<Message key={index} name={msg.sentBy} message={msg.message} time={msg.time}/>
 									)
 								})
 							}
@@ -104,7 +101,6 @@ export default class ChatBox extends React.Component {
 						<input type="submit" style={{visibility: "hidden"}}></input>
 					</form>
 				</div>
-
 			</div>
 		)
 	}
@@ -113,10 +109,15 @@ export default class ChatBox extends React.Component {
 class Message extends React.Component {
 	render() {
 		return (
-			<tr className="message">
-				<td className="text-left">{this.props.name}</td>
-				<td className="text-right">{this.props.message}</td>
-			</tr>
+
+				<div className="chat-body">
+          <div className="chat-one">
+            <div className="chat-name">{this.props.name}</div>
+            <div className="chat-time">{moment(this.props.time).fromNow()}</div>
+          </div>
+          <div className="chat-message">{this.props.message}</div>
+        </div>
+
 		)
 	}
 }

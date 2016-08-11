@@ -27,19 +27,8 @@ var assetFolder = path.join(__dirname, '..', 'client','public');
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
-// app.use(bodyParser.json());
 
-// var routes = express.Router()
-
-// routes.use( '/api', require('./apis/projects-api.js') )
-
-// app.use('/', routes)
-
-// app.get('/socket.io/socket.io.js',function(req, res){
-//   console.log("what is happening")
-//   var toGo = path.join(__dirname, '../node_modules/socket.io-client/socket.io.js')
-//   res.sendFile(toGo)
-// })
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -169,7 +158,6 @@ app.use('/api/projectsPATCH', Auth.isAuthenticated, function (req, res) {
 //
 // Users API
 //
-
 
 app.use('/api/usersGET', Auth.isAuthenticated, function (req, res) {
   User.all()

@@ -76,9 +76,9 @@ font-family: 'Raleway', sans-serif;
 	width: 50%;
 	margin: 20px auto;
 	text-align: center;
-	color: black;
+	/*color: black;*/
 	background-color: white;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 	margin-top: 5%;
 	padding: 5px;
 	border-radius: 2%;
@@ -780,5 +780,51 @@ li.logout:hover {
 	cursor:pointer;
 }
 
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
 
 
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 400px;;
+}
+
+#chatInput {
+  margin: auto;
+  /* position: fixed; */
+  bottom: 0px;
+  width: 100%;
+}
