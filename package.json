@@ -43,6 +43,7 @@
     "mongoose": "^4.5.7",
     "node-wit": "^4.0.0",
     "nodemon": "^1.10.0",
+    "path": "^0.12.7",
     "react": "^15.1.0",
     "react-addons-transition-group": "^15.2.1",
     "react-cardstack": "^0.1.1",
@@ -55,6 +56,8 @@
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "request": "^2.74.0",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
     "supertest": "^1.2.0",
     "supertest-as-promised": "^3.2.0"
   }

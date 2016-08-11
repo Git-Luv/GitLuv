@@ -16,11 +16,11 @@ var userSchema = new Schema({
 	url:          String,
 	location:     String,
 	bio:          String,
-	repos:        Array,
 	followers:    Number,
 	skills:       Array,
 	visionary:    Boolean,
 	projects:     Array,
+	endorsements: Array,
 	updated_at:   String
 })
 

@@ -5,6 +5,8 @@ import CreateProject from './createproject'
 import * as Projects from '../models/projects'
 import * as modelProfile from '../models/profile';
 import * as modelUser from '../models/users';
+import ChatBox from './ChatBox'
+
 
 import { Accordion, AccordionItem } from 'react-sanfona';
 import { CardStack, Card } from 'react-cardstack';
@@ -133,6 +135,9 @@ componentWillMount() {
 //////////////////////////////////////////////////
 	render() {
 		var active
+		if(!this.state.myProjects.length) {
+			return <h3 className="loading">Loading...</h3>;
+		} else {
 		return (
 			<div>
 				<div>
@@ -148,8 +153,10 @@ componentWillMount() {
 											    {item.users_liked.map(user => {
 											    	return (
 											    		<div className="user-liked">
+											    		<Link to={`userprofile` + '/' + user}>
 			     											<img className="userPhoto" src={this.getAvatar(user)} />
 					                            			<span className="user-liked-username"><h4>{user}</h4></span>
+				                            			</Link>
 					                            			<button className="chat-button pure-button">chat</button>
 				                            			</div>
 			                        				)
@@ -161,13 +168,17 @@ componentWillMount() {
 			            </div>
 		            </div>
 				</div>
-					<div className="projectPage">
+					<div className="projectPage"> 
 						{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
 						<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
 					</div>
 			</div>
 
 			)
+		}
 	}
 
 }
+
+
+
