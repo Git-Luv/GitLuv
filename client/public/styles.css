@@ -333,8 +333,8 @@ font-family: 'Roboto', sans-serif;
 	background-color: white;
 	margin: auto;
 	margin-top: 150px;
-  	width: 50%;
-  	height: 50%;
+  	width: 45%;
+  	height: 60%;
   	color: black;
 	text-align: center;
 	box-shadow: 0px 0px 20px black;
@@ -361,11 +361,12 @@ font-family: 'Roboto', sans-serif;
 
 .projectCancelButton {
 	display: inline-block;
-	position: fixed;
+	position: absolute;
 	top: 10px;
 	left: 10px;
 	margin: 0px;
 	padding: 5px;
+	margin-top:40%;
 }
 
 .projectWarning {
@@ -411,6 +412,7 @@ font-family: 'Roboto', sans-serif;
 	text-align:center;
 	padding-left: 25%;
 	width: 100%;
+	margin-top: 50%;
 }
 
 .project-next {
@@ -778,6 +780,10 @@ img.userPhoto {
 
 li.logout:hover {
 	cursor:pointer;
+}
+
+.createProjectSkills {
+	margin-top: 50%;
 }
 
 
