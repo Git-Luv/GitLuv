@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./client",
-    "test": "./test/run.sh"
+    "test": "./test/run.sh",
   },
   "devDependencies": {
     "babel-core": "^6.0.20",
