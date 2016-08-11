@@ -27,11 +27,14 @@ export function getRepoData(repoName) {
 export function createRepo(repoObject){
 	return profile.getUserData(dc.get('AuthToken').value)
 	.then(response => {
-		return fetch('https://api.github.com/' + response.login + '/repos',
+		console.log('response!!!~~~!~~!~!', response)
+		return fetch('https://api.github.com/user/repos',
 		{
 			method:'POST',
 			headers: {
 			Authorization: "token " + dc.get('AuthToken').value,
+			// 'X-OAuth-Scopes': 'repo',
+			// 'X-Accepted-OAuth-Scopes': 'repo',
 			Accept: 'application/json'
 			},
 			body: JSON.stringify(repoObject)

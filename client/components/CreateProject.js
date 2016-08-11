@@ -72,22 +72,7 @@ export default class CreateProject extends React.Component {
 					}, stage: 1 })
 				})
 				.catch(err => {
-					if(errorTimeoutId){
-						window.clearTimeout(errorTimeoutId);
-					}
-					if(!document.getElementsByClassName('projectWarning')[0]){
-						document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
 						this.handleCreateRepo();
-					}
-					else {
-						console.log('working????????~~~~~~~~')
-						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
-						window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
-					}
-
-					errorTimeoutId = window.setTimeout(x => {
-						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut";
-					}, 4000)
 				})
 		}
 	}
