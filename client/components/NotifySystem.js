@@ -27,7 +27,9 @@ export default class NotifySystem extends React.Component {
 	handleNotifyClick(item) {
 		if(!item.isRead){
 			console.log(item);
-			NotifyModel.read({ id: item._id })
+			NotifyModel.read({ id: item._id }, () => {
+				this.props.sidebar.updateNotifications.call(this.props.sidebar);
+			})
 
 			var temp = [];
 			for(let i = 0; i < this.state.notifications.length; i++){

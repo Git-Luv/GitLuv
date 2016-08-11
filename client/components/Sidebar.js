@@ -33,6 +33,16 @@ export default class SideBar extends React.Component {
 
 	toggleNotificationMenu() {
 		this.setState({ isNotifySystemOpen: !this.state.isNotifySystemOpen })
+		if(!this.state.isNotifySystemOpen)
+			this.updateNotifications();
+	}
+
+	updateNotifications() {
+		console.log("Updating!")
+		notifyModel.getUnread(this.state.username)
+		.then(data => {
+			this.setState({ notifications: data })
+		})
 	}
 
 	getNotifyCount() {
@@ -124,7 +134,7 @@ export default class SideBar extends React.Component {
 			    <div className="pure-u-1 pure-u-md-1-3">
 			    </div>
 			    { this.state.isNotifySystemOpen ? 
-				    <NotifySystem />
+				    <NotifySystem sidebar={this} />
 			    : null }
 			</div>
 			)

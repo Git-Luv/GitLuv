@@ -51,7 +51,7 @@ export function getUnread(username) {
 	})
 }
 
-export function read(obj) {
+export function read(obj, callback) {
 	this.getOne(obj.id)
 	.then(item => {
 		this.remove({ id: obj.id })
@@ -60,6 +60,9 @@ export function read(obj) {
 				description: 	item[0].description,
 				isRead: true,
 				username:  		item[0].username, 
+			})
+			.then(x => {
+				callback();
 			})
 		})
 	})
