@@ -27,6 +27,32 @@ export default class CreateProject extends React.Component {
 		this.setState({ inputArea: event.target.value })
 	}
 
+	handleCreateRepo(){
+		var repoObject = {
+			name: this.state.input0,
+  			description: "This is your first repository",
+  			private: false,
+  			has_issues: true,
+  			has_wiki: true,
+  			has_downloads: true
+		}
+		model.createRepo(repoObject)
+		.then(repo => {
+			this.setState({ project: {
+				title: 			repo.name,
+				description: 	repo.description,
+				username:       repo.owner.login,
+				looking_for:  	this.state.inputArea,
+				repo_url:       repo.html_url,
+				description:    repo.description,
+				location:       null,
+				req_skills:     [],
+				users_liked:    [],
+				users_disliked: [],
+			}, stage: 1 })
+		})
+	}
+
 	handleNextStage(command) {
 		switch(this.state.stage){
 			case 0:
@@ -49,9 +75,12 @@ export default class CreateProject extends React.Component {
 					if(errorTimeoutId){
 						window.clearTimeout(errorTimeoutId);
 					}
-					if(!document.getElementsByClassName('projectWarning')[0])
+					if(!document.getElementsByClassName('projectWarning')[0]){
 						document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
+						this.handleCreateRepo();
+					}
 					else {
+						console.log('working????????~~~~~~~~')
 						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
 						window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
 					}
@@ -87,8 +116,11 @@ export default class CreateProject extends React.Component {
 			if(errorTimeoutId){
 				window.clearTimeout(errorTimeoutId);
 			}
-			if(!document.getElementsByClassName('projectWarning')[0])
+			if(!document.getElementsByClassName('projectWarning')[0]){
+				// console.log('working????????')
 				document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
+				
+			}
 			else {
 				document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
 				window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
