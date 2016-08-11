@@ -136,7 +136,15 @@ componentWillMount() {
 	render() {
 		var active
 		if(!this.state.myProjects.length) {
-			return <h3 className="loading">Loading...</h3>;
+			return (
+				<div>
+					<Sidebar />
+					<div className="projectPage"> 
+						{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
+						<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
+					</div>
+				</div>
+				)
 		} else {
 		return (
 			<div>
@@ -175,10 +183,10 @@ componentWillMount() {
 			</div>
 
 			)
-		}
+		// }
 	}
 
 }
-
+}
 
 
