@@ -17,8 +17,6 @@ Auth.isAuthenticated = function(req, res, next) {
             res.send(401);
         }
         else{
-            console.log('made it in here wtf')
-            console.log('~~~~~~~~~~~~~~~~~~', authToken)
             // if exists then fetch data from github
             fetch('https://api.github.com/user', {
                 method: 'GET',
@@ -29,10 +27,9 @@ Auth.isAuthenticated = function(req, res, next) {
             })
             .then(function(data){
                 // console.log('cookie test???', document.cookie.split(''))
-                console.log('dataaaaaaa', data);
                 // If there is data run next()
                 if(data.status === 200 || data.statusText === 'Authorized'){
-                    console.log('made it in here', 'plsssss')                
+                    console.log('made it')                
                     return next();
                 }
                 else{
