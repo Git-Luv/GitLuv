@@ -89,7 +89,6 @@ export default class Swipe extends React.Component {
  	handleLike(event) {
  		event.preventDefault();
  		var self = this
-
 		let developer = this.state.username
 		let visionary = this.state.projects[0].username
 			Chat.addChatroom({chatRoom: visionary + "" + developer, developer: developer, visionary: visionary, initiated: false})
@@ -104,6 +103,7 @@ export default class Swipe extends React.Component {
  	}
  	handleDislike(event) {
  		event.preventDefault();
+ 		console.log('THISSTATEPROJECTNAME',this.state.projects[0].title)
  		Projects.updateProject(this.state.projects[0].title, {users_disliked: [this.state.username]})
 		this.setState({ direction: 'left'})
 		if(!hasEvent) {

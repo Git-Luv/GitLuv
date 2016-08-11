@@ -115,7 +115,7 @@ export default class CreateProject extends React.Component {
 							        <input type="text" className="pure-input-1-2" onChange={this.handleChange.bind(this)} placeholder="Enter GitHub Repo Title" />
 							        <textarea className="pure-input-1-2" onChange={this.handleAreaChange.bind(this)} placeholder="Description of work to be completed"></textarea>
 							    </fieldset>
-							    <button type="submit" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
+							    <button type="button" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
 						    </form>
 						<div className="projectWarning-hidden animated tada">`You don't have a repo on your GitHub account with that name`</div>
 					</div>
