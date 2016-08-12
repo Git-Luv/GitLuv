@@ -174,7 +174,7 @@ export default class CreateProject extends React.Component {
 							<form className="pure-form create-project">
 							    <fieldset className="pure-group">
 							    	<div className='pure-div-1-2'>The repo named {this.state.project.title} does not exist, we can create it for you!</div>
-							        <textarea className="pure-input-1-2" onChange={this.handleDescChange.bind(this)} placeholder="Please enter a short description of the repository"></textarea>
+							        <textarea className="pure-input-1-2" onChange={this.handleDescChange.bind(this)} value={this.state.inputDesc} placeholder="Please enter a short description of the repository"></textarea>
 							    </fieldset>
 							    <button type="button" onClick={this.handleCreateRepo.bind(this)} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
 						    </form>
