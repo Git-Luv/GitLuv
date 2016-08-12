@@ -166,6 +166,7 @@ export default class CreateProject extends React.Component {
 							<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
 						</div>
 					</div>
+			
 				)
 			case 2:
 				return (
