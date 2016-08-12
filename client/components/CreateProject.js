@@ -77,19 +77,7 @@ export default class CreateProject extends React.Component {
 					}, stage: 1 })
 				})
 				.catch(err => {
-					if(errorTimeoutId){
-						window.clearTimeout(errorTimeoutId);
-					}
-					if(!document.getElementsByClassName('projectWarning')[0])
-						document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated slideInUp"
-					else {
-						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
-						window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated slideInUp"}, 200)		
-					}
-
-					errorTimeoutId = window.setTimeout(x => {
-						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut";
-					}, 4000)
+					this.setState({ stage: 2 })
 				})
 		}
 	}
@@ -179,8 +167,17 @@ export default class CreateProject extends React.Component {
 			
 				)
 			case 2:
-				return (
-					<div>ENDING!</div>
+			return (
+				<div className="stage modalContent">
+					<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
+						<form className="pure-form create-project">		
+						  <fieldset className="pure-group">		
+							  <div className='pure-div-1-2'>The repo named {this.state.project.title} does not exist, we can create it for you!</div>		
+							  <textarea className="pure-input-1-2" onChange={this.handleDescChange.bind(this)} value={this.state.inputDesc} placeholder="Please enter a short description of the repository"></textarea>		
+						  </fieldset>		
+						  <button type="button" onClick={this.handleCreateRepo.bind(this)} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>		
+				    </form>		
+				</div>		
 				)
 		}
 	}
