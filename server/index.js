@@ -63,7 +63,7 @@ app.get('/auth/login', (req, res) => {
     return response.json()
   })
   .then(result => {
-      cookie = result.access_token;
+    cookie = result.access_token;
 
     return Profile.getUserData(result.access_token)
   })
@@ -89,8 +89,12 @@ app.get('/auth/login', (req, res) => {
             updated_at: data.updated_at
           }
           User.createIfNotExists( userStuff )
-            res.cookie("AuthToken", cookie)
-            res.redirect('/skills');
+          Notify.add({ 
+            description: "Welcome to GitLuv!",
+            username: data.login,
+          })
+          res.cookie("AuthToken", cookie)
+          res.redirect('/skills');
         }
         else {
           res.cookie("AuthToken", cookie)
