@@ -141,7 +141,7 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
 			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
 			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
-			                <li className="pure-menu-item a-button"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">Notify <span>{this.getNotifyCount()}</span></a></li>
+			                <li className="pure-menu-item a-button"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">NOTIFY <span>{this.getNotifyCount()}</span></a></li>
 			                <li className="pure-menu-item"><Link to={`messages`} className="pure-menu-link l-box">MESSAGES</Link></li>
 			                <li className="pure-menu-item a-button"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
