@@ -77,7 +77,19 @@ export default class CreateProject extends React.Component {
 					}, stage: 1 })
 				})
 				.catch(err => {
-					this.setState({ stage: 2 })
+					if(errorTimeoutId){
+						window.clearTimeout(errorTimeoutId);
+					}
+					if(!document.getElementsByClassName('projectWarning')[0])
+						document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated slideInUp"
+					else {
+						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
+						window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated slideInUp"}, 200)		
+					}
+
+					errorTimeoutId = window.setTimeout(x => {
+						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut";
+					}, 4000)
 				})
 		}
 	}
@@ -106,14 +118,11 @@ export default class CreateProject extends React.Component {
 			if(errorTimeoutId){
 				window.clearTimeout(errorTimeoutId);
 			}
-			if(!document.getElementsByClassName('projectWarning')[0]){
-				// console.log('working????????')
-				document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
-				
-			}
+			if(!document.getElementsByClassName('projectWarning')[0])
+				document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated slideInUp"
 			else {
 				document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
-				window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
+				window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated slideInUp"}, 200)		
 			}
 
 			errorTimeoutId = window.setTimeout(x => {
@@ -130,21 +139,22 @@ export default class CreateProject extends React.Component {
 		switch(stage){
 			case 0:
 				return (
-					<div className="stage">
-						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
+					<div className="stage modalContent">
 							<form className="pure-form create-project">
+						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
 							    <fieldset className="pure-group">
 							        <input type="text" className="pure-input-1-2" onChange={this.handleChange.bind(this)} placeholder="Enter GitHub Repo Title" />
 							        <textarea className="pure-input-1-2" onChange={this.handleAreaChange.bind(this)} placeholder="Description of work to be completed"></textarea>
 							    </fieldset>
 							    <button type="button" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
 						    </form>
+						<div className="projectWarning-hidden animated slideInUp">`You don't have a repo on your GitHub account with that name`</div>
 					</div>
 					)
 			case 1:
 				return (
-					<div>
-						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
+					<div className="modalContentSkills">
+						<button type="button" className="projectCancelButtonSkills pure-button" onClick={this.cancelProject.bind(this)}>X</button>
 						<div className="skillSelector">
 						<div className="createProjectSkills">
 							<h1 style={{paddingTop: '10px'}}>{this.state.project.title}</h1>
@@ -163,31 +173,22 @@ export default class CreateProject extends React.Component {
 								})}
 							</div>
 							<button className="pure-button createProjectSubmit pure-button" onClick={this.submitProject.bind(this)}>Submit</button>
-							<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
+							<div className="projectWarning-hidden animated slideInUp">Please choose at least one skill</div>
 						</div>
 					</div>
 			
 				)
 			case 2:
 				return (
-					<div className="stage">
-						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
-							<form className="pure-form create-project">
-							    <fieldset className="pure-group">
-							    	<div className='pure-div-1-2'>The repo named {this.state.project.title} does not exist, we can create it for you!</div>
-							        <textarea className="pure-input-1-2" onChange={this.handleDescChange.bind(this)} value={this.state.inputDesc} placeholder="Please enter a short description of the repository"></textarea>
-							    </fieldset>
-							    <button type="button" onClick={this.handleCreateRepo.bind(this)} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
-						    </form>
-					</div>
-					)
+					<div>ENDING!</div>
+				)
 		}
 	}
 
 	render() {
 		return (
 			<div className="createProjectModal">
-				<div className="modalContent animated fadeInUp">
+				<div className="animated fadeInUp">
 					<div className="stageContent animated fadeIn" >
 						{ this.returnStage(this.state.stage) }
 					</div>
@@ -195,5 +196,4 @@ export default class CreateProject extends React.Component {
 			</div>
 			)
 	}
-
 }

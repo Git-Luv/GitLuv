@@ -129,7 +129,7 @@ export default class SideBar extends React.Component {
 	render() {
 		return(
 			<div className="custom-wrapper pure-g " ref="menuClass" id="menu">
-			    <div className="pure-u-1 pure-u-md-1-4">
+			    <div className="pure-u-1 pure-u-md-1-6">
 			        <div className="pure-menu">
 			            <a href="#" className="pure-menu-heading custom-brand menu-item l-box logo">GitLuv</a>
 			            <a href="#" className="custom-toggle" ref="toggleClass" id="toggle" onClick={this.toggleMenu}><s className="bar"></s><s className="bar"></s></a>
@@ -146,8 +146,6 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item a-button"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
 			        </div>
-			    </div>
-			    <div className="pure-u-1 pure-u-md-1-3">
 			    </div>
 			    { this.state.isNotifySystemOpen ? 
 				    <NotifySystem sidebar={this} notifications={this.state.notifications} />
