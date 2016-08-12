@@ -99,10 +99,8 @@ app.get('/auth/login', (req, res) => {
         else {
           res.cookie("AuthToken", cookie)
           res.redirect('/swipe');
-
         }
       })
-
   })
 
 });
@@ -316,6 +314,10 @@ io.on('connection', function(socket){
     let rooooooom = data.room
     
     if(data.message){
+      Notify.add({
+        description: `New message from ${data.sentBy}: ${data.message}`,
+        username: data.room.split(data.sentBy).filter(element => element)[0],
+      })
       
       Chat.updateChatroom(data.room, {messages: [data]})
         .then(function(x){
