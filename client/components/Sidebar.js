@@ -38,7 +38,6 @@ export default class SideBar extends React.Component {
 	}
 
 	updateNotifications() {
-		console.log("Notify")
 		notifyModel.get(this.state.username)
 		.then(data => {
 			data = data.sort((a, b) => {
@@ -57,7 +56,6 @@ export default class SideBar extends React.Component {
 	}
 
 	getNotifyCount() {
-		console.log("COunt")
 		var count = 0;
 		for(let i = 0; i < this.state.notifications.length; i++){
 			if(!this.state.notifications[i].isRead){
