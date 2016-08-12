@@ -1,5 +1,8 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
+import * as Profile from '../models/profile';
+import * as notifyModel from '../models/notifications';
+import NotifySystem from './NotifySystem';
 
 var dc = require('delightful-cookies');
 
@@ -9,8 +12,63 @@ export default class SideBar extends React.Component {
 		super(props);
 		this.toggleMenu = this.toggleMenu.bind(this)
 		this.toggleHorizontal = this.toggleHorizontal.bind(this)
+		this.state = {
+			notifications: [],
+			username: null,
+			isNotifySystemOpen: false,
+		}
 	}
 
+	componentWillMount() {
+		if(!this.state.username){
+			Profile.getUserData(dc.get('AuthToken').value)
+			.then(res => {
+				notifyModel.getUnread(res.login)
+				.then(data => {
+					this.setState({ username: res.login, notifications: data })
+				})
+			})
+		}
+	}
+
+	toggleNotificationMenu() {
+		this.setState({ isNotifySystemOpen: !this.state.isNotifySystemOpen })
+		if(!this.state.isNotifySystemOpen)
+			this.updateNotifications();
+	}
+
+	updateNotifications() {
+		console.log("Notify")
+		notifyModel.get(this.state.username)
+		.then(data => {
+			data = data.sort((a, b) => {
+				a = Date.parse(a.created);
+				b = Date.parse(b.created);
+				if(a > b) {
+					return -1;
+				} else if(b > a) {
+					return 1
+				} else {
+					return 0;
+				}
+			})
+			this.setState({ notifications: data })
+		})
+	}
+
+	getNotifyCount() {
+		console.log("COunt")
+		var count = 0;
+		for(let i = 0; i < this.state.notifications.length; i++){
+			if(!this.state.notifications[i].isRead){
+				count++;
+			}
+		}
+		if(count === 0){
+			return null;
+		}
+		return count;
+	}
 
 	logoutUser() {
 		document.cookie = 'AuthToken=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
@@ -83,15 +141,17 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
 			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
 			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
+			                <li className="pure-menu-item a-button"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">NOTIFY <span>{this.getNotifyCount()}</span></a></li>
 			                <li className="pure-menu-item"><Link to={`messages`} className="pure-menu-link l-box">MESSAGES</Link></li>
-			              
-			                <li className="pure-menu-item logout"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
-
+			                <li className="pure-menu-item a-button"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
 			        </div>
 			    </div>
 			    <div className="pure-u-1 pure-u-md-1-3">
 			    </div>
+			    { this.state.isNotifySystemOpen ? 
+				    <NotifySystem sidebar={this} notifications={this.state.notifications} />
+			    : null }
 			</div>
 			)
 	}

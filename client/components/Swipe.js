@@ -73,17 +73,7 @@ export default class Swipe extends React.Component {
 		} else {
 			browserHistory.pushState(null, '/');
 		}
- 		// Projects.getAllProjects().then(x => console.log(x))
- 		// Projects.addProject({title: "wtf", users_liked: ['mccarthyist']})
- 		// Projects.updateProject("wtf", {description: "uhh"})
- 		// Projects.getProject("wtf").then(y => console.log(y))
 
-
- 		// Users.getAllUsers().then(z => console.log(z))
- 		// Users.addUser({username: "Mr. Junior", location: "hell", followers: 6})
- 		// Users.updateUser("Mr. Junior", {bio: "lol"})
- 		// Users.getUser("Mr. Junior").then(a => console.log(a))
- 		
  	}
 
  	handleLike(event) {
@@ -91,15 +81,32 @@ export default class Swipe extends React.Component {
  		var self = this
 		let developer = this.state.username
 		let visionary = this.state.projects[0].username
+		
+		Chat.getChatroom(developer + "" + visionary)
+		.then(function(x){
+
+			Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
+	 		self.setState({ direction: 'right' })
+				if(!hasEvent) {
+					document.getElementsByClassName('currentProject')[0].addEventListener('animationend', self.updateArray.bind(self))
+					hasEvent = true;
+				}
+
+		})
+		.catch(function(x){
+
 			Chat.addChatroom({chatRoom: visionary + "" + developer, developer: developer, visionary: visionary, initiated: false})
-		.then(function(x) {	
- 		Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
- 		self.setState({ direction: 'right' })
- 		if(!hasEvent) {
- 			document.getElementsByClassName('currentProject')[0].addEventListener('animationend', self.updateArray.bind(self))
- 			hasEvent = true;
- 		}
- 		})
+				.then(function(x) {	
+			 		Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
+			 		self.setState({ direction: 'right' })
+	 				if(!hasEvent) {
+	 					document.getElementsByClassName('currentProject')[0].addEventListener('animationend', self.updateArray.bind(self))
+	 					hasEvent = true;
+	 				}
+			 	})
+
+		})
+
  	}
  	handleDislike(event) {
  		event.preventDefault();

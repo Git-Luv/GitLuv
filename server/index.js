@@ -5,6 +5,7 @@ var fetch = require('isomorphic-fetch');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Notify = require('./models/notifications');
 // var http = require('http').Server(express);
 // var io = require('socket.io')(http);
 
@@ -27,19 +28,7 @@ var assetFolder = path.join(__dirname, '..', 'client','public');
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
-  app.use(bodyParser.json());
-
-// var routes = express.Router()
-
-// routes.use( '/api', require('./apis/projects-api.js') )
-
-// app.use('/', routes)
-
-// app.get('/socket.io/socket.io.js',function(req, res){
-//   console.log("what is happening")
-//   var toGo = path.join(__dirname, '../node_modules/socket.io-client/socket.io.js')
-//   res.sendFile(toGo)
-// })
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -147,7 +136,6 @@ app.use('/api/projects/:title', Auth.isAuthenticated, function (req, res) {
 
 
 app.use('/api/projectsPOST', Auth.isAuthenticated, function (req, res) {
-
   Project.createIfNotExists( req.body )
   res.sendStatus(201)
 })
@@ -169,7 +157,6 @@ app.use('/api/projectsPATCH', Auth.isAuthenticated, function (req, res) {
 //
 // Users API
 //
-
 
 app.use('/api/usersGET', Auth.isAuthenticated, function (req, res) {
   User.all()
@@ -211,6 +198,47 @@ app.use('/api/usersPATCH', Auth.isAuthenticated, function (req, res) {
     console.log(err) 
     res.sendStatus(500)
   })
+})
+
+//
+// Notifications API
+//
+
+app.delete('/api/notifications', (req, res) => {
+  Notify.remove(req.body);
+  res.send({});
+})
+
+app.post('/api/notifications', (req, res) => {
+  Notify.add(req.body);
+  res.send({});
+})
+
+app.get('/api/notifications/:username', (req, res) => {
+  Notify.get(req.params.username)
+  .then(data => {
+    res.send(data);
+  })
+})
+
+app.get('/api/unreadNotifications/:username', (req, res) => {
+  Notify.getUnread(req.params.username)
+  .then(data => {
+    res.send(data);
+  })
+})
+
+app.get('/api/getNotifications/:id', (req, res) => {
+  console.log(req.params.id)
+  Notify.getOne(req.params.id)
+  .then(data => {
+    res.send(data);
+  })
+})
+
+app.patch('/api/notifications', (req, res) => {
+  Notify.read(req.body.id)
+  res.send({})
 })
 
 //
