@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from './sidebar';
+import moment from 'moment';
 import * as Chat from '../models/chat';
 import * as model from '../models/profile';
 
@@ -54,57 +55,50 @@ export default class ChatBox extends React.Component {
 
 		var self = this;
 
-		// console.log("handle submit: " + this.state.text)
-
-	// Chat.updateChatroom(this.state.room, {messages: [{sentBy: this.state.username, message: this.state.text}]})
-	// 	.then(function(x){
-
 		console.log("step 1 --- ChatBox.js: ", {room: this.state.room, sentBy: this.state.username, message: this.state.text})
 
 		socket.emit("send", {
 		  room   : this.state.room,
 		  sentBy : this.state.username, 
-		  message: this.state.text
+		  message: this.state.text,
+		  time   : moment()
 		})
 
 			// clear input after each message
-			self.setState({
-				text: ""
-			})
-		// })
+		self.setState({
+			text: ""
+		})
+
 	}
 
 	render () {
 
-		return (
-			<div className="chatBox">
-				<div className="messages">
-					<table className="table table-hover">
-						<tbody>
-							{
-								this.state.messages.map(function (msg,index) {
-									return (
-										<Message key={index} name={msg.sentBy} message={msg.message}/>
-									)
-								})
-							}
-						</tbody>
-					</table>
-					<form onSubmit={this._handleSubmit.bind(this)} >
-						<input
-							type="text"
-							value={this.state.text}
-							className="u-full-width"
-							placeholder="send a message!"
-							id="chatInput"
-							onChange={event => this.setState({text: event.target.value})}
-							autoComplete="off"
-							/>
+		return (			
+			<div className="messages">
+				<table className="messagesNotSend">
+					<tbody>
+						{
+							this.state.messages.map(function (msg,index) {
+								return (
+									<Message key={index} name={msg.sentBy} message={msg.message} time={msg.time}/>
+								)
+							})
+						}
+					</tbody>
+				</table>
+				<form onSubmit={this._handleSubmit.bind(this)} >
+					<input
+						type="text"
+						value={this.state.text}
+						className="u-full-width"
+						placeholder="send a message!"
+						id="chatInput"
+						onChange={event => this.setState({text: event.target.value})}
+						autoComplete="off"
+						/>
 
-						<input type="submit" style={{visibility: "hidden"}}></input>
-					</form>
-				</div>
-
+					<input type="submit" style={{visibility: "hidden"}}></input>
+				</form>
 			</div>
 		)
 	}
@@ -113,10 +107,13 @@ export default class ChatBox extends React.Component {
 class Message extends React.Component {
 	render() {
 		return (
-			<tr className="message">
-				<td className="text-left">{this.props.name}</td>
-				<td className="text-right">{this.props.message}</td>
-			</tr>
+			<div className="chat-body">
+        <div className="chat-one">
+          <span className="chat-name"><b>{this.props.name}</b></span>
+          <span className="chat-time"><i>{moment(this.props.time).fromNow()}</i></span>
+        </div>
+        <div className="chat-message">{this.props.message}</div>
+      </div>
 		)
 	}
 }

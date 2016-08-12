@@ -11,11 +11,12 @@ conn.once('open', function() {
 })
 
 var chatSchema = new Schema({
-	chatRoom:  String,
+	chatRoom : String,
 	visionary: String,
 	developer: String,
-	messages:  Array,
-	initiated: Boolean
+	messages : Array,
+	initiated: Boolean,
+	time     : String
 })
 
 var ChatCollection = mongoose.model('Chatcollection', chatSchema)
