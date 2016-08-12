@@ -778,8 +778,45 @@ img.userPhoto {
 	color:white;
 }
 
-li.logout:hover {
-	cursor:pointer;
+/* ============ Notification System ============ */
+.NotifySystemMenu {
+	position: fixed;
+	right: 10%;
+	top: 2.5em;
+	width: 40%;
+	background-color: white;
+  box-shadow: 5px 7px 15px -6px;
+}
+
+.notification-read,
+.notification-unread span {
+	letter-spacing: 0em;
+}
+
+.notification-read,
+.notification-unread {
+	padding: 5px;
+}
+
+.notify-timeCreated {
+	font-style: italic;
+	font-size: 1em;
+}
+
+.notify-description {
+	font-size: 1.1em;
+}
+
+.notification-read {
+	background-color: #fff;
+}
+
+.notification-unread {
+	background-color: #aaa;
+}
+
+.a-button:hover {
+	cursor: pointer;
 }
 
 /* ========== Chat ========== */
