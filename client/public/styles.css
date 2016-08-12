@@ -78,7 +78,7 @@ font-family: 'Raleway', sans-serif;
 	text-align: center;
 	/*color: black;*/
 	background-color: white;
-	box-shadow: 0px 0px 20px white;
+	box-shadow: 0px 0px 8px white;
 	margin-top: 5%;
 	padding: 5px;
 	border-radius: 1%;
@@ -332,16 +332,31 @@ font-family: 'Roboto', sans-serif;
 .modalContent {
 	background-color: white;
 	margin: auto;
-	margin-top: 150px;
+	margin-top: 30%;
   	width: 45%;
   	height: 60%;
   	color: black;
 	text-align: center;
-	box-shadow: 0px 0px 20px white;
+	box-shadow: 0px 0px 8px white;
 /*	padding: 5px;
 	padding-bottom: 40px;*/
 	border-radius: 1%;
 }
+
+.modalContentSkills {
+	background-color: white;
+	margin: auto;
+	margin-top: 30%;
+  	width: 70%;
+  	height: 60%;
+  	color: black;
+	text-align: center;
+	box-shadow: 0px 0px 8px white;
+/*	padding: 5px;
+	padding-bottom: 40px;*/
+	border-radius: 1%;
+}
+
 
 .stageContent {
 	color: black;
@@ -360,13 +375,25 @@ font-family: 'Roboto', sans-serif;
 }
 
 .projectCancelButton {
-	display: inline-block;
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	margin: 0px;
-	padding: 5px;
-	margin-top:40%;
+    display: inline-block;
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    margin: 0px;
+    padding: 5px;
+    margin-top: -9%;
+    float: left;
+}
+
+.projectCancelButtonSkills {
+    display: inline-block;
+    position: relative;
+    top: 25px;
+    left: 10px;
+    margin: 0px;
+    padding: 5px;
+    margin-top: -18px;
+    float: left;
 }
 
 .projectWarning {
@@ -412,7 +439,6 @@ font-family: 'Roboto', sans-serif;
 	text-align:center;
 	padding-left: 25%;
 	width: 100%;
-	margin-top: 50%;
 }
 
 .project-next {
@@ -426,7 +452,7 @@ font-family: 'Roboto', sans-serif;
 	margin: 10px auto;
 	text-align: center;
 	background-color: white;
-	box-shadow: 0px 0px 20px white;
+	box-shadow: 0px 0px 8px white;
 	margin-top: 5%;
 	padding: 5px;
 	padding-bottom: 40px;
@@ -455,7 +481,7 @@ font-family: 'Roboto', sans-serif;
 	margin: 10px auto;
 	text-align: center;
 	background-color: white;
-	box-shadow: 0px 0px 20px white;
+	box-shadow: 0px 0px 8px white;
 	margin-top: 5%;
 	padding: 15px;
 	border-radius: 1%;
@@ -504,7 +530,7 @@ font-family: 'Roboto', sans-serif;
 }
 
 .custom-wrapper.open {
-    height: 19em;
+    height: 26.5em;
 }
 
 .custom-menu-3 {
@@ -576,7 +602,7 @@ font-family: 'Roboto', sans-serif;
 
 .l-box {
 	color:white;
-    padding-right: 2.5cm;
+    padding-right: 2cm;
     height: 2.5em;
     font-size: 18px;
 	font-family: 'Roboto', sans-serif;
