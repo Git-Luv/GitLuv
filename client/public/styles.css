@@ -76,12 +76,12 @@ font-family: 'Raleway', sans-serif;
 	width: 50%;
 	margin: 20px auto;
 	text-align: center;
-	color: black;
+	/*color: black;*/
 	background-color: white;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 	margin-top: 5%;
 	padding: 5px;
-	border-radius: 2%;
+	border-radius: 1%;
 }
 
 .profile img {
@@ -295,8 +295,8 @@ font-family: 'Roboto', sans-serif;
 	color: white;
 	font-size: 40px;
 	text-align: center;
-	margin-top:0;
-	margin-bottom:0;
+	margin-top:40px;
+	margin-bottom:-30px;
 	font-family: 'Roboto', sans-serif;
 
 }
@@ -337,7 +337,7 @@ font-family: 'Roboto', sans-serif;
   	height: 60%;
   	color: black;
 	text-align: center;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 /*	padding: 5px;
 	padding-bottom: 40px;*/
 	border-radius: 1%;
@@ -355,7 +355,7 @@ font-family: 'Roboto', sans-serif;
 }
 
 .stage > * {
-	display: block;
+	display: inline-block;
 	margin: 10px auto;
 }
 
@@ -426,11 +426,11 @@ font-family: 'Roboto', sans-serif;
 	margin: 10px auto;
 	text-align: center;
 	background-color: white;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 	margin-top: 5%;
 	padding: 5px;
 	padding-bottom: 40px;
-	border-radius: 2%;
+	border-radius: 1%;
 }
 
 .skillSelector {
@@ -455,10 +455,10 @@ font-family: 'Roboto', sans-serif;
 	margin: 10px auto;
 	text-align: center;
 	background-color: white;
-	box-shadow: 0px 0px 20px black;
+	box-shadow: 0px 0px 20px white;
 	margin-top: 5%;
 	padding: 15px;
-	border-radius: 2%;
+	border-radius: 1%;
 	font-family: 'Roboto', sans-serif;
 }
 .horizontal-rule {
@@ -778,13 +778,72 @@ img.userPhoto {
 	color:white;
 }
 
-li.logout:hover {
-	cursor:pointer;
+/* ============ Notification System ============ */
+.NotifySystemMenu {
+	position: fixed;
+	right: 10%;
+	top: 2.5em;
+	width: 40%;
+	background-color: white;
+  box-shadow: 5px 7px 15px -6px;
 }
 
-.createProjectSkills {
-	margin-top: 50%;
+.notification-read,
+.notification-unread span {
+	letter-spacing: 0em;
 }
 
+.notification-read,
+.notification-unread {
+	padding: 5px;
+}
 
+.notify-timeCreated {
+	font-style: italic;
+	font-size: 1em;
+}
 
+.notify-description {
+	font-size: 1.1em;
+}
+
+.notification-read {
+	background-color: #fff;
+}
+
+.notification-unread {
+	background-color: #aaa;
+}
+
+.a-button:hover {
+	cursor: pointer;
+}
+
+/* ========== Chat ========== */
+
+.messages {
+}
+
+.messagesNotSend {
+	width: 100%;
+}
+
+.chat-body {
+
+}
+
+.chat-one {
+	
+}
+
+.chat-name {
+	
+}
+
+.chat-time {
+	color: gray;
+}
+
+.chat-message {
+	/*text-align: right;*/
+}

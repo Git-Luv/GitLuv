@@ -14,6 +14,7 @@ export default class CreateProject extends React.Component {
 			stage: 0,
 			input0: "",
 			inputArea: "",
+			inputDesc: "",
 			project: {},
 			error: false,
 		}
@@ -27,14 +28,44 @@ export default class CreateProject extends React.Component {
 		this.setState({ inputArea: event.target.value })
 	}
 
+	handleDescChange(event) {
+		this.setState({inputDesc: event.target.value })
+	}
+
+	handleCreateRepo(){
+		var repoObject = {
+			name: this.state.input0,
+  			description: this.state.inputDesc,
+  			private: false,
+  			has_issues: true,
+  			has_wiki: true,
+  			has_downloads: true
+		}
+		model.createRepo(repoObject)
+		.then(repo => {
+			this.setState({ project: {
+				title: 			repo.name,
+				description: 	repo.description,
+				username:       repo.owner.login,
+				looking_for:  	this.state.inputArea,
+				repo_url:       repo.html_url,
+				description:    repo.description,
+				location:       null,
+				req_skills:     [],
+				users_liked:    [],
+				users_disliked: [],
+			}, stage: 1 })
+		})
+	}
+
 	handleNextStage(command) {
 		switch(this.state.stage){
 			case 0:
 				model.getRepoData(this.state.input0)
 				.then(repo => {
 					this.setState({ project: {
-						title: 					repo.name,
-						description: 		repo.description,
+						title: 			repo.name,
+						description: 	repo.description,
 						username:       repo.owner.login,
 						looking_for:  	this.state.inputArea,
 						repo_url:       repo.html_url,
@@ -46,19 +77,7 @@ export default class CreateProject extends React.Component {
 					}, stage: 1 })
 				})
 				.catch(err => {
-					if(errorTimeoutId){
-						window.clearTimeout(errorTimeoutId);
-					}
-					if(!document.getElementsByClassName('projectWarning')[0])
-						document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
-					else {
-						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
-						window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
-					}
-
-					errorTimeoutId = window.setTimeout(x => {
-						document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut";
-					}, 4000)
+					this.setState({ stage: 2 })
 				})
 		}
 	}
@@ -87,8 +106,11 @@ export default class CreateProject extends React.Component {
 			if(errorTimeoutId){
 				window.clearTimeout(errorTimeoutId);
 			}
-			if(!document.getElementsByClassName('projectWarning')[0])
+			if(!document.getElementsByClassName('projectWarning')[0]){
+				// console.log('working????????')
 				document.getElementsByClassName('projectWarning-hidden')[0].className = "projectWarning animated tada"
+				
+			}
 			else {
 				document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated fadeOut"
 				window.setTimeout(x => {document.getElementsByClassName('projectWarning')[0].className = "projectWarning animated tada"}, 200)		
@@ -117,7 +139,6 @@ export default class CreateProject extends React.Component {
 							    </fieldset>
 							    <button type="button" onClick={this.handleNextStage.bind(this, 'next')} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
 						    </form>
-						<div className="projectWarning-hidden animated tada">`You don't have a repo on your GitHub account with that name`</div>
 					</div>
 					)
 			case 1:
@@ -145,11 +166,21 @@ export default class CreateProject extends React.Component {
 							<div className="projectWarning-hidden animated tada">Please choose at least one skill</div>
 						</div>
 					</div>
+			
 				)
 			case 2:
 				return (
-					<div>ENDING!</div>
-				)
+					<div className="stage">
+						<button type="button" className="projectCancelButton pure-button" onClick={this.cancelProject.bind(this)}>X</button>
+							<form className="pure-form create-project">
+							    <fieldset className="pure-group">
+							    	<div className='pure-div-1-2'>The repo named {this.state.project.title} does not exist, we can create it for you!</div>
+							        <textarea className="pure-input-1-2" onChange={this.handleDescChange.bind(this)} value={this.state.inputDesc} placeholder="Please enter a short description of the repository"></textarea>
+							    </fieldset>
+							    <button type="button" onClick={this.handleCreateRepo.bind(this)} className="pure-button pure-input-1-2 pure-button-primary project-next">Next</button>
+						    </form>
+					</div>
+					)
 		}
 	}
 
