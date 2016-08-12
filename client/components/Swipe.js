@@ -6,6 +6,7 @@ import * as model    from '../models/profile';
 import * as Users    from '../models/users'
 import * as Chat     from '../models/chat'
 import * as Utils    from '../utils'
+import * as Notify	 from '../models/notifications';
 
 import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
@@ -81,6 +82,11 @@ export default class Swipe extends React.Component {
  		var self = this
 		let developer = this.state.username
 		let visionary = this.state.projects[0].username
+
+		Notify.add({
+			description: `A developer has liked your project: ${self.state.projects[0].title}!`,
+			username: visionary,
+		})
 		
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){
