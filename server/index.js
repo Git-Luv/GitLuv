@@ -317,6 +317,7 @@ io.on('connection', function(socket){
 
   socket.on('send', function(data) {
     console.log('step 2 --- socket .on(send): ', data);
+    'use strict'
 
     let rooooooom = data.room
     
