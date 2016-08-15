@@ -11,21 +11,12 @@ var Notify = require('./models/notifications');
 
 var path = require('path')
 
-
-
-
 var Auth = require('./models/util')
-
 
 var app = express();
 exports.app = app
 
-
-if(process.env.NODE_ENV){
-  var server = app.listen(process.env.NODE_ENV)
-} else {
-  var server = app.listen(4000);  
-}
+var server = app.listen(4000);  
 
 var io = require('socket.io').listen(server)
 
