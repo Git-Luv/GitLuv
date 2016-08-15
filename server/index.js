@@ -18,8 +18,15 @@ var Auth = require('./models/util')
 
 
 var app = express();
+exports.app = app
 
-var server = app.listen(4000);
+
+if(process.env.NODE_ENV){
+  var server = app.listen(process.env.NODE_ENV)
+} else {
+  var server = app.listen(4000);  
+}
+
 var io = require('socket.io').listen(server)
 
 // var port = process.env.PORT || 4000;
