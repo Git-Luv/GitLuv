@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 import moment from 'moment';
 import * as Chat from '../models/chat';
 import * as model from '../models/profile';

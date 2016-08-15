@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
-import Sidebar from './sidebar'
-import CreateProject from './createproject'
+import Sidebar from './Sidebar'
+import CreateProject from './CreateProject'
 import * as Projects from '../models/projects'
 import * as modelProfile from '../models/profile';
 import * as modelUser from '../models/users';

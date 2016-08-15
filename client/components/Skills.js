@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch';
 import * as modelSkills from '../models/users';
 import * as modelProfile from '../models/profile';
 import * as Utils from '../utils';
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 let dc = require('delightful-cookies')
 let Popout = require('react-popout')
 
