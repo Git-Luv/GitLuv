@@ -201,6 +201,30 @@ font-family: 'Roboto', sans-serif;
 	color: white;
 }
 
+.l-box2 {
+	color: white;
+    padding-right: 2cm;
+    height: 2.5em;
+    font-size: 18px;
+    width: 115px;
+    font-family: 'Roboto', sans-serif;
+
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url('path/to/image.jpg');
+}
+
+.l-box2 img {
+	zoom: 2;
+
+    display: block;
+    margin: auto;
+    margin-top: -7px;
+    max-height: 100%;
+
+}
+
 /* ========== Swipe Page ========== */
 
 .visionaryBadge {
