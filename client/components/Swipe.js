@@ -90,6 +90,7 @@ export default class Swipe extends React.Component {
 		
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){
+			console.log("no")
 
 			Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
 	 		self.setState({ direction: 'right' })
