@@ -202,25 +202,16 @@ font-family: 'Roboto', sans-serif;
 }
 
 .l-box2 {
-	color: white;
     padding-right: 2cm;
     height: 2.5em;
-    font-size: 18px;
-    width: 115px;
-    font-family: 'Roboto', sans-serif;
-
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-    background-image: url('path/to/image.jpg');
+    width: 105px;
 }
 
 .l-box2 img {
 	zoom: 2;
-
     display: block;
     margin: auto;
-    margin-top: -7px;
+    margin-top: -6px;
     max-height: 100%;
 
 }
