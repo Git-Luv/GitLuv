@@ -54,9 +54,8 @@ export default class SideBar extends React.Component {
 			if(data.length > 10) {
 				console.log(data);
 				for(let i = data.length - 1; i >= 10; i--){
-					console.log("MURDER!!!!!!!")
 					notifyModel.remove({ id: data[i]._id })
-
+					notifications.pop();
 				}
 			}
 			this.setState({ notifications: data })
