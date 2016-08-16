@@ -51,6 +51,14 @@ export default class SideBar extends React.Component {
 					return 0;
 				}
 			})
+			if(data.length > 10) {
+				console.log(data);
+				for(let i = data.length - 1; i >= 10; i--){
+					console.log("MURDER!!!!!!!")
+					notifyModel.remove({ id: data[i]._id })
+
+				}
+			}
 			this.setState({ notifications: data })
 		})
 	}
