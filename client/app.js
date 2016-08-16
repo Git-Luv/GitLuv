@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import Project from './components/Project';
 import Messages   from './components/Messages';
 import SkillsList from './components/Skills';
-import UserProfile from './components/Userprofile';
+import UserProfile from './components/UserProfile';
 
 export default function App() {
   return (
