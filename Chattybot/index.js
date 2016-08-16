@@ -18,6 +18,22 @@ app.get('/', function (req, res) {
 })
 
 
+// Wit.ai parameters
+const WIT_TOKEN = process.env.WIT_TOKEN || "OYZAK6OU46FUO7UCPWG2KZ27VRIFN5UB"
+
+
+
+let Wit = null;
+let log = null;
+try {
+  // if running from repo
+  Wit = require('../').Wit;
+  log = require('../').log;
+} catch (e) {
+  Wit = require('node-wit').Wit;
+  log = require('node-wit').log;
+}
+
 
 // Spin up the server
 app.listen(app.get('port'), function() {
@@ -30,7 +46,21 @@ var token = "EAADF9ay2h5gBAOvwyJAFpwqG9y3Wg3Q4JWZAfpVgDXNKrvwfObIUbq7ZCbNERuuPdM
 
 
 
+// Messenger API parameters
+// const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
+const FB_PAGE_TOKEN = "EAADF9ay2h5gBAOvwyJAFpwqG9y3Wg3Q4JWZAfpVgDXNKrvwfObIUbq7ZCbNERuuPdMLy6cGoanbryqx6XEcF9tWnkGA7ZAwHJo9LUFCplndhA1Kw8c1NjaS49vHjjjhebzCw7PiWUsNVa0bxOQ4BQKqLsbCLIWiZC8GR7FZAKlAZDZD";
+if (!FB_PAGE_TOKEN) { throw new Error('missing FB_PAGE_TOKEN') }
+// const FB_APP_SECRET = process.env.FB_APP_SECRET;
+const FB_APP_SECRET = "cc5f2d797b549fc1e8cc7780c9b5a2c2";
+if (!FB_APP_SECRET) { throw new Error('missing FB_APP_SECRET') }
 
+
+let FB_VERIFY_TOKEN = "my_voice_is_my_password_verify_me";
+// crypto.randomBytes(8, (err, buff) => {
+//   if (err) throw err;
+//   FB_VERIFY_TOKEN = buff.toString('hex');
+//   console.log(`/webhook will accept the Verify Token "${FB_VERIFY_TOKEN}"`);
+// });
 
 
 // Messenger API specific code
