@@ -1,6 +1,6 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 import * as Projects from '../models/projects'
 import * as model    from '../models/profile';
 import * as Users    from '../models/users'
@@ -90,6 +90,7 @@ export default class Swipe extends React.Component {
 		
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){
+			console.log("no")
 
 			Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
 	 		self.setState({ direction: 'right' })

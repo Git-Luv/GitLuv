@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import * as Chat from '../models/chat'
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 
 var dc = require('delightful-cookies');
 
@@ -22,7 +22,7 @@ export default class Landing extends React.Component {
 
   login(e) {
   	e.preventDefault()
-  	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://localhost:4000/auth/login&scope=repo', {
+  	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://gitluv.io/auth/login&scope=repo', {
   		method: "GET",
   		redirect: "manual",
   		mode: 'no-cors',

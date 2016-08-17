@@ -11,15 +11,13 @@ var Notify = require('./models/notifications');
 
 var path = require('path')
 
-
-
-
 var Auth = require('./models/util')
 
-
 var app = express();
+exports.app = app
 
-var server = app.listen(4000);
+var server = app.listen(4000);  
+
 var io = require('socket.io').listen(server)
 
 // var port = process.env.PORT || 4000;
@@ -310,6 +308,7 @@ io.on('connection', function(socket){
 
   socket.on('send', function(data) {
     console.log('step 2 --- socket .on(send): ', data);
+    'use strict'
 
     let rooooooom = data.room
     
