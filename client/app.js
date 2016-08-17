@@ -2,13 +2,13 @@ import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 
 
-import Landing from './components/landing';
-import Swipe from './components/swipe';
-import Profile from './components/profile';
-import Project from './components/project';
-import Messages   from './components/messages';
-import SkillsList from './components/skills';
-import UserProfile from './components/userprofile';
+import Landing from './components/Landing';
+import Swipe from './components/Swipe';
+import Profile from './components/Profile';
+import Project from './components/Project';
+import Messages   from './components/Messages';
+import SkillsList from './components/Skills';
+import UserProfile from './components/UserProfile';
 
 export default function App() {
   return (

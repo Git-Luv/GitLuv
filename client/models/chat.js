@@ -22,7 +22,7 @@ export function getChatroom(chatRoom){
 			'Content-Type': 'application/json'
 		}})
 	.then(data => data.json())
-	.catch(err => console.error(err))
+	.catch(err => new Promise(function(res, rej){return rej()}))
 }
 
 export function addChatroom(chatRoomObj){

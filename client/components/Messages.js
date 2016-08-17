@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import ChatBox from './ChatBox'
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 import * as model from '../models/profile';
 import * as Chat from '../models/chat'
 
