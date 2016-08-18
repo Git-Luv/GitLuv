@@ -84,7 +84,6 @@ export default class Messages extends React.Component {
 		var self = this
 		return (<div>
 			<Sidebar />
-				
 					{this.state.chats.map(function(chatBox, i){
 						let chatName;
 						if(self.state.username === chatBox.developer){
@@ -99,11 +98,9 @@ export default class Messages extends React.Component {
 				          <div className="panel">
 										<ChatBox username={self.state.username} room={chatBox.chatRoom} visionary={chatBox.visionary} developer={chatBox.developer}/>
 									</div>
-							</div>
-							
+							</div>	
 						)
 					})}
-
 		</div>)
 	}
 }

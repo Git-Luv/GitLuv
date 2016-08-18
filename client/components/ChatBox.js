@@ -74,13 +74,13 @@ export default class ChatBox extends React.Component {
 	render () {
 
 		return (			
-			<div className="messages">
-				<table className="messagesNotSend">
-					<tbody>
+			<div>
+				<table style={{float:"center"}} className="messages">
+					<tbody className="messagesNotSend">
 						{
 							this.state.messages.map(function (msg,index) {
 								return (
-									<Message key={index} name={msg.sentBy} message={msg.message} time={msg.time}/>
+									<tr className="message"><Message key={index} name={msg.sentBy} message={msg.message} time={msg.time}/></tr>
 								)
 							})
 						}
@@ -90,7 +90,7 @@ export default class ChatBox extends React.Component {
 					<input
 						type="text"
 						value={this.state.text}
-						className="u-full-width"
+						className="messageBar"
 						placeholder="send a message!"
 						id="chatInput"
 						onChange={event => this.setState({text: event.target.value})}
