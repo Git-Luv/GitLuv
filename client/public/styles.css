@@ -787,7 +787,6 @@ button.accordion.active:after {
 .user-liked {
 	padding-top: 1px;
 	padding-bottom: 1px;
-	/*margin-bottom: -8px;*/
 	padding-left: 20px;
 	vertical-align: middle;
 	position:relative;
