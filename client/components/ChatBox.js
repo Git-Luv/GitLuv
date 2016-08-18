@@ -31,32 +31,31 @@ export default class ChatBox extends React.Component {
 								  developer: this.props.developer,
 											 open: this.props.open || null})
 
+		//chatroom is gotten from database, then applied to state
 		Chat.getChatroom(this.props.room)
 		.then(room => {
-			console.log("room in getChatroom: ", room)
 			this.setState({messages: room.messages})
 		})
 
+		//subscribes to socket pertaining to chatroom
 		socket.emit("subscribe", this.props.room);
 
+		//socket is listening for new messages
     socket.on("chat message", function(msg) {
-    	console.log("Step 4 msg in socket.on client: ", msg)
-
     	let newMess = [{sentby: msg.sentBy, message: msg.message}]
-
     	if(self.state.room === msg.room){
     		self.setState({messages: self.state.messages.concat(msg)})
     	}
   	})
 	}
 
+	//function runs when message is sent
 	_handleSubmit (event) {
 		event.preventDefault();
 
 		var self = this;
 
-		console.log("step 1 --- ChatBox.js: ", {room: this.state.room, sentBy: this.state.username, message: this.state.text})
-
+		//socket emitting when a message is sent
 		socket.emit("send", {
 		  room   : this.state.room,
 		  sentBy : this.state.username, 
@@ -64,7 +63,7 @@ export default class ChatBox extends React.Component {
 		  time   : moment()
 		})
 
-			// clear input after each message
+		// clear input after each message
 		self.setState({
 			text: ""
 		})
