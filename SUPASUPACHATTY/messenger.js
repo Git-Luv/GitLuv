@@ -8,9 +8,7 @@ const Project = require('../server/models/project')
 
 
 
-Project.all().then(function(response) {
-  console.log('FUCK YEA', response)
-})
+
 
 
 
@@ -143,30 +141,71 @@ const actions = {
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
+  send(request, response) {
+      console.log("REQUEST", request)
+      console.log("RESPONSE", response)
+      const {sessionId, context, entities} = request;
+      const {text, quickreplies} = response;
+      return new Promise(function(resolve, reject) {
+        console.log('sending...', JSON.stringify(response));
+        return resolve();
+      });
+    },
+    getSkill({context, entities}) {
+      return new Promise(function(resolve, reject) {
+        const userSkill = firstEntityValue(entities, 'skill');
+        context.skill = userSkill;
+
+        const projectList = Project.all()
+          .then(function(response) {
+            return response.filter(function (project) {
+              return project.req_skills.indexOf(userSkill) >= 0
+            })
+          })
+          .then(function (goodProj) {
+            return resolve(context)
+          })
+      })
+    }
+};
 
   // send(request, response) {
-  //     const {sessionId, context, entities} = request;
-  //     const {text, quickreplies} = response;
-  //     return new Promise(function(resolve, reject) {
+  //   const {sessionId, context, entities} = request;
+  //   const {text, quickreplies} = response;
+  //   return new Promise(function(resolve, reject) {
+  //       console.log('user said...', request.text);
   //       console.log('sending...', JSON.stringify(response));
   //       return resolve();
-  //     });
-  //   },
-  //   getSkill({context, entities}) {
-  //     return new Promise(function(resolve, reject) {
-  //       // Here should go the api call, e.g.:
-  //       // context.forecast = apiCall(context.loc)
-  //       context.forecast = 'sunny';
-  //       return resolve(context);
-  //     });
-  //   },
-  // };
+  //   });
+  // },
+  // ['compute-result']({context,entities}) {
+  //   return new Promise(function(resolve, reject) {
+  //     const movie_title = firstEntityValue(entities, 'movie');
+  //     if (movie_title) {
+  //       context.movie = movie_title;
+  //     }
+  //     //call the API here
+  //     return resolve(context);
+  // });
+ // },
 
 
 
 
 
-};
+
+
+
+
+
+  // Project.all().then(function(response) {
+  // console.log('FUR YEA', response)
+  // })
+
+
+
+
+// };
 
 // Setting up our bot
 const wit = new Wit({
