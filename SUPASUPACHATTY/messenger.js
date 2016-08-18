@@ -1,81 +1,18 @@
 'use strict';
 
-// setting up server functionality to allow for mLab communication between wit bot searching
 
-var Project = require('./models/project')
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://gitluv:lolboi5@ds031965.mlab.com:31965/gitluv');
 
-app.use('/api/projectsGET', Auth.isAuthenticated, function (req, res) {
 
-  Project.all()
-    .then(function (projects) {
-        console.log("getting!!: ", projects)
-      res.status(200).send(projects)
-    })
-    .catch(function (err) {
-      console.log("Project.all error:", err)
-      res.status(500).send(err)
-    })
+const Project = ('../server/models/project')
+
+
+
+
+Project.all().then(function(response) {
+  console.log('FUCK YEA', response)
 })
-
-app.use('/api/projects/:title', Auth.isAuthenticated, function (req, res) {
-
-  Project.getProject(req.params.title)
-  .then(function(project){
-    res.status(200).send(project)
-  })
-  .catch(function (err){
-    console.log("get error: ", err)
-    res.status(500).send(err)
-  })
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
