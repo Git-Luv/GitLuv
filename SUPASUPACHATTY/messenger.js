@@ -1,11 +1,9 @@
 'use strict';
 
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://gitluv:lolboi5@ds031965.mlab.com:31965/gitluv');
 
 
-const Project = ('../server/models/project')
+const Project = require('../server/models/project')
 
 
 
@@ -146,23 +144,23 @@ const actions = {
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
 
-  send(request, response) {
-      const {sessionId, context, entities} = request;
-      const {text, quickreplies} = response;
-      return new Promise(function(resolve, reject) {
-        console.log('sending...', JSON.stringify(response));
-        return resolve();
-      });
-    },
-    getSkill({context, entities}) {
-      return new Promise(function(resolve, reject) {
-        // Here should go the api call, e.g.:
-        // context.forecast = apiCall(context.loc)
-        context.forecast = 'sunny';
-        return resolve(context);
-      });
-    },
-  };
+  // send(request, response) {
+  //     const {sessionId, context, entities} = request;
+  //     const {text, quickreplies} = response;
+  //     return new Promise(function(resolve, reject) {
+  //       console.log('sending...', JSON.stringify(response));
+  //       return resolve();
+  //     });
+  //   },
+  //   getSkill({context, entities}) {
+  //     return new Promise(function(resolve, reject) {
+  //       // Here should go the api call, e.g.:
+  //       // context.forecast = apiCall(context.loc)
+  //       context.forecast = 'sunny';
+  //       return resolve(context);
+  //     });
+  //   },
+  // };
 
 
 
