@@ -1,5 +1,85 @@
 'use strict';
 
+// setting up server functionality to allow for mLab communication between wit bot searching
+
+var Project = require('./models/project')
+
+app.use('/api/projectsGET', Auth.isAuthenticated, function (req, res) {
+
+  Project.all()
+    .then(function (projects) {
+        console.log("getting!!: ", projects)
+      res.status(200).send(projects)
+    })
+    .catch(function (err) {
+      console.log("Project.all error:", err)
+      res.status(500).send(err)
+    })
+})
+
+app.use('/api/projects/:title', Auth.isAuthenticated, function (req, res) {
+
+  Project.getProject(req.params.title)
+  .then(function(project){
+    res.status(200).send(project)
+  })
+  .catch(function (err){
+    console.log("get error: ", err)
+    res.status(500).send(err)
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Messenger API integration example
 // We assume you have:
 // * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
@@ -128,6 +208,29 @@ const actions = {
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
+
+  send(request, response) {
+      const {sessionId, context, entities} = request;
+      const {text, quickreplies} = response;
+      return new Promise(function(resolve, reject) {
+        console.log('sending...', JSON.stringify(response));
+        return resolve();
+      });
+    },
+    getSkill({context, entities}) {
+      return new Promise(function(resolve, reject) {
+        // Here should go the api call, e.g.:
+        // context.forecast = apiCall(context.loc)
+        context.forecast = 'sunny';
+        return resolve(context);
+      });
+    },
+  };
+
+
+
+
+
 };
 
 // Setting up our bot
@@ -142,6 +245,7 @@ const app = express();
 app.use(({method, url}, rsp, next) => {
   rsp.on('finish', () => {
     console.log(`${rsp.statusCode} ${method} ${url}`);
+
   });
   next();
 });
