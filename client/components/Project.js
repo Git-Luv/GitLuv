@@ -146,45 +146,44 @@ componentWillMount() {
 				</div>
 				)
 		} else {
-		return (
-			<div>
+			return (
 				<div>
-					<Sidebar />
-					<h2 className="projectsPageTitle">My Projects</h2>
-					<div className="projectsLiked">
-						<div className="likedUsers">
-			                {this.state.myProjects.map((item, i) => {
-			                    return (
-			                    	<div className="accordionContainer" key={i}>
-				                        <button className="accordion" title={`${ item.title}`}  onClick={this.toggleAccordion} key={i} >{item.title}</button>
-				                            <div className="panel">
-											    {item.users_liked.map(user => {
-											    	return (
-											    		<div className="user-liked">
-											    		<Link to={`userprofile/${user}`}>
-			     											<img className="userPhoto" src={this.getAvatar(user)} />
-					                            			<span className="user-liked-username"><h4>{user}</h4></span>
-				                            			</Link>
-					                            			<Link to={`messages`}><button className="chat-button pure-button">chat</button></Link>
-				                            			</div>
-			                        				)
-		                        				})}
-				                            </div>
-			                        </div>
-			                    );
-			                })}
-			            </div>
-		            </div>
-				</div>
-					<div className="projectPage"> 
-						{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
-						<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
+					<div>
+						<Sidebar />
+						<h2 className="projectsPageTitle">My Projects</h2>
+						<div className="projectsLiked">
+							<div className="likedUsers">
+                {this.state.myProjects.map((item, i) => {
+                    return (
+                    	<div className="accordionContainer" key={i}>
+	                        <button className="accordion" title={`${ item.title}`}  onClick={this.toggleAccordion} key={i} >{item.title}</button>
+	                            <div className="panel">
+														    {item.users_liked.map(user => {
+														    	return (
+														    		<div className="user-liked">
+														    			<Link to={`userprofile/${user}`}>
+						     												<img className="userPhoto" src={this.getAvatar(user)} />
+								                        	<span className="user-liked-username"><h4>{user}</h4></span>
+							                        </Link>
+								                      <Link to={`messages`}><button className="chat-button pure-button">chat</button></Link>
+							                      </div>
+						               				)
+					                      })}
+	                            </div>
+                        </div>
+                    );
+                })}
+				      </div>
+			      </div>
 					</div>
-			</div>
+				<div className="projectPage"> 
+					{ this.state.isCreatingProject ? <CreateProject project={this} /> : null }							
+					<button type="button" className="button-like pure-button" onClick={this.createProject.bind(this)}>Create Project</button>
+				</div>
+				</div>
 
 			)
-		// }
-	}
+		}
 
 }
 }
