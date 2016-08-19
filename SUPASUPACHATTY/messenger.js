@@ -153,20 +153,34 @@ const actions = {
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
-  send(request, response) {
-      console.log("REQUEST", request)
-      console.log("RESPONSE", response)
-      const {sessionId, context, entities} = request;
-      const {text, quickreplies} = response;
-      const recipientId = sessions[sessionId].fbid
-      
-      return new Promise(function(resolve, reject) {
-        console.log('sending...', JSON.stringify(response));
-        return fbMessage(recipientId, text)
+  // send(request, response) {
+  //     console.log("REQUEST", request)
+  //     console.log("RESPONSE", response)
+  //     const {sessionId, context, entities} = request;
+  //     const {text, quickreplies} = response;
+  //     const recipientId = sessions[sessionId].fbid
 
-        // return resolve();
-      });
-    },
+  //     // return new Promise(function(resolve, reject) {
+  //       if (recipientId) {
+  //       console.log('sending...', JSON.stringify(response));
+  //       return fbMessage(recipientId, text)
+  //       then(() => null)
+  //             .catch((err) => {
+  //               console.error(
+  //                 'Oops! An error occurred while forwarding the response to',
+  //                 recipientId,
+  //                 ':',
+  //                 err.stack || err
+  //               );
+  //             });
+  //           } else {
+  //             console.error('Oops! Couldn\'t find user for session:', sessionId);
+  //             // Giving the wheel back to our bot
+  //             return Promise.resolve()
+  //           }
+  //       // return resolve();
+  //     // });
+  //   },
     getSkill({context, entities}) {
       return new Promise(function(resolve, reject) {
         const userSkill = firstEntityValue(entities, 'skill');
@@ -179,11 +193,16 @@ const actions = {
             })
           })
           .then(function (goodProj) {
-            console.log("goodProj", goodProj)
-            console.log("context", context)
-            console.log("promise context", Promise.resolve(context));
-
+            // console.log("goodProj", goodProj)
+            // console.log("context", context)
+            // console.log("promise context", Promise.resolve(context));
+            const stringifiedProj = JSON.stringify(goodProj);
+            console.log("HERHERHERHERHERHERH", stringifiedProj)
+            return fbMessage(recipientId, stringifiedProj)
+          })
+          .then(function (res) {
             return resolve(context)
+
           })
       })
     }
@@ -198,15 +217,15 @@ const actions = {
   //       return resolve();
   //   });
   // },
-  // ['compute-result']({context,entities}) {
-  //   return new Promise(function(resolve, reject) {
-  //     const movie_title = firstEntityValue(entities, 'movie');
-  //     if (movie_title) {
-  //       context.movie = movie_title;
-  //     }
-  //     //call the API here
-  //     return resolve(context);
-  // });
+ //  ['compute-result']({context,entities}) {
+ //    return new Promise(function(resolve, reject) {
+ //      const movie_title = firstEntityValue(entities, 'movie');
+ //      if (movie_title) {
+ //        context.movie = movie_title;
+ //      }
+ //      //call the API here
+ //      return resolve(context);
+ //  });
  // },
 
 
