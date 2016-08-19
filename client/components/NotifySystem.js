@@ -43,6 +43,11 @@ export default class NotifySystem extends React.Component {
 		}
 	}
 
+	handleDeleteNotification(item) {
+		NotifyModel.remove({ id: item._id })
+		
+	}
+
 	render() {
 		return(
 			<div className="NotifySystemMenu">
@@ -58,6 +63,7 @@ export default class NotifySystem extends React.Component {
 										<span className="notify-description">{item.description}</span>
 										<br/>
 										<span className="notify-timeCreated">{Utils.convertTimeToString(item.created)}</span>
+										<span className="deleteButton" onClick={this.handleDeleteNotification.bind(this, item)}>X</span>
 									</div>
 							)
 						})

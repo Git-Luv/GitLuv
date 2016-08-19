@@ -821,6 +821,7 @@ img.userPhoto {
 /* ============ Notification System ============ */
 .NotifySystemMenu {
 	position: fixed;
+	z-index: 2;
 	right: 10%;
 	top: 2.5em;
 	width: 40%;
@@ -835,7 +836,18 @@ img.userPhoto {
 
 .notification-read,
 .notification-unread {
+	position: relative;
 	padding: 5px;
+}
+
+.notification-read:hover > .deleteButton,
+.notification-unread:hover > .deleteButton {
+	display: block;
+}
+
+.notification-read > .deleteButton,
+.notification-unread > .deleteButton {
+	display: none;
 }
 
 .notify-timeCreated {
@@ -853,6 +865,18 @@ img.userPhoto {
 
 .notification-unread {
 	background-color: #aaa;
+}
+
+.deleteButton {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	padding: 2px;
+}
+
+.deleteButton:hover {
+	background-color: white;
+	cursor: pointer;
 }
 
 .a-button:hover {
