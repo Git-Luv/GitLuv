@@ -68,6 +68,33 @@ crypto.randomBytes(8, (err, buff) => {
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
 
+const fbMessage = (sender, text) => {
+  // const body = JSON.stringify({
+  //   recipient: { id },
+  //   message: { text },
+  // });
+  const messageData = {
+    text: text
+  }
+  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+
+  return fetch('https://graph.facebook.com/me/messages?' + qs, {
+    method: 'POST',
+    // headers: {'Content-Type': 'application/json'},
+    json: {
+      recipient: {id: sender},
+      message: messageData,
+    }
+  })
+  // .then(rsp => rsp.json())
+  .then(json => {
+    if (json.error && json.error.message) {
+      throw new Error(json.error.message);
+    }
+    return json;
+  });
+};
+
 // const fbMessage = (id, text) => {
 //   const body = JSON.stringify({
 //     recipient: { id },
@@ -87,28 +114,6 @@ crypto.randomBytes(8, (err, buff) => {
 //     return json;
 //   });
 // };
-
-function fbMessage (sender, text)  {
-  const messageData = {
-      text:text
-    }
-    const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: qs,
-        method: 'POST',
-        json: {
-          recipient: {id:sender},
-          message: messageData,
-        }
-    }, function(error, response, body) {
-      if (error) {
-        console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-        console.log('Error: ', response.body.error);
-      }
-    });
-};
 
 // ----------------------------------------------------------------------------
 // Wit.ai bot specific code
