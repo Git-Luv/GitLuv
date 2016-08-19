@@ -68,24 +68,46 @@ crypto.randomBytes(8, (err, buff) => {
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
 
-const fbMessage = (id, text) => {
-  const body = JSON.stringify({
-    recipient: { id },
-    message: { text },
-  });
-  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-  return fetch('https://graph.facebook.com/me/messages?' + qs, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body,
-  })
-  .then(rsp => rsp.json())
-  .then(json => {
-    if (json.error && json.error.message) {
-      throw new Error(json.error.message);
+// const fbMessage = (id, text) => {
+//   const body = JSON.stringify({
+//     recipient: { id },
+//     message: { text },
+//   });
+//   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+//   return fetch('https://graph.facebook.com/me/messages?' + qs, {
+//     method: 'POST',
+//     headers: {'Content-Type': 'application/json'},
+//     body,
+//   })
+//   .then(rsp => rsp.json())
+//   .then(json => {
+//     if (json.error && json.error.message) {
+//       throw new Error(json.error.message);
+//     }
+//     return json;
+//   });
+// };
+
+function fbMessage (sender, text)  {
+  const messageData = {
+      text:text
     }
-    return json;
-  });
+    const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: qs,
+        method: 'POST',
+        json: {
+          recipient: {id:sender},
+          message: messageData,
+        }
+    }, function(error, response, body) {
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+      }
+    });
 };
 
 // ----------------------------------------------------------------------------
@@ -128,6 +150,7 @@ const firstEntityValue = (entities, entity) => {
 // Our bot actions
 const actions = {
   send({sessionId}, {text}) {
+    console.log("SESSION IDDDDDD", sessions[sessionId])
     // Our bot has something to say!
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
@@ -194,11 +217,11 @@ const actions = {
           })
           .then(function (goodProj) {
             // console.log("goodProj", goodProj)
-            // console.log("context", context)
-            // console.log("promise context", Promise.resolve(context));
+            console.log("context", context)
+            console.log("promise context", Promise.resolve(context));
             const stringifiedProj = JSON.stringify(goodProj);
             console.log("HERHERHERHERHERHERH", stringifiedProj)
-            return fbMessage(recipientId, stringifiedProj)
+            // return fbMessage(sender, stringifiedProj)
           })
           .then(function (res) {
             return resolve(context)
