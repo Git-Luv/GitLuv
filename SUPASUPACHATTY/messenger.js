@@ -68,52 +68,57 @@ crypto.randomBytes(8, (err, buff) => {
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
 
-const fbMessage = (sender, text) => {
-  // const body = JSON.stringify({
-  //   recipient: { id },
-  //   message: { text },
-  // });
-  const messageData = {
-    text: text
-  }
-  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-
-  return fetch('https://graph.facebook.com/me/messages?' + qs, {
-    method: 'POST',
-    // headers: {'Content-Type': 'application/json'},
-    json: {
-      recipient: {id: sender},
-      message: messageData,
-    }
-  })
-  // .then(rsp => rsp.json())
-  .then(json => {
-    if (json.error && json.error.message) {
-      throw new Error(json.error.message);
-    }
-    return json;
-  });
-};
-
-// const fbMessage = (id, text) => {
-//   const body = JSON.stringify({
-//     recipient: { id },
-//     message: { text },
-//   });
+// const fbMessage = (sender, text) => {
+//   // const body = JSON.stringify({
+//   //   recipient: { id },
+//   //   message: { text },
+//   // });
+//   const messageData = {
+//     recipient: sender,
+//     text: text
+//   }
 //   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+
 //   return fetch('https://graph.facebook.com/me/messages?' + qs, {
 //     method: 'POST',
-//     headers: {'Content-Type': 'application/json'},
-//     body,
+//     // headers: {'Content-Type': 'application/json'},
+//     json: {
+//       recipient: {id: sender},
+//       message: messageData,
+//     }
 //   })
 //   .then(rsp => rsp.json())
 //   .then(json => {
+//     console.log("JSNJSNSJNSJNSJNS", json)
 //     if (json.error && json.error.message) {
 //       throw new Error(json.error.message);
 //     }
 //     return json;
 //   });
 // };
+
+const fbMessage = (id, text) => {
+  const body = JSON.stringify({
+    recipient: { id: id },
+    message: { text },
+  });
+  const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+  return fetch('https://graph.facebook.com/me/messages?' + qs, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body,
+  })
+  // .then(rsp => rsp.json())
+  .then(rsp => {
+    return rsp
+  // .then(json => {
+  //   console.log("JSJONSJSONSJSONSJONS", json)
+  //   if (json.error && json.error.message) {
+  //     throw new Error(json.error.message);
+  //   }
+  //   return json;
+  });
+};
 
 // ----------------------------------------------------------------------------
 // Wit.ai bot specific code
@@ -231,6 +236,9 @@ const actions = {
           .then(function (res) {
             return resolve(context)
 
+          })
+          .then (function (res) {
+            return fbMessage(sender, res)
           })
       })
     }
