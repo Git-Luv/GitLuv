@@ -113,6 +113,18 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
+const firstEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
+
 // Our bot actions
 const actions = {
   send({sessionId}, {text}) {
@@ -146,9 +158,13 @@ const actions = {
       console.log("RESPONSE", response)
       const {sessionId, context, entities} = request;
       const {text, quickreplies} = response;
+      const recipientId = sessions[sessionId].fbid
+      
       return new Promise(function(resolve, reject) {
         console.log('sending...', JSON.stringify(response));
-        return resolve();
+        return fbMessage(recipientId, text)
+
+        // return resolve();
       });
     },
     getSkill({context, entities}) {
@@ -163,6 +179,10 @@ const actions = {
             })
           })
           .then(function (goodProj) {
+            console.log("goodProj", goodProj)
+            console.log("context", context)
+            console.log("promise context", Promise.resolve(context));
+
             return resolve(context)
           })
       })
