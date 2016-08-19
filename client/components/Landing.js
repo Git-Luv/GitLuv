@@ -2,7 +2,7 @@ import React from 'react';
 import { browserHistory, Link } from 'react-router';
 import fetch from 'isomorphic-fetch';
 import * as Chat from '../models/chat'
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 
 var dc = require('delightful-cookies');
 

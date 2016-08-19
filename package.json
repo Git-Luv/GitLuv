@@ -42,6 +42,7 @@
     "moment": "^2.14.1",
     "mongo": "^0.1.0",
     "mongoose": "^4.5.7",
+    "node-fetch": "^1.6.0",
     "node-wit": "^4.0.0",
     "nodemon": "^1.10.0",
     "path": "^0.12.7",

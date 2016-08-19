@@ -201,6 +201,21 @@ font-family: 'Roboto', sans-serif;
 	color: white;
 }
 
+.l-box2 {
+    padding-right: 2cm;
+    height: 2.5em;
+    width: 115px;
+}
+
+.l-box2 img {
+	zoom: 2;
+    display: block;
+    margin: auto;
+    margin-top: -6px;
+    max-height: 100%;
+
+}
+
 /* ========== Swipe Page ========== */
 
 .visionaryBadge {
@@ -772,7 +787,6 @@ button.accordion.active:after {
 .user-liked {
 	padding-top: 1px;
 	padding-bottom: 1px;
-	/*margin-bottom: -8px;*/
 	padding-left: 20px;
 	vertical-align: middle;
 	position:relative;
@@ -847,29 +861,52 @@ img.userPhoto {
 
 /* ========== Chat ========== */
 
-.messages {
+.messageBar {
+	text-align: left;
+	width: 100%;
+	border: 0px;
+	height: 25px;
 }
 
-.messagesNotSend {
+.messages {
+	border-collapse: collapse;
 	width: 100%;
+	padding: 5px;
+}
+
+.message {
+	width: 100%;
+	border: solid;
+	border-color: #e6e6ff;
+  border-width: 1px 0;
+}
+
+
+.messagesNotSend {
+	height: 30%;
 }
 
 .chat-body {
-
 }
 
 .chat-one {
+	width: 100%;
 	
 }
 
 .chat-name {
-	
+	text-align; left;
 }
 
 .chat-time {
 	color: gray;
+	float: right;
 }
 
 .chat-message {
-	/*text-align: right;*/
+	text-align: left;
+}
+
+@media only screen and (max-width: 768px){
+
 }

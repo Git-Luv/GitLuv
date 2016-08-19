@@ -1,6 +1,6 @@
 import React from 'react';
 import { browserHistory, Link } from 'react-router';
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 import * as Projects from '../models/projects'
 import * as model    from '../models/profile';
 import * as Users    from '../models/users'
@@ -8,7 +8,6 @@ import * as Chat     from '../models/chat'
 import * as Utils    from '../utils'
 import * as Notify	 from '../models/notifications';
 
-import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
 var hasEvent = false;
 
@@ -88,8 +87,11 @@ export default class Swipe extends React.Component {
 			username: visionary,
 		})
 		
+		//following function is ran to determine if a chatroom already exists betweem
+		//visionary and developer
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){
+			console.log("no")
 
 			Projects.updateProject(self.state.projects[0].title, {users_liked: [self.state.username]})
 	 		self.setState({ direction: 'right' })

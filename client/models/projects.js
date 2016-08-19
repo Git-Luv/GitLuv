@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 require('es6-promise').polyfill();
 var dc = require('delightful-cookies');
 
-
+//function that returns all projects
 export function getAllProjects(){
 	return fetch('/api/projectsGET', {
 		method: 'GET',
@@ -18,6 +18,7 @@ export function getAllProjects(){
 	})
 }
 
+//function that returns a project by title
 export function getProject(title){
 	return fetch('/api/projects/' + title, {
 		method: 'GET',
@@ -29,6 +30,7 @@ export function getProject(title){
 	.catch(err => console.error(err))
 }
 
+//function that adds a project and will update one if it exists already
 export function addProject(projectObj){
 	return fetch('/api/projectsPOST', {
 		method: 'POST',
@@ -42,6 +44,7 @@ export function addProject(projectObj){
 	.catch(err => console.error(err))
 }
 
+//function that updates a specific project
 export function updateProject(title, updatedAttrs){
 	return fetch('/api/projectsPATCH', {
 		method: 'PATCH',
