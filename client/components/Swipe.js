@@ -87,12 +87,8 @@ export default class Swipe extends React.Component {
 			description: `A developer has liked your project: ${self.state.projects[0].title}!`,
 			username: visionary,
 		})
-		
-<<<<<<< HEAD
-		//following function is ran to determine if a chatroom already exists between
-=======
+
 		//following function is ran to determine if a chatroom already exists betweem
->>>>>>> master
 		//visionary and developer
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){
