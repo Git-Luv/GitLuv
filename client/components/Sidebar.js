@@ -127,7 +127,7 @@ export default class SideBar extends React.Component {
 	render() {
 		return(
 			<div className="custom-wrapper pure-g " ref="menuClass" id="menu">
-			    <div className="pure-u-1 pure-u-md-1-6">
+			    <div className="pure-u-1 pure-u-md-1-8">
 			        <div className="pure-menu">
 			            <a href="#" className="pure-menu-heading custom-brand menu-item l-box logo">GitLuv</a>
 			            <a href="#" className="custom-toggle" ref="toggleClass" id="toggle" onClick={this.toggleMenu}><s className="bar"></s><s className="bar"></s></a>
@@ -136,13 +136,13 @@ export default class SideBar extends React.Component {
 			    <div className="pure-u-1 pure-u-md-1-6">
 			        <div className="menu-links pure-menu pure-menu-horizontal custom-can-transform">
 			            <ul className="pure-menu-list">
-			                <li className="pure-menu-item"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
-			                <li className="pure-menu-item"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
-			                <li className="pure-menu-item"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
-			                <li className="pure-menu-item a-button"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item l-box">NOTIFY <span>{this.getNotifyCount()}</span></a></li>
-			                <li className="pure-menu-item"><Link to={`messages`} className="pure-menu-link l-box">MESSAGES</Link></li>
+			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
+			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
+			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
+			                <li className="pure-menu-item pure-u-md-1-8 a-button"><a onClick={this.toggleNotificationMenu.bind(this)} className="pure-menu-link menu-item pure-u-md-1-8 l-box">NOTIFY <span>{this.getNotifyCount()}</span></a></li>
+			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`messages`} className="pure-menu-link l-box">MESSAGES</Link></li>
+			                <li className="pure-menu-item pure-u-md-1-8 a-button"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			                <li className="pure-menu-item a-button"><a href='http://m.me/747013538770126' target="_blank" className="pure-menu-link l-box2"><img className="messengerPic" src="https://hipstercatbot.files.wordpress.com/2016/06/fb-message-us-small.png?w=700" /></a></li>
-			                <li className="pure-menu-item a-button"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			            </ul>
 			        </div>
 			    </div>
