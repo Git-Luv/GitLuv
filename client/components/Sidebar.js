@@ -6,6 +6,7 @@ import NotifySystem from './NotifySystem';
 
 var dc = require('delightful-cookies');
 
+var updateID;
 
 export default class SideBar extends React.Component {
 	constructor(props) {
@@ -31,6 +32,14 @@ export default class SideBar extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		if(updateID)
+			window.clearInterval(updateID);
+			
+		updateID = window.setInterval(this.updateNotifications.bind(this), 5000);
+		
+	}
+
 	toggleNotificationMenu() {
 		this.setState({ isNotifySystemOpen: !this.state.isNotifySystemOpen })
 		if(!this.state.isNotifySystemOpen)
@@ -52,7 +61,6 @@ export default class SideBar extends React.Component {
 				}
 			})
 			if(data.length > 10) {
-				console.log(data);
 				for(let i = data.length - 1; i >= 10; i--){
 					notifyModel.remove({ id: data[i]._id })
 					notifications.pop();
@@ -81,20 +89,17 @@ export default class SideBar extends React.Component {
 	}
 	
 	function (window, document) {
-	console.log('IN PARENT FUNCTION')
 
 	var menu = document.getElementsByClassName('menuClass'),
 	    WINDOW_CHANGE_EVENT = ('onorientationchange' in window) ? 'orientationchange':'resize';
 
 	function closeMenu() {
-	    console.log('IN CLOSE MENU')
 	    if (menu.classList.contains('open')) {
 	        toggleMenu();
 	    }
 	}
 
 	this.refs.toggleClass.addEventListener('click', function (e) {
-		console.log('IN TOGGLE GET ELEMENT')
 	    toggleMenu();
 	});
 
@@ -103,16 +108,13 @@ export default class SideBar extends React.Component {
 	
 	toggleMenu(e) {
 		e.preventDefault()
-		console.log('TOGGLEMENU', e)
 	    // set timeout so that the panel has a chance to roll up
 	    // before the menu switches states
 	    if (menu.classList.contains('open')) {
 	        setTimeout(this.toggleHorizontal, 500);
-	        console.log('IN TOGGLE MENU IF')
 
 	    }
 	    else {
-	    	console.log('IN TOGGLE MENU ELSE')
 
 	        this.toggleHorizontal();
 	    }
@@ -125,10 +127,8 @@ export default class SideBar extends React.Component {
 	        this.refs.menuClass.querySelectorAll('.custom-can-transform'),
 	        function(el){
 	            el.classList.toggle('pure-menu-horizontal');
-	            console.log('IN TOGGLE HORIZONTAL')
 	        }
 	    );
-	    	console.log('toggleHorizontal', this)
 	};
 
 	render() {

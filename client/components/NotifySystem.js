@@ -45,7 +45,9 @@ export default class NotifySystem extends React.Component {
 
 	handleDeleteNotification(item) {
 		NotifyModel.remove({ id: item._id })
-		
+		.then(() => {
+			this.props.sidebar.updateNotifications.call(this.props.sidebar);
+		})
 	}
 
 	render() {
