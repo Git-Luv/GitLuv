@@ -88,7 +88,11 @@ export default class Swipe extends React.Component {
 			username: visionary,
 		})
 		
+<<<<<<< HEAD
 		//following function is ran to determine if a chatroom already exists between
+=======
+		//following function is ran to determine if a chatroom already exists betweem
+>>>>>>> master
 		//visionary and developer
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){

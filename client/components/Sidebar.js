@@ -127,6 +127,7 @@ export default class SideBar extends React.Component {
 			    <div className="pure-u-1 pure-u-md-1-6">
 			        <div className="menu-links pure-menu pure-menu-horizontal custom-can-transform">
 			            <ul className="pure-menu-list">
+
 			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`profile`} className="pure-menu-link  l-box">PROFILE</Link></li>
 			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`swipe`} className="pure-menu-link l-box">SWIPE</Link></li>
 			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`project`} className="pure-menu-link l-box">PROJECTS</Link></li>
@@ -134,6 +135,7 @@ export default class SideBar extends React.Component {
 			                <li className="pure-menu-item pure-u-md-1-8"><Link to={`messages`} className="pure-menu-link l-box">MESSAGES</Link></li>
 			                <li className="pure-menu-item pure-u-md-1-8 a-button"><a onClick={this.logoutUser} className="pure-menu-link menu-item l-box">LOGOUT</a></li>
 			                <li className="pure-menu-item a-button"><a href='http://m.me/747013538770126' target="_blank" className="pure-menu-link l-box2"><img className="messengerPic" src="https://hipstercatbot.files.wordpress.com/2016/06/fb-message-us-small.png?w=700" /></a></li>
+
 			            </ul>
 			        </div>
 			    </div>
