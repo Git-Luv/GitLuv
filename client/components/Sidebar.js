@@ -6,6 +6,8 @@ import NotifySystem from './NotifySystem';
 
 var dc = require('delightful-cookies');
 
+var updateID;
+
 export default class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -30,6 +32,14 @@ export default class SideBar extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		if(updateID)
+			window.clearInterval(updateID);
+			
+		updateID = window.setInterval(this.updateNotifications.bind(this), 5000);
+		
+	}
+
 	toggleNotificationMenu() {
 		this.setState({ isNotifySystemOpen: !this.state.isNotifySystemOpen })
 		if(!this.state.isNotifySystemOpen)
@@ -50,6 +60,12 @@ export default class SideBar extends React.Component {
 					return 0;
 				}
 			})
+			if(data.length > 10) {
+				for(let i = data.length - 1; i >= 10; i--){
+					notifyModel.remove({ id: data[i]._id })
+					notifications.pop();
+				}
+			}
 			this.setState({ notifications: data })
 		})
 	}
