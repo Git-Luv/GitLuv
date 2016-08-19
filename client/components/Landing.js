@@ -14,12 +14,6 @@ export default class Landing extends React.Component {
 		}
 	}
 
-	componentWillMount() {
-		// Chat.addChatroom({chatRoom: "mccarthyistthetslc", visionary: "thetslc", developer: "mccarthyist"})
-		// Chat.getChatroom("mccarthyistthetslc").then(x => console.log(x))
-		// Chat.updateChatroom("mccarthyistthetslc", {messages: [{sentBy: 'mccarthyist', message: 'stahp' }]})
-	}
-
   login(e) {
   	e.preventDefault()
   	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://localhost:4000/auth/login&scope=repo', {
@@ -45,13 +39,13 @@ export default class Landing extends React.Component {
 			    </div>
 			    
 			</div>
-	    <div className="landingPage">
-	    	<div className="landing-text">
-	    	<h1 className="gitluvh1">GitLuv</h1>
-	    	<div className="description">Bring your product to life</div>
-	    	<input type="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRce09JcurXChhgGjKhLTTvOcQ8glqfIdFQclOWdQdY92eJ2uYg7w" onClick={this.login} />
-	    	</div>
-  	  	</div>
+		    <div className="landingPage">
+		    	<div className="landing-text">
+			    	<h1 className="gitluvh1">GitLuv</h1>
+			    	<div className="description">Bring your product to life</div>
+			    	<input type="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRce09JcurXChhgGjKhLTTvOcQ8glqfIdFQclOWdQdY92eJ2uYg7w" onClick={this.login} />
+		    	</div>
+	  	  	</div>
 	    </div>
 	  )
 	}

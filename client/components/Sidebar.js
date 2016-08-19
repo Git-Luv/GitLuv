@@ -6,7 +6,6 @@ import NotifySystem from './NotifySystem';
 
 var dc = require('delightful-cookies');
 
-
 export default class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -74,20 +73,17 @@ export default class SideBar extends React.Component {
 	}
 	
 	function (window, document) {
-	console.log('IN PARENT FUNCTION')
 
 	var menu = document.getElementsByClassName('menuClass'),
 	    WINDOW_CHANGE_EVENT = ('onorientationchange' in window) ? 'orientationchange':'resize';
 
 	function closeMenu() {
-	    console.log('IN CLOSE MENU')
 	    if (menu.classList.contains('open')) {
 	        toggleMenu();
 	    }
 	}
 
 	this.refs.toggleClass.addEventListener('click', function (e) {
-		console.log('IN TOGGLE GET ELEMENT')
 	    toggleMenu();
 	});
 
@@ -96,16 +92,13 @@ export default class SideBar extends React.Component {
 	
 	toggleMenu(e) {
 		e.preventDefault()
-		console.log('TOGGLEMENU', e)
 	    // set timeout so that the panel has a chance to roll up
 	    // before the menu switches states
 	    if (menu.classList.contains('open')) {
 	        setTimeout(this.toggleHorizontal, 500);
-	        console.log('IN TOGGLE MENU IF')
 
 	    }
 	    else {
-	    	console.log('IN TOGGLE MENU ELSE')
 
 	        this.toggleHorizontal();
 	    }
@@ -118,10 +111,8 @@ export default class SideBar extends React.Component {
 	        this.refs.menuClass.querySelectorAll('.custom-can-transform'),
 	        function(el){
 	            el.classList.toggle('pure-menu-horizontal');
-	            console.log('IN TOGGLE HORIZONTAL')
 	        }
 	    );
-	    	console.log('toggleHorizontal', this)
 	};
 
 	render() {
@@ -153,11 +144,3 @@ export default class SideBar extends React.Component {
 			)
 	}
 }
-
-
-			// <div className={ this.state.isSidebar ? 'sidebarOpen' : 'sidebarClose' }>
-			// 	<Link className="pure-button sidebar-button" to={`profile`}>Profile</Link>
-			// 	<Link className="pure-button sidebar-button" to={`swipe`}>Swipe</Link>
-			// 	<Link className="pure-button sidebar-button" to={`project`}>Projects</Link>
-			// 	<button className="pure-button sidebar-button-logout" onClick={this.logoutUser}>Logout</button>
-			// </div>
