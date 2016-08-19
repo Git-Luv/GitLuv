@@ -22,7 +22,7 @@ export default class Landing extends React.Component {
 
   login(e) {
   	e.preventDefault()
-  	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://www.gitluv.io/auth/login&scope=repo', {
+  	fetch('https://github.com/login/oauth/authorize?client_id=444a46dcbe1340ce4a49&redirect_uri=http://localhost:4000/auth/login&scope=repo', {
   		method: "GET",
   		redirect: "manual",
   		mode: 'no-cors',
