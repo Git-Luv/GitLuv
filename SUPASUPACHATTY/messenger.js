@@ -157,6 +157,20 @@ const firstEntityValue = (entities, entity) => {
   return typeof val === 'object' ? val.value : val;
 };
 
+// const secondEntityValue = (entities, entity) => {
+//   console.log("ENTITIES", entities)
+//   console.log("ENTITYentity", entity)
+//   const val = entities && entities[entity] &&
+//     Array.isArray(entities[entity]) &&
+//     entities[entity].length > 1 &&
+//     entities[entity][1].value
+//   ;
+//   if (!val) {
+//     return null;
+//   }
+//   return typeof val === 'object' ? val.value : val;
+// };
+
 // Our bot actions
 const actions = {
   send({sessionId}, {text}) {
@@ -218,6 +232,9 @@ const actions = {
       return new Promise(function(resolve, reject) {
         const userSkill = firstEntityValue(entities, 'skill');
         context.skill = userSkill;
+        
+
+
 
         const projectList = Project.all()
           .then(function(response) {
@@ -227,15 +244,20 @@ const actions = {
           })
           .then(function (goodProj) {
             // console.log("goodProj", goodProj)
-            console.log("context", context)
-            console.log("promise context", Promise.resolve(context));
-            const stringifiedProj = JSON.stringify(goodProj);
-            console.log("HERHERHERHERHERHERH", stringifiedProj)
-            // return fbMessage(sender, stringifiedProj)
+            // console.log("context", context)
+            // console.log("promise context", Promise.resolve(context));
+            // const stringifiedProj = JSON.stringify(goodProj);
+            // console.log("HERHERHERHERHERHERH", stringifiedProj)
+            // // return fbMessage(sender, stringifiedProj)
+            // // const results = secondEntityValue(entities, 'results')
+            context.results = goodProj
           })
           .then(function (res) {
-            return resolve(context)
-
+            // // context.results = res
+            // console.log("contextCONTEXT", context)
+            // context.results = res
+            console.log("CONTEXT . RESULTS", context.results)
+            return resolve(context.results)
           })
           .then (function (res) {
             return fbMessage(sender, res)
