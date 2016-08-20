@@ -118,6 +118,12 @@ export default class Swipe extends React.Component {
 
  	}
 
+  changeSidebarState(state) {		
+	 	if(state !== this.state.isSidebar){		
+	 		this.setState({ isSidebar: state })		
+	 	}		
+	}
+
  	// update users_disliked array on dislike
  	handleDislike(event) {
  		event.preventDefault();
