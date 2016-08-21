@@ -8,7 +8,6 @@ import * as Chat     from '../models/chat'
 import * as Utils    from '../utils'
 import * as Notify	 from '../models/notifications';
 
-import { fetchProjects } from '../models/swipe'
 var dc = require('delightful-cookies');
 var hasEvent = false;
 
@@ -77,6 +76,7 @@ export default class Swipe extends React.Component {
 
  	}
 
+ 	// update projects array on like
  	handleLike(event) {
  		event.preventDefault();
  		var self = this
@@ -87,7 +87,9 @@ export default class Swipe extends React.Component {
 			description: `A developer has liked your project: ${self.state.projects[0].title}!`,
 			username: visionary,
 		})
-		
+
+		//following function is ran to determine if a chatroom already exists betweem
+		//visionary and developer
 		Chat.getChatroom(developer + "" + visionary)
 		.then(function(x){
 			console.log("no")
@@ -115,6 +117,14 @@ export default class Swipe extends React.Component {
 		})
 
  	}
+
+  changeSidebarState(state) {		
+	 	if(state !== this.state.isSidebar){		
+	 		this.setState({ isSidebar: state })		
+	 	}		
+	}
+
+ 	// update users_disliked array on dislike
  	handleDislike(event) {
  		event.preventDefault();
  		console.log('THISSTATEPROJECTNAME',this.state.projects[0].title)
@@ -125,7 +135,7 @@ export default class Swipe extends React.Component {
 			hasEvent = true;
 		}
 	}
-
+	// highlight matching skills with project and user
 	handleProjects(skill){
 		if(this.state.userSkills.indexOf(skill) >= 0){
 			return true;
@@ -135,8 +145,8 @@ export default class Swipe extends React.Component {
 		}
 	}
 
-		
-  updateArray() { 
+	// display new project on click  
+  	updateArray() { 
 		var updatedProjects = this.state.projects.slice(1)
 		this.setState({
 			projects: updatedProjects,
@@ -144,15 +154,8 @@ export default class Swipe extends React.Component {
 		})
 	}
 
- 	changeSidebarState(state) {
-		if(state !== this.state.isSidebar){
-			this.setState({ isSidebar: state })
-		}
-	}
-
     render() {
 	  	var direction = this.state.direction === 'left' ? 'animated bounceOutLeft' : this.state.direction === 'right' ? 'animated bounceOutRight' : 'null'
-	  	// console.log('state', this.state)
 
 	  	if(this.state.projects === null) {
 	  		return (
@@ -160,20 +163,20 @@ export default class Swipe extends React.Component {
 		  			<Sidebar />
 		  			<h3 className="loading">Loading...</h3>
 	  			</div>
-	  			)
+	  		)
 	  	} else if (this.state.projects.length === 0) {
 	  		return (
 	  			<div>
 		  			<Sidebar />
 		  			<h3 className="loading">No more projects, check back later!</h3>
 	  			</div>
-	  			)
+	  		)
 	  	} else {
 			  return (
 			  	<div>
 		  			<Sidebar />
 			  		<div className='swipe'>
-		     				<div key={this.state.projects[0].id} className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
+		     				<div className={'currentProject ' + direction} onClick={this.changeSidebarState.bind(this, false)}>
 					     		<span className="project"><h1>{this.state.projects[0].title}</h1></span>
 					     		<div className="projectDescription">
 					     			<h2>Project Description:</h2>
@@ -181,7 +184,7 @@ export default class Swipe extends React.Component {
 					     			<h2>Looking For:</h2>
 						     		<p>{this.state.projects[0].looking_for}</p>
 						     		<h2>Required Skills:</h2>
-						     		<p>{this.state.projects[0].req_skills.map(skill => <button className={this.handleProjects(skill)? 'skill-selected pure-button': 'skill-deselected pure-button'}>{skill}</button>)}</p>
+						     		<p>{this.state.projects[0].req_skills.map((skill, i) => <button key={i} className={this.handleProjects(skill)? 'skill-selected pure-button': 'skill-deselected pure-button'}>{skill}</button>)}</p>
 					     		</div>
 			     			</div>
 			     		<div className="buttons">

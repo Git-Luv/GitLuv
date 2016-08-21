@@ -392,11 +392,11 @@ font-family: 'Roboto', sans-serif;
 .projectCancelButton {
     display: inline-block;
     position: absolute;
-    top: 25px;
-    left: 10px;
+    top: 5%;
+    left: 28%;
     margin: 0px;
     padding: 5px;
-    margin-top: -9%;
+    /* margin-top: -9%; */
     float: left;
 }
 
@@ -787,7 +787,6 @@ button.accordion.active:after {
 .user-liked {
 	padding-top: 1px;
 	padding-bottom: 1px;
-	/*margin-bottom: -8px;*/
 	padding-left: 20px;
 	vertical-align: middle;
 	position:relative;
@@ -822,6 +821,7 @@ img.userPhoto {
 /* ============ Notification System ============ */
 .NotifySystemMenu {
 	position: fixed;
+	z-index: 2;
 	right: 10%;
 	top: 2.5em;
 	width: 40%;
@@ -836,7 +836,18 @@ img.userPhoto {
 
 .notification-read,
 .notification-unread {
+	position: relative;
 	padding: 5px;
+}
+
+.notification-read:hover > .deleteButton,
+.notification-unread:hover > .deleteButton {
+	display: block;
+}
+
+.notification-read > .deleteButton,
+.notification-unread > .deleteButton {
+	display: none;
 }
 
 .notify-timeCreated {
@@ -856,35 +867,76 @@ img.userPhoto {
 	background-color: #aaa;
 }
 
+.deleteButton {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	padding: 2px;
+}
+
+.deleteButton:hover {
+	background-color: white;
+	cursor: pointer;
+}
+
 .a-button:hover {
 	cursor: pointer;
 }
 
 /* ========== Chat ========== */
 
-.messages {
+.messageBar {
+	text-align: left;
+	width: 100%;
+	border: 0px;
+	height: 25px;
 }
 
-.messagesNotSend {
+.messages {
+	border-collapse: collapse;
 	width: 100%;
+	padding: 5px;
+}
+
+.message {
+	width: 100%;
+	border: solid;
+	border-color: #e6e6ff;
+  border-width: 1px 0;
+}
+
+
+.messagesNotSend {
+	height: 30%;
 }
 
 .chat-body {
-
 }
 
 .chat-one {
+	width: 100%;
 	
 }
 
 .chat-name {
-	
+	text-align; left;
 }
 
 .chat-time {
 	color: gray;
+	float: right;
 }
 
 .chat-message {
-	/*text-align: right;*/
+	text-align: left;
 }
+
+@media only screen and (max-width: 768px){
+
+}
+
+.new-repo {
+    margin-left: -50%;
+    margin-bottom: 3%;
+}
+

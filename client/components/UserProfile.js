@@ -46,7 +46,7 @@ export default class UserProfile extends React.Component {
 			this.setState({ isSidebar: state })
 		}
 	}
-
+	// endorse user if active user hasn't already and not active user's profile
 	handleEndorsement(e) {
 		e.preventDefault();
 		var temp = this.state.userInfo;

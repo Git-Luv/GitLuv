@@ -24,7 +24,7 @@ var projectSchema = new Schema({
 
 var ProjectCollection = mongoose.model('ProjectCollection', projectSchema)
 
-
+//function that creates and project and updates if it exists
 Project.createIfNotExists = function(attrs){
 
 	let title = attrs.title
@@ -33,12 +33,11 @@ Project.createIfNotExists = function(attrs){
 	return ProjectCollection.findOneAndUpdate({title: title}, attrs, {upsert: true}, function (err, doc) {
 		if(err){
 			console.log("!!!-----------------!!!", err)
-		} else {
-			console.log("created!")
-		}
+		} 
 	})
 }
 
+//function that returns all projects
 Project.all = function(){
 
 	return ProjectCollection.find(function (err, projects) {
@@ -46,6 +45,7 @@ Project.all = function(){
 	})
 }
 
+//function that gets a project by title
 Project.getProject = function(projectTitle){
 
 	return ProjectCollection.findOne({title: projectTitle}, function (err, projects) {
@@ -53,18 +53,17 @@ Project.getProject = function(projectTitle){
 	})
 }
 
+//function that edits a project.  Since parts of the collection are stored
+//in an array, the project is first gotten from the database and the arrays 
+//are then concatenated
 Project.editProject = function(title, changedAttrs){
-	console.log("title: " + title + " and changedAttrs: " + changedAttrs)
 
 	return Project.getProject(title)
 		.then(function (projectInfo){
 
-		console.log("running?")
-
 			if(changedAttrs.req_skills){
 				let newArr = []
 				for(let i = 0; i < changedAttrs.req_skills.length; i++){
-
 					if(!(projectInfo.req_skills.indexOf(changedAttrs.req_skills[i]) >= 0)){
 						newArr.push(changedAttrs.req_skills[i])
 					}
@@ -75,7 +74,6 @@ Project.editProject = function(title, changedAttrs){
 			if(changedAttrs.users_liked){
 				let newArr2 = []
 				for(let i = 0; i < changedAttrs.users_liked.length; i++){
-
 					if(!(projectInfo.users_liked.indexOf(changedAttrs.users_liked[i]) >= 0)){
 						newArr2.push(changedAttrs.users_liked[i])
 					}
@@ -86,7 +84,6 @@ Project.editProject = function(title, changedAttrs){
 			if(changedAttrs.users_disliked){
 				let newArr3 = []
 				for(let i = 0; i < changedAttrs.users_disliked.length; i++){
-
 					if(!(projectInfo.users_disliked.indexOf(changedAttrs.users_disliked[i]) >= 0)){
 						newArr3.push(changedAttrs.users_disliked[i])
 					}
@@ -97,10 +94,8 @@ Project.editProject = function(title, changedAttrs){
 			return ProjectCollection.findOneAndUpdate({title: title}, changedAttrs, function (err, doc) {
 				if(err){
 					console.log("!!!-----------------!!!", err)
-				} else {
-					console.log("created!")
-				}
+				} 
 			})
 	})
-	.catch(err => console.log("what? ", err))
+	.catch(err => console.log("Project.editProject error: ", err))
 }

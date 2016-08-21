@@ -26,7 +26,7 @@ var userSchema = new Schema({
 
 var UserCollection = mongoose.model('UserCollection', userSchema)
 
-
+//function that creates a user, will update if it already exists
 User.createIfNotExists = function(attrs){
 
 	let usrnm = attrs.username
@@ -35,12 +35,11 @@ User.createIfNotExists = function(attrs){
 	return UserCollection.findOneAndUpdate({username: usrnm}, attrs, {upsert: true}, function (err, doc) {
 		if(err){
 			console.log("!!!-----------------!!!", err)
-		} else {
-			console.log("created!")
-		}
+		} 
 	})
 }
 
+//function that gets all users
 User.all = function(){
 
 	return UserCollection.find(function (err, users) {
@@ -48,26 +47,25 @@ User.all = function(){
 	})
 }
 
+//function that gets a user by username
 User.getUser = function(username){
 
 	return UserCollection.findOne({username: username}, function (err, projects) {
-		console.log("saving!!!")
 		if(err) console.log("!!!-----------------!!!", err)		 
 	})
 }
 
+//function that edits a user.  Since parts of the collection are stored
+//in an array, the User is first gotten from the database and the arrays 
+//are then concatenated
 User.editUser = function(username, changedAttrs){
-	console.log("username: " + username + " and changedAttrs: " + changedAttrs)
 
 	return User.getUser(username)
 	.then(function (userInfo){
 
-		console.log("running?")
-
 		if(changedAttrs.skills){
 			let newArr = []
 			for(let i = 0; i < changedAttrs.skills.length; i++){
-
 				if(!(userInfo.skills.indexOf(changedAttrs.skills[i]) >= 0)){
 					newArr.push(changedAttrs.skills[i])
 				}
@@ -78,7 +76,6 @@ User.editUser = function(username, changedAttrs){
 		if(changedAttrs.projects){
 			let newArr2 = []
 			for(let i = 0; i < changedAttrs.projects.length; i++){
-
 				if(!(userInfo.projects.indexOf(changedAttrs.projects[i]) >= 0)){
 					newArr2.push(changedAttrs.projects[i])
 				}
@@ -89,12 +86,8 @@ User.editUser = function(username, changedAttrs){
 		return UserCollection.findOneAndUpdate({username: username}, changedAttrs, function (err, doc) {
 			if(err){
 				console.log("!!!-----------------!!!", err)
-			} else {
-				console.log("created!")
-			}
+			} 
 		})
-
-
 	})
-	.catch(err => console.log("what? ", err))
+	.catch(err => console.log("User.editUser error: ", err))
 }
