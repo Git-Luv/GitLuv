@@ -238,21 +238,22 @@ const actions = {
 
         const projectList = Project.all()
           .then(function(response) {
-            return response.forEach(function (project) {
+            return response.filter(function (project) {
               return project.req_skills.indexOf(userSkill) >= 0
             })
           })
           .then(function (goodProj) {
-            console.log("GOOOODPROJ", goodProj)
-           
+            var titles = goodProj.map(function(x) { return x.title })
+
             // console.log("context", context)
             // console.log("promise context", Promise.resolve(context));
             // const stringifiedProj = JSON.stringify(goodProj);
             // console.log("HERHERHERHERHERHERH", stringifiedProj)
             // // return fbMessage(sender, stringifiedProj)
             // // const results = secondEntityValue(entities, 'results')
-            context.results = goodProj
+            // context.results = goodProj
             context.skill = "react"
+            context.results = titles
           })
           .then(function (res) {
             // // context.results = res
