@@ -1,31 +1,6 @@
 'use strict';
 
-
-
-
 const Project = require('../server/models/project')
-
-
-
-
-
-
-
-
-
-// Messenger API integration example
-// We assume you have:
-// * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
-// * a Messenger Platform setup (https://developers.facebook.com/docs/messenger-platform/quickstart)
-// You need to `npm install` the following dependencies: body-parser, express, request.
-//
-// 1. npm install body-parser express request
-// 2. Download and install ngrok from https://ngrok.com/download
-// 3. ./ngrok http 8445
-// 4. WIT_TOKEN=your_access_token FB_APP_SECRET=your_app_secret FB_PAGE_TOKEN=your_page_token node examples/messenger.js
-// 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
-// 6. Talk to your bot on Messenger!
-
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const express = require('express');
@@ -68,35 +43,6 @@ crypto.randomBytes(8, (err, buff) => {
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
 
-// const fbMessage = (sender, text) => {
-//   // const body = JSON.stringify({
-//   //   recipient: { id },
-//   //   message: { text },
-//   // });
-//   const messageData = {
-//     recipient: sender,
-//     text: text
-//   }
-//   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-
-//   return fetch('https://graph.facebook.com/me/messages?' + qs, {
-//     method: 'POST',
-//     // headers: {'Content-Type': 'application/json'},
-//     json: {
-//       recipient: {id: sender},
-//       message: messageData,
-//     }
-//   })
-//   .then(rsp => rsp.json())
-//   .then(json => {
-//     console.log("JSNJSNSJNSJNSJNS", json)
-//     if (json.error && json.error.message) {
-//       throw new Error(json.error.message);
-//     }
-//     return json;
-//   });
-// };
-
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
     recipient: { id: id },
@@ -109,13 +55,7 @@ const fbMessage = (id, text) => {
     body,
   })
   .then(rsp => rsp.json())
-  // .then(rsp => {
-    // return rsp
   .then(json => {
-  //   console.log("JSJONSJSONSJSONSJONS", json)
-  //   if (json.error && json.error.message) {
-  //     throw new Error(json.error.message);
-  //   }
     return json;
   });
 };
@@ -157,19 +97,6 @@ const firstEntityValue = (entities, entity) => {
   return typeof val === 'object' ? val.value : val;
 };
 
-// const secondEntityValue = (entities, entity) => {
-//   console.log("ENTITIES", entities)
-//   console.log("ENTITYentity", entity)
-//   const val = entities && entities[entity] &&
-//     Array.isArray(entities[entity]) &&
-//     entities[entity].length > 1 &&
-//     entities[entity][1].value
-//   ;
-//   if (!val) {
-//     return null;
-//   }
-//   return typeof val === 'object' ? val.value : val;
-// };
 
 // Our bot actions
 const actions = {
@@ -179,8 +106,6 @@ const actions = {
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
-      // Yay, we found our recipient!
-      // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
       return fbMessage(recipientId, text)
       .then(() => null)
@@ -198,44 +123,10 @@ const actions = {
       return Promise.resolve()
     }
   },
-  // You should implement your custom actions here
-  // See https://wit.ai/docs/quickstart
-  // send(request, response) {
-  //     console.log("REQUEST", request)
-  //     console.log("RESPONSE", response)
-  //     const {sessionId, context, entities} = request;
-  //     const {text, quickreplies} = response;
-  //     const recipientId = sessions[sessionId].fbid
-
-  //     // return new Promise(function(resolve, reject) {
-  //       if (recipientId) {
-  //       console.log('sending...', JSON.stringify(response));
-  //       return fbMessage(recipientId, text)
-  //       then(() => null)
-  //             .catch((err) => {
-  //               console.error(
-  //                 'Oops! An error occurred while forwarding the response to',
-  //                 recipientId,
-  //                 ':',
-  //                 err.stack || err
-  //               );
-  //             });
-  //           } else {
-  //             console.error('Oops! Couldn\'t find user for session:', sessionId);
-  //             // Giving the wheel back to our bot
-  //             return Promise.resolve()
-  //           }
-  //       // return resolve();
-  //     // });
-  //   },
     getSkill({context, entities}) {
       return new Promise(function(resolve, reject) {
         const userSkill = firstEntityValue(entities, 'skill');
         context.skill = userSkill;
-        
-
-
-
         const projectList = Project.all()
           .then(function(response) {
             return response.filter(function (project) {
@@ -244,68 +135,16 @@ const actions = {
           })
           .then(function (goodProj) {
             console.log("PROJPROJPROH", "")
-            var pusi = goodProj.map(function(x) { return x.title })
-
-            // console.log("context", context)
-            // console.log("promise context", Promise.resolve(context));
-            // const stringifiedProj = JSON.stringify(goodProj);
-            // console.log("HERHERHERHERHERHERH", stringifiedProj)
-            // // return fbMessage(sender, stringifiedProj)
-            // // const results = secondEntityValue(entities, 'results')
-            // context.results = goodProj
-            context.results = pusi
+            const projTitles = goodProj.map(function(x) { return x.title })
+            context.results = projTitles
           })
           .then(function (res) {
-            // // context.results = res
-            // console.log("contextCONTEXT", context)
-            // context.results = res
-            console.log("CONTEXT . RESULTS", context.results)
             return resolve(context)
           })
-          // .then (function (res) {
-          //   return fbMessage(sender, res)
-          // })
       })
     }
 };
 
-  // send(request, response) {
-  //   const {sessionId, context, entities} = request;
-  //   const {text, quickreplies} = response;
-  //   return new Promise(function(resolve, reject) {
-  //       console.log('user said...', request.text);
-  //       console.log('sending...', JSON.stringify(response));
-  //       return resolve();
-  //   });
-  // },
- //  ['compute-result']({context,entities}) {
- //    return new Promise(function(resolve, reject) {
- //      const movie_title = firstEntityValue(entities, 'movie');
- //      if (movie_title) {
- //        context.movie = movie_title;
- //      }
- //      //call the API here
- //      return resolve(context);
- //  });
- // },
-
-
-
-
-
-
-
-
-
-
-  // Project.all().then(function(response) {
-  // console.log('FUR YEA', response)
-  // })
-
-
-
-
-// };
 
 // Setting up our bot
 const wit = new Wit({
@@ -347,17 +186,14 @@ app.post('/webhook', (req, res) => {
     data.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         if (event.message) {
-          // Yay! We got a new message!
+          // We received a message
           // We retrieve the Facebook user ID of the sender
           const sender = event.sender.id;
-
           // We retrieve the user's current session, or create one if it doesn't exist
           // This is needed for our bot to figure out the conversation history
           const sessionId = findOrCreateSession(sender);
-
           // We retrieve the message content
           const {text, attachments} = event.message;
-
           if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
@@ -365,7 +201,6 @@ app.post('/webhook', (req, res) => {
             .catch(console.error);
           } else if (text) {
             // We received a text message
-
             // Let's forward the message to the Wit.ai Bot Engine
             // This will run all actions until our bot has nothing left to do
             wit.runActions(
@@ -376,14 +211,12 @@ app.post('/webhook', (req, res) => {
               // Our bot did everything it has to do.
               // Now it's waiting for further messages to proceed.
               console.log('Waiting for next user messages');
-
               // Based on the session state, you might want to reset the session.
               // This depends heavily on the business logic of your bot.
               // Example:
               // if (context['done']) {
               //   delete sessions[sessionId];
               // }
-
               // Updating the user's current session state
               sessions[sessionId].context = context;
             })
@@ -412,8 +245,7 @@ function verifyRequestSignature(req, res, buf) {
   var signature = req.headers["x-hub-signature"];
 
   if (!signature) {
-    // For testing, let's log an error. In production, you should throw an
-    // error.
+    // For testing, let's log an error.
     console.error("Couldn't validate the signature.");
   } else {
     var elements = signature.split('=');
