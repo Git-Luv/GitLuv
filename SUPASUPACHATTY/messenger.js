@@ -243,7 +243,8 @@ const actions = {
             })
           })
           .then(function (goodProj) {
-            var titles = goodProj.map(function(x) { return x.title })
+            console.log("PROJPROJPROH", "")
+            var pusi = goodProj.map(function(x) { return x.title })
 
             // console.log("context", context)
             // console.log("promise context", Promise.resolve(context));
@@ -252,8 +253,7 @@ const actions = {
             // // return fbMessage(sender, stringifiedProj)
             // // const results = secondEntityValue(entities, 'results')
             // context.results = goodProj
-            context.skill = "react"
-            context.results = titles
+            context.results = pusi
           })
           .then(function (res) {
             // // context.results = res
