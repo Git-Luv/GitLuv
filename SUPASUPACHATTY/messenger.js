@@ -251,6 +251,7 @@ const actions = {
             // // return fbMessage(sender, stringifiedProj)
             // // const results = secondEntityValue(entities, 'results')
             context.results = JSON.stringify(goodProj)
+            context.skill = "react"
           })
           .then(function (res) {
             // // context.results = res
