@@ -108,15 +108,15 @@ const fbMessage = (id, text) => {
     headers: {'Content-Type': 'application/json'},
     body,
   })
-  // .then(rsp => rsp.json())
-  .then(rsp => {
-    return rsp
-  // .then(json => {
+  .then(rsp => rsp.json())
+  // .then(rsp => {
+    // return rsp
+  .then(json => {
   //   console.log("JSJONSJSONSJSONSJONS", json)
   //   if (json.error && json.error.message) {
   //     throw new Error(json.error.message);
   //   }
-  //   return json;
+    return json;
   });
 };
 
@@ -250,18 +250,18 @@ const actions = {
             // console.log("HERHERHERHERHERHERH", stringifiedProj)
             // // return fbMessage(sender, stringifiedProj)
             // // const results = secondEntityValue(entities, 'results')
-            context.results = goodProj
+            context.results = JSON.stringify(goodProj)
           })
           .then(function (res) {
             // // context.results = res
             // console.log("contextCONTEXT", context)
             // context.results = res
             console.log("CONTEXT . RESULTS", context.results)
-            return resolve(context.results)
+            return resolve(context)
           })
-          .then (function (res) {
-            return fbMessage(sender, res)
-          })
+          // .then (function (res) {
+          //   return fbMessage(sender, res)
+          // })
       })
     }
 };
@@ -320,6 +320,7 @@ app.use(({method, url}, rsp, next) => {
   });
   next();
 });
+
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // Webhook setup
