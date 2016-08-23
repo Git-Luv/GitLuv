@@ -1,18 +1,3 @@
-'use strict';
-
-
-
-
-const Project = require('../server/models/project')
-
-
-
-
-
-
-
-
-
 // Messenger API integration example
 // We assume you have:
 // * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
@@ -26,6 +11,8 @@ const Project = require('../server/models/project')
 // 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
 // 6. Talk to your bot on Messenger!
 
+'use strict';
+const Project = require('../server/models/project')
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const express = require('express');
@@ -68,35 +55,6 @@ crypto.randomBytes(8, (err, buff) => {
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
 
-// const fbMessage = (sender, text) => {
-//   // const body = JSON.stringify({
-//   //   recipient: { id },
-//   //   message: { text },
-//   // });
-//   const messageData = {
-//     recipient: sender,
-//     text: text
-//   }
-//   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-
-//   return fetch('https://graph.facebook.com/me/messages?' + qs, {
-//     method: 'POST',
-//     // headers: {'Content-Type': 'application/json'},
-//     json: {
-//       recipient: {id: sender},
-//       message: messageData,
-//     }
-//   })
-//   .then(rsp => rsp.json())
-//   .then(json => {
-//     console.log("JSNJSNSJNSJNSJNS", json)
-//     if (json.error && json.error.message) {
-//       throw new Error(json.error.message);
-//     }
-//     return json;
-//   });
-// };
-
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
     recipient: { id: id },
@@ -109,13 +67,7 @@ const fbMessage = (id, text) => {
     body,
   })
   .then(rsp => rsp.json())
-  // .then(rsp => {
-    // return rsp
   .then(json => {
-  //   console.log("JSJONSJSONSJSONSJONS", json)
-  //   if (json.error && json.error.message) {
-  //     throw new Error(json.error.message);
-  //   }
     return json;
   });
 };
@@ -125,7 +77,6 @@ const fbMessage = (id, text) => {
 
 // This will contain all user sessions.
 // Each session has an entry:
-// sessionId -> {fbid: facebookUserId, context: sessionState}
 const sessions = {};
 
 const findOrCreateSession = (fbid) => {
@@ -157,20 +108,6 @@ const firstEntityValue = (entities, entity) => {
   return typeof val === 'object' ? val.value : val;
 };
 
-// const secondEntityValue = (entities, entity) => {
-//   console.log("ENTITIES", entities)
-//   console.log("ENTITYentity", entity)
-//   const val = entities && entities[entity] &&
-//     Array.isArray(entities[entity]) &&
-//     entities[entity].length > 1 &&
-//     entities[entity][1].value
-//   ;
-//   if (!val) {
-//     return null;
-//   }
-//   return typeof val === 'object' ? val.value : val;
-// };
-
 // Our bot actions
 const actions = {
   send({sessionId}, {text}) {
@@ -198,44 +135,10 @@ const actions = {
       return Promise.resolve()
     }
   },
-  // You should implement your custom actions here
-  // See https://wit.ai/docs/quickstart
-  // send(request, response) {
-  //     console.log("REQUEST", request)
-  //     console.log("RESPONSE", response)
-  //     const {sessionId, context, entities} = request;
-  //     const {text, quickreplies} = response;
-  //     const recipientId = sessions[sessionId].fbid
-
-  //     // return new Promise(function(resolve, reject) {
-  //       if (recipientId) {
-  //       console.log('sending...', JSON.stringify(response));
-  //       return fbMessage(recipientId, text)
-  //       then(() => null)
-  //             .catch((err) => {
-  //               console.error(
-  //                 'Oops! An error occurred while forwarding the response to',
-  //                 recipientId,
-  //                 ':',
-  //                 err.stack || err
-  //               );
-  //             });
-  //           } else {
-  //             console.error('Oops! Couldn\'t find user for session:', sessionId);
-  //             // Giving the wheel back to our bot
-  //             return Promise.resolve()
-  //           }
-  //       // return resolve();
-  //     // });
-  //   },
     getSkill({context, entities}) {
       return new Promise(function(resolve, reject) {
         const userSkill = firstEntityValue(entities, 'skill');
         context.skill = userSkill;
-        
-
-
-
         const projectList = Project.all()
           .then(function(response) {
             return response.filter(function (project) {
@@ -244,68 +147,17 @@ const actions = {
           })
           .then(function (goodProj) {
             var titles = goodProj.map(function(x) { return x.title })
-
-            // console.log("context", context)
-            // console.log("promise context", Promise.resolve(context));
-            // const stringifiedProj = JSON.stringify(goodProj);
-            // console.log("HERHERHERHERHERHERH", stringifiedProj)
-            // // return fbMessage(sender, stringifiedProj)
-            // // const results = secondEntityValue(entities, 'results')
-            // context.results = goodProj
             context.skill = "react"
             context.results = titles
           })
           .then(function (res) {
-            // // context.results = res
-            // console.log("contextCONTEXT", context)
-            // context.results = res
             console.log("CONTEXT . RESULTS", context.results)
             return resolve(context)
           })
-          // .then (function (res) {
-          //   return fbMessage(sender, res)
-          // })
       })
     }
 };
 
-  // send(request, response) {
-  //   const {sessionId, context, entities} = request;
-  //   const {text, quickreplies} = response;
-  //   return new Promise(function(resolve, reject) {
-  //       console.log('user said...', request.text);
-  //       console.log('sending...', JSON.stringify(response));
-  //       return resolve();
-  //   });
-  // },
- //  ['compute-result']({context,entities}) {
- //    return new Promise(function(resolve, reject) {
- //      const movie_title = firstEntityValue(entities, 'movie');
- //      if (movie_title) {
- //        context.movie = movie_title;
- //      }
- //      //call the API here
- //      return resolve(context);
- //  });
- // },
-
-
-
-
-
-
-
-
-
-
-  // Project.all().then(function(response) {
-  // console.log('FUR YEA', response)
-  // })
-
-
-
-
-// };
 
 // Setting up our bot
 const wit = new Wit({
@@ -347,7 +199,7 @@ app.post('/webhook', (req, res) => {
     data.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         if (event.message) {
-          // Yay! We got a new message!
+          // Received a message
           // We retrieve the Facebook user ID of the sender
           const sender = event.sender.id;
 
