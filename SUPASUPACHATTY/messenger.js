@@ -1,5 +1,3 @@
-'use strict';
-
 // Messenger API integration example
 // We assume you have:
 // * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
@@ -13,6 +11,8 @@
 // 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
 // 6. Talk to your bot on Messenger!
 
+'use strict';
+const Project = require('../server/models/project')
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const express = require('express');
@@ -57,7 +57,7 @@ crypto.randomBytes(8, (err, buff) => {
 
 const fbMessage = (id, text) => {
   const body = JSON.stringify({
-    recipient: { id },
+    recipient: { id: id },
     message: { text },
   });
   const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
@@ -68,9 +68,6 @@ const fbMessage = (id, text) => {
   })
   .then(rsp => rsp.json())
   .then(json => {
-    if (json.error && json.error.message) {
-      throw new Error(json.error.message);
-    }
     return json;
   });
 };
@@ -80,7 +77,6 @@ const fbMessage = (id, text) => {
 
 // This will contain all user sessions.
 // Each session has an entry:
-// sessionId -> {fbid: facebookUserId, context: sessionState}
 const sessions = {};
 
 const findOrCreateSession = (fbid) => {
@@ -100,9 +96,22 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
+const firstEntityValue = (entities, entity) => {
+  const val = entities && entities[entity] &&
+    Array.isArray(entities[entity]) &&
+    entities[entity].length > 0 &&
+    entities[entity][0].value
+  ;
+  if (!val) {
+    return null;
+  }
+  return typeof val === 'object' ? val.value : val;
+};
+
 // Our bot actions
 const actions = {
   send({sessionId}, {text}) {
+    console.log("SESSION IDDDDDD", sessions[sessionId])
     // Our bot has something to say!
     // Let's retrieve the Facebook user whose session belongs to
     const recipientId = sessions[sessionId].fbid;
@@ -126,9 +135,29 @@ const actions = {
       return Promise.resolve()
     }
   },
-  // You should implement your custom actions here
-  // See https://wit.ai/docs/quickstart
+    getSkill({context, entities}) {
+      return new Promise(function(resolve, reject) {
+        const userSkill = firstEntityValue(entities, 'skill');
+        context.skill = userSkill;
+        const projectList = Project.all()
+          .then(function(response) {
+            return response.filter(function (project) {
+              return project.req_skills.indexOf(userSkill) >= 0
+            })
+          })
+          .then(function (goodProj) {
+            var titles = goodProj.map(function(x) { return x.title })
+            context.skill = "react"
+            context.results = titles
+          })
+          .then(function (res) {
+            console.log("CONTEXT . RESULTS", context.results)
+            return resolve(context)
+          })
+      })
+    }
 };
+
 
 // Setting up our bot
 const wit = new Wit({
@@ -142,9 +171,11 @@ const app = express();
 app.use(({method, url}, rsp, next) => {
   rsp.on('finish', () => {
     console.log(`${rsp.statusCode} ${method} ${url}`);
+
   });
   next();
 });
+
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // Webhook setup
@@ -168,7 +199,7 @@ app.post('/webhook', (req, res) => {
     data.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         if (event.message) {
-          // Yay! We got a new message!
+          // Received a message
           // We retrieve the Facebook user ID of the sender
           const sender = event.sender.id;
 
